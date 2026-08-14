@@ -1,0 +1,23 @@
+{
+  "name": "unilab",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "UniLab — every tool a student needs, free and private. All processing happens in your browser.",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "browser-image-compression": "^2.0.2",
+    "cropperjs": "^1.6.2",
+    "jszip": "^3.10.1",
+    "pdf-lib": "^1.17.1",
+    "pdfjs-dist": "^6.2.108",
+    "qrcode": "^1.5.4"
+  },
+  "devDependencies": {
+    "vite": "^8.2.1"
+  }
+}
