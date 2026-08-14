@@ -1,5 +1,8 @@
 import './styles.css';
 import { el } from './ui.js';
+import { registerServiceWorker } from './register-sw.js';
+
+registerServiceWorker();
 
 // ---------------------------------------------------------------------------
 // Tool registry. Each tool module default-exports render(container, tool).
@@ -30,6 +33,9 @@ export const TOOLS = [
   { id: 'image-to-pdf', name: 'Images → PDF', icon: '🖼️', category: 'image',
     desc: 'Turn photos of notes or homework into one clean PDF.',
     load: () => import('./tools/image-to-pdf.js') },
+  { id: 'heic-to-jpg', name: 'HEIC to JPG', icon: '📱', category: 'image',
+    desc: 'Turn iPhone photos into JPG so uploads stop getting rejected.',
+    load: () => import('./tools/heic-to-jpg.js') },
   // ---- pdf ----
   { id: 'merge-pdf', name: 'Merge PDF', icon: '➕', category: 'pdf',
     desc: 'Combine reports, cover pages and appendices into one file.',
@@ -46,6 +52,12 @@ export const TOOLS = [
   { id: 'organize-pdf', name: 'Organize PDF', icon: '🗂️', category: 'pdf',
     desc: 'Reorder, rotate or delete pages with live thumbnails.',
     load: () => import('./tools/organize-pdf.js') },
+  { id: 'watermark-pdf', name: 'Watermark PDF', icon: '💧', category: 'pdf',
+    desc: 'Stamp a diagonal DRAFT, ID, or CONFIDENTIAL watermark on every page.',
+    load: () => import('./tools/watermark-pdf.js') },
+  { id: 'page-numbers-pdf', name: 'Page Numbers', icon: '#️⃣', category: 'pdf',
+    desc: 'Add page numbers to any PDF for thesis and report formatting rules.',
+    load: () => import('./tools/page-numbers-pdf.js') },
   // ---- text ----
   { id: 'word-counter', name: 'Word Counter', icon: '🔢', category: 'text',
     desc: 'Words, characters, sentences and reading time — live.',
