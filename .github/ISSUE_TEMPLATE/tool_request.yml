@@ -1,0 +1,28 @@
+name: 💡 Tool request
+description: Suggest a new tool or an improvement to an existing one
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve in your daily student life?
+      description: The real situation matters more than the feature. "At 11:55pm my upload was rejected because…" beats "add feature X".
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What should the tool do?
+    validations:
+      required: true
+  - type: dropdown
+    id: clientside
+    attributes:
+      label: Can this run 100% in the browser?
+      description: UniLab has no server — files never leave the device. Tools that require server processing are out of scope.
+      options:
+        - "Yes / I think so"
+        - "Not sure"
+        - "No — it needs a server (probably out of scope)"
+    validations:
+      required: true
