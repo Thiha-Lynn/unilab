@@ -5,7 +5,7 @@
 // visited (exact hashed filenames aren't known at write-time, so we can't
 // precache everything up front).
 
-const CACHE_NAME = 'unilab-v1';
+const CACHE_NAME = 'unilab-v2';
 const PRECACHE_URLS = ['./', './index.html'];
 
 // ---------------------------------------------------------------------------
@@ -55,15 +55,51 @@ self.addEventListener('activate', (event) => {
 });
 
 // ---------------------------------------------------------------------------
-// fetch: cache-first, falling back to network. Successful same-origin GET
-// responses are cloned and stashed in the cache for next time. Never let a
-// caching error break the actual fetch — always fall back to network.
+// fetch strategy:
+//  - Navigations (the HTML shell): NETWORK-first, cache fallback. Cache-first
+//    here would pin returning visitors to a stale index.html forever, since
+//    sw.js itself rarely changes between deploys. Network-first means a deploy
+//    reaches users on their next visit, while offline still serves the cache.
+//  - Everything else (Vite's content-hashed assets are immutable): cache-first
+//    with runtime caching, so tool chunks work offline once visited.
+// Never let a caching error break a fetch — always fall back to network.
 // ---------------------------------------------------------------------------
+async function stashInCache(request, response) {
+  try {
+    const isSameOrigin = new URL(request.url).origin === self.location.origin;
+    if (isSameOrigin && response && response.ok) {
+      const cache = await caches.open(CACHE_NAME);
+      await cache.put(request, response.clone());
+    }
+  } catch (err) {
+    console.warn('[sw] runtime cache put failed (non-fatal):', err);
+  }
+}
+
 self.addEventListener('fetch', (event) => {
   const { request } = event;
 
   // Only handle GET requests; let everything else (POST, etc.) pass through.
   if (request.method !== 'GET') {
+    return;
+  }
+
+  if (request.mode === 'navigate') {
+    event.respondWith(
+      (async () => {
+        try {
+          const networkResponse = await fetch(request);
+          await stashInCache(request, networkResponse);
+          return networkResponse;
+        } catch (err) {
+          const cached = await caches.match(request).catch(() => null)
+            || await caches.match('./index.html').catch(() => null)
+            || await caches.match('./').catch(() => null);
+          if (cached) return cached;
+          throw err;
+        }
+      })()
+    );
     return;
   }
 
@@ -80,19 +116,7 @@ self.addEventListener('fetch', (event) => {
 
       try {
         const networkResponse = await fetch(request);
-
-        try {
-          const isSameOrigin = new URL(request.url).origin === self.location.origin;
-          if (isSameOrigin && networkResponse && networkResponse.ok) {
-            const cache = await caches.open(CACHE_NAME);
-            cache.put(request, networkResponse.clone());
-          }
-        } catch (err) {
-          // Caching the response failed — that's fine, the response itself
-          // is still returned to the page below.
-          console.warn('[sw] runtime cache put failed (non-fatal):', err);
-        }
-
+        await stashInCache(request, networkResponse);
         return networkResponse;
       } catch (err) {
         // Network failed too (offline, no cache hit). Nothing more we can do.
