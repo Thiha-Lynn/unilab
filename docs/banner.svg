@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 320" width="1200" height="320">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#171c26"/>
+      <stop offset="1" stop-color="#232647"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="320" rx="24" fill="url(#bg)"/>
+
+  <!-- logo mark -->
+  <g transform="translate(80,80)">
+    <rect width="160" height="160" rx="36" fill="#5b5bd6"/>
+    <path d="M 40 38 L 40 92 C 40 113 57 130 78 130 C 99 130 116 113 116 92 L 116 38 L 98 38 L 98 92 C 98 103 89 112 78 112 C 67 112 58 103 58 92 L 58 38 Z" fill="#ffffff"/>
+    <circle cx="78" cy="24" r="8" fill="#ffffff"/>
+  </g>
+
+  <!-- wordmark + tagline -->
+  <text x="300" y="150" font-family="-apple-system,'Segoe UI',Helvetica,Arial,sans-serif" font-size="72" font-weight="800" fill="#e9edf5" letter-spacing="-2">Uni<tspan fill="#8484e8">Lab</tspan></text>
+  <text x="300" y="205" font-family="-apple-system,'Segoe UI',Helvetica,Arial,sans-serif" font-size="30" fill="#a3adbf">Every tool a student needs, in one place.</text>
+  <text x="300" y="250" font-family="-apple-system,'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" fill="#6d7789">Free forever · No sign-up · No ads · Private by design</text>
+
+  <!-- decorative tool chips -->
+  <g font-family="-apple-system,'Segoe UI',Helvetica,Arial,sans-serif" font-size="19" fill="#a3adbf">
+    <rect x="895" y="60" width="235" height="44" rx="22" fill="#1f2740"/>
+    <text x="920" y="88">Merge · Split · Compress</text>
+    <rect x="895" y="116" width="235" height="44" rx="22" fill="#1f2740"/>
+    <text x="920" y="144">Resize · Convert · HEIC</text>
+    <rect x="895" y="172" width="235" height="44" rx="22" fill="#1f2740"/>
+    <text x="920" y="200">นับคำ · စာလုံးရေတွက်</text>
+    <rect x="895" y="228" width="235" height="44" rx="22" fill="#1f2740"/>
+    <text x="920" y="256">GPA · Citations · Focus</text>
+  </g>
+</svg>

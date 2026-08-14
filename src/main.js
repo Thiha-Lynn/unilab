@@ -168,6 +168,7 @@ function renderHome() {
       <p><b>🔒 Private by design:</b> every tool runs 100% in your browser.
       Nothing is uploaded, tracked or stored — PDPA-friendly by architecture.</p>
       <p>UniLab · a student project from Mae Fah Luang University · Software Engineering Case Studies 1/2569</p>
+      <p>Free &amp; open source — <a href="https://github.com/mfu-hlaing/unilab" target="_blank" rel="noopener">⭐ star or contribute on GitHub</a></p>
     </footer>
   `));
 
