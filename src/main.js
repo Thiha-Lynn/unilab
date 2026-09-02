@@ -1,85 +1,14 @@
 import './styles.css';
-import { el } from './ui.js';
+import { el, formatBytes } from './ui.js';
+import { CATEGORIES, TOOLS } from './registry.js';
 import { registerServiceWorker } from './register-sw.js';
 
 registerServiceWorker();
 
-// ---------------------------------------------------------------------------
-// Tool registry. Each tool module default-exports render(container, tool).
-// Lazy imports keep the landing page light.
-// ---------------------------------------------------------------------------
-export const CATEGORIES = {
-  image: { name: 'Image', color: 'var(--c-image)' },
-  pdf: { name: 'PDF', color: 'var(--c-pdf)' },
-  text: { name: 'Text & Writing', color: 'var(--c-text)' },
-  study: { name: 'Study', color: 'var(--c-study)' },
-  utility: { name: 'Everyday', color: 'var(--c-utility)' },
-};
+// The registry lives in registry.js so tools can import it without a cycle;
+// re-exported here because that is where everything already looks for it.
+export { CATEGORIES, TOOLS } from './registry.js';
 
-export const TOOLS = [
-  // ---- image ----
-  { id: 'compress-image', name: 'Compress Image', icon: '🗜️', category: 'image',
-    desc: 'Shrink photos to fit LMS upload limits while keeping quality.',
-    load: () => import('./tools/compress-image.js') },
-  { id: 'resize-image', name: 'Resize Image', icon: '📐', category: 'image',
-    desc: 'Resize by pixels or percent — ID photos, slides, submissions.',
-    load: () => import('./tools/resize-image.js') },
-  { id: 'crop-image', name: 'Crop Image', icon: '✂️', category: 'image',
-    desc: 'Crop freely or to presets like 1:1 profile and 3:4 ID photo.',
-    load: () => import('./tools/crop-image.js') },
-  { id: 'convert-image', name: 'Convert Image', icon: '🔄', category: 'image',
-    desc: 'JPG ↔ PNG ↔ WebP in bulk, right in your browser.',
-    load: () => import('./tools/convert-image.js') },
-  { id: 'image-to-pdf', name: 'Images → PDF', icon: '🖼️', category: 'image',
-    desc: 'Turn photos of notes or homework into one clean PDF.',
-    load: () => import('./tools/image-to-pdf.js') },
-  { id: 'heic-to-jpg', name: 'HEIC to JPG', icon: '📱', category: 'image',
-    desc: 'Turn iPhone photos into JPG so uploads stop getting rejected.',
-    load: () => import('./tools/heic-to-jpg.js') },
-  // ---- pdf ----
-  { id: 'merge-pdf', name: 'Merge PDF', icon: '➕', category: 'pdf',
-    desc: 'Combine reports, cover pages and appendices into one file.',
-    load: () => import('./tools/merge-pdf.js') },
-  { id: 'split-pdf', name: 'Split PDF', icon: '📑', category: 'pdf',
-    desc: 'Extract the pages you need, or split every page apart.',
-    load: () => import('./tools/split-pdf.js') },
-  { id: 'compress-pdf', name: 'Compress PDF', icon: '📉', category: 'pdf',
-    desc: 'Get big scanned PDFs under submission size limits.',
-    load: () => import('./tools/compress-pdf.js') },
-  { id: 'pdf-to-images', name: 'PDF → Images', icon: '🖨️', category: 'pdf',
-    desc: 'Export slides or pages as JPG/PNG for notes and posts.',
-    load: () => import('./tools/pdf-to-images.js') },
-  { id: 'organize-pdf', name: 'Organize PDF', icon: '🗂️', category: 'pdf',
-    desc: 'Reorder, rotate or delete pages with live thumbnails.',
-    load: () => import('./tools/organize-pdf.js') },
-  { id: 'watermark-pdf', name: 'Watermark PDF', icon: '💧', category: 'pdf',
-    desc: 'Stamp a diagonal DRAFT, ID, or CONFIDENTIAL watermark on every page.',
-    load: () => import('./tools/watermark-pdf.js') },
-  { id: 'page-numbers-pdf', name: 'Page Numbers', icon: '#️⃣', category: 'pdf',
-    desc: 'Add page numbers to any PDF for thesis and report formatting rules.',
-    load: () => import('./tools/page-numbers-pdf.js') },
-  // ---- text ----
-  { id: 'word-counter', name: 'Word Counter', icon: '🔢', category: 'text',
-    desc: 'Words, characters, sentences and reading time — live.',
-    load: () => import('./tools/word-counter.js') },
-  { id: 'citation-generator', name: 'Citation Generator', icon: '📚', category: 'text',
-    desc: 'APA 7 and MLA 9 citations for websites, books and journals.',
-    load: () => import('./tools/citation-generator.js') },
-  // ---- study ----
-  { id: 'gpa-calculator', name: 'GPA Calculator', icon: '🎓', category: 'study',
-    desc: 'Term and cumulative GPA on the standard university scale.',
-    load: () => import('./tools/gpa-calculator.js') },
-  { id: 'pomodoro', name: 'Focus Timer', icon: '🍅', category: 'study',
-    desc: 'Pomodoro study sessions with breaks and a session count.',
-    load: () => import('./tools/pomodoro.js') },
-  // ---- utility ----
-  { id: 'qr-generator', name: 'QR Code Maker', icon: '🔳', category: 'utility',
-    desc: 'Share links and Wi-Fi with your group in one scan.',
-    load: () => import('./tools/qr-generator.js') },
-  { id: 'unit-converter', name: 'Unit Converter', icon: '⚖️', category: 'utility',
-    desc: 'Length, mass, temperature, data size and more.',
-    load: () => import('./tools/unit-converter.js') },
-];
 
 const app = document.getElementById('app');
 let activeCategory = 'all';
@@ -103,11 +32,12 @@ function renderHome() {
   const hero = el(`
     <section class="hero">
       <h1>Every tool a student needs,<br>in one place.</h1>
-      <p>Free forever. No sign-up, no ads, no upload limits — everything runs
-         inside your browser, so your files stay on your device.</p>
+      <p>Photos, PDFs, video and audio — edited right here, with no sign-up, no ads
+         and no upload limits. Everything runs inside your browser, so your files
+         stay on your device.</p>
       <div class="search">
         <span class="icon">🔍</span>
-        <input type="search" placeholder="Search tools… (e.g. compress, PDF, GPA)" aria-label="Search tools" />
+        <input type="search" placeholder="Search tools… (e.g. compress video, PDF, GPA)" aria-label="Search tools" />
       </div>
     </section>
   `);
@@ -172,7 +102,98 @@ function renderHome() {
     </footer>
   `));
 
+  // Offline-mode block (see buildOfflineBlock below). Hidden entirely when
+  // the browser has no Service Worker support.
+  if ('serviceWorker' in navigator) {
+    wrap.querySelector('.footer').appendChild(buildOfflineBlock());
+  }
+
   app.appendChild(wrap);
+}
+
+// ---------------------------------------------------------------------------
+// Offline mode (home footer block)
+// ---------------------------------------------------------------------------
+// Must match CACHE_NAME in public/sw.js — if that bumps, bump this with it so
+// the "already downloaded" flag resets for the new cache version.
+const SW_CACHE_NAME = 'unilab-v3';
+const OFFLINE_FLAG = `unilab.offline.${SW_CACHE_NAME}`;
+
+function buildOfflineBlock() {
+  const block = el(`
+    <div style="margin-top:18px">
+      <button class="btn secondary small">⬇ Make UniLab work offline</button>
+      <p class="note" style="margin-bottom:0"></p>
+      <p class="note" style="margin-top:6px">Offline mode covers the app itself — the OCR language packs and the
+        background-removal model still download once on first use of those two tools.</p>
+    </div>
+  `);
+  const btn = block.querySelector('button');
+  const status = block.querySelector('.note'); // first .note is the status line
+
+  // Restore the "already downloaded" state — but only trust the flag if the
+  // versioned cache still exists (the browser may have evicted it).
+  if (localStorage.getItem(OFFLINE_FLAG)) {
+    caches.has(SW_CACHE_NAME).then((exists) => {
+      if (exists) status.textContent = '✅ Available offline';
+      else localStorage.removeItem(OFFLINE_FLAG);
+    }).catch(() => {});
+  }
+
+  btn.addEventListener('click', async () => {
+    btn.disabled = true;
+    status.textContent = 'Preparing download…';
+    try {
+      // Wait (briefly) for an active service worker — on the very first visit
+      // it may still be installing, and registration can also have failed.
+      const registration = await Promise.race([
+        navigator.serviceWorker.ready,
+        new Promise((_, rej) => setTimeout(() => rej(new Error('sw-not-ready')), 4000)),
+      ]);
+      if (!registration.active) throw new Error('sw-not-ready');
+
+      // Best-effort storage check first — the page can't know the download
+      // size up front, so this only warns when space is clearly tight; real
+      // quota failures surface as PRECACHE_ERROR from the worker.
+      try {
+        const est = await navigator.storage?.estimate?.();
+        if (est?.quota && est.quota - (est.usage || 0) < 50 * 1024 * 1024) {
+          status.textContent = 'Heads up: device storage is nearly full — this may not fit…';
+        }
+      } catch (_) { /* estimate unsupported — fine */ }
+
+      const onMessage = (event) => {
+        const msg = event.data;
+        if (!msg || typeof msg.type !== 'string' || !msg.type.startsWith('PRECACHE_')) return;
+        if (msg.type === 'PRECACHE_PROGRESS') {
+          const cur = Math.min(msg.done + 1, msg.total);
+          status.textContent = `Downloading tool ${cur} of ${msg.total}…`;
+        } else if (msg.type === 'PRECACHE_DONE') {
+          navigator.serviceWorker.removeEventListener('message', onMessage);
+          btn.disabled = false;
+          if (msg.failed) {
+            status.textContent = `⚠️ ${msg.total - msg.failed} of ${msg.total} files saved (${formatBytes(msg.bytes)}) — ${msg.failed} failed. Try again for full offline support.`;
+          } else {
+            localStorage.setItem(OFFLINE_FLAG, String(Date.now()));
+            status.textContent = `✅ All ${TOOLS.length} tools now work with no connection — even in flight mode. (${formatBytes(msg.bytes)})`;
+          }
+        } else if (msg.type === 'PRECACHE_ERROR') {
+          navigator.serviceWorker.removeEventListener('message', onMessage);
+          btn.disabled = false;
+          status.textContent = '⚠️ Download stopped — your device storage may have run out. Free some space and try again.';
+          console.warn('[offline] precache failed at:', msg.url, msg.error);
+        }
+      };
+      navigator.serviceWorker.addEventListener('message', onMessage);
+      registration.active.postMessage({ type: 'PRECACHE_ALL' });
+    } catch (err) {
+      btn.disabled = false;
+      status.textContent = 'Offline setup isn’t ready yet — reload the page once, then try again.';
+      console.warn('[offline]', err);
+    }
+  });
+
+  return block;
 }
 
 // ---------------------------------------------------------------------------

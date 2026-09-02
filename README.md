@@ -37,15 +37,53 @@ The trade-off, stated honestly: no server-grade conversions (PDF→Word needs a
 server; we don't do it), and PDF compression rasterizes text. We think that's
 the right trade for student daily life.
 
-## The tools (19)
+## The tools (58)
 
 | Category | Tools |
 | --- | --- |
-| 🖼️ **Image** | Compress (with *"must be under X MB"* target mode) · Resize · Crop (ID-photo presets) · Convert (JPG/PNG/WebP) · Images→PDF · **HEIC→JPG** |
-| 📄 **PDF** | Merge · Split/Extract · Compress · PDF→Images · Organize (reorder/rotate/delete with thumbnails) · Watermark · Page Numbers |
-| ✍️ **Text** | Word Counter (Unicode-correct — see below) · Citation Generator (APA 7 / MLA 9) |
-| 🎓 **Study** | GPA Calculator (Thai university scale, saved on-device) · Pomodoro Focus Timer |
-| 🧰 **Everyday** | QR Code Maker (link + Wi-Fi, never expires) · Unit Converter (incl. Thai land units ไร่/งาน/ตร.วา) |
+| 🖼️ **Image** (13) | Compress (*"must be under X MB"* target mode) · Resize · Crop (ID-photo presets) · Convert · Images→PDF · **HEIC→JPG** · Add Text · Rotate · Watermark · **Remove Background** · **Blur Faces** · Enlarge (Lanczos-3) · Photo Editor |
+| 🎬 **Video** (7) | Compress · Trim · Convert · Resize for 9:16/1:1/16:9 · Video→GIF · Video→Photos · Screen Recorder |
+| 🎵 **Audio** (11) | **Enhance Voice** (one-press clean-up) · **Remove Noise** (spectral + optional on-device neural) · Fix Volume (LUFS) · Change Speed (pitch-preserved) · Cut Silences · Equalizer (live preview) · Join Audio · Extract Audio · Trim · Convert · Voice Recorder |
+| 📄 **PDF** (20) | Merge (page ranges + contents page) · Split (named parts) · Compress (3 levels or a size cap) · Rotate · PDF→Images · Organize · Watermark · Page Numbers · **Sign** · Crop · **Edit** · **OCR (Thai + Burmese)** · Fill Form · Unlock · **Redact** · Compare · PDF→Markdown · Scan to PDF · Word→PDF · Excel→PDF |
+| ✍️ **Text** (2) | Word Counter (Unicode-correct — see below) · Citation Generator (APA 7 / MLA 9) |
+| 🎓 **Study** (2) | GPA Calculator (Thai university scale, saved on-device) · Pomodoro Focus Timer |
+| 🧰 **Everyday** (3) | **Workflows** · QR Code Maker (link + Wi-Fi, never expires) · Unit Converter (incl. Thai land units ไร่/งาน/ตร.วา) |
+
+### Workflows — chained tools, free
+
+iLovePDF sells *Workflows* as a Premium feature, and it has to be paid for: every hop
+in a chain costs them another upload, another store and another download. In a browser
+the file is already in memory, so a chain is not only free — it is **faster** than
+running the tools one at a time.
+
+Pick your steps, save the chain, drop your files in. Ready-made ones cover the evenings
+that actually happen: *photos of notes → one small numbered PDF*, *lecture video → a
+64 kbps MP3*, *report → stamped DRAFT and numbered*.
+
+### The audio lab
+
+Adobe's Podcast Enhance does its cleaning on Adobe's servers. UniLab's audio lab does
+real signal processing in the tab: spectral noise gating that learns the room from the
+gaps between sentences, mains-hum notching, LUFS loudness normalisation, pitch-preserving
+speed change, silence cutting that tells you how many minutes it saves — and an optional
+**neural voice mode** running RNNoise as WebAssembly, bundled with the site (112 KB,
+same-origin, works offline). Honest limits, stated in the tools themselves: steady
+background noise comes out; a voice drowned by a passing truck does not come back.
+
+### Video and audio, which no comparable site has
+
+Neither iLovePDF nor iLoveIMG has a single video or audio tool. UniLab has eleven, built
+on **WebCodecs** — the browser API that hands a page the same hardware decoder the video
+player uses. That is how a 500 MB lecture recording gets trimmed in seconds without being
+uploaded. We deliberately did *not* use `ffmpeg.wasm`: it would mean shipping ~31 MB of
+WebAssembly and decoding on the CPU.
+
+### Your files are never stored — and you can watch the clock
+
+Finished files live in this tab's memory with a countdown on screen, and are dropped when
+it runs out, when you close the tab, or when you press the bin. Upload-based sites show
+you the same countdown; the difference is that theirs is a promise about a copy on their
+servers, and ours is about the only copy there has ever been.
 
 ## Unicode done right 🇹🇭🇲🇲
 
@@ -71,11 +109,27 @@ npm run dev
 
 Vite + vanilla JavaScript — no framework to learn. Processing is done by
 [pdf-lib](https://pdf-lib.js.org), [pdf.js](https://mozilla.github.io/pdf.js/),
+[mediabunny](https://mediabunny.dev) (WebCodecs video/audio),
+[tesseract.js](https://tesseract.projectnaptha.com) (OCR),
+[mammoth](https://github.com/mwilliamson/mammoth.js) (.docx),
 [browser-image-compression](https://github.com/Donaldcwl/browser-image-compression),
 [cropperjs](https://fengyuanchen.github.io/cropperjs/),
 [heic2any](https://github.com/alexcorvi/heic2any),
+[gifenc](https://github.com/mattdesl/gifenc),
 [jszip](https://stuk.github.io/jszip/) and
 [qrcode](https://github.com/soldair/node-qrcode) — all in-browser.
+
+Two tools download a model on first use — OCR fetches its language data, and Remove
+Background fetches an ONNX model. Both are gated behind an explicit button that states
+the size, and in both cases it is the *engine* that is downloaded: your file stays here.
+
+## What we deliberately don't do
+
+PDF→Word, PDF→PowerPoint, PDF→Excel, HTML→PDF, password *protection*, PDF/A and repair
+all need a server, so they are not here. Neither is an AI summariser or translator: those
+send your document to a model provider, which is the exact thing this project exists to
+avoid. Compress PDF rasterises pages, so its output has no selectable text — the tool
+says so on screen.
 
 Deploys to GitHub Pages automatically on every push to `main`
 ([workflow](.github/workflows/deploy.yml)).

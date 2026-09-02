@@ -5,7 +5,7 @@
 // visited (exact hashed filenames aren't known at write-time, so we can't
 // precache everything up front).
 
-const CACHE_NAME = 'unilab-v2';
+const CACHE_NAME = 'unilab-v3';
 const PRECACHE_URLS = ['./', './index.html'];
 
 // ---------------------------------------------------------------------------
@@ -125,4 +125,99 @@ self.addEventListener('fetch', (event) => {
       }
     })()
   );
+});
+
+// ---------------------------------------------------------------------------
+// message: explicit "download everything" precache. The home page's
+// "Make UniLab work offline" button posts { type: 'PRECACHE_ALL' }.
+// precache.json is written at build time (see vite.config.js) and lists every
+// app file; each entry is fetched and stored in the SAME versioned cache the
+// fetch handler reads from, so every tool works offline even if never opened.
+// Replies to the requesting page:
+//   { type: 'PRECACHE_PROGRESS', done, total }      after each batch
+//   { type: 'PRECACHE_DONE', bytes, failed, total } on completion
+//   { type: 'PRECACHE_ERROR', url, error }          on a hard failure
+// Hard failures (abort the run): precache.json unreachable, cache unopenable,
+// cache.put throwing (usually storage quota). Individual fetch failures are
+// soft: skipped, counted, and reported in PRECACHE_DONE.failed.
+// ---------------------------------------------------------------------------
+const PRECACHE_BATCH_SIZE = 4;
+
+self.addEventListener('message', (event) => {
+  if (!event.data || event.data.type !== 'PRECACHE_ALL') return;
+
+  const source = event.source;
+  const post = (msg) => {
+    try {
+      if (source) { source.postMessage(msg); return; }
+      // No source (shouldn't happen for page-sent messages) — broadcast.
+      self.clients.matchAll({ includeUncontrolled: true })
+        .then((cs) => cs.forEach((c) => c.postMessage(msg)))
+        .catch(() => {});
+    } catch (err) {
+      console.warn('[sw] precache postMessage failed (non-fatal):', err);
+    }
+  };
+
+  event.waitUntil((async () => {
+    // 1. Get the build manifest. Failing here is a hard failure.
+    let urls;
+    try {
+      const res = await fetch('./precache.json', { cache: 'no-store' });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      urls = await res.json();
+      if (!Array.isArray(urls)) throw new Error('precache.json is not an array');
+    } catch (err) {
+      post({ type: 'PRECACHE_ERROR', url: './precache.json', error: String(err) });
+      return;
+    }
+
+    let cache;
+    try {
+      cache = await caches.open(CACHE_NAME);
+    } catch (err) {
+      post({ type: 'PRECACHE_ERROR', url: '', error: String(err) });
+      return;
+    }
+
+    // 2. Fetch + cache in small parallel batches, reporting progress.
+    const total = urls.length;
+    let done = 0;
+    let failed = 0;
+    let bytes = 0;
+    post({ type: 'PRECACHE_PROGRESS', done, total });
+
+    for (let i = 0; i < total; i += PRECACHE_BATCH_SIZE) {
+      const batch = urls.slice(i, i + PRECACHE_BATCH_SIZE);
+      try {
+        await Promise.all(batch.map(async (url) => {
+          let res;
+          try {
+            res = await fetch(url);
+          } catch (err) {
+            failed += 1; // network hiccup on one file: skip it, keep going
+            return;
+          }
+          if (!res || !res.ok) { failed += 1; return; }
+          try {
+            await cache.put(url, res.clone());
+          } catch (err) {
+            // cache.put throwing usually means the storage quota is full —
+            // every later put would fail too, so abort the whole run.
+            try { err.precacheUrl = url; } catch (_) { /* not extensible */ }
+            throw err;
+          }
+          // Sum sizes where readable; a failure here must not fail the run.
+          try { bytes += (await res.blob()).size; } catch (_) { /* fine */ }
+        }));
+      } catch (err) {
+        post({ type: 'PRECACHE_ERROR', url: (err && err.precacheUrl) || '', error: String(err) });
+        return;
+      }
+      done = Math.min(i + PRECACHE_BATCH_SIZE, total);
+      post({ type: 'PRECACHE_PROGRESS', done, total });
+    }
+
+    post({ type: 'PRECACHE_DONE', bytes, failed, total });
+  })());
 });
