@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UniLab — lo-fi prototype (W4)</title>
+<style>
+  /* Tokens copied verbatim from src/styles.css :root — see 02-design/design-system.md §1.
+     Rule zero: nothing below uses a colour, radius or shadow that is not a token. */
+  :root{
+    --bg:#f6f7fb; --card:#ffffff; --ink:#171c26; --muted:#5b6472; --faint:#8a93a2;
+    --line:#e4e7ee; --accent:#5b5bd6; --accent-strong:#4747c2; --accent-soft:#eeeefc;
+    --good:#1d9e77; --good-soft:#e4f6ef; --warn:#d97706; --danger:#d64545;
+    --shadow:0 1px 2px rgba(23,28,38,.05), 0 10px 30px rgba(23,28,38,.07);
+    --radius:14px;
+    --c-image:#d64593; --c-pdf:#d65045; --c-video:#d3891a; --c-audio:#0e9bb5;
+    --c-text:#3d8bd6; --c-study:#1d9e77; --c-utility:#9147d6;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,system-ui,"Noto Sans Thai",sans-serif;
+    font-size:14px; line-height:1.5;
+  }
+  .sheet{padding:22px 14px 40px; max-width:1280px; margin:0 auto}
+  .sheet > h1{font-size:19px; margin:0 0 4px}
+  .sheet > p.lede{color:var(--muted); margin:0 0 22px; max-width:60ch}
+  .rail{display:flex; gap:16px; flex-wrap:wrap; align-items:flex-start}
+  .col{flex:1 1 300px; min-width:0; max-width:480px}
+  .col > figcaption{font-size:12.5px; color:var(--muted); margin:0 0 8px; font-weight:600}
+  .col > figcaption b{color:var(--ink)}
+
+  /* ---- phone frame: mobile-first, max-width 480 (design-system §1.4) ---- */
+  .phone{
+    background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+    box-shadow:var(--shadow); overflow:hidden; display:flex; flex-direction:column;
+    min-height:560px;
+  }
+  .bar{
+    display:flex; align-items:center; gap:10px; padding:12px 14px;
+    border-bottom:1px solid var(--line);
+  }
+  .bar .back{color:var(--faint); font-size:16px}
+  .bar .title{font-weight:700; font-size:15px}
+  .pill{
+    margin-left:auto; font-size:11px; font-weight:600; color:var(--good);
+    background:var(--good-soft); border-radius:999px; padding:4px 9px;
+  }
+  .body{padding:16px 14px 12px; flex:1}
+
+  /* ---- S1 tool picker ---- */
+  .search{
+    width:100%; font-size:16px; padding:12px 14px; border-radius:10px;
+    border:1px solid var(--line); background:var(--bg); color:var(--faint);
+  }
+  .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:10px; margin-top:14px}
+  .tool{
+    background:var(--card); border:1px solid var(--line); border-radius:10px;
+    padding:14px 12px; display:flex; flex-direction:column; gap:6px;
+  }
+  .tool .icon{
+    width:36px; height:36px; border-radius:9px; font-size:19px;
+    display:grid; place-items:center; color:var(--card);
+  }
+  .tool h3{margin:0; font-size:14px}
+  .tool p{margin:0; font-size:12px; color:var(--muted)}
+  .tool.sel{border-color:var(--accent); background:var(--accent-soft)}
+
+  /* ---- S2 work stage ---- */
+  .preview{
+    border:1px solid var(--line); border-radius:10px; background:var(--bg);
+    padding:16px; text-align:center;
+  }
+  .page{
+    width:96px; height:126px; margin:0 auto 10px; background:var(--card);
+    border:1px solid var(--line); border-radius:6px; position:relative;
+  }
+  .page::after{
+    content:""; position:absolute; inset:14px 12px auto 12px; height:6px;
+    background:var(--line); border-radius:3px;
+    box-shadow:0 14px 0 var(--line), 0 28px 0 var(--line), 0 42px 0 var(--line);
+  }
+  .facts{display:flex; gap:12px; justify-content:center; font-size:12px; color:var(--muted)}
+  .facts b{display:block; font-size:14px; color:var(--ink)}
+  .side{margin-top:14px; border-top:1px solid var(--line); padding-top:14px}
+  .lbl{font-size:12.5px; font-weight:600; color:var(--muted); margin:0 0 6px}
+  .seg{display:flex; gap:6px; margin-bottom:14px}
+  .seg span{
+    flex:1; text-align:center; font-size:12.5px; padding:9px 6px; border-radius:10px;
+    border:1px solid var(--line); color:var(--muted); min-height:38px;
+  }
+  .seg span.on{background:var(--accent-soft); border-color:var(--accent); color:var(--accent-strong); font-weight:600}
+  .num{display:flex; border:1px solid var(--line); border-radius:10px; overflow:hidden; margin-bottom:14px}
+  .num input{
+    flex:1; border:0; padding:11px 12px; font-size:16px; background:var(--card);
+    color:var(--ink); font-family:inherit; min-width:0;
+  }
+  .num .unit{
+    padding:11px 14px; background:var(--bg); border-left:1px solid var(--line);
+    font-size:13px; color:var(--muted); display:grid; place-items:center;
+  }
+  .explain{
+    background:var(--accent-soft); border-radius:10px; padding:11px 12px;
+    font-size:12.5px; color:var(--ink); margin-bottom:6px;
+  }
+  .explain b{color:var(--accent-strong)}
+  .note{
+    display:flex; gap:8px; font-size:12px; color:var(--warn); margin-top:10px;
+  }
+  .foot{padding:12px 14px 14px; border-top:1px solid var(--line); background:var(--card)}
+  .btn{
+    display:block; width:100%; text-align:center; border:0; border-radius:10px;
+    padding:15px 22px; font-size:16px; font-weight:700; font-family:inherit;
+    background:var(--accent); color:var(--card); min-height:38px;
+  }
+  .btn.ghost{background:var(--card); color:var(--muted); border:1px solid var(--line); font-weight:600}
+  .btn.danger{background:var(--card); color:var(--danger); border:1px solid var(--danger); font-weight:600}
+
+  /* ---- S3 download + custody ---- */
+  .done-mark{
+    width:52px; height:52px; border-radius:50%; background:var(--good-soft); color:var(--good);
+    display:grid; place-items:center; font-size:24px; margin:6px auto 12px;
+  }
+  .done h2{margin:0 0 4px; font-size:18px; text-align:center}
+  .done p.sub{margin:0 0 16px; text-align:center; color:var(--muted); font-size:13px}
+  .saving{
+    background:var(--good-soft); border-radius:10px; padding:12px;
+    text-align:center; font-size:13px; color:var(--ink); margin-bottom:14px;
+  }
+  .saving b{color:var(--good); font-size:18px; display:block}
+  .vault{border:1px solid var(--line); border-radius:10px; padding:12px; margin-top:14px}
+  .vault .row{display:flex; align-items:baseline; gap:8px; margin-bottom:8px}
+  .vault .cd{font-size:19px; font-weight:700; color:var(--accent-strong); font-variant-numeric:tabular-nums}
+  .vault p{margin:0 0 10px; font-size:12px; color:var(--muted)}
+  .stack{display:flex; flex-direction:column; gap:8px}
+
+  .why{
+    margin-top:12px; font-size:12.5px; color:var(--muted);
+    border-left:2px solid var(--line); padding-left:10px;
+  }
+  .why b{color:var(--ink)}
+  @media (max-width:640px){ .rail{flex-direction:column} .col{max-width:none} }
+</style>
+</head>
+<body>
+<div class="sheet">
+  <h1>UniLab — lo-fi prototype</h1>
+  <p class="lede">Three core screens for the one core workflow, built only from the tokens and
+  component rules in <code>design-system.md</code>. Mobile-first, each screen 480&nbsp;px max.
+  Screens map 1:1 onto the five steps in <code>user-journey.md</code>.</p>
+
+  <div class="rail">
+
+    <!-- ================= S1 ================= -->
+    <figure class="col" style="margin:0">
+      <figcaption><b>S1 · Tool picker</b> — journey step 1</figcaption>
+      <div class="phone">
+        <div class="bar">
+          <span class="title">UniLab</span>
+          <span class="pill">Nothing is uploaded</span>
+        </div>
+        <div class="body">
+          <input class="search" value="compress" readonly aria-label="Search tools">
+          <div class="grid">
+            <div class="tool sel">
+              <div class="icon" style="background:var(--c-pdf)">🗜️</div>
+              <h3>Compress PDF</h3>
+              <p>Hit a size cap</p>
+            </div>
+            <div class="tool">
+              <div class="icon" style="background:var(--c-image)">🗜️</div>
+              <h3>Compress Image</h3>
+              <p>Smaller JPG or PNG</p>
+            </div>
+            <div class="tool">
+              <div class="icon" style="background:var(--c-video)">📦</div>
+              <h3>Compress Video</h3>
+              <p>Shrink a recording</p>
+            </div>
+            <div class="tool">
+              <div class="icon" style="background:var(--c-pdf)">✂️</div>
+              <h3>Split PDF</h3>
+              <p>Pull pages out</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="why"><b>R4</b> — the card, the icon tile and the search field are existing
+      components; nothing new was invented. Category hue is used on the icon tile only.</p>
+    </figure>
+
+    <!-- ================= S2 ================= -->
+    <figure class="col" style="margin:0">
+      <figcaption><b>S2 · Compress PDF, work stage</b> — journey steps 2–4</figcaption>
+      <div class="phone">
+        <div class="bar">
+          <span class="back">‹</span>
+          <span class="title">Compress PDF</span>
+          <span class="pill">On this device</span>
+        </div>
+        <div class="body">
+          <div class="preview">
+            <div class="page"></div>
+            <div class="facts">
+              <span><b>scan-notes.pdf</b>file</span>
+              <span><b>18.4 MB</b>now</span>
+              <span><b>24</b>pages</span>
+            </div>
+          </div>
+
+          <div class="side">
+            <p class="lbl">Compression</p>
+            <div class="seg">
+              <span>Low</span><span>Medium</span><span class="on">Target size</span>
+            </div>
+
+            <p class="lbl">Target size</p>
+            <div class="num">
+              <input value="5" readonly aria-label="Target size">
+              <span class="unit">MB</span>
+            </div>
+
+            <div class="explain">
+              Estimated result <b>≈ 4.6 MB</b> — under your 5 MB cap.
+              Text stays sharp; images drop to 110 dpi.
+            </div>
+            <div class="note">⚠ No download needed for this tool.</div>
+          </div>
+        </div>
+        <div class="foot">
+          <button class="btn">Compress PDF</button>
+        </div>
+      </div>
+      <p class="why"><b>R1</b> — one primary action, pinned to the foot.
+      <b>R2</b> — the target input is 16&nbsp;px so iOS does not zoom the page.
+      <b>R6</b> — the estimate is shown <i>before</i> the run: this is F5, and the reason the
+      student never burns a submission attempt finding out.</p>
+    </figure>
+
+    <!-- ================= S3 ================= -->
+    <figure class="col" style="margin:0">
+      <figcaption><b>S3 · Download &amp; custody</b> — journey step 5</figcaption>
+      <div class="phone">
+        <div class="bar">
+          <span class="back">‹</span>
+          <span class="title">Compress PDF</span>
+          <span class="pill">Done</span>
+        </div>
+        <div class="body done">
+          <div class="done-mark">✓</div>
+          <h2>Your PDF is ready</h2>
+          <p class="sub">scan-notes-compressed.pdf</p>
+
+          <div class="saving">
+            <b>4.6 MB</b>
+            down from 18.4 MB — 75% smaller
+          </div>
+
+          <button class="btn">Download</button>
+
+          <div class="vault">
+            <div class="row">
+              <span class="cd">29:47</span>
+              <span style="font-size:12.5px;color:var(--muted)">until this is gone</span>
+            </div>
+            <p>Held in this tab's memory only. It is deleted when the timer ends, when you tap
+            Delete now, or the moment you close this tab.</p>
+            <div class="stack">
+              <button class="btn danger">Delete now</button>
+              <button class="btn ghost">Continue to Merge PDF</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="why"><b>R5</b> — the destructive control is <code>--danger</code> and says exactly
+      what it does. This screen is LR5 made visible: the countdown is something the student can
+      <i>watch</i>, not a deletion promise they have to trust.</p>
+    </figure>
+
+  </div>
+</div>
+</body>
+</html>
