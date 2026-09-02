@@ -39,7 +39,7 @@ flowchart LR
     HOST -- "program code only, no user data" --> SYS
     MODEL -- "OCR engine / ONNX model, disclosed first (F12, LR3)" --> SYS
 
-    style SYS fill:#eeeefc,stroke:#5b5bd6,stroke-width:2px
+    style SYS fill:#eeeefc,stroke:#5b5bd6,stroke-width:2px,color:#171c26
     style LMS stroke-dasharray: 4 4
 ```
 
@@ -95,7 +95,7 @@ flowchart TB
     UC1 -.->|"«include»"| UC8
     UC5 -.->|"«include»"| UC9
 
-    style UC1 fill:#eeeefc,stroke:#5b5bd6,stroke-width:2px
+    style UC1 fill:#eeeefc,stroke:#5b5bd6,stroke-width:2px,color:#171c26
 ```
 
 **Reading the notation.** Plain solid lines join an actor to a use case. Dashed arrows are
@@ -159,8 +159,8 @@ flowchart TB
     SW -- "cached assets" --> MAIN
 
     NOSRV["No application server, no database,<br/>no session store, no access log —<br/>see spec §4.1"]
-    style NOSRV fill:#e4f6ef,stroke:#1d9e77,stroke-dasharray: 5 5
-    style VAULT fill:#eeeefc,stroke:#5b5bd6,stroke-width:2px
+    style NOSRV fill:#e4f6ef,stroke:#1d9e77,stroke-dasharray: 5 5,color:#171c26
+    style VAULT fill:#eeeefc,stroke:#5b5bd6,stroke-width:2px,color:#171c26
 ```
 
 **The tier that is not here is the design.** Every box sits inside one browser tab. There is no
