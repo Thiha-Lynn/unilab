@@ -1,8 +1,16 @@
 #!/usr/bin/env bash
 #
-# Deploy UniLab to the droplet.
+# Deploy UniLab to production.
 #
 #   ./deploy.sh
+#
+# Production is the AWS Lightsail box `awam-prod` (3.0.126.159), where UniLab is
+# one static vhost beside AWAM, the AWAM shop bot and two NoteVault services.
+# First-time setup of a NEW host is ./provision-awam.sh, not this script.
+#
+# It used to be the DigitalOcean droplet at 165.22.62.67. That box — and the
+# `catter` droplet at 129.212.146.127 before it — became unreachable, which is
+# why the defaults below moved. Do not point them back.
 #
 # Builds, ships the build to /var/www/unilab over rsync, and verifies the result
 # from outside. Everything here is a static file copy: there is no application
@@ -18,9 +26,9 @@
 
 set -euo pipefail
 
-HOST="${UNILAB_HOST:-droplet}"
+HOST="${UNILAB_HOST:-awam-prod}"
 REMOTE_DIR="${UNILAB_REMOTE_DIR:-/var/www/unilab}"
-URL="${UNILAB_URL:-https://unilab.165.22.62.67.sslip.io}"
+URL="${UNILAB_URL:-https://unilab.3-0-126-159.nip.io}"
 
 say() { printf '\n\033[1m%s\033[0m\n' "$*"; }
 fail() { printf '\033[31m  FAIL: %s\033[0m\n' "$*"; exit 1; }
@@ -63,7 +71,9 @@ check "/manifest.webmanifest" "application/manifest+json" "no-cache"
 # Every hashed asset the page actually references, checked by real extension.
 # The .mjs worker is the one that has bitten this deploy before: nginx's stock
 # mime.types has no entry for it, so it ships as application/octet-stream and
-# the browser refuses to run it as a module.
+# the browser refuses to run it as a module. The same omission covers
+# .webmanifest and .ttf — both caught on awam-prod in Sep 2026, which is why
+# the manifest check above is not decorative.
 index_html=$(curl -sS --max-time 25 "${URL}/")
 for ext in js mjs css; do
   asset=$(printf '%s' "$index_html" | grep -oE "/assets/[A-Za-z0-9._-]+\.${ext}" | head -1 || true)
