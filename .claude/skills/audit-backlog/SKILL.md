@@ -61,3 +61,7 @@ FAIL  n checks
   and record why they differ.
 - Do not renumber anything. Ids are cited from other files; renumbering breaks the chain.
 - Append the report to `.docs/05-log/{YYYYMMDD}-log.md` so the audit history is in git.
+
+## The rule that overrides everything
+
+**If anything is unclear, stop and ask — and offer at least 3 concrete options.** Never guess.

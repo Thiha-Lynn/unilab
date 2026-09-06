@@ -76,3 +76,7 @@ Mismatches: n
   3 options (same thing, rename one, keep both and record the distinction). Never assume.
 - A check you could not run (a missing file, an unreadable diagram) is reported as
   **not run**, never as passing.
+
+## The rule that overrides everything
+
+**If anything is unclear, stop and ask — and offer at least 3 concrete options.** Never guess.

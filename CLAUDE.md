@@ -100,8 +100,10 @@ The auditor exists as both because they differ in who asks: `/audit-backlog` is 
 `backlog-auditor` is what Claude delegates to when the chain is too big to hold in context.
 `SKILL.md` defines what the checks mean and wins if they ever disagree.
 
-Every agent and skill file carries the same last line: **if anything is unclear, stop and ask,
-and offer at least 3 concrete options. Never guess.** That is the W3 "failure pattern to catch".
+Every agent and skill file carries the same rule: **if anything is unclear, stop and ask, and
+offer at least 3 concrete options. Never guess.** The W3 deck names its absence as a failure
+pattern — an agent with no "ask if unsure" line guesses instead of asking, and a guessed
+requirement is exactly what the traceability check catches.
 
 Requirement conventions:
 - Functional: `F1, F2…` written as "As a **[user]**, I want **[X]**, so that **[Y]**", with a

@@ -67,6 +67,8 @@ a user.
 | **B29** | State the retention window as a number beside the control, before the file is committed — not only as a countdown met afterwards | Must | LR5, `rule.md` PDPA 11 | ✅ Done — `tool-shell.js` uploader |
 | **B30** | Keep filenames out of the production console; error messages name the file on screen, and those strings were reaching `console.error` | Must | `rule.md` PDPA 6 | ✅ Done — `src/log.js`; absence verified in the built bundle |
 | **B31** | Ship the privacy page required by `rule.md` PDPA 25: what is processed, where, what is held and for how long, what is fetched and why, how to erase | Must | LR4, `rule.md` PDPA 25 | ✅ Done — `src/privacy.js` at `#/privacy`; retention and size read from code so the page cannot drift from the enforcement |
+| **B32** | Fixture test for NFR7: ≥20 Thai / Burmese / emoji strings where a code-point count differs, asserting 0 miscounts | Must | NFR7 | ✅ Done — `test/grapheme-counting.test.mjs`, 23 fixtures. Writing it corrected the NFR: UAX #29 gives a *spacing* vowel its own cluster, so a cluster is **not** a reader's syllable |
+| **B33** | Measure NFR6 rather than infer it: Performance-panel long-task count over a 60 s job, and progress timestamps from a hidden tab | Must | NFR6 | 🔴 To do — the yielding is implemented and code-reviewed, but the 50 ms / 1-per-second thresholds have not been profiled |
 
 ---
 
@@ -74,9 +76,9 @@ a user.
 
 | | Count |
 |---|---|
-| ✅ Done | 17 |
+| ✅ Done | 18 |
 | ⚠️ Built but unverified | 3 |
-| 🔴 To do | 12 |
+| 🔴 To do | 13 |
 | **Gate blockers open** | **2** (B16, B17) — B13 closed by the W4 push, B12 by the 6 Sep `rule.md` rewrite |
 
 **The product is far ahead of its evidence.** Sixteen Must-level rows now ship, and the design

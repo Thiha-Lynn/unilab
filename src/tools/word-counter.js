@@ -25,7 +25,10 @@ function countWords(text) {
   return text.trim().split(/\s+/).length;
 }
 
-function graphemes(text) {
+// Exported so NFR7 can be tested directly. Thai sara am (ำ) and Burmese stacked
+// consonants are single characters to a reader and several code points to
+// String.length, which is the miscount this exists to prevent.
+export function graphemes(text) {
   if (graphemeSeg) return [...graphemeSeg.segment(text)].map((s) => s.segment);
   return Array.from(text);
 }
