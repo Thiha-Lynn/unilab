@@ -2,6 +2,8 @@ import './styles.css';
 import { el, formatBytes } from './ui.js';
 import { CATEGORIES, TOOLS } from './registry.js';
 import { registerServiceWorker } from './register-sw.js';
+import { debug, debugError } from './log.js';
+import { renderPrivacy } from './privacy.js';
 
 registerServiceWorker();
 
@@ -98,7 +100,8 @@ function renderHome() {
       <p><b>🔒 Private by design:</b> every tool runs 100% in your browser.
       Nothing is uploaded, tracked or stored — PDPA-friendly by architecture.</p>
       <p>UniLab · a student project from Mae Fah Luang University · Software Engineering Case Studies 1/2569</p>
-      <p>Free &amp; open source — <a href="https://github.com/mfu-hlaing/unilab" target="_blank" rel="noopener">⭐ star or contribute on GitHub</a></p>
+      <p>Free &amp; open source — <a href="https://github.com/mfu-hlaing/unilab" target="_blank" rel="noopener">⭐ star or contribute on GitHub</a>
+      &nbsp;·&nbsp; <a href="#/privacy">Privacy</a></p>
     </footer>
   `));
 
@@ -181,7 +184,7 @@ function buildOfflineBlock() {
           navigator.serviceWorker.removeEventListener('message', onMessage);
           btn.disabled = false;
           status.textContent = '⚠️ Download stopped — your device storage may have run out. Free some space and try again.';
-          console.warn('[offline] precache failed at:', msg.url, msg.error);
+          debug('[offline] precache failed at:', msg.url, msg.error);
         }
       };
       navigator.serviceWorker.addEventListener('message', onMessage);
@@ -189,7 +192,7 @@ function buildOfflineBlock() {
     } catch (err) {
       btn.disabled = false;
       status.textContent = 'Offline setup isn’t ready yet — reload the page once, then try again.';
-      console.warn('[offline]', err);
+      debug('[offline]', err);
     }
   });
 
@@ -220,7 +223,7 @@ async function renderTool(tool) {
     const mod = await tool.load();
     mod.default(container, tool);
   } catch (err) {
-    console.error(err);
+    debugError(err);
     container.appendChild(el(`<div class="error-box">This tool failed to load: ${err.message}</div>`));
   }
 }
@@ -232,6 +235,8 @@ function route() {
   const id = location.hash.replace(/^#\/?/, '');
   const tool = TOOLS.find((t) => t.id === id);
   if (tool) renderTool(tool);
+  // Not a tool, but a page rule.md PDPA 25 requires us to ship.
+  else if (id === 'privacy') { app.innerHTML = ''; renderPrivacy(app); }
   else renderHome();
   window.scrollTo(0, 0);
 }

@@ -375,6 +375,9 @@ audio.media-el { max-height: none; background: transparent; border: none; }
 .ts__pick:active { transform: scale(.98); }
 .ts__drop { color: var(--muted); font-size: 14px; margin: 14px 0 0; }
 .ts__privacy { color: var(--good); font-size: 13px; font-weight: 600; margin: 22px 0 0; }
+/* The retention window and size limit, stated up front rather than discovered
+   later — quieter than the privacy line above it, which carries the headline. */
+.ts__retention { color: var(--muted); font-size: 12px; margin: 6px 0 0; }
 
 /* ---------- stage 2: work ---------- */
 .ts__work {
@@ -774,3 +777,26 @@ audio.media-el { max-height: none; background: transparent; border: none; }
   .tool-page:has(.ts) { max-width: 1280px; }
   .ts__work { grid-template-columns: minmax(0, 1fr) 320px; }
 }
+
+/* ---- privacy page (rule.md PDPA 25) --------------------------------------
+   Deliberately plain: one column, generous measure, no cards. This page is
+   read once, carefully, by someone deciding whether to trust the tool — the
+   home page's density would work against that. */
+.privacy-page { max-width: 720px; }
+.privacy-page__head { margin: 8px 0 28px; }
+.privacy-page__head .back { color: var(--muted); font-size: 14px; text-decoration: none; }
+.privacy-page__head .back:hover { color: var(--accent); }
+.privacy-page__head h1 { margin: 14px 0 8px; font-size: 32px; letter-spacing: -0.02em; }
+.privacy-page__head .lede { color: var(--muted); font-size: 16px; margin: 0; max-width: 60ch; }
+.privacy-page__body h2 { font-size: 17px; margin: 30px 0 8px; }
+.privacy-page__body p, .privacy-page__body li { font-size: 15px; line-height: 1.65; max-width: 66ch; }
+.privacy-page__body ul { padding-left: 20px; }
+.privacy-page__body li { margin: 4px 0; }
+/* A claim the reader can go and check, rather than one they must accept. */
+.privacy-page__body .check {
+  border-left: 3px solid var(--good);
+  padding: 8px 0 8px 14px;
+  color: var(--muted);
+  font-size: 14px;
+}
+.privacy-page__body code { font-size: 13px; }

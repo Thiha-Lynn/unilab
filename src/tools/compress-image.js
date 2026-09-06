@@ -1,4 +1,5 @@
 import imageCompression from 'browser-image-compression';
+import { stripImageMetadata, mayCarryMetadata } from '../intake.js';
 import JSZip from 'jszip';
 import { el, dropzone, fileListView, formatBytes, downloadBlob, progressBar, errorBox, toast, stem } from '../ui.js';
 
@@ -75,14 +76,28 @@ export default function render(container) {
         progress.set(i / files.length, `Compressing ${f.name} (${i + 1}/${files.length})`);
         const maxDim = Number(container.querySelector('[data-maxdim]').value) || undefined;
         const targetMode = modeSel.value === 'target';
-        const blob = await imageCompression(f, {
+        let blob = await imageCompression(f, {
           // Target mode binary-searches quality until the file fits the cap —
           // "must be under X" is what portals and LMS limits actually ask for.
           maxSizeMB: targetMode ? Number(controls.querySelector('[data-target]').value) : 50,
           initialQuality: targetMode ? 0.85 : Number(qSlider.value) / 100,
           maxWidthOrHeight: maxDim,
           useWebWorker: true,
+          // Stated rather than left to the library's default, because rule.md
+          // PDPA 16 forbids carrying EXIF — and therefore GPS coordinates and a
+          // device serial — out the other side of a tool. A default we did not
+          // write is a default that can change under us in a minor release.
+          preserveExif: false,
         });
+
+        // Belt and braces. The library re-encodes through a canvas, which cannot
+        // carry EXIF at all — but it can also hand back the original file
+        // untouched when compressing would not help, and that file still has the
+        // photo's GPS in it. Same bytes and same type means we cannot tell those
+        // two cases apart, so re-encode rather than assume.
+        if (mayCarryMetadata(blob) && blob.size === f.size && blob.type === f.type) {
+          blob = await stripImageMetadata(blob);
+        }
         const ext = blob.type === 'image/png' ? 'png' : blob.type === 'image/webp' ? 'webp' : 'jpg';
         outputs.push({ name: `${stem(f.name)}-compressed.${ext}`, blob, before: f.size, after: blob.size });
       }

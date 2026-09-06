@@ -19,6 +19,7 @@
 import { el, formatBytes, downloadBlob, toast, errorBox } from './ui.js';
 import { TOOLS, CATEGORIES } from './registry.js';
 import * as vault from './vault.js';
+import { screenFiles, rejectionMessage, describeLimit, MAX_FILE_BYTES } from './intake.js';
 
 const ICON_ARROW = `<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 12h8m-3.5-3.5L16 12l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 const ICON_DOWNLOAD = `<svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true"><path d="M12 3v11m0 0l-4.5-4.5M12 14l4.5-4.5M4 19h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
@@ -34,7 +35,7 @@ const ICON_FILE = `<svg viewBox="0 0 24 30" width="26" height="32" aria-hidden="
  * Mounts a tool.
  *
  * spec:
- *   accept, multiple, minFiles, pickLabel, dropLabel, sortable, reorderable
+ *   accept, multiple, minFiles, maxBytes, pickLabel, dropLabel, sortable, reorderable
  *   thumbnail(file)          → optional; a canvas/img/URL for the file card
  *   onFiles(ctx)             → optional; async, after files are added/removed
  *   options(panel, ctx)      → build the sidebar; return an object of getters
@@ -45,7 +46,7 @@ const ICON_FILE = `<svg viewBox="0 0 24 30" width="26" height="32" aria-hidden="
  */
 export function toolShell(container, tool, spec) {
   const {
-    accept = '*', multiple = false, minFiles = 1,
+    accept = '*', multiple = false, minFiles = 1, maxBytes = MAX_FILE_BYTES,
     pickLabel = multiple ? 'Select files' : 'Select a file',
     dropLabel = multiple ? 'or drop them here' : 'or drop it here',
     sortable = false, reorderable = false,
@@ -68,10 +69,16 @@ export function toolShell(container, tool, spec) {
       <button class="ts__pick" type="button"></button>
       <p class="ts__drop"></p>
       <p class="ts__privacy">🔒 Nothing is uploaded — the file is opened by this page, on this device.</p>
+      <p class="ts__retention"></p>
     </div>
   `);
   uploader.querySelector('.ts__pick').textContent = pickLabel;
   uploader.querySelector('.ts__drop').textContent = dropLabel;
+  // rule.md PDPA 7 wants the retention window stated as a number beside the
+  // control, not just implied by a countdown the user only meets afterwards.
+  uploader.querySelector('.ts__retention').textContent =
+    `Results stay in this tab for ${ttlMinutes ?? vault.TTL_MINUTES} minutes, then are cleared. 
+     One file at a time, up to ${describeLimit(maxBytes)}.`;
 
   const input = document.createElement('input');
   input.type = 'file';
@@ -211,8 +218,18 @@ export function toolShell(container, tool, spec) {
   // ---- files -------------------------------------------------------------
   async function addFiles(next) {
     errorBox(container, null);
+
+    // `input.accept` only filters the operating system's picker, and a dragged
+    // file never goes near it — so the type and size rules are enforced here,
+    // which is the one place every path in passes through. (rule.md PDPA 12)
+    const { accepted, rejected } = screenFiles(next, { accept, maxBytes });
+    if (rejected.length) errorBox(container, rejectionMessage(rejected));
+    // A refused file is simply never held: not read, not listed, not referenced
+    // once this function returns — the second half of PDPA 12.
+    if (!accepted.length) return;
+
     if (!multiple) files.length = 0;
-    files.push(...next);
+    files.push(...accepted);
     renderCards();
     setStage('work');
     try {

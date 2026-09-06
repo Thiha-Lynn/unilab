@@ -2,6 +2,8 @@
 // installable PWA support. Safe to import unconditionally — it no-ops in
 // browsers without Service Worker support, and never throws.
 
+import { debug } from './log.js';
+
 export function registerServiceWorker() {
   if (!('serviceWorker' in navigator)) {
     return;
@@ -16,10 +18,10 @@ export function registerServiceWorker() {
       navigator.serviceWorker
         .register(`${import.meta.env.BASE_URL}sw.js`)
         .catch((err) => {
-          console.warn('[register-sw] service worker registration failed:', err);
+          debug('[register-sw] service worker registration failed:', err);
         });
     } catch (err) {
-      console.warn('[register-sw] service worker registration failed:', err);
+      debug('[register-sw] service worker registration failed:', err);
     }
   });
 }

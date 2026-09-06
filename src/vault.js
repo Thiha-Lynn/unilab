@@ -8,6 +8,8 @@
 // Cache Storage or OPFS would make the countdown survive a reload at the cost of
 // leaving files on disk, which is the wrong trade for this product.
 
+import { debug } from './log.js';
+
 const DEFAULT_TTL_MINUTES = 30;
 
 let items = [];          // { id, name, blob, url }
@@ -17,7 +19,7 @@ const listeners = new Set();
 
 function notify() {
   for (const fn of listeners) {
-    try { fn(snapshot()); } catch (err) { console.warn('[vault] listener failed:', err); }
+    try { fn(snapshot()); } catch (err) { debug('[vault] listener failed:', err); }
   }
 }
 

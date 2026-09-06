@@ -1,3 +1,4 @@
+import { screenFiles, rejectionMessage, describeLimit, MAX_FILE_BYTES } from './intake.js';
 // Shared UI + file helpers used by every tool.
 
 export function el(html) {
@@ -37,21 +38,30 @@ export function stem(filename) {
 }
 
 // Drag & drop file picker. onFiles(File[]) is called for every add.
-export function dropzone({ accept = '*', multiple = true, label = 'Choose files', hint = 'or drag & drop here', onFiles }) {
+export function dropzone({ accept = '*', multiple = true, label = 'Choose files', hint = 'or drag & drop here', maxBytes = MAX_FILE_BYTES, onFiles }) {
   const zone = el(`
     <div class="dropzone" role="button" tabindex="0" aria-label="${label}">
       <div class="big">📂</div>
       <div class="label">${label}</div>
-      <div class="hint">${hint} · stays on your device</div>
+      <div class="hint">${hint} · stays on your device · up to ${describeLimit(maxBytes)} per file</div>
     </div>
   `);
+
+  // Both ways in are screened, because `input.accept` filters only the operating
+  // system's picker and a dragged file bypasses it entirely. (rule.md PDPA 12)
+  function admit(list) {
+    const { accepted, rejected } = screenFiles(list, { accept, maxBytes });
+    if (rejected.length) toast(rejectionMessage(rejected));
+    // Nothing is kept for a refused file — it is never passed on to the tool.
+    if (accepted.length) onFiles(multiple ? accepted : accepted.slice(0, 1));
+  }
   const input = document.createElement('input');
   input.type = 'file';
   input.accept = accept;
   input.multiple = multiple;
   input.style.display = 'none';
   input.addEventListener('change', () => {
-    if (input.files.length) onFiles([...input.files]);
+    if (input.files.length) admit([...input.files]);
     input.value = '';
   });
   zone.appendChild(input);
@@ -65,7 +75,7 @@ export function dropzone({ accept = '*', multiple = true, label = 'Choose files'
     e.preventDefault();
     zone.classList.remove('drag');
     const files = [...e.dataTransfer.files];
-    if (files.length) onFiles(multiple ? files : files.slice(0, 1));
+    if (files.length) admit(files);
   });
   return zone;
 }

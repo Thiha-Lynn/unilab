@@ -27,7 +27,7 @@ a user.
 |---|---|
 | **B16** | Gate requires **≥5 real users interviewed**. Currently **0**. Without it, no requirement traces to a pain and the chain fails on its own terms. |
 | **B17** | UniLab does not appear on the assigned topic list (19 Aug slide). If it was never approved as this team's own topic, everything else is moot. |
-| **B12** | `rule.md` binds the company to a server-upload, ad-funded architecture the product does not have. Graded side by side with the code, it reads as a contradiction. |
+| ~~**B12**~~ | ~~`rule.md` binds the company to a server-upload, ad-funded architecture the product does not have~~ — **closed 6 Sep 2026**: rewritten against the Charter's product; class draft preserved at `04-legal/rule-as-submitted-20260819.md`. |
 | ~~**B13**~~ | ~~Uncommitted work~~ — **closed 2 Sep 2026**: `CLAUDE.md`, `rule.md`, `.claude/`, `.docs/` and the modified source files are pushed. |
 
 ---
@@ -47,7 +47,7 @@ a user.
 | **B9** | Cut the offline precache from **31 MB to ≤ 8 MB** by fetching the 23 MB ONNX runtime on demand instead of precaching it | Must | NFR3, D1, H3 | 🔴 To do — **blocked on Q1** |
 | **B10** | Fix the OCR tool description: `registry.js` says "English and Thai", `README.md` says "Thai + Burmese", the code ships all three. Make all three agree | Should | F14, D2, H6 | 🔴 To do — one-line fix, hides Burmese support from the users who need it |
 | **B11** | Write the test that proves NFR1: run all 58 tools against sample files, assert **0 bytes of file content** in any request body | Must | NFR1, LR1, D5 | 🔴 To do — **the product's central claim has never been tested** |
-| **B12** | Rewrite `rule.md` as *"architecture as compliance — the requirements this design removes"*; keep LR1–LR7, record the dissolved duties and why (§4.1) rather than deleting them | Must | LR4, D3 | 🔴 To do — **gate blocker** |
+| **B12** | Rewrite `rule.md` as *"architecture as compliance — the requirements this design removes"*; keep LR1–LR7, record the dissolved duties and why (§4.1) rather than deleting them | Must | LR4, D3 | ✅ Done — 6 Sep 2026. W2 shape kept (3 laws, direct commands); "duties this architecture removes" table added; class draft archived |
 | **B13** | Commit and push `CLAUDE.md`, `rule.md`, `.claude/`, `.docs/` and the untracked/modified source files | Must | D4 | ✅ Done — 2 Sep 2026 |
 | **B14** | Verify Remove Background discloses its model download before it starts, as OCR already does | Must | F12, LR3 | ⚠️ Unverified |
 | **B15** | QA test for B7: extract text from a redacted PDF and assert the redacted string is absent | Must | LR6, F7 | 🔴 To do |
@@ -61,6 +61,12 @@ a user.
 | **B23** | Updated proposal: problem statement + target users | Must | Gate criterion 1 | 🔴 To do |
 | **B24** | Draw the **desktop** two-pane work stage in the prototype — only the 480 px phone layout exists | Should | F5, D3 | 🔴 To do — W5 addition |
 | **B25** | Re-run `/audit-backlog` and `diagram-checker` immediately before the gate submission and paste both reports into `.docs/05-log/` | Must | Gate criterion 3 | 🔴 To do |
+| **B26** | Test that proves LR5: store results, purge, then resolve the object URL to show the bytes are unreachable — not merely unlisted | Must | LR5, NFR2 | ✅ Done — `test/vault-deletion.test.mjs`, 6 tests |
+| **B27** | Enforce type and size limits on **every** intake path; `accept` filters only the OS picker, so a dragged file bypassed it entirely | Must | LR1, `rule.md` PDPA 8 | ✅ Done — `src/intake.js` + `test/intake-screening.test.mjs`, 8 tests |
+| **B28** | Guarantee EXIF/GPS removal on the one image path that could pass the original file through unchanged | Must | LR6, `rule.md` PDPA 7 | ✅ Done — `compress-image.js` states `preserveExif:false` and re-encodes if the library returns the input |
+| **B29** | State the retention window as a number beside the control, before the file is committed — not only as a countdown met afterwards | Must | LR5, `rule.md` PDPA 11 | ✅ Done — `tool-shell.js` uploader |
+| **B30** | Keep filenames out of the production console; error messages name the file on screen, and those strings were reaching `console.error` | Must | `rule.md` PDPA 6 | ✅ Done — `src/log.js`; absence verified in the built bundle |
+| **B31** | Ship the privacy page required by `rule.md` PDPA 25: what is processed, where, what is held and for how long, what is fetched and why, how to erase | Must | LR4, `rule.md` PDPA 25 | ✅ Done — `src/privacy.js` at `#/privacy`; retention and size read from code so the page cannot drift from the enforcement |
 
 ---
 
@@ -68,14 +74,16 @@ a user.
 
 | | Count |
 |---|---|
-| ✅ Done | 10 |
+| ✅ Done | 17 |
 | ⚠️ Built but unverified | 3 |
 | 🔴 To do | 12 |
-| **Gate blockers open** | **3** (B12, B16, B17) — B13 closed by the W4 push |
+| **Gate blockers open** | **2** (B16, B17) — B13 closed by the W4 push, B12 by the 6 Sep `rule.md` rewrite |
 
-**The product is far ahead of its evidence.** Ten Must-level rows already ship, and the design
-pack is complete. The three remaining gate blockers are all about *proving* the work rather than
-doing it — the interviews, the topic approval, and the compliance rewrite. None of them is code.
+**The product is far ahead of its evidence.** Sixteen Must-level rows now ship, and the design
+pack is complete. The compliance rewrite (B12) is done, and with it the five conformance gaps it
+exposed (B26–B30). The two remaining gate blockers are both about *proving* the work rather than
+doing it — the interviews and the topic approval. **Neither of them is code**, and no amount of
+building will close them.
 
 ---
 

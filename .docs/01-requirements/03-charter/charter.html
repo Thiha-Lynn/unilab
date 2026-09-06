@@ -1,0 +1,231 @@
+<p style="text-align:center;font-size:11pt;color:#5b6472;letter-spacing:2px">DIGITAL IMPOSTERS PVT. CO., LTD. &nbsp;&middot;&nbsp; COMPANY 18</p>
+<p style="text-align:center;font-size:19pt;color:#4747c2"><strong>Project Charter for Software Engineering Case Studies</strong></p>
+<p style="text-align:center;font-size:13pt"><strong>🎒 UniLab</strong> &mdash; Private, On-Device File Toolbox for Students</p>
+<hr>
+<table style="border-collapse:collapse;width:100%" cellpadding="8">
+<tr>
+<td style="background-color:#eeeefc;border:1px solid #e4e7ee;width:50%" valign="top"><p style="color:#4747c2"><strong>Course</strong></p><p>1305493 Software Engineering Case Studies<br>Semester 1/2569 &middot; Dr. Prasara Jakkaew</p></td>
+<td style="background-color:#eeeefc;border:1px solid #e4e7ee;width:50%" valign="top"><p style="color:#4747c2"><strong>Status</strong></p><p>Draft charter &middot; 6 September 2026<br>Submitted for the W5 User Validation Gate</p></td>
+</tr>
+</table>
+<p><strong>👥 Team Members</strong></p>
+<table style="border-collapse:collapse;width:100%" cellpadding="7" border="1" bordercolor="#e4e7ee">
+<tr style="background-color:#f6f7fb"><td width="20%"><strong>Student ID</strong></td><td width="35%"><strong>Name</strong></td><td width="45%"><strong>Role on this project</strong></td></tr>
+<tr><td>6631503076</td><td>Myo Zin Thant</td><td>Product Owner &mdash; scope, backlog, gate submission</td></tr>
+<tr><td>6631503088</td><td>Swan Htut Oakkar Aung</td><td>Designer &mdash; user journey, prototype, design system</td></tr>
+<tr><td>6631503092</td><td>Thiha Lin</td><td>Tech Lead &mdash; architecture, spec, build</td></tr>
+<tr><td>6631503097</td><td>Wanna San</td><td>AI Lead &mdash; on-device OCR and model-backed tools</td></tr>
+<tr><td>6631503101</td><td>Zaw Win Htut</td><td>QA / Test &mdash; the zero-upload test, redaction QA</td></tr>
+</table>
+<table style="border-collapse:collapse;width:100%" cellpadding="10">
+<tr><td style="background-color:#e4f6ef;border-left:4px solid #1d9e77"><p><strong>🔒 In one sentence.</strong> UniLab lets a student finish an everyday file job &mdash; compress, convert, scan, trim &mdash; entirely inside their own browser, so the file never leaves the device and no deletion promise has to be trusted.</p></td></tr>
+</table>
+<hr>
+
+<h1>🎯 1. Purpose</h1>
+<p>Our purpose is to let a student finish an everyday file job &mdash; shrink a report under a submission size cap, turn an iPhone photo into a JPG a form will accept, scan a transcript, trim a lecture recording &mdash; <strong>without handing that file to anybody</strong>.</p>
+<p>UniLab is a free web application in which every tool runs inside the student&rsquo;s own browser. The file is opened, changed and saved on the student&rsquo;s own device, and is never uploaded to a server. There is no upload endpoint anywhere in the codebase.</p>
+<p>The project exists because the current alternatives ask students to trade custody of their files &mdash; and sometimes of their identity documents &mdash; for a routine task that does not need a server at all.</p>
+<table style="border-collapse:collapse;width:100%" cellpadding="10">
+<tr><td style="background-color:#eeeefc;border-left:4px solid #5b5bd6"><p><strong>💡 Why this framing matters.</strong> &ldquo;Free&rdquo; cannot be our reason to exist: iLovePDF already gives students a free year of Premium. <strong>Custody</strong> is the only claim a competitor with a server cannot copy, so every decision in this charter is measured against it.</p></td></tr>
+</table>
+
+<h1>⚠️ 2. Problem Statement</h1>
+<p>Students handle files under deadline pressure, usually on a phone, late at night. Three problems stack on top of each other.</p>
+<p><strong style="color:#d65045">Problem 1 &mdash; The free tier runs out exactly when the deadline arrives.</strong><br>The free web tools students reach for ration what they can do: roughly two tasks a day, then a sign-up or a payment prompt, plus size caps and watermarks. The limit is not felt on a quiet afternoon. It is felt at 11pm the night before, with three files still to fix.</p>
+<p><strong style="color:#d65045">Problem 2 &mdash; Routine tasks require handing over identity documents.</strong><br>Applying for a scholarship, a visa or an internship means scanning a transcript, an ID card or a medical certificate. Converting one of those on a free site means uploading an identity document to a service the student does not know. Those services promise deletion after a fixed window &mdash; typically two hours &mdash; but the student cannot verify the promise was kept, and cannot withdraw the file once it has been sent.</p>
+<p><strong style="color:#d65045">Problem 3 &mdash; No single free site covers everything, so students maintain a list.</strong><br>A competitor teardown carried out on 22 August 2026 produced the comparison below. Students keep three or four sites bookmarked and relearn each one&rsquo;s limits.</p>
+<table style="border-collapse:collapse;width:100%" cellpadding="7" border="1" bordercolor="#e4e7ee">
+<tr style="background-color:#f6f7fb"><td width="34%"><strong>&nbsp;</strong></td><td width="22%"><strong>iLovePDF</strong></td><td width="22%"><strong>iLoveIMG</strong></td><td width="22%" style="background-color:#eeeefc"><strong>🎒 UniLab</strong></td></tr>
+<tr><td>Document &amp; image tools</td><td>31</td><td>13</td><td style="background-color:#eeeefc"><strong>33</strong></td></tr>
+<tr><td>Video tools</td><td style="color:#d64545"><strong>0</strong></td><td style="color:#d64545"><strong>0</strong></td><td style="background-color:#eeeefc"><strong>7</strong></td></tr>
+<tr><td>Audio tools</td><td style="color:#d64545"><strong>0</strong></td><td style="color:#d64545"><strong>0</strong></td><td style="background-color:#eeeefc"><strong>11</strong></td></tr>
+<tr><td>Free-tier daily cap</td><td>~2 tasks/day</td><td>~2 tasks/day</td><td style="background-color:#eeeefc;color:#1d9e77"><strong>None</strong></td></tr>
+<tr><td>Account required</td><td>For most features</td><td>For most features</td><td style="background-color:#eeeefc;color:#1d9e77"><strong>Never</strong></td></tr>
+<tr><td>Where the file is processed</td><td style="color:#d64545">Their server</td><td style="color:#d64545">Their server</td><td style="background-color:#eeeefc;color:#1d9e77"><strong>Your device</strong></td></tr>
+<tr><td>Deletion</td><td>Promised, ~2 hours</td><td>Promised, ~2 hours</td><td style="background-color:#eeeefc;color:#1d9e77"><strong>Nothing to delete</strong></td></tr>
+</table>
+<p style="color:#5b6472;font-size:10pt">Source: competitive teardown, 22 August 2026. Tool counts for UniLab are from <code>src/registry.js</code>.</p>
+
+<h1>✅ 3. Objectives</h1>
+<table style="border-collapse:collapse;width:100%" cellpadding="7" border="1" bordercolor="#e4e7ee">
+<tr style="background-color:#f6f7fb"><td width="6%"><strong>#</strong></td><td width="60%"><strong>Objective</strong></td><td width="34%"><strong>How we will know</strong></td></tr>
+<tr><td>O1</td><td>Transform a file entirely on the student&rsquo;s own device, with no upload path anywhere in the codebase</td><td>0 bytes of file content in any request body</td></tr>
+<tr><td>O2</td><td>Require no account, sign-in, email or task-per-day limit for any tool</td><td>No auth code exists in the repository</td></tr>
+<tr><td>O3</td><td>Let the student state an explicit target (&ldquo;under 5 MB&rdquo;) and see a live estimate before committing to a run</td><td>Estimate shown before every run</td></tr>
+<tr><td>O4</td><td>Cover documents, images, video and audio in one place</td><td>58 tools across 7 categories</td></tr>
+<tr><td>O5</td><td>Read scanned handouts by OCR in Thai, English and Burmese</td><td>Three languages selectable in-tool</td></tr>
+<tr><td>O6</td><td>Hold finished files in memory only, on a visible countdown, with delete-now and purge on tab close</td><td>30-minute TTL; nothing written to disk</td></tr>
+<tr><td>O7</td><td>Let a student save a repeated multi-step chore as a workflow and batch files through it</td><td>Workflows can be saved, exported, re-run</td></tr>
+<tr><td>O8</td><td>Keep working with no network connection once installed</td><td>Installable PWA passes an offline test</td></tr>
+<tr><td>O9</td><td>Validate the problem with at least 15 real MFU students</td><td>Every requirement traces to a stated pain</td></tr>
+</table>
+
+<h1>🧭 4. Scope</h1>
+<p>The project focuses on a browser-based, fully client-side <strong>file toolbox for students</strong>, built around exactly one core workflow.</p>
+<table style="border-collapse:collapse;width:100%" cellpadding="10" border="1" bordercolor="#5b5bd6">
+<tr>
+<td width="30%" style="background-color:#eeeefc;text-align:center"><p style="font-size:15pt">📂</p><p><strong>1. Select a file</strong></p><p style="font-size:10pt;color:#5b6472">From the phone or laptop. Nothing is sent.</p></td>
+<td width="5%" style="text-align:center;font-size:15pt;color:#5b5bd6"><strong>&rarr;</strong></td>
+<td width="30%" style="background-color:#eeeefc;text-align:center"><p style="font-size:15pt">⚙️</p><p><strong>2. Transform it on this device</strong></p><p style="font-size:10pt;color:#5b6472">Preview and estimate before committing.</p></td>
+<td width="5%" style="text-align:center;font-size:15pt;color:#5b5bd6"><strong>&rarr;</strong></td>
+<td width="30%" style="background-color:#eeeefc;text-align:center"><p style="font-size:15pt">⬇️</p><p><strong>3. Download the result</strong></p><p style="font-size:10pt;color:#5b6472">Held in memory, on a countdown.</p></td>
+</tr>
+</table>
+<table style="border-collapse:collapse;width:100%" cellpadding="10">
+<tr><td style="background-color:#fff7ed;border-left:4px solid #d97706"><p><strong>⚖️ The scope rule that governs this whole project.</strong> UniLab ships <strong>58 tools, and they are 58 settings of that one workflow &mdash; not 58 workflows</strong>. Split PDF and Remove Noise differ in what they compute, not in what the student does. Described as 58 workflows, the scope reads as sprawl; described correctly, it reads as one workflow proven 58 times.</p></td></tr>
+</table>
+<p><strong>✔️ In scope &mdash; the 58 tools, by category</strong></p>
+<table style="border-collapse:collapse;width:100%" cellpadding="7" border="1" bordercolor="#e4e7ee">
+<tr style="background-color:#f6f7fb"><td width="18%"><strong>Category</strong></td><td width="9%"><strong>Tools</strong></td><td width="73%"><strong>Representative work</strong></td></tr>
+<tr><td style="color:#d65045"><strong>📄 PDF</strong></td><td><strong>20</strong></td><td>Merge with per-file page ranges and a contents page; split; compress to a level or a size cap; true redaction; OCR; sign; compare; organise</td></tr>
+<tr><td style="color:#d64593"><strong>🖼️ Image</strong></td><td><strong>13</strong></td><td>Compress to a target size; resize; crop with ID-photo presets; convert; HEIC&rarr;JPG; background removal; face blurring</td></tr>
+<tr><td style="color:#0e9bb5"><strong>🎵 Audio</strong></td><td><strong>11</strong></td><td>Trim; convert; join; noise removal; loudness correction; voice enhancement; equaliser; silence cutting</td></tr>
+<tr><td style="color:#d3891a"><strong>🎬 Video</strong></td><td><strong>7</strong></td><td>Compress; trim; convert; reframe to 9:16 / 1:1 / 16:9; frames to images; screen recording</td></tr>
+<tr><td style="color:#9147d6"><strong>🧮 Everyday</strong></td><td><strong>3</strong></td><td>QR codes and small day-to-day utilities</td></tr>
+<tr><td style="color:#3d8bd6"><strong>✍️ Text &amp; Writing</strong></td><td><strong>2</strong></td><td>Word and character counting, correct for Thai and Burmese</td></tr>
+<tr><td style="color:#1d9e77"><strong>🎓 Study</strong></td><td><strong>2</strong></td><td>Citation generator; GPA calculator</td></tr>
+<tr style="background-color:#eeeefc"><td><strong>Total</strong></td><td><strong>58</strong></td><td>Plus saved workflows, result custody and offline install</td></tr>
+</table>
+<p><strong>🚫 Explicitly out of scope</strong></p>
+<table style="border-collapse:collapse;width:100%" cellpadding="7" border="1" bordercolor="#e4e7ee">
+<tr style="background-color:#f6f7fb"><td width="8%"><strong>#</strong></td><td width="40%"><strong>We will not build</strong></td><td width="52%"><strong>Why not</strong></td></tr>
+<tr><td>W1</td><td>PDF &rarr; Word / Excel round-trip conversion</td><td>Genuinely needs a server, which would destroy the product&rsquo;s central property</td></tr>
+<tr><td>W2</td><td>Accounts, cloud sync, cross-device history</td><td>Requires storing user data we have promised not to hold</td></tr>
+<tr><td>W3</td><td>Advertising or third-party analytics</td><td>Re-imposes the whole consent and disclosure regime the architecture removes</td></tr>
+<tr><td>W4</td><td>Sending file content to an AI model or third-party API</td><td>On-device only; this is the line that makes the custody claim true</td></tr>
+<tr><td>W5</td><td>Staff and faculty features, LMS integration</td><td>Not our user this phase</td></tr>
+</table>
+<p>The system will not claim to be faster than a server for every job. Processing happens on the student&rsquo;s own hardware, so a long video job is bounded by the device.</p>
+
+<h1>👥 5. Target Users / Stakeholders</h1>
+<h2>5.1 Target Users</h2>
+<table style="border-collapse:collapse;width:100%" cellpadding="7" border="1" bordercolor="#e4e7ee">
+<tr style="background-color:#f6f7fb"><td width="10%"><strong>&nbsp;</strong></td><td width="30%"><strong>Who</strong></td><td width="60%"><strong>The moment they need us</strong></td></tr>
+<tr><td style="text-align:center;font-size:14pt">🎓</td><td><strong>U1 &mdash; MFU undergraduate</strong></td><td>Submitting coursework to a form with a file size cap, on a phone, the night it is due</td></tr>
+<tr><td style="text-align:center;font-size:14pt">🪪</td><td><strong>U2 &mdash; Student handling identity documents</strong></td><td>Scanning a transcript, ID card or medical certificate for a scholarship, visa or internship. Custody stops being abstract here</td></tr>
+<tr><td style="text-align:center;font-size:14pt">👥</td><td><strong>U3 &mdash; Group-work coordinator</strong></td><td>Merging everyone&rsquo;s sections into one report before a deadline &mdash; multi-file, multi-step, under time pressure</td></tr>
+<tr><td style="text-align:center;font-size:14pt">🌏</td><td><strong>Multilingual students</strong></td><td>Working in Thai, English and Burmese, including MFU&rsquo;s large Burmese-speaking cohort, whose scanned handouts most tools cannot read</td></tr>
+<tr><td style="text-align:center;font-size:14pt">📶</td><td><strong>Students on campus Wi-Fi</strong></td><td>Where the upload-and-download round trip is itself a meaningful part of the wait</td></tr>
+</table>
+<h2>5.2 Stakeholders</h2>
+<ul>
+<li><strong>MFU students</strong> &mdash; the users of the product, and the people whose files are at stake.</li>
+<li><strong>Dr. Prasara Jakkaew</strong> &mdash; course instructor and project reviewer.</li>
+<li><strong>DIGITAL IMPOSTERS PVT. CO., LTD.</strong> &mdash; the project team, accountable for the custody claim.</li>
+<li><strong>Open-source contributors</strong> &mdash; the project is MIT-licensed and publicly hosted, so the claim is auditable by anyone.</li>
+</ul>
+
+<h1>💡 6. Proposed Solution</h1>
+<p>Develop a free <strong>web application</strong> that performs every file transformation inside the browser, using the browser&rsquo;s own capabilities rather than a server.</p>
+<p>Every tool shares one three-stage shell, so learning one tool teaches the student all 58:</p>
+<table style="border-collapse:collapse;width:100%" cellpadding="7" border="1" bordercolor="#e4e7ee">
+<tr style="background-color:#f6f7fb"><td width="8%"><strong>Step</strong></td><td width="42%"><strong>The student does</strong></td><td width="50%"><strong>The system does</strong></td></tr>
+<tr><td style="text-align:center"><strong>1</strong></td><td>Opens a tool, for example Compress PDF</td><td>Loads the tool module and shows the uploader stage</td></tr>
+<tr><td style="text-align:center"><strong>2</strong></td><td>Picks the file from the device</td><td>Reads the file <strong>in the browser</strong>. No request carries file bytes</td></tr>
+<tr><td style="text-align:center"><strong>3</strong></td><td>Types the target &mdash; <strong>5 MB</strong> &mdash; and reads the live estimate</td><td>Renders a preview and an estimated output size <strong>before</strong> anything is committed</td></tr>
+<tr><td style="text-align:center"><strong>4</strong></td><td>Runs the tool</td><td>Works on-device, yielding every ~24 ms so the tab never freezes</td></tr>
+<tr><td style="text-align:center"><strong>5</strong></td><td>Downloads the result and may press <strong>Delete now</strong></td><td>Holds the result in memory only, counts down from 30:00, purges on tab close</td></tr>
+</table>
+<table style="border-collapse:collapse;width:100%" cellpadding="10">
+<tr><td style="background-color:#e4f6ef;border-left:4px solid #1d9e77"><p><strong>🔍 The one decision that matters is at step 3.</strong> If the estimate already meets the cap, the student continues; if not, they change the target and the estimate re-renders. They never burn a run to find out. Discovering the file is <em>still</em> too big after the run is precisely the failure this design exists to prevent.</p></td></tr>
+</table>
+
+<h1>🧰 7. Key Features</h1>
+<table style="border-collapse:collapse;width:100%" cellpadding="7" border="1" bordercolor="#e4e7ee">
+<tr style="background-color:#f6f7fb"><td width="26%"><strong>Feature</strong></td><td width="59%"><strong>What it does</strong></td><td width="15%"><strong>Priority</strong></td></tr>
+<tr><td>⭐ <strong>Transform a file on this device</strong></td><td>Select &rarr; transform &rarr; download, with a live preview before committing, no upload path anywhere, and no account or daily cap. <em>The core feature; everything else depends on it.</em></td><td style="background-color:#eeeefc"><strong>Must</strong></td></tr>
+<tr><td>⏳ <strong>Result custody</strong></td><td>Finished files held in memory only, on a visible 30-minute countdown, with delete-now and automatic purge when the tab closes. Never written to disk, Cache Storage or IndexedDB</td><td style="background-color:#eeeefc"><strong>Must</strong></td></tr>
+<tr><td>📄 <strong>Document toolkit</strong></td><td>PDF and image work, including <strong>true redaction</strong> (the removed text is absent from the output, not merely covered) and OCR in Thai, English and Burmese</td><td style="background-color:#eeeefc"><strong>Must</strong></td></tr>
+<tr><td>🎬 <strong>Media toolkit</strong></td><td>Video and audio jobs in the same place as document jobs &mdash; the gap no competitor fills</td><td>Should</td></tr>
+<tr><td>🔗 <strong>Workflows</strong></td><td>Save a repeated multi-step chore as a named workflow, run a batch of files through it, export it so a group shares one chain</td><td>Should</td></tr>
+<tr><td>📡 <strong>Network honesty</strong></td><td>Any tool that must fetch a model or engine states what it will download, and roughly how large, <strong>before</strong> it starts. This is the single exception to the on-device rule, and it is always disclosed</td><td style="background-color:#eeeefc"><strong>Must</strong></td></tr>
+<tr><td>📥 <strong>Offline install</strong></td><td>Installable progressive web app that keeps working with no connection</td><td>Could</td></tr>
+</table>
+<p><strong>Optional / later versions (not required for the MVP)</strong></p>
+<ul>
+<li>Desktop two-pane work stage in the prototype, in addition to the phone layout.</li>
+<li>Bringing the offline install under the 8 MB target by loading the largest model on demand.</li>
+<li>Additional OCR languages beyond Thai, English and Burmese.</li>
+</ul>
+
+<h1>🔑 8. User Roles</h1>
+<p><strong>Visitor (Student) &mdash; the only role, and no account exists</strong></p>
+<ul>
+<li>Open any tool without signing in, registering or providing an email address.</li>
+<li>Pick a file from their own device.</li>
+<li>Set options and read the live preview and estimated output size.</li>
+<li>Run the transformation on their own device.</li>
+<li>Download the result.</li>
+<li>Delete the result immediately, or let the 30-minute countdown purge it.</li>
+<li>Save, export and re-run a multi-step workflow.</li>
+<li>Install the application for offline use.</li>
+</ul>
+<table style="border-collapse:collapse;width:100%" cellpadding="10">
+<tr><td style="background-color:#eeeefc;border-left:4px solid #5b5bd6"><p><strong>🛡️ There is deliberately no administrator, moderator or operator role.</strong> The system stores no user data and holds no files, so there is nothing for an administrator to administer. Removing the role removes the risk that comes with it &mdash; and removes the insider-access question entirely.</p></td></tr>
+</table>
+
+<h1>📊 9. Success Criteria / KPIs</h1>
+<p>Each criterion below is measurable, and the current measured value is stated honestly &mdash; including where the product currently fails.</p>
+<table style="border-collapse:collapse;width:100%" cellpadding="7" border="1" bordercolor="#e4e7ee">
+<tr style="background-color:#f6f7fb"><td width="34%"><strong>Criterion</strong></td><td width="24%"><strong>Target</strong></td><td width="26%"><strong>Current</strong></td><td width="16%"><strong>Status</strong></td></tr>
+<tr><td>No file content leaves the device</td><td>0 bytes in any request body, across all 58 tools</td><td>Believed true; never tested</td><td style="background-color:#fff7ed;color:#d97706"><strong>Untested</strong></td></tr>
+<tr><td>Results are unrecoverable after the countdown</td><td>Memory only, 30-min TTL, purge on tab close</td><td>Implemented as specified</td><td style="background-color:#e4f6ef;color:#1d9e77"><strong>Met</strong></td></tr>
+<tr><td>Offline install completes on campus Wi-Fi</td><td>&le; 8 MB core precache</td><td>31 MB &mdash; 23 MB is one model file</td><td style="background-color:#fee2e2;color:#d64545"><strong>Failing</strong></td></tr>
+<tr><td>A tool becomes usable quickly</td><td>Interactive &lt; 2 s on a mid-range laptop</td><td>No reference device agreed</td><td style="background-color:#fff7ed;color:#d97706"><strong>Proposed</strong></td></tr>
+<tr><td>Network use is disclosed before it happens</td><td>100% of network-using tools</td><td>2 tools qualify; OCR already discloses</td><td style="background-color:#fff7ed;color:#d97706"><strong>Partial</strong></td></tr>
+<tr><td>A long job never freezes the tab</td><td>Responsive even when backgrounded</td><td>Time-based yielding implemented</td><td style="background-color:#e4f6ef;color:#1d9e77"><strong>Met</strong></td></tr>
+<tr><td>Text counts correctly in Thai and Burmese</td><td>Counted by grapheme cluster</td><td>Implemented</td><td style="background-color:#e4f6ef;color:#1d9e77"><strong>Met</strong></td></tr>
+<tr><td>Redaction actually removes text</td><td>Redacted string absent from output</td><td>QA test not yet written</td><td style="background-color:#fff7ed;color:#d97706"><strong>To do</strong></td></tr>
+<tr><td>Problem validated with real users</td><td>&ge; 15 MFU students interviewed</td><td>0 interviews conducted</td><td style="background-color:#fee2e2;color:#d64545"><strong>Blocker</strong></td></tr>
+<tr><td>A student finishes the core workflow unaided</td><td>Pick &rarr; set target &rarr; run &rarr; download</td><td>To be tested in Phase 9</td><td style="background-color:#fff7ed;color:#d97706"><strong>Planned</strong></td></tr>
+</table>
+<table style="border-collapse:collapse;width:100%" cellpadding="10">
+<tr><td style="background-color:#fee2e2;border-left:4px solid #d64545"><p><strong>📌 Two of these are red, and we are stating that on purpose.</strong> The 31 MB install fails its own target, and 0 of 15 interviews have been conducted. A charter that hid either would be easier to submit and impossible to act on.</p></td></tr>
+</table>
+
+<h1>🗓️ 10. Project Implementation Timeline</h1>
+<p>The project is structured into 10 phases across the semester, grouped into the four course stages.</p>
+<table style="border-collapse:collapse;width:100%" cellpadding="7" border="1" bordercolor="#e4e7ee">
+<tr style="background-color:#f6f7fb"><td width="12%"><strong>Stage</strong></td><td width="22%"><strong>Phase</strong></td><td width="52%"><strong>Details</strong></td><td width="14%"><strong>Timeline</strong></td></tr>
+<tr><td style="background-color:#eeeefc" rowspan="4"><strong>🔍 DISCOVER</strong></td><td>Phase 1: Problem Validation</td><td>Interview 15+ MFU students about how they handle files under deadline; convert hypotheses into pains a real user described</td><td>Weeks 1&ndash;5</td></tr>
+<tr><td>Phase 2: Requirements</td><td>Write the spec, the backlog and the legal spec; trace every backlog row to a requirement and a pain</td><td>Weeks 3&ndash;5</td></tr>
+<tr><td>Phase 3: UX/UI Design</td><td>Feature list, user journey, design system, clickable prototype and the four required diagrams</td><td>Weeks 4&ndash;5</td></tr>
+<tr><td><strong>Phase 4: User Validation Gate</strong></td><td>Submit the charter, proposal, backlog and design pack (<strong>8 Sep 2026</strong>); reviewed in class 9 Sep</td><td>Week 5</td></tr>
+<tr><td style="background-color:#e4f6ef" rowspan="2"><strong>🔨 BUILD</strong></td><td>Phase 5: Core Development</td><td>Harden the core workflow end to end: uploader, live preview, on-device transform, download and the result vault</td><td>Weeks 6&ndash;8</td></tr>
+<tr><td><strong>Phase 6: Alpha Demo Day</strong></td><td>Demonstrate the one core workflow running fully on-device (<strong>7 Oct 2026</strong>)</td><td>Week 8</td></tr>
+<tr><td style="background-color:#fff7ed" rowspan="2"><strong>🧪 TEST</strong></td><td>Phase 7: Testing</td><td>Run the zero-upload network test across all 58 tools; redaction QA; cross-browser checks; fix the 31 MB offline install</td><td>Weeks 9&ndash;11</td></tr>
+<tr><td><strong>Phase 8: Beta Release</strong></td><td>Public beta to MFU students (<strong>28 Oct 2026</strong>); collect defects and usability problems</td><td>Week 11</td></tr>
+<tr><td style="background-color:#f6f7fb" rowspan="2"><strong>🚀 DELIVER</strong></td><td>Phase 9: Real-User Evaluation</td><td>Test with 15+ students on their own devices; measure task completion, time and confidence</td><td>Weeks 11&ndash;13</td></tr>
+<tr><td>Phase 10: Evaluation &amp; Delivery</td><td>Analyse results, fix priority issues, prepare the final report and demonstration (<strong>11 / 18 Nov 2026</strong>)</td><td>Weeks 12&ndash;14</td></tr>
+</table>
+
+<h1>🚧 11. Risks &amp; Constraints</h1>
+<table style="border-collapse:collapse;width:100%" cellpadding="7" border="1" bordercolor="#e4e7ee">
+<tr style="background-color:#f6f7fb"><td width="13%"><strong>Severity</strong></td><td width="35%"><strong>Risk or constraint</strong></td><td width="52%"><strong>What we are doing about it</strong></td></tr>
+<tr><td style="background-color:#fee2e2;color:#d64545"><strong>High</strong></td><td><strong>0 interviews conducted.</strong> Every requirement traces to a hypothesis backed by a teardown or a platform constraint, not to a pain a real user described</td><td>Phase 1 exists to close it; 15 interviews assigned three per team member this week</td></tr>
+<tr><td style="background-color:#fee2e2;color:#d64545"><strong>High</strong></td><td><strong>Topic approval unconfirmed.</strong> UniLab does not appear on the assigned topic list issued 19 August 2026</td><td>Confirm directly with Dr. Prasara before the gate</td></tr>
+<tr><td style="background-color:#fee2e2;color:#d64545"><strong>High</strong></td><td><strong>The central claim has never been tested.</strong> &ldquo;No file content leaves the device&rdquo; is an assertion until measured</td><td>Phase 7 network test across all 58 tools; owned by QA</td></tr>
+<tr><td style="background-color:#fff7ed;color:#d97706"><strong>Medium</strong></td><td>The legal specification still describes a server-upload, ad-funded product the system does not have</td><td>Rewrite as &ldquo;architecture as compliance&rdquo; &mdash; the requirements this design removes</td></tr>
+<tr><td style="background-color:#fff7ed;color:#d97706"><strong>Medium</strong></td><td>Offline install is 31 MB against an 8 MB target; ~74% is one WebAssembly runtime for a single tool</td><td>Load that model on demand rather than precaching it</td></tr>
+<tr><td style="background-color:#fff7ed;color:#d97706"><strong>Medium</strong></td><td>Browser capability varies; WebCodecs is weaker in Safari, limiting some video tools on iPhone</td><td>State honest per-browser limits in the tools themselves</td></tr>
+<tr><td style="background-color:#fff7ed;color:#d97706"><strong>Medium</strong></td><td>OCR language support is described inconsistently across the code, the registry and the README, so Burmese support is invisible to the students most likely to need it</td><td>Correct all three to match what actually ships</td></tr>
+<tr><td style="background-color:#f6f7fb"><strong>Low</strong></td><td>Processing runs on the student&rsquo;s own hardware, so a large video job is slow on an older phone</td><td>Never promise server-grade speed; show honest progress</td></tr>
+<tr><td style="background-color:#f6f7fb"><strong>Low</strong></td><td>Some tools must download a model on first use &mdash; the one exception to the on-device rule</td><td>Always disclose the download and its size beforehand</td></tr>
+<tr><td style="background-color:#f6f7fb"><strong>Low</strong></td><td>The team must complete build, testing and evaluation within the semester schedule</td><td>Phases sized against the course calendar above</td></tr>
+</table>
+
+<h1>🧾 12. Assumptions</h1>
+<ul>
+<li><strong>Behaviour:</strong> students will accept doing the work on their own device in exchange for never uploading the file.</li>
+<li><strong>Platform:</strong> students have a reasonably current browser; Chrome, Edge and Firefox are fully supported and Safari partially.</li>
+<li><strong>Device:</strong> a phone is the primary camera and often the primary computer for the target user.</li>
+<li><strong>Access:</strong> MFU students, including the Burmese-speaking cohort, are reachable on campus for interviews and real-user testing.</li>
+<li><strong>Environment:</strong> submission forms will continue to enforce size caps and format restrictions, so the need for compression and conversion persists.</li>
+<li><strong>Competitors:</strong> free tiers and their fixed-window deletion promises are what students actually encounter today.</li>
+<li><strong>Compliance:</strong> because no file content leaves the device, no data-controller duties attach to file content under PDPA &mdash; the compliance position is a property of the architecture rather than of a policy document.</li>
+<li><strong>Availability:</strong> the public repository and the live deployment remain available for the duration of the semester.</li>
+<li><strong>Honesty:</strong> students describe their own file problems accurately during interviews and testing.</li>
+</ul>
+<hr>
+<p style="text-align:center;color:#5b6472;font-size:10pt">DIGITAL IMPOSTERS PVT. CO., LTD. &middot; UniLab &middot; Project Charter &middot; 6 September 2026<br>Repository: github.com/mfu-hlaing/unilab &nbsp;&middot;&nbsp; Live: unilab.3-0-126-159.nip.io</p>
