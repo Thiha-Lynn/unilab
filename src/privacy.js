@@ -91,7 +91,7 @@ export function renderPrivacy(app) {
       <p>UniLab is a student project at Mae Fah Luang University, built by DIGITAL
       IMPOSTERS PVT. CO., LTD. for course 1305493. For a PDPA question, or anything on this
       page you think is wrong, open an issue on
-      <a href="https://github.com/mfu-hlaing/unilab/issues" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://github.com/Thiha-Lynn/unilab/issues" target="_blank" rel="noopener">GitHub</a>
       — we answer within 30 days. The whole source is public, so you never have to take
       this page's word for anything.</p>
 

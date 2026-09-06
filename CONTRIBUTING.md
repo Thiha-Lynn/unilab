@@ -14,7 +14,7 @@ compliance story), not just an implementation detail.
 ## Getting started
 
 ```bash
-git clone https://github.com/mfu-hlaing/unilab.git
+git clone https://github.com/Thiha-Lynn/unilab.git
 cd unilab
 npm install
 npm run dev        # dev server at http://localhost:5173

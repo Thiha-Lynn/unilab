@@ -3,11 +3,11 @@
 </p>
 
 <p align="center">
-  <a href="https://mfu-hlaing.github.io/unilab/"><b>🎒 Open UniLab →</b></a>
+  <a href="https://thiha-lynn.github.io/unilab/"><b>🎒 Open UniLab →</b></a>
 </p>
 
 <p align="center">
-  <a href="https://github.com/mfu-hlaing/unilab/actions/workflows/deploy.yml"><img src="https://github.com/mfu-hlaing/unilab/actions/workflows/deploy.yml/badge.svg" alt="Deploy status" /></a>
+  <a href="https://github.com/Thiha-Lynn/unilab/actions/workflows/deploy.yml"><img src="https://github.com/Thiha-Lynn/unilab/actions/workflows/deploy.yml/badge.svg" alt="Deploy status" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-5b5bd6" alt="MIT license" /></a>
   <a href="CONTRIBUTING.md"><img src="https://img.shields.io/badge/PRs-welcome-2a9d8f" alt="PRs welcome" /></a>
   <img src="https://img.shields.io/badge/servers-zero-e1972b" alt="Zero servers" />
@@ -101,7 +101,7 @@ actually see:
 ## Run it locally
 
 ```bash
-git clone https://github.com/mfu-hlaing/unilab.git
+git clone https://github.com/Thiha-Lynn/unilab.git
 cd unilab
 npm install
 npm run dev

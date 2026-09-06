@@ -1,7 +1,7 @@
 # UniLab — project rules for Claude
 
 **Course:** 1305493 Software Engineering Case Studies, MFU, 1/2569 · Dr. Prasara Jakkaew
-**Repo:** https://github.com/mfu-hlaing/unilab · **Live:** https://mfu-hlaing.github.io/unilab/
+**Repo:** https://github.com/Thiha-Lynn/unilab · **Live:** https://thiha-lynn.github.io/unilab/
 **Phase:** DISCOVER (W1–W5). **No production code until the User Validation Gate passes (Sep 8 2026).**
 
 ## What UniLab is
@@ -93,10 +93,12 @@ see spec §0. Converting `H` to `P` happens only through `/capture-requirement`,
 | `requirement-writer` | subagent | Raw pain notes → spec (F / NFR / LR) + backlog rows in sync |
 | `capture-requirement` | skill | One interview → `P#`; converts the `H#` it replaces and re-points every citation |
 | `audit-backlog` | skill | Coverage · provenance · priority agreement · legal coverage. Run before any commit touching `.docs/` |
+| `backlog-auditor` | subagent | The same four checks, delegated — its own context, returns only mismatches. Read-only by design |
 | `diagram-checker` | subagent | The W4 design pack still agrees with the spec |
 
-`backlog-auditor` in the W3 target tree **is** `audit-backlog` — the deck allows either a
-subagent or a skill, and a skill is lighter and invoked directly. Not duplicated, deliberately.
+The auditor exists as both because they differ in who asks: `/audit-backlog` is what you type;
+`backlog-auditor` is what Claude delegates to when the chain is too big to hold in context.
+`SKILL.md` defines what the checks mean and wins if they ever disagree.
 
 Every agent and skill file carries the same last line: **if anything is unclear, stop and ask,
 and offer at least 3 concrete options. Never guess.** That is the W3 "failure pattern to catch".

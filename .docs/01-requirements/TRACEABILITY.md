@@ -120,12 +120,15 @@ mismatch.
 |---|---|---|
 | `requirement-writer` | subagent | Raw pain notes → spec (F / NFR / LR) + backlog rows |
 | `capture-requirement` | skill | One interview → `P#`, converts the `H#` it replaces, re-points every citation |
-| `audit-backlog` | skill | The four checks: coverage, provenance, priority agreement, legal coverage |
+| `audit-backlog` | skill | The four checks, run in front of you: coverage, provenance, priority agreement, legal coverage |
+| `backlog-auditor` | subagent | The same four checks, delegated — reads the whole `.docs/` tree in its own context and returns only the mismatches |
 | `diagram-checker` | subagent | W4 design pack still agrees with the spec |
 
-`backlog-auditor` from the W3 target tree **is** `audit-backlog`; the deck notes it can be
-built as either a subagent or a skill, and a skill is lighter and invoked directly with
-`/audit-backlog`. It is not duplicated as an agent file, deliberately.
+The W3 deck notes the auditor can be built as either a subagent or a skill. Both exist here
+because they differ in *who asks*: the skill is what a person types when they want the report
+in front of them; the subagent is delegated to and keeps the whole `.docs/` read out of the
+main context. `SKILL.md` is the authority on what the four checks mean — if the two ever
+disagree, the subagent is instructed to say so and defer.
 
 ## Running the chain
 
