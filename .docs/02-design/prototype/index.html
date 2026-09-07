@@ -138,6 +138,31 @@
     margin-top:12px; font-size:12.5px; color:var(--muted);
     border-left:2px solid var(--line); padding-left:10px;
   }
+
+  /* ---- S2-D · desktop two-pane work stage (design-system §1.4 breakpoint 960px) ----
+     The same three stages and the same tokens; the phone's stacked preview + sidebar
+     become two panes. No new component and no new colour is introduced here. */
+  .deskwrap{margin-top:34px}
+  .desk{
+    background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+    box-shadow:var(--shadow); overflow:hidden; max-width:980px;
+  }
+  .desk .bar{padding:14px 20px}
+  .desk .panes{display:grid; grid-template-columns:1fr 320px; min-height:380px}
+  .desk .stage{
+    padding:26px 24px; display:flex; flex-direction:column; justify-content:center;
+    background:var(--bg); border-right:1px solid var(--line);
+  }
+  .desk .stage .preview{background:var(--card)}
+  .desk .stage .page{width:132px; height:174px}
+  .desk .rightpane{display:flex; flex-direction:column}
+  .desk .rightpane .body{padding:20px 20px 12px; flex:1}
+  .desk .rightpane .side{margin-top:0; border-top:0; padding-top:0}
+  .desk .foot{padding:14px 20px 18px}
+  @media (max-width:960px){
+    .desk .panes{grid-template-columns:1fr}
+    .desk .stage{border-right:0; border-bottom:1px solid var(--line)}
+  }
   .why b{color:var(--ink)}
   @media (max-width:640px){ .rail{flex-direction:column} .col{max-width:none} }
 </style>
@@ -277,6 +302,67 @@
       <i>watch</i>, not a deletion promise they have to trust.</p>
     </figure>
 
+  </div>
+
+  <!-- ================= S2 · desktop ================= -->
+  <div class="deskwrap">
+    <figure class="col" style="margin:0; max-width:980px">
+      <figcaption><b>S2-D · Compress PDF, desktop two-pane work stage</b> — the same journey
+      steps 2–4, at the ≥&nbsp;960&nbsp;px breakpoint</figcaption>
+      <div class="desk">
+        <div class="bar">
+          <span class="back">‹</span>
+          <span class="title">Compress PDF</span>
+          <span class="pill">On this device</span>
+        </div>
+        <div class="panes">
+
+          <div class="stage">
+            <div class="preview">
+              <div class="page"></div>
+              <div class="facts">
+                <span><b>scan-notes.pdf</b>file</span>
+                <span><b>18.4 MB</b>now</span>
+                <span><b>24</b>pages</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="rightpane">
+            <div class="body">
+              <div class="side">
+                <p class="lbl">Compression</p>
+                <div class="seg">
+                  <span>Low</span><span>Medium</span><span class="on">Target size</span>
+                </div>
+
+                <p class="lbl">Target size</p>
+                <div class="num">
+                  <input value="5" readonly aria-label="Target size">
+                  <span class="unit">MB</span>
+                </div>
+
+                <div class="explain">
+                  Estimated result <b>&asymp; 4.6 MB</b> — under your 5 MB cap.
+                  Text stays sharp; images drop to 110 dpi.
+                </div>
+                <div class="note">&#9888; No download needed for this tool.</div>
+              </div>
+            </div>
+            <div class="foot">
+              <button class="btn">Compress PDF</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <p class="why"><b>Why this is drawn at all.</b> The gate reviewer opens the prototype on a
+      desktop, so shipping only the 480&nbsp;px layout showed one of the two layouts the product
+      ships (spec <b>D6</b>, backlog <b>B24</b>). It is the <i>widening</i> of S2, not a second
+      design: the preview becomes the left stage, the sidebar becomes the right pane, and
+      <b>R1</b> still holds — one primary action, still pinned to the foot. Same tokens, no new
+      component, no new colour.</p>
+    </figure>
   </div>
 </div>
 </body>

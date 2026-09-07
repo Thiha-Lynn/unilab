@@ -15,8 +15,9 @@ Lo-fi on purpose. This tests the **flow**, not the polish.
 | **S1 · Tool picker** | 1 | A student finds the right tool by typing what they want to *do*, not by learning a menu. |
 | **S2 · Compress PDF, work stage** | 2 – 4 | The estimate appears **before** the run. Options live in the sidebar; the single primary action is pinned to the foot. |
 | **S3 · Download & custody** | 5 | The countdown is watchable and the result is destroyable on demand. |
+| **S2-D · Compress PDF, desktop two-pane stage** | 2 – 4 | The same stage at the ≥ 960 px breakpoint — the layout a gate reviewer actually opens. |
 
-All three are drawn at 480 px, the phone width, because the phone is the primary device for
+S1–S3 are drawn at 480 px, the phone width, because the phone is the primary device for
 this user (spec §1.1). The desktop layout widens S2 into the two-pane work stage; it does not
 change the steps.
 
@@ -61,8 +62,11 @@ Two things surfaced only once the screens existed:
 
 ## Known gaps in this prototype
 
-- The **desktop** two-pane layout is not drawn. Mobile-first is deliberate, but the gate design
-  should show both; W5 addition.
+- ~~The **desktop** two-pane layout is not drawn.~~ **Closed 7 Sep 2026 (B24).** S2-D draws it:
+  the preview becomes the left stage, the option sidebar becomes the 320 px right pane, and the
+  primary action stays pinned to the foot. Verified in the browser — `grid-template-columns`
+  resolves to `658px 320px` at 1200 px and collapses to one column below the 960 px breakpoint;
+  the primary button's background computes to `rgb(91,91,214)`, which is `--accent` exactly.
 - Only the **happy path** is drawn. The step-3 "misses the cap" branch exists in D4 but has no
   screen — it re-renders the same estimate, so it needs no new screen, but that should be said
   rather than assumed.

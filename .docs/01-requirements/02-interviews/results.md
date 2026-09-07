@@ -21,8 +21,13 @@ and skip that step — the citations in the spec and backlog will silently go st
 | Pains recorded (`P#`) | **0** |
 | Hypotheses still unvalidated (`H#`) | **9** |
 
+> **A participant does not have to be an MFU student, or on campus.** Per the instructor's
+> `M1-choosing-your-problem` guide, a real user is anyone who **has the problem** and whom you
+> **can reach to talk** — a call, a chat, a DM or a video call all count. Record the channel in
+> the block below. Teammates and classmates on this course never count.
+
 > **This file is empty on purpose.** Nothing may be written here that did not come from a real
-> conversation with a real MFU student. The course policy lists "fabricating user interviews that
+> conversation with a real person. The course policy lists "fabricating user interviews that
 > never happened" as not allowed, and a fabricated `P#` is worse than an honest `H#` because it
 > looks finished. If this file is still empty at the gate, that is the finding — report it.
 
@@ -71,7 +76,8 @@ who confirms it — record it prominently rather than filing it quietly.
 <!--
 ### S1
 - Date:
-- Role: (year + programme only — never a name)
+- Role: (year + programme, or occupation — never a name)
+- Channel: in person / call / chat / DM / video
 - Language: EN / TH / MY
 - Last file task described:
 - Pains stated (their words, not ours):

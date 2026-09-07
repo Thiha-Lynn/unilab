@@ -51,13 +51,13 @@ a user.
 | **B13** | Commit and push `CLAUDE.md`, `rule.md`, `.claude/`, `.docs/` and the untracked/modified source files | Must | D4 | ✅ Done — 2 Sep 2026 |
 | **B14** | Verify Remove Background discloses its model download before it starts, as OCR already does | Must | F12, LR3, NFR5 | ✅ Done — 7 Sep 2026. `remove-background.js` `modelGate()` downloads nothing on open and gates the model behind a button naming the size; NFR5 is now 2 of 2 tools disclosing |
 | **B15** | QA test for B7: extract text from a redacted PDF and assert the redacted string is absent | Must | LR6, F7 | 🔴 To do |
-| **B16** | Interview **≥5 real students** (target ≥15), recording role / pain / quote only per LR7; convert each `H#` to a `P#` and re-point every requirement | Must | §6, LR7 | 🔴 **0 of 5. Gate blocker.** Instruments ready — `02-interviews/field-kit.md` (where to go, what to say, the 6 questions), `results.md` (empty log), `/capture-requirement`. Only the conversations are missing |
+| **B16** | Interview **≥5 real users** (target ≥15), recording role / pain / quote only per LR7; convert each `H#` to a `P#` and re-point every requirement | Must | §6, LR7 | 🔴 **0 of 5. Gate blocker.** Instruments ready — `02-interviews/field-kit.md`, `results.md` (empty log), `/capture-requirement`. **Widened 7 Sep:** the instructor's `M1-choosing-your-problem` defines a real user as anyone who *has the problem* and *can be reached* — call, chat, DM and video all count, and they need not be on campus. Field kit §1b now carries the remote channels. Only the conversations are missing |
 | **B17** | Confirm with Dr. Prasara that UniLab is an approved case-study topic (not on the 19 Aug assigned list) | Must | Q4 | 🔴 **Gate blocker.** Request drafted at `05-approvals/topic-approval-request.md` with the guardrail-by-guardrail case and a fallback plan — **not sent**; Product Owner to send |
 | **B18** | Video and audio tools in the same place as document tools (18 shipped) | Should | F9, H7 | ✅ Done |
 | **B19** | Merge PDFs with per-file page ranges and an optional contents page | Should | F10, H8 | ✅ Done — `merge-pdf.js` |
 | **B20** | Save a multi-step chore as a named workflow and batch files through it | Should | F11, H8 | ✅ Done — `ops.js` (13 ops) + `workflows.js` |
 | **B21** | Installable PWA that works with no connection | Could | F13, H3 | ⚠️ Built — **unusable until B9** |
-| **B24** | Draw the **desktop** two-pane work stage in the prototype — only the 480 px phone layout exists | Must | F5, D6 | 🔴 To do — W5 addition. Raised to Must to agree with F5 (the gate reviewer opens the prototype on a desktop); previously cited D3, which is the `rule.md` defect, not this one |
+| **B24** | Draw the **desktop** two-pane work stage in the prototype — only the 480 px phone layout existed | Must | F5, D6 | ✅ Done — 7 Sep 2026. **S2-D** in `prototype/index.html`: preview left, 320 px option pane right, one primary action still pinned to the foot. No new component and no colour outside the token block; verified in-browser at 1200 px and at the 960 px collapse |
 | **B26** | Test that proves LR5: store results, purge, then resolve the object URL to show the bytes are unreachable — not merely unlisted | Must | LR5, NFR2 | ✅ Done — `test/vault-deletion.test.mjs`, 6 tests |
 | **B27** | Enforce type and size limits on **every** intake path; `accept` filters only the OS picker, so a dragged file bypassed it entirely | Must | LR1, `rule.md` PDPA 8 | ✅ Done — `src/intake.js` + `test/intake-screening.test.mjs`, 8 tests |
 | **B28** | Guarantee EXIF/GPS removal on the one image path that could pass the original file through unchanged | Must | LR6, `rule.md` PDPA 7 | ✅ Done — `compress-image.js` states `preserveExif:false` and re-encodes if the library returns the input |
@@ -89,9 +89,9 @@ product table; these rows cite the course rubric instead, which is their real so
 
 | | Count |
 |---|---|
-| ✅ Done | 21 |
+| ✅ Done | 22 |
 | ⚠️ Built but unverified | 2 | (B7, B21) |
-| 🔴 To do | 8 |
+| 🔴 To do | 7 |
 | **Gate blockers open** | **2** (B16, B17) — B13 closed by the W4 push, B12 by the 6 Sep `rule.md` rewrite |
 
 *(31 product rows — 21 done, 2 built-unverified, 8 to do — plus 3 gate-deliverable rows. The 7 Sep audit closed B10 and B14, split the
