@@ -51,8 +51,8 @@ a user.
 | **B13** | Commit and push `CLAUDE.md`, `rule.md`, `.claude/`, `.docs/` and the untracked/modified source files | Must | D4 | ✅ Done — 2 Sep 2026 |
 | **B14** | Verify Remove Background discloses its model download before it starts, as OCR already does | Must | F12, LR3 | ⚠️ Unverified |
 | **B15** | QA test for B7: extract text from a redacted PDF and assert the redacted string is absent | Must | LR6, F7 | 🔴 To do |
-| **B16** | Interview **≥5 real students** (target ≥15), recording role / pain / quote only per LR7; convert each `H#` to a `P#` and re-point every requirement | Must | §6, LR7 | 🔴 To do — **0 of 5. Gate blocker** |
-| **B17** | Confirm with Dr. Prasara that UniLab is an approved case-study topic (not on the 19 Aug assigned list) | Must | Q4 | 🔴 To do — **gate blocker** |
+| **B16** | Interview **≥5 real students** (target ≥15), recording role / pain / quote only per LR7; convert each `H#` to a `P#` and re-point every requirement | Must | §6, LR7 | 🔴 **0 of 5. Gate blocker.** Instruments ready — `02-interviews/field-kit.md` (where to go, what to say, the 6 questions), `results.md` (empty log), `/capture-requirement`. Only the conversations are missing |
+| **B17** | Confirm with Dr. Prasara that UniLab is an approved case-study topic (not on the 19 Aug assigned list) | Must | Q4 | 🔴 **Gate blocker.** Request drafted at `05-approvals/topic-approval-request.md` with the guardrail-by-guardrail case and a fallback plan — **not sent**; Product Owner to send |
 | **B18** | Video and audio tools in the same place as document tools (18 shipped) | Should | F9, H7 | ✅ Done |
 | **B19** | Merge PDFs with per-file page ranges and an optional contents page | Should | F10, H8 | ✅ Done — `merge-pdf.js` |
 | **B20** | Save a multi-step chore as a named workflow and batch files through it | Should | F11, H8 | ✅ Done — `ops.js` (13 ops) + `workflows.js` |
