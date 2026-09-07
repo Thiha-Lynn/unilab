@@ -299,7 +299,7 @@ ever answers a user in prose.
 
 ## Carry into the W3 backlog
 
-These are the legal requirements this file produces. They are numbered LR1–LR7 and every one
+These are the legal requirements this file produces. They are numbered LR1–LR8 and every one
 is already traced in `.docs/01-requirements/01-spec/` and `.docs/01-requirements/backlog.md`.
 
 | # | Legal requirement | Source | Priority |
@@ -311,6 +311,7 @@ is already traced in `.docs/01-requirements/01-spec/` and `.docs/01-requirements
 | **LR5** | Results must be held in memory only, expire without user action, be erasable on demand, and be unreachable once dropped — proven by test, not asserted. | PDPA (retention, user rights) — PDPA rules 9–15 | **Must** |
 | **LR6** | Redaction, blurring and metadata stripping must remove the content, not overlay it — proven by a test that extracts from the output. | PDPA (sensitive data) — PDPA rules 7, 19 | **Must** |
 | **LR7** | No interview transcript, name, phone number, student ID, or contact detail may be pasted into an AI tool or committed to the public repo; the evidence log holds role, pain and quote only. | PDPA (our own research) — PDPA rules 30–32 | **Must** |
+| **LR8** | No filename, file content, or object URL may reach the console, an error tracker, or any diagnostic sink in a production build. Naming the file on screen is correct; the same string in the console is not. | PDPA (minimisation) — PDPA rule 6 | **Must** |
 
 ### Duties this architecture removes — recorded, not deleted
 

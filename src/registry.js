@@ -146,7 +146,7 @@ export const TOOLS = [
     desc: 'Add text, images and boxes straight onto a PDF page.',
     load: () => import('./tools/edit-pdf.js') },
   { id: 'ocr-pdf', name: 'OCR PDF', icon: '🔍', category: 'pdf',
-    desc: 'Make a scanned PDF searchable — English and Thai.',
+    desc: 'Make a scanned PDF searchable — Thai, English and Burmese.',
     load: () => import('./tools/ocr-pdf.js') },
   { id: 'pdf-forms', name: 'Fill PDF Form', icon: '🧾', category: 'pdf',
     desc: 'Fill in a university form and flatten it so it stays put.',

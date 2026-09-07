@@ -1,7 +1,7 @@
 # B17 — topic approval request (DRAFT, not sent)
 
 **Status:** 🔴 **Not sent.** Someone on the team must send this. It is written to be pasted into
-Google Classroom or email with the name changed.
+Google Classroom or email as-is.
 **Blocks:** the W5 User Validation Gate (submit 8 Sep 2026)
 **Traces to:** spec §7 **Q4** · backlog **B17**
 **Owner:** Myo Zin Thant (Product Owner)
@@ -30,7 +30,7 @@ is why it is a gate blocker rather than a footnote.
 | 1 | **Real users ≥ 15** (≈3 per member, no classmates, no AI personas) | Interview plan assigns 3 per member; **0 conducted so far** (B16) — stated honestly, not claimed |
 | 2 | **Buildable in 1 month — exactly 1 core workflow** | One workflow: *select a file → transform it on this device → download*. All 58 tools are settings of that one workflow, not 58 workflows |
 | 3 | **A measurable metric** | Files leaving the device per task (before: every file to a third-party server → after: zero), plus time-to-finished-file and submission rejections |
-| 4 | **PDPA-safe** | Compliance is architectural: no upload path exists, so no personal data is collected. `rule.md` derives LR1–LR7 from PDPA, CCA §26 and ETA §9/26/28 |
+| 4 | **PDPA-safe** | Compliance is architectural: no upload path exists, so no personal data is collected. `rule.md` derives LR1–LR8 from PDPA, CCA §26 and ETA §9/26/28 |
 | 5 | **Not sold / shipped by anyone in the team already — must be new work** | Built by this team, this semester, for this course. Not sold, no revenue, no ads, MIT-licensed. It is deployed publicly because the W4 prototype had to be real enough to interview against — **not because it pre-existed the course** |
 
 Guardrail 5 is the one worth stating plainly rather than hoping it passes unnoticed: UniLab is
@@ -67,7 +67,7 @@ course.
 > useful to us today.
 >
 > Thank you,
-> [name], Product Owner, Company 18
+> Myo Zin Thant, Product Owner, Company 18 — DIGITAL IMPOSTERS PVT. CO., LTD.
 
 ---
 

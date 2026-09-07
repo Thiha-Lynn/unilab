@@ -2,7 +2,7 @@
 
 **Course:** 1305493 · 1/2569 · Dr. Prasara Jakkaew
 **Company:** DIGITAL IMPOSTERS PVT. CO., LTD. · **Product:** UniLab
-**Updated:** 6 Sep 2026 · **Owner:** Thiha Lin (6631503092), Tech Lead
+**Updated:** 7 Sep 2026 · **Owner:** Thiha Lin (6631503092), Tech Lead
 
 The W5 gate grades one chain, and the W3 deck states it plainly:
 
@@ -63,9 +63,14 @@ LR-numbered items inside today's requirement spec."*
 | **LR5** | Results in memory only, expire unaided, erasable on demand, unreachable once dropped | PDPA 9–15 | PDPA (retention) |
 | **LR6** | Redaction, blurring and metadata stripping remove content rather than covering it | PDPA 7, 19 | PDPA (sensitive data) |
 | **LR7** | No interview PII into an AI tool or the public repo; role, pain and quote only | PDPA 30–32 | PDPA (our own research) |
+| **LR8** | No filename, file content or object URL reaches the console or an error tracker in production | PDPA 6 | PDPA (minimisation) |
 
-All seven are live in the spec §4 and cited by backlog rows. `/audit-backlog` check 4 fails
-if a Must-level rule in `rule.md` has no LR.
+All eight are live in the spec §4 and cited by backlog rows. `/audit-backlog` check 4 fails if a
+Must-level rule in `rule.md` has no LR.
+
+> **LR8 was added by the pre-gate audit on 7 Sep 2026.** `rule.md` PDPA rule 6 — no filename in
+> a production console — is a Must-level rule that never became an LR, so `B30` cited the raw
+> rule instead of a requirement id. Check 4 had been failing quietly since the W2 rewrite.
 
 ---
 
@@ -95,9 +100,9 @@ build — but **an artefact is not a user**, and the gate asks for a user.
 | F7 redact / blur so removed content is absent | H2 · LR6 | B7, B15 |
 | F10 merge PDFs with page ranges and a contents page | H8 | B19 |
 | F11 save a repeated chore as a workflow | H8 | B20 |
-| F12 told before a tool downloads anything | LR3 | B14 |
+| F12 told before a tool downloads anything | LR3 · NFR5 | B14 ✅ |
 | F13 install and keep working offline | H3 | B21 |
-| F14 true language coverage shown in-app | D2 | B10 |
+| F14 true language coverage shown in-app | D2 | B10 ✅ |
 
 **Converting `H` to `P` is `/capture-requirement`'s only job**, and it is the only sanctioned
 route. A hypothesis is promoted when **two different participants describe it unprompted** —

@@ -15,7 +15,7 @@ W1  Charter ─────────► what the product IS
       │                 (one core workflow, users, scope, metric)
       ▼
 W2  rule.md ─────────► what the LAW requires of THAT product
-      │                 (PDPA · CCA §26 · ETA §9/26/28 → LR1–LR7)
+      │                 (PDPA · CCA §26 · ETA §9/26/28 → LR1–LR8)
       ▼
 W3  spec + backlog ──► P# / F# / NFR# / LR#  →  B# rows
       │                 pain → requirement → backlog item
@@ -46,10 +46,11 @@ webapp/
 ├── .docs/
 │   ├── 01-requirements/
 │   │   ├── TRACEABILITY.md ........... ★ START HERE — the whole chain, one screen
-│   │   ├── backlog.md ................ W3 · 37 rows, B1–B33, MoSCoW + Traces to
+│   │   ├── proposal.md ............... W5 · problem statement + target users + guardrails
+│   │   ├── backlog.md ................ W3 · 31 product rows (B1–B34) + 3 gate rows, MoSCoW
 │   │   ├── 01-spec/
 │   │   │   └── 20260826-01-unilab-core.md   W3 · the spec: §0 evidence · §1 problem
-│   │   │                                    §2 F1–F14 · §3 NFR1–7 · §4 LR1–7 · §5 scope
+│   │   │                                    §2 F1–F14 · §3 NFR1–7 · §4 LR1–8 · §5 scope
 │   │   ├── 02-interviews/            ← B16 lives here
 │   │   │   ├── interview-guide.md .... the instrument: consent, questions, never-ask list
 │   │   │   ├── field-kit.md .......... ★ the page to hold on your phone while interviewing
@@ -73,7 +74,8 @@ webapp/
 │   └── 05-log/                       ← the audit trail
 │       ├── 20260826-log.md ........... W3 session
 │       ├── 20260902-log.md ........... W4 session
-│       └── 20260906-log.md ........... rule.md rewrite + conformance + W3 bridge
+│       ├── 20260906-log.md ........... rule.md rewrite + conformance + W3 bridge
+│       └── 20260907-log.md ........... ★ pre-gate audit — the 4 checks, 7 findings, 0 left
 │
 └── test/ ......................... proves the claims rather than asserting them
     ├── vault-deletion.test.mjs ....... LR5 · bytes unreachable after purge
@@ -89,9 +91,10 @@ webapp/
 |---|---|---|---|
 | **W1** | Company Charter | [`01-requirements/03-charter/`](01-requirements/03-charter/) + [published Doc](https://docs.google.com/document/d/1D10q6PEqQ_sskQpPEEDYESxWUno8BGYK1mQv8IvPN0o/edit) | ✅ submitted, row 22 of the class sheet |
 | **W2** | `rule.md` | [`../rule.md`](../rule.md) · draft preserved in [`04-legal/`](01-requirements/04-legal/) | ✅ rewritten from the Charter (B12) |
-| **W3** | **Backlog + spec (draft)** | [`01-requirements/backlog.md`](01-requirements/backlog.md) + [`01-spec/`](01-requirements/01-spec/) | ✅ 37 rows · 14 F · 7 NFR · 7 LR, all traced |
+| **W3** | **Backlog + spec (draft)** | [`01-requirements/backlog.md`](01-requirements/backlog.md) + [`01-spec/`](01-requirements/01-spec/) | ✅ 34 rows · 14 F · 7 NFR · 8 LR — all four audit checks clean (7 Sep) |
 | **W3** | agents + skills, pushed to GitHub | [`../.claude/`](../.claude/) | ✅ 3 agents, 2 skills |
 | **W4** | design pack | [`02-design/`](02-design/) | ✅ 5 documents, D1–D4 |
+| **W5** | proposal | [`01-requirements/proposal.md`](01-requirements/proposal.md) | ✅ assembled 7 Sep (B23) |
 | **W5** | **Gate — 8 Sep 23:59** | all of the above | ⚠️ **2 blockers** |
 
 ---
@@ -129,4 +132,5 @@ UniLab is not among them. Four weeks of work sit on that ambiguity.
 /capture-requirement    # after each interview — the only sanctioned route to a P#
 /audit-backlog          # before any commit touching .docs/, and before the gate
 npm test                # 17 tests: deletion, intake screening, grapheme counting
+npm run build           # must stay clean before any submission
 ```
