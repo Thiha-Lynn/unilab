@@ -20,16 +20,16 @@ The system as one box: who talks to it, and what crosses the boundary.
 
 ```mermaid
 flowchart LR
-    U1(["U1 — Undergraduate at MFU"])
-    U2(["U2 — Student handling identity documents"])
-    U3(["U3 — Group-work coordinator"])
+    U1(["«actor»<br/>U1 — Undergraduate at MFU"])
+    U2(["«actor»<br/>U2 — Student handling identity documents"])
+    U3(["«actor»<br/>U3 — Group-work coordinator"])
 
-    SYS["UniLab<br/>browser application"]
+    SYS["UniLab<br/>browser application<br/>— the system —"]
 
-    DEV[("Device file storage")]
-    LMS["MFU LMS<br/>submission target"]
-    HOST["Static host — GitHub Pages"]
-    MODEL["Model / language-data host"]
+    DEV[("Device file storage<br/>the student's own device")]
+    HOST["«external»<br/>Static host — GitHub Pages"]
+    MODEL["«external»<br/>Model / language-data host"]
+    LMS["«external — out of scope»<br/>MFU LMS, submission target"]
 
     U1 -- "picks a file, sets options" --> SYS
     U2 -- "picks an ID document" --> SYS
@@ -37,10 +37,11 @@ flowchart LR
 
     SYS -- "reads file bytes locally" --> DEV
     SYS -- "writes the downloaded result" --> DEV
-    DEV -- "student uploads the result themselves" --> LMS
 
     HOST -- "program code only, no user data" --> SYS
     MODEL -- "OCR engine / ONNX model, disclosed first (F12, LR3)" --> SYS
+
+    U1 -. "submits the finished file themselves — UniLab is not involved" .-> LMS
 
     style SYS fill:#eeeefc,stroke:#5b5bd6,stroke-width:2px,color:#171c26
     style LMS stroke-dasharray: 4 4
@@ -51,6 +52,15 @@ box**. The only inbound arrows are program code and model data. Submission to th
 dashed and *outside* the system: the student does it themselves, from their own device, after
 UniLab is finished. That absence is LR1, and it is why §4.1 of the spec can dissolve the CCA §26
 logging duty — there is no event to log.
+
+**Every node is typed**, so the boundary reads without the prose: `«actor»` ×3, `«external»`
+×2, one data store, and the system itself as a single box with nothing drawn inside it.
+
+**The LMS arrow starts at the student, not at the device.** It used to run
+`Device file storage → MFU LMS`, which said a *data store* performs an upload. It does not — the
+**student** does, from their own machine, after UniLab has finished. It is now a dashed arrow
+from U1 marked *"UniLab is not involved"*, which is the honest boundary statement and the reason
+the arrow is drawn at all.
 
 **In scope:** the transform. **Out of scope:** submission, storage, accounts, delivery.
 
@@ -135,15 +145,17 @@ flowchart TB
     FILE[("Device file storage")]
     CDN["Static host + model host"]
 
-    FILE -- "File handle, read in-page" --> TS
-    MAIN --> REG
+    FILE -- "file handle, read in-page" --> TS
+    MAIN -- "route" --> REG
     REG -- "lazy import" --> TS
-    TS --> OUI
-    TS -- "options + file" --> ENGINE
-    OPS --> PDF
-    OPS --> MEDIA
-    OPS --> AUDIO
-    ENGINE -- "result blob" --> VAULT
+    TS -- "renders" --> OUI
+    TS -- "options + file" --> OPS
+    OPS -- "dispatch" --> PDF
+    OPS -- "dispatch" --> MEDIA
+    OPS -- "dispatch" --> AUDIO
+    PDF -- "result blob" --> VAULT
+    MEDIA -- "result blob" --> VAULT
+    AUDIO -- "result blob" --> VAULT
     VAULT -- "object URL, download" --> FILE
     CDN -- "code + model, disclosed" --> SW
     SW -- "cached assets" --> MAIN
@@ -152,6 +164,11 @@ flowchart TB
     style NOSRV fill:#e4f6ef,stroke:#1d9e77,stroke-dasharray: 5 5,color:#171c26
     style VAULT fill:#eeeefc,stroke:#5b5bd6,stroke-width:2px,color:#171c26
 ```
+
+**Every arrow is labelled with what crosses it, and every arrow joins two components.** Two
+edges used to point at the `ENGINE` *subgraph* rather than at a component inside it, which
+renders as an arrow into a group boundary — ambiguous about which module is actually called. The
+call path is now explicit: `tool-shell → ops → pdf-utils / media-utils / audio-fx → vault`.
 
 **The tier that is not here is the design.** Every box sits inside one browser tab. There is no
 API tier and no database tier, so there is nowhere for an `access_log` table or a `consent`
@@ -272,8 +289,20 @@ Both diagrams the W4 deck grades on notation were rebuilt:
 | **D2 associations carried arrowheads** (`---` renders a line, but the tool-to-core links used `-.->`) | Associations are plain solid lines with **no arrowhead** |
 | **D2 used `«extend»` six times** for the tools. `«extend»` means *optional, conditional* — but compressing a PDF *is* a transform, not an optional addition to one | **Generalization** (hollow triangle): each tool *is a kind of* the core use case. `«extend»` now appears once, where the behaviour really is optional |
 | **D4 had a 1-in / 1-out diamond** (`merge_run`) — neither a decision nor a merge, and it read as an unanswered question | Removed. The retry loop rejoins at `retarget`, a real 2-in merge |
+| **D1 drew the upload to the LMS as leaving the device storage** — a data store does not perform an upload | The dashed arrow now starts at **U1**, the actor who actually does it, labelled *UniLab is not involved* |
+| **D1 externals were untyped** — nothing on the diagram said which box was an actor and which a third-party system | Every external carries `«actor»` or `«external»`; the out-of-scope LMS says so on its face |
+| **D3 pointed two arrows at a subgraph** rather than at a component, so the call was ambiguous | `tool-shell → ops → pdf-utils / media-utils / audio-fx → vault`, component to component |
+| **D3 had four unlabelled arrows** — the deck asks arrows to show what moves | All 14 arrows carry a label |
 | **D4 decisions had no yes/no** — guards described the condition but never answered it | Every decision asks its question on the inbound edge and answers `[yes]` / `[no]` on both outbound edges |
 
-Verified mechanically: Mermaid parses all three blocks with **0 syntax errors**; D4's four
-diamonds compute to **2 decisions (1 in, 2 guarded out)** and **2 merges (2 in, 1 out)**, with
-no unguarded edge leaving a decision.
+Verified mechanically, all four diagrams:
+
+| Check | Result |
+|---|---|
+| Mermaid parses D1, D3, D4 | **3 of 3, 0 syntax errors** |
+| D1 — system drawn as one box, no internals | ✅ |
+| D1 — externals typed, ≥ 2 actors | ✅ 3 actors, 2 `«external»`, 1 data store |
+| D3 — no arrow points at a subgraph | ✅ 0 |
+| D3 — every arrow labelled | ✅ 14 of 14 |
+| D4 — every diamond a valid decision or merge | ✅ 2 decisions (1→2, both guarded) · 2 merges (2→1) |
+| D2 — notation counts | ✅ 3 stick figures · 8 associations · 6 generalizations · 2 `«include»` · 1 `«extend»` |
