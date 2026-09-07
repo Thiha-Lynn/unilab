@@ -15,7 +15,8 @@ before the grader does.
 - `.docs/01-requirements/backlog.md`
 - `.docs/02-design/feature-list.md`
 - `.docs/02-design/user-journey.md`
-- `.docs/02-design/diagrams.md`
+- `.docs/02-design/diagrams.md` — D1, D3, D4 (Mermaid) and the prose for all four
+- `.docs/02-design/d2-use-case.svg` — **D2 itself.** Hand-authored SVG, so it is plain text: grep it for actor names and use-case labels exactly as you would a Mermaid block
 - `.docs/02-design/design-system.md`
 - `.docs/02-design/prototype/` — every file
 - `rule.md`, `CLAUDE.md`
@@ -24,6 +25,18 @@ before the grader does.
 
 **C1 — Actors.** Every actor named in D1, D2 or the user journey must appear in spec §1.1. An
 actor invented for a diagram is the single most common template-copy tell.
+
+**C1b — UML notation.** The W4 deck grades notation, not just content. Report any of these:
+
+- **D2** — an actor drawn as a box rather than a stick figure · an association carrying an
+  arrowhead · `«include»` on behaviour that can be skipped · `«extend»` on behaviour that always
+  runs · a generalization without a hollow triangle at the *general* case.
+- **D4** — a labelled "Start"/"End" box instead of the ● / ◉ nodes · **a diamond that is not
+  either a decision (1 edge in, 2 guarded edges out) or a merge (2 edges in, 1 out)** · a
+  decision whose outgoing edges are not both guarded in `[brackets]`.
+
+A 1-in / 1-out diamond is the specific defect to hunt for: it renders as a decision that was
+never answered, and it is invisible unless you count edges.
 
 **C2 — Journey steps in D4.** Every numbered step in `user-journey.md` must appear in D4, **in
 the same order**. A step in one and not the other is a mismatch, whichever way round.

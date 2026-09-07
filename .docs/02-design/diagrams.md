@@ -1,8 +1,11 @@
 # Diagrams D1–D4 — UniLab
 
 **Course:** 1305493 · W4 · 2 Sep 2026
-**Source:** Mermaid, rendered natively by GitHub. The `.md` **is** the source file — there is no
-separate binary to fall out of date with the spec.
+**Source:** D1, D3 and D4 are Mermaid, rendered natively by GitHub. D2 is
+[`d2-use-case.svg`](d2-use-case.svg) — hand-authored SVG, because Mermaid has no use-case
+diagram type and cannot draw a UML actor. **Nothing here is a binary export:** every diagram is
+plain text in this repository and diffs like code, so none of them can silently fall out of date
+with the spec.
 **Checked by:** [`.claude/agents/diagram-checker.md`](../../.claude/agents/diagram-checker.md)
 
 Every actor name below appears in spec §1.1. Every step in D4 appears in
@@ -55,59 +58,46 @@ logging duty — there is no event to log.
 
 ## D2 · Use Case
 
-Who can do what. The core use case is central; every other use case is a parameterisation of it.
+Who can do what. The core use case is central; every other use case is a specialisation of it.
 
-```mermaid
-flowchart TB
-    U1(["U1 — Undergraduate at MFU"])
-    U2(["U2 — Student handling identity documents"])
-    U3(["U3 — Group-work coordinator"])
+![D2 — UniLab use case diagram: three stick-figure actors outside the UniLab system boundary; six tool use cases generalise to the core use case "Transform a file on this device"; the core includes "Hold the result in the vault"; "OCR a scan" includes "Disclose a network download"; "Delete the result now" extends the vault use case.](d2-use-case.svg)
 
-    subgraph BOUNDARY["UniLab"]
-        UC1(["Transform a file on this device"])
-        UC2(["Compress to a named size cap"])
-        UC3(["Convert HEIC to JPG"])
-        UC4(["Redact an ID document"])
-        UC5(["OCR a scan — Thai / English / Burmese"])
-        UC6(["Merge sections with page ranges"])
-        UC7(["Run a saved workflow on a batch"])
-        UC8(["Hold the result in the vault"])
-        UC9(["Disclose a network download"])
-        UC10(["Delete the result now"])
-    end
+> **Source:** [`d2-use-case.svg`](d2-use-case.svg) — hand-authored SVG, not a binary export. It is
+> plain text, diffs like code, and every colour in it is a token from
+> [`design-system.md`](design-system.md). It replaced a Mermaid `flowchart` on 7 Sep 2026:
+> Mermaid has no use-case diagram type, so actors were drawn as rounded boxes and associations
+> carried arrowheads. **Both are UML errors**, and the W4 deck grades the notation explicitly.
 
-    U1 --- UC2
-    U1 --- UC3
-    U1 --- UC5
-    U1 --- UC10
-    U2 --- UC4
-    U2 --- UC10
-    U3 --- UC6
-    U3 --- UC7
+### The notation, and why each relationship is the one it is
 
-    UC2 -.->|"«extend»"| UC1
-    UC3 -.->|"«extend»"| UC1
-    UC4 -.->|"«extend»"| UC1
-    UC5 -.->|"«extend»"| UC1
-    UC6 -.->|"«extend»"| UC1
-    UC7 -.->|"«extend»"| UC1
+| Relationship | Drawn as | Used here for |
+|---|---|---|
+| **Association** | plain solid line, **no arrowhead** | An actor uses a use case. U1 → compress / convert / OCR / delete · U2 → redact / delete · U3 → merge / batch workflow |
+| **Generalization** | solid line, **hollow triangle** at the general case | The six tools are each *a kind of* "Transform a file on this device" |
+| **«include»** | dashed line, **open arrowhead**, base → included | Behaviour that **always** runs |
+| **«extend»** | dashed line, **open arrowhead**, extension → base | Behaviour that runs **only sometimes** |
 
-    UC1 -.->|"«include»"| UC8
-    UC5 -.->|"«include»"| UC9
+**Generalization is doing the rubric's work.** The earlier version drew the six tools as
+`«extend»` of the core, which was wrong twice over: `«extend»` means *optional, conditional*
+behaviour at an extension point, and compressing a PDF is neither optional nor an addition to
+transforming a file — **it is a transform**. Drawn as generalization, the diagram now states the
+claim the rubric turns on: *58 tools are 58 settings of one workflow, not 58 workflows.*
 
-    style UC1 fill:#eeeefc,stroke:#5b5bd6,stroke-width:2px,color:#171c26
-```
+**The two `«include»`s are the two things that are never skipped.**
 
-**Reading the notation.** Plain solid lines join an actor to a use case. Dashed arrows are
-UML stereotypes.
+- `Transform a file` **«include»** `Hold the result in the vault` — every transform puts its
+  output in the vault. That is F6 and LR5, and there is no path that skips it.
+- `OCR a scan` **«include»** `Disclose a network download` — OCR cannot run until a language
+  pack is fetched, so the disclosure always precedes it. That is F12 and LR3.
 
-- **`«include»` is used twice, and only where it is genuinely unconditional.** Every transform
-  *always* puts its result in the vault (F6/LR5), so `UC1 «include» UC8`. OCR *always* fetches a
-  language pack before it can run, so it must always disclose (F12/LR3).
-- **`«extend»` carries the rubric argument.** The specific tools extend the core use case rather
-  than sitting beside it — that is the diagram-level statement of "58 settings of one workflow".
-- U1 and U2 are the **same person at a different moment** (spec §1.1). Both are drawn because
-  the custody stakes differ: a lecture handout and a passport scan are not the same risk.
+**The one `«extend»` is the one thing that is genuinely optional.** `Delete the result now`
+**«extend»** `Hold the result in the vault`: the student *may* press it, and if they never do,
+the countdown expires the result anyway. Optional behaviour on a base use case is exactly what
+`«extend»` is for — and it is the only place in this diagram that qualifies.
+
+**Both U1 and U2 are drawn** although spec §1.1 says they are the same person at a different
+moment, because the custody stakes differ: a lecture handout and a passport scan are not the
+same risk, and only U2 reaches for redaction.
 
 ---
 
@@ -184,55 +174,80 @@ One scenario, start to end: **compress a scanned PDF to the 5 MB cap** — the f
 stateDiagram-v2
     direction TB
 
-    %% every choice node is declared before it is referenced, so mermaid renders
-    %% all four as UML diamonds instead of turning a forward reference into a box
-    state meets_cap <<choice>>
-    state merge_run <<choice>>
-    state disposed  <<choice>>
-    state merge_end <<choice>>
+    %% Two decisions and two merges. Declared before use so mermaid renders every
+    %% one as a UML diamond rather than turning a forward reference into a box.
+    state retarget  <<choice>>
+    state under_cap <<choice>>
+    state disposal  <<choice>>
+    state rejoin    <<choice>>
 
     OpenTool  : 1. Open UniLab, tap Compress PDF
     PickFile  : 2. Pick the scanned PDF from the device
-    ReadLocal : Read file bytes in-page (no upload)
-    SetTarget : 3. Enter target size — 5 MB
+    ReadLocal : Read the file bytes in-page — no upload
+    SetTarget : 3. Enter the target size — 5 MB
     Estimate  : Render live preview + estimated output size
     Compress  : 4. Run pdf.js on-device, yielding every ~24 ms
-    Store     : Store result in vault — 30 min countdown starts
+    Store     : Store the result in the vault — 30:00 countdown starts
     Download  : 5. Download the result
-    DeleteNow : Revoke object URL, drop from memory
-    Expire    : Purge on pagehide / TTL
+    DeleteNow : Revoke the object URL, drop it from memory
+    Expire    : Purge on pagehide, or when the countdown ends
 
-    [*]       --> OpenTool
-    OpenTool  --> PickFile
-    PickFile  --> ReadLocal
-    ReadLocal --> SetTarget
+    [*] --> OpenTool
+    OpenTool --> PickFile
+    PickFile --> ReadLocal
+
+    ReadLocal --> retarget
+    retarget --> SetTarget
     SetTarget --> Estimate
-    Estimate  --> meets_cap
 
-    meets_cap --> SetTarget : [estimate misses the cap]
-    meets_cap --> merge_run : [estimate meets the cap]
-    merge_run --> Compress
+    Estimate --> under_cap : is the estimate under 5 MB?
+    under_cap --> Compress : [yes] at or under the cap
+    under_cap --> retarget : [no] over the cap, change the target
 
-    Compress  --> Store
-    Store     --> Download
-    Download  --> disposed
+    Compress --> Store
+    Store --> Download
 
-    disposed  --> DeleteNow : [student taps Delete now]
-    disposed  --> Expire    : [countdown ends or tab closes]
-    DeleteNow --> merge_end
-    Expire    --> merge_end
-    merge_end --> [*]
+    Download --> disposal : delete it now?
+    disposal --> DeleteNow : [yes] student presses Delete now
+    disposal --> Expire : [no] countdown ends, or the tab closes
+
+    DeleteNow --> rejoin
+    Expire --> rejoin
+    rejoin --> [*]
 ```
 
-**Notation.** `[*]` renders as the UML initial node (●) and the final node (◉) — no labelled
-"Start"/"End" box anywhere. Diamonds are `<<choice>>` nodes, used both as **decision** (`meets_cap`,
-`disposed`) and as **merge** (`merge_run`, `merge_end`), which is UML-correct: both are diamonds, and
-both branches rejoin at a merge before the final node. Guards are in `[brackets]`.
+### Every diamond, and what it is
 
-**The two branches are the two requirements this scenario exists to prove.** `meets_cap` loops
-back into step 3 rather than forward into the run — that is F5, and it is why the student does
-not discover the file is still too big after submitting. `disposed` has **no path that keeps the
-file**: both branches destroy it. That is F6 and LR5 drawn as a shape, not asserted in prose.
+A diamond in UML is one of exactly two things, and each has a shape rule. **A diamond with one
+line in and one line out is neither, and is a defect** — the previous version of this diagram had
+one (`merge_run`), which is why it read as a decision that had never been answered.
+
+| Diamond | Kind | In | Out | Reads as |
+|---|---|---|---|---|
+| `under_cap` | **decision** | 1 | **2** | *is the estimate under 5 MB?* → `[yes]` / `[no]` |
+| `disposal` | **decision** | 1 | **2** | *delete it now?* → `[yes]` / `[no]` |
+| `retarget` | **merge** | **2** | 1 | where the retry loop rejoins the main flow |
+| `rejoin` | **merge** | **2** | 1 | where both disposal paths rejoin before the end |
+
+Every decision has **two labelled outputs**; every merge has **two inputs**. The question is on
+the edge entering the diamond, the answers are on the edges leaving it, and every guard is in
+`[brackets]` as the deck requires.
+
+**Notation.** `[*]` renders as the UML initial node (●) at the top and the final node (◉) at the
+bottom — no labelled "Start"/"End" box anywhere.
+
+### What the two decisions are there to prove
+
+**`under_cap` loops backwards, and that is the whole point of F5.** `[no]` returns to the
+`retarget` merge and back into step 3, so the student changes the target and re-reads the
+estimate. They never spend a run to discover the file is still too big. The merge is what makes
+this legal UML: without it, the `[no]` edge would re-enter a step that already has an incoming
+flow, and the diagram would not say where the two paths join.
+
+**`disposal` has no output that keeps the file.** `[yes]` revokes the object URL immediately;
+`[no]` lets the countdown or `pagehide` purge it. Both edges lead to destruction, then to the
+final node. That is F6 and LR5 drawn as a shape rather than asserted in prose — a reader can
+check the claim by looking for an exit that keeps the result, and finding none.
 
 ---
 
@@ -245,3 +260,20 @@ file**: both branches destroy it. That is F6 and LR5 drawn as a shape, not asser
 | Steps match `user-journey.md` order | — | ✅ core use case | — | ✅ 1–5 |
 | Components exist in `src/` | — | — | ✅ | ✅ pdf.js, vault |
 | Tech stack matches the spec | — | — | ✅ | ✅ |
+| **UML notation is correct** | ✅ one box, actors outside | ✅ stick figures · ovals in the boundary · associations with no arrowhead · hollow-triangle generalization · dashed open-arrow stereotypes | ✅ layers, not code | ✅ ● initial / ◉ final · every diamond is a 1→2 decision or a 2→1 merge · guards in `[brackets]` |
+
+### Notation audit, 7 Sep 2026
+
+Both diagrams the W4 deck grades on notation were rebuilt:
+
+| Was wrong | Now |
+|---|---|
+| **D2 actors were rounded boxes.** Mermaid `flowchart` has no actor glyph, so U1–U3 rendered as stadium shapes — not UML | Stick figures, drawn in SVG |
+| **D2 associations carried arrowheads** (`---` renders a line, but the tool-to-core links used `-.->`) | Associations are plain solid lines with **no arrowhead** |
+| **D2 used `«extend»` six times** for the tools. `«extend»` means *optional, conditional* — but compressing a PDF *is* a transform, not an optional addition to one | **Generalization** (hollow triangle): each tool *is a kind of* the core use case. `«extend»` now appears once, where the behaviour really is optional |
+| **D4 had a 1-in / 1-out diamond** (`merge_run`) — neither a decision nor a merge, and it read as an unanswered question | Removed. The retry loop rejoins at `retarget`, a real 2-in merge |
+| **D4 decisions had no yes/no** — guards described the condition but never answered it | Every decision asks its question on the inbound edge and answers `[yes]` / `[no]` on both outbound edges |
+
+Verified mechanically: Mermaid parses all three blocks with **0 syntax errors**; D4's four
+diamonds compute to **2 decisions (1 in, 2 guarded out)** and **2 merges (2 in, 1 out)**, with
+no unguarded edge leaving a decision.

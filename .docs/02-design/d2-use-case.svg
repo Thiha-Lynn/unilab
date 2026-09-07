@@ -1,0 +1,160 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1010 730" width="1010" height="730" role="img" aria-labelledby="d2title d2desc" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, system-ui, sans-serif">
+  <title id="d2title">D2 — UniLab use case diagram</title>
+  <desc id="d2desc">UML use case diagram. Three actors — U1 Undergraduate at MFU, U2 Student handling identity documents, U3 Group-work coordinator — are drawn as stick figures outside the UniLab system boundary. Inside the boundary, six tool use cases generalise to the core use case "Transform a file on this device". The core use case includes "Hold the result in the vault"; "OCR a scan" includes "Disclose a network download"; and "Delete the result now" extends "Hold the result in the vault".</desc>
+
+  <defs>
+    <!-- open arrowhead: UML dependency (<<include>> / <<extend>>) -->
+    <marker id="open" markerWidth="12" markerHeight="10" refX="10" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8" fill="none" stroke="#d97706" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <!-- hollow triangle: UML generalization -->
+    <marker id="gen" markerWidth="14" markerHeight="12" refX="11" refY="5" orient="auto">
+      <path d="M0,0 L11,5 L0,10 Z" fill="#f6f7fb" stroke="#1d9e77" stroke-width="1.5" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1010" height="730" fill="#f6f7fb"/>
+
+  <!-- ============ system boundary ============ -->
+  <rect x="195" y="32" width="780" height="576" rx="14" fill="none" stroke="#8a93a2" stroke-width="1.5"/>
+  <text x="585" y="57" text-anchor="middle" font-size="13" font-weight="700" fill="#5b6472"
+        font-family="ui-monospace, SFMono-Regular, Menlo, monospace" letter-spacing="1.2">UniLab</text>
+
+  <!-- ============ actors (UML stick figures) ============ -->
+  <g stroke="#5b5bd6" stroke-width="1.9" fill="none" stroke-linecap="round">
+    <!-- U1, head centre y=150 -->
+    <circle cx="85" cy="150" r="9" fill="#ffffff"/>
+    <line x1="85" y1="159" x2="85" y2="184"/>
+    <line x1="70" y1="169" x2="100" y2="169"/>
+    <line x1="85" y1="184" x2="74" y2="200"/>
+    <line x1="85" y1="184" x2="96" y2="200"/>
+    <!-- U2, head centre y=330 -->
+    <circle cx="85" cy="330" r="9" fill="#ffffff"/>
+    <line x1="85" y1="339" x2="85" y2="364"/>
+    <line x1="70" y1="349" x2="100" y2="349"/>
+    <line x1="85" y1="364" x2="74" y2="380"/>
+    <line x1="85" y1="364" x2="96" y2="380"/>
+    <!-- U3, head centre y=500 -->
+    <circle cx="85" cy="500" r="9" fill="#ffffff"/>
+    <line x1="85" y1="509" x2="85" y2="534"/>
+    <line x1="70" y1="519" x2="100" y2="519"/>
+    <line x1="85" y1="534" x2="74" y2="550"/>
+    <line x1="85" y1="534" x2="96" y2="550"/>
+  </g>
+
+  <g text-anchor="middle" fill="#171c26" font-size="12.5" font-weight="700">
+    <text x="85" y="218">U1 · Undergraduate</text>
+    <text x="85" y="233" font-weight="400" fill="#5b6472" font-size="11.5">at MFU</text>
+    <text x="85" y="398">U2 · Student handling</text>
+    <text x="85" y="413" font-weight="400" fill="#5b6472" font-size="11.5">identity documents</text>
+    <text x="85" y="568">U3 · Group-work</text>
+    <text x="85" y="583" font-weight="400" fill="#5b6472" font-size="11.5">coordinator</text>
+  </g>
+
+  <!-- ============ associations: plain solid line, NO arrowhead ============ -->
+  <g stroke="#5b6472" stroke-width="1.3" fill="none">
+    <line x1="102" y1="150" x2="285" y2="100"/>
+    <line x1="102" y1="155" x2="285" y2="172"/>
+    <line x1="102" y1="160" x2="285" y2="244"/>
+    <line x1="102" y1="166" x2="285" y2="568"/>
+    <line x1="102" y1="330" x2="285" y2="322"/>
+    <line x1="102" y1="336" x2="285" y2="568"/>
+    <line x1="102" y1="500" x2="285" y2="424"/>
+    <line x1="102" y1="506" x2="285" y2="496"/>
+  </g>
+
+  <!-- ============ use cases: ovals inside the boundary ============ -->
+  <g fill="#ffffff" stroke="#5b6472" stroke-width="1.5">
+    <ellipse cx="390" cy="100" rx="105" ry="30"/>
+    <ellipse cx="390" cy="172" rx="105" ry="30"/>
+    <ellipse cx="390" cy="244" rx="105" ry="30"/>
+    <ellipse cx="390" cy="322" rx="105" ry="30"/>
+    <ellipse cx="390" cy="424" rx="105" ry="30"/>
+    <ellipse cx="390" cy="496" rx="105" ry="30"/>
+    <ellipse cx="390" cy="568" rx="105" ry="30"/>
+    <ellipse cx="885" cy="150" rx="85" ry="30"/>
+    <ellipse cx="885" cy="300" rx="85" ry="30"/>
+  </g>
+
+  <!-- core use case -->
+  <ellipse cx="655" cy="300" rx="105" ry="40" fill="#eeeefc" stroke="#5b5bd6" stroke-width="2.5"/>
+
+  <g text-anchor="middle" fill="#171c26" font-size="12.5">
+    <text x="390" y="96">Compress to a named</text>
+    <text x="390" y="112">size cap</text>
+
+    <text x="390" y="177">Convert HEIC to JPG</text>
+
+    <text x="390" y="240">OCR a scan —</text>
+    <text x="390" y="256">Thai / English / Burmese</text>
+
+    <text x="390" y="327">Redact an ID document</text>
+
+    <text x="390" y="420">Merge sections with</text>
+    <text x="390" y="436">page ranges</text>
+
+    <text x="390" y="492">Run a saved workflow</text>
+    <text x="390" y="508">on a batch</text>
+
+    <text x="390" y="573">Delete the result now</text>
+
+    <text x="885" y="146">Disclose a network</text>
+    <text x="885" y="162">download</text>
+
+    <text x="885" y="296">Hold the result</text>
+    <text x="885" y="312">in the vault</text>
+
+    <text x="655" y="295" font-size="13.5" font-weight="700">Transform a file</text>
+    <text x="655" y="312" font-size="13.5" font-weight="700">on this device</text>
+  </g>
+
+  <!-- ============ generalization: solid line, hollow triangle at the parent ============ -->
+  <g stroke="#1d9e77" stroke-width="1.4" fill="none">
+    <line x1="495" y1="100" x2="520" y2="100"/>
+    <line x1="495" y1="172" x2="520" y2="172"/>
+    <line x1="495" y1="244" x2="520" y2="244"/>
+    <line x1="495" y1="322" x2="520" y2="322"/>
+    <line x1="495" y1="424" x2="520" y2="424"/>
+    <line x1="495" y1="496" x2="520" y2="496"/>
+    <line x1="520" y1="100" x2="520" y2="496"/>
+    <line x1="520" y1="300" x2="546" y2="300" marker-end="url(#gen)"/>
+  </g>
+
+  <!-- ============ <<include>> / <<extend>>: dashed line, open arrowhead ============ -->
+  <g stroke="#d97706" stroke-width="1.4" fill="none" stroke-dasharray="6 4">
+    <!-- core always stores its result in the vault -->
+    <line x1="760" y1="300" x2="796" y2="300" marker-end="url(#open)"/>
+    <!-- OCR always discloses its language-pack download first -->
+    <line x1="491" y1="228" x2="801" y2="158" marker-end="url(#open)"/>
+    <!-- deleting now is optional behaviour on the vault -->
+    <line x1="492" y1="556" x2="878" y2="334" marker-end="url(#open)"/>
+  </g>
+  <g fill="#d97706" font-size="11" font-weight="700" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">
+    <text x="776" y="286" text-anchor="middle">«include»</text>
+    <text x="640" y="184" text-anchor="middle">«include»</text>
+    <text x="694" y="460" text-anchor="middle">«extend»</text>
+  </g>
+
+  <!-- ============ legend ============ -->
+  <line x1="40" y1="632" x2="970" y2="632" stroke="#e4e7ee" stroke-width="1"/>
+  <text x="40" y="656" font-size="11" font-weight="700" fill="#8a93a2"
+        font-family="ui-monospace, SFMono-Regular, Menlo, monospace" letter-spacing="1.4">NOTATION</text>
+
+  <g font-size="12" fill="#5b6472">
+    <!-- association -->
+    <line x1="40" y1="684" x2="92" y2="684" stroke="#5b6472" stroke-width="1.3"/>
+    <text x="102" y="688"><tspan fill="#171c26" font-weight="700">association</tspan> — the actor uses the case. Solid, no arrowhead.</text>
+
+    <!-- generalization -->
+    <line x1="40" y1="710" x2="86" y2="710" stroke="#1d9e77" stroke-width="1.4" marker-end="url(#gen)"/>
+    <text x="102" y="714"><tspan fill="#171c26" font-weight="700">generalization</tspan> — “is a kind of”. Hollow triangle at the general case.</text>
+
+    <!-- include -->
+    <line x1="530" y1="684" x2="576" y2="684" stroke="#d97706" stroke-width="1.4" stroke-dasharray="6 4" marker-end="url(#open)"/>
+    <text x="592" y="688"><tspan fill="#171c26" font-weight="700">«include»</tspan> — always happens. Dashed, open arrowhead.</text>
+
+    <!-- extend -->
+    <line x1="530" y1="710" x2="576" y2="710" stroke="#d97706" stroke-width="1.4" stroke-dasharray="6 4" marker-end="url(#open)"/>
+    <text x="592" y="714"><tspan fill="#171c26" font-weight="700">«extend»</tspan> — optional, conditional. Arrow points at the base case.</text>
+  </g>
+</svg>
