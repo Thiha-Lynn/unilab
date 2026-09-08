@@ -162,11 +162,13 @@ pain. Aim for 6–8 of these per interview, not all of them.
 
 ## 8. One measurement that is not an interview
 
-**H3 is marked "Unvalidated — *and unmeasured*"** in the spec, and no number of interviews fixes
-that. Someone must actually time it: take one 10 MB PDF, on MFU campus wifi, and record the round
-trip through a competitor's upload-and-download flow versus opening the same file in UniLab.
-Record the two numbers in the log. Owner: **Zaw Win Htut (QA / Test)** — this is a test, not an
-interview.
+**H3 is a claim about the network, not about people**, and no number of interviews settles it.
+It now has its own procedure: **[`h3-measurement.md`](h3-measurement.md)**.
+
+The UniLab half is **done** — measured 8 Sep 2026, 0 network attempts during a real transform.
+What remains is the competitor round trip **on MFU campus Wi-Fi**, three runs, against the
+deterministic 10 MB fixture (`node test/fixtures/make-h3-fixture.mjs`, `sha256 a2bd25a4…2ec2c9`)
+so both sides move identical bytes. Owner: **Zaw Win Htut (QA / Test)** — a test, not an interview.
 
 ---
 

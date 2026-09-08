@@ -108,6 +108,9 @@ that.** Someone must time it: one 10 MB PDF, on MFU campus Wi-Fi, round trip thr
 competitor's upload-and-download flow versus opening the same file in UniLab. Record both
 numbers here. Owner: **Zaw Win Htut (QA / Test)**.
 
+Full procedure and the fixture: **[`h3-measurement.md`](h3-measurement.md)**.
+
 | Date | Network | Competitor round trip | UniLab | Notes |
 |---|---|---|---|---|
-| — | — | — | — | not yet measured |
+| 8 Sep 2026 | any | — | **0 — no network path** | Measured: real 2-step transform, 0 attempts across fetch / XHR / sendBeacon / WebSocket / WebRTC, while online. Statically: 6 fetch sites in `src/`, all bare GETs for app assets, 0 with a body |
+| — | MFU campus Wi-Fi | *pending* | 0 | The competitor half. Owner: Zaw Win Htut. 10 MB fixture, `sha256 a2bd25a4…2ec2c9`, 3 runs |
