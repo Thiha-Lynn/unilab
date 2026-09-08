@@ -52,9 +52,11 @@ file. A legal duty that never became a numbered requirement will not be traced a
 
 ## What is *not* a finding
 
-- A requirement tracing to an `H#` rather than a `P#` is the **known, recorded** state of this
-  project — 0 interviews have been conducted, the spec says so in §0, and it is tracked as
-  B16. Report the counts, do not report it as a defect nine times.
+- A requirement tracing to an `H#` rather than a `P#` is a **known, recorded** state, not a
+  defect to repeat. As of 8 Sep 2026 no live row does: the two that did — F8/B8 (H6) and
+  F11/B20 (H8), which 0 of 15 participants raised — are **parked** (spec §2.1, backlog "Parked"
+  table) and sit outside the product table you audit. Report them as parked, name the two, and
+  stop; re-admitting them is Q5/Q6, a person's decision.
 - A retired `H#` number that nothing cites any more is correct. Ids are never reused.
 
 ## Report format

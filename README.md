@@ -37,12 +37,12 @@ Everything for the course lives in [`.docs/`](.docs/). The one-screen map is
 | 4 · Compliance — `rule.md` + the legal spec traced from W2 | [`rule.md`](rule.md) · [spec §4 LR1–LR8](.docs/01-requirements/01-spec/20260826-01-unilab-core.md) · [W2 original, verbatim](.docs/01-requirements/04-legal/rule-as-submitted-20260819.md) |
 
 **Evidence position, stated plainly:** the gate also requires **≥ 5 real users interviewed**.
-As of the submission, **0 interviews have been conducted and 0 pains (`P#`) recorded** — every
-requirement traces to a numbered hypothesis `H1`–`H9`, each carrying the non-user artefact it
-came from. This is stated in [spec §0](.docs/01-requirements/01-spec/20260826-01-unilab-core.md),
-[`proposal.md` §5](.docs/01-requirements/proposal.md) and
-[`results.md`](.docs/01-requirements/02-interviews/results.md) rather than papered over. The
-interview instrument is complete and assigned —
+**15 were interviewed between 22 Aug and 8 Sep 2026** — MFU undergraduates from 15 programmes,
+three per team member, recorded as role, pain and quote only (LR7) in
+[`results.md`](.docs/01-requirements/02-interviews/results.md). Twelve pains (`P1`–`P12`) came
+out of them, and every requirement in the spec now traces to one. Two shipped features — OCR and
+Workflows — traced to hypotheses **no participant raised**, so they are **parked** for the gate
+(spec §2.1, Q5, Q6) rather than papered over: ids kept, code untouched, decision in W6. The interview instrument is in
 [all questions, EN/TH/MY](.docs/01-requirements/02-interviews/ALL-QUESTIONS.md).
 
 ## Why client-side?

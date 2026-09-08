@@ -103,11 +103,15 @@ That is `pain → requirement → backlog → design`, said in one breath.
 
 Answer it first, plainly, and do not let it arrive as a discovery at the end:
 
-> "Zero at submission. The instrument is complete — guide, field kit, chat script in three
-> languages, and a phone capture sheet — and every requirement traces to a numbered hypothesis
-> `H1`–`H9` with the artefact it came from, not to an invented user. That gap is stated in spec
-> §0, in the proposal, and in `results.md`. It is the thing we owe you, and we are running
-> interviews toward fifteen."
+> "Fifteen, between 22 August and 8 September — MFU undergraduates from fifteen programmes,
+> three per team member, in English, Thai and Burmese. Role, pain and quote only; no names
+> anywhere in the repo. Twelve pains came out of them, and every requirement in the spec now
+> traces to one. Two that we'd built — OCR and Workflows — had nobody behind them, so we parked
+> them for this submission rather than pretend: the code stays, and whether they come back is a
+> decision we've written down for next month."
 
-**Lead with it.** A reviewer who finds it themselves reads the whole pack as evasive; a team that
-opens with it reads as one that knows where it stands.
+**Lead with it, including the two that failed.** A reviewer who finds the unsupported
+hypotheses themselves reads the pack as evasive; a team that names them first reads as one that
+ran the research to learn something. Then the follow-up — *"tell me about one of them"* — is
+answered from `results.md` by whoever interviewed that participant (the table at its foot says
+who did which three).

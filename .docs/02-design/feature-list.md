@@ -9,11 +9,11 @@ user story in the spec. Nothing appears here that is not in the backlog.
 
 | Feature | Traces to | Backlog |
 |---|---|---|
-| ⭐ **Transform a file on this device** — select → transform → download, with a live preview before committing, no upload path anywhere, and no account or task-per-day cap | **F1, F2, F3, F4, F5** | B1, B2, B3, B4, B5 |
+| ⭐ **Transform a file on this device** — select → transform → download, with a live preview before committing, no upload path anywhere, no account or task-per-day cap, and every step completing on a phone | **F1, F2, F3, F4, F5, F15** | B1, B2, B3, B4, B5, B35 |
 | **Result custody** — finished files held in memory only, on a visible countdown, with "delete now" and an automatic purge when the tab closes | F6, LR5 | B6 |
-| **Document toolkit** — PDF and image work, including true redaction and OCR in 19 languages | F7, F8 | B7, B8 |
+| **Document toolkit** — PDF and image work, including true redaction *(OCR ships but is parked as a requirement — F8, spec §2.1)* | F7 | B7 |
 | **Media toolkit** — video and audio jobs in the same place as document jobs | F9 | B18 |
-| **Workflows** — save a repeated multi-step chore and run a batch of files through it | F10, F11 | B19, B20 |
+| **Merge and batch** — assemble several PDFs in an order checked before the run, with page ranges and a contents page; batch modes on the compress and convert tools *(the saved-Workflows layer is parked — F11, spec §2.1)* | F10 | B19 |
 | **Network honesty** — any tool that must fetch from the network says what it will download, and how big, before it starts | F12, F14, LR3 | B10, B14 |
 | **Offline install** — installable PWA that keeps working with no connection | F13 | B21 (blocked on B9) |
 
@@ -22,16 +22,18 @@ user story in the spec. Nothing appears here that is not in the backlog.
 ## ⭐ Why "Transform a file on this device" is the core feature
 
 It is the one month-2 BUILD must ship end to end, and it is the feature that kills the top
-pain — **H2, custody**: a student scanning a transcript, ID card or medical certificate has no
-way to verify a third party's deletion promise. Transform-on-device removes the need for the
-promise.
+pain — **P2, custody**: a student scanning a transcript, ID card, medical certificate or signed
+sheet has no way to verify a third party's deletion promise (S4, S7, S12, S14 — S12: "I can't
+verify whether every temporary copy was removed"). Transform-on-device removes the need for the
+promise. It also answers **P7**, the largest pain in the sample (7 of 15): a limit discovered only
+after the work — the live preview is the step that makes the limit visible *before* it.
 
 It is also the feature the other six depend on:
 
 - **Result custody** only exists because a result was produced locally.
 - **Document toolkit** and **Media toolkit** are the *same* workflow with different parameters.
-- **Workflows** chains it; **Network honesty** guards its one exception; **Offline install** is
-  it, without a connection.
+- **Merge and batch** chains it; **Network honesty** guards its one exception; **Offline install**
+  is it, without a connection.
 
 > **The rubric point that has to survive review:** 58 tools are **58 settings of one workflow**,
 > not 58 workflows. Split PDF and Remove Noise differ in what they compute, not in what the user
@@ -53,5 +55,9 @@ The core feature and six of the seven **ship today**. The one open row is `Offli
 (blocked on the 31 MB precache, B9/Q1). `Network honesty` closed on 7 Sep — **B14 done**, NFR5
 at 2 of 2 tools disclosing.
 
-The features are not the risk. **The evidence is** — every row above traces to an `H#`
-hypothesis, not a `P#` pain from a real interview. See B16.
+**The evidence caught up on 8 Sep 2026** — 15 interviews, and every row above traces to a `P#`
+a real participant stated. Two things that ship are deliberately *not* rows: **OCR (F8)** and
+**saved Workflows (F11)** traced to hypotheses that 0 of 15 participants raised, so they are parked
+(spec §2.1) and re-admitting or cutting them is Q5 / Q6. `Media toolkit` gained direct evidence
+(S2 and S10 did video, S9 audio, none in a document tool), and the core feature gained **F15** —
+5 of 15 never touched a laptop.

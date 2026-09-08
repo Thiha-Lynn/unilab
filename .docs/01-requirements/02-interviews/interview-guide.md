@@ -8,9 +8,14 @@
 
 ## 0. Why this document exists
 
-`.docs/01-requirements/01-spec/20260826-01-unilab-core.md` §0 says it plainly:
+`.docs/01-requirements/01-spec/20260826-01-unilab-core.md` §0 said it plainly when this guide
+was written:
 
 > Interviews conducted to date: 0. Validated pains (`P#`) recorded: 0.
+
+> **Closed 8 Sep 2026 — 15 conducted, 12 pains recorded.** This guide is kept as the instrument
+> the 15 were run with; the outcome is in [`results.md`](results.md). It stays the instrument for
+> the next round (Q5 asks for the H6 branch to be put directly).
 
 Every requirement in this project currently traces to an **`H#` — a hypothesis** backed by a real
 artefact (a competitor teardown, a platform constraint, a measurement of our own build). An

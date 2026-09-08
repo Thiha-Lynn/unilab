@@ -81,10 +81,13 @@ test/               node --test; proves the deletion and intake claims
 the spec. If you cannot find the pain, **ask** — do not invent one.
 The whole chain is mapped in [`.docs/01-requirements/TRACEABILITY.md`](.docs/01-requirements/TRACEABILITY.md).
 
-**Today every `Traces to` ends at an `H#` (hypothesis), not a `P#` (a pain a real user
-described), because 0 interviews have been conducted (B16).** That is stated, not hidden —
-see spec §0. Converting `H` to `P` happens only through `/capture-requirement`, and only when
-**two different participants** describe the same pain unprompted.
+**As of 8 Sep 2026, 15 interviews are captured (`S1`–`S15` in `results.md`) and 12 pains
+recorded (`P1`–`P12`). Every `F`, `NFR` and `LR` in the spec traces to a `P#`.** Two requirements
+were **parked** for the gate — F8 (OCR, H6) and F11 (Workflows, H8), which 0 of 15 participants
+raised — with ids retained and code untouched (spec §2.1); re-admit or cut is the team's W6
+decision (Q5, Q6), never an agent's. Converting `H` to `P`
+happens only through `/capture-requirement`, and only when **two different participants**
+describe the same pain unprompted. `H1`–`H5` and `H7` are retired; never reuse the numbers.
 
 ## Agents and skills
 

@@ -109,6 +109,12 @@ the countdown expires the result anyway. Optional behaviour on a base use case i
 moment, because the custody stakes differ: a lecture handout and a passport scan are not the
 same risk, and only U2 reaches for redaction.
 
+> **Two of the six tool use cases — `OCR a scan` and `Run a saved workflow` — are shipped
+> capability whose *requirements* were parked on 8 Sep 2026** (F8, F11 — spec §2.1), because 0 of
+> 15 interviewees raised the hypothesis behind either. They stay in the diagram: D2 describes what
+> the product does and who can do it, not what the backlog promises. If Q5 / Q6 cut them, the two
+> ovals and the OCR `«include»` go in the same change, and `diagram-checker` C1b is re-run.
+
 ---
 
 ## D3 · High-level Architecture

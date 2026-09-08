@@ -46,18 +46,18 @@ webapp/
 ├── .docs/
 │   ├── 01-requirements/
 │   │   ├── TRACEABILITY.md ........... ★ START HERE — the whole chain, one screen
-│   │   ├── proposal.md ............... W5 · problem statement + target users + guardrails
-│   │   ├── backlog.md ................ W3 · 31 product rows (B1–B34) + 3 gate rows, MoSCoW
+│   │   ├── proposal.md ............... W5 · problem statement + target users + guardrails + evidence
+│   │   ├── backlog.md ................ W3 · 27 product rows (B1–B35) + 2 parked + 6 process rows, MoSCoW
 │   │   ├── 01-spec/
-│   │   │   └── 20260826-01-unilab-core.md   W3 · the spec: §0 evidence · §1 problem
-│   │   │                                    §2 F1–F14 · §3 NFR1–7 · §4 LR1–8 · §5 scope
-│   │   ├── 02-interviews/            ← B16 lives here
+│   │   │   └── 20260826-01-unilab-core.md   W3 · the spec: §0 evidence · §1 P1–P12
+│   │   │                                    §2 F1–F15 · §3 NFR1–7 · §4 LR1–8 · §5 scope
+│   │   ├── 02-interviews/            ← B16 closed here, 8 Sep
 │   │   │   ├── interview-guide.md .... the instrument: consent, questions, never-ask list
 │   │   │   ├── field-kit.md .......... ★ the page to hold on your phone while interviewing
 │   │   │   ├── chat-script.md ........ the same interview as DMs — EN / TH / MY, one Q per message
 │   │   │   ├── capture.html .......... ★ open on a phone: asks the six, emits the results.md block
 │   │   │   ├── rehearsal-scenarios.md  RS1-RS5 practice conversations — INVENTED, never evidence
-│   │   │   └── results.md ............ the evidence log — EMPTY, 0 of 5
+│   │   │   └── results.md ............ ★ the evidence log — 15 participants S1–S15, P1–P12
 │   │   ├── 03-charter/               ← W1
 │   │   │   ├── charter.html .......... source of the published Google Doc
 │   │   │   └── README.md ............. how to regenerate the Doc from it
@@ -80,7 +80,7 @@ webapp/
 │       ├── 20260902-log.md ........... W4 session
 │       ├── 20260906-log.md ........... rule.md rewrite + conformance + W3 bridge
 │       ├── 20260907-log.md ........... pre-gate audit — the 4 checks, 7 findings, 0 left
-│       ├── 20260908-log.md ........... ★ gate-day audit — B25, the W4 pack, the 2 blockers
+│       ├── 20260908-log.md ........... ★ gate-day audit — B25, the W4 pack, and Addendum 3: the 15-interview evidence pass
 │       └── 20260908-gate-runsheet.md .. ★ the clock to 23:59 and the two honest submissions
 │
 └── test/ ......................... proves the claims rather than asserting them
@@ -97,38 +97,34 @@ webapp/
 |---|---|---|---|
 | **W1** | Company Charter | [`01-requirements/03-charter/`](01-requirements/03-charter/) + [published Doc](https://docs.google.com/document/d/1D10q6PEqQ_sskQpPEEDYESxWUno8BGYK1mQv8IvPN0o/edit) | ✅ submitted, row 22 of the class sheet |
 | **W2** | `rule.md` | [`../rule.md`](../rule.md) · draft preserved in [`04-legal/`](01-requirements/04-legal/) | ✅ rewritten from the Charter (B12) |
-| **W3** | **Backlog + spec (draft)** | [`01-requirements/backlog.md`](01-requirements/backlog.md) + [`01-spec/`](01-requirements/01-spec/) | ✅ 34 rows · 14 F · 7 NFR · 8 LR — all four audit checks clean (7 Sep) |
+| **W3** | **Backlog + spec** | [`01-requirements/backlog.md`](01-requirements/backlog.md) + [`01-spec/`](01-requirements/01-spec/) | ✅ 27 product rows + 2 parked + 6 process · 12 P · 13 F live (2 parked) · 7 NFR · 8 LR — every requirement traced to a pain; all four audit checks clean (8 Sep, after the evidence pass) |
 | **W3** | agents + skills, pushed to GitHub | [`../.claude/`](../.claude/) | ✅ 3 agents, 2 skills |
 | **W4** | design pack | [`02-design/`](02-design/) | ✅ 5 documents, D1–D4 |
-| **W5** | proposal | [`01-requirements/proposal.md`](01-requirements/proposal.md) | ✅ assembled 7 Sep (B23) |
-| **W5** | **Gate — 8 Sep 23:59** | all of the above | ⚠️ **2 blockers** |
+| **W5** | proposal | [`01-requirements/proposal.md`](01-requirements/proposal.md) | ✅ assembled 7 Sep (B23), evidence section updated 8 Sep |
+| **W5** | **interviews ≥ 5** | [`01-requirements/02-interviews/results.md`](01-requirements/02-interviews/results.md) | ✅ **15 of 5** — S1–S15, 22 Aug – 8 Sep, 12 pains (B16 closed) |
+| **W5** | **Gate — 8 Sep 23:59** | all of the above | ⚠️ **1 blocker** — B17 |
 
 ---
 
-## The two blockers — neither is code
+## What is still open — one blocker, one decision
 
-### 🔴 B16 · 0 of ≥5 interviews
+### ✅ B16 · closed 8 Sep 2026 — 15 of ≥5 interviews
 
-Every one of the 14 functional requirements traces to an **`H#` (hypothesis)** — backed by the
-22 Aug competitor teardown or a platform constraint — not a **`P#` (a pain a real user
-described)**. The gate asks for a user.
+Fifteen MFU undergraduates, 15 programmes, 22 Aug – 8 Sep, three per interviewer, EN/TH/MY,
+LR7 kept throughout. **12 pains recorded (`P1`–`P12`)**; six hypotheses promoted, two
+unsupported, one confirmed. Every requirement in the spec — F, NFR and LR — now traces to a pain a
+real participant stated, with role, date and quote.
 
-**The instruments are ready; the conversations are not.**
-→ [`02-interviews/capture.html`](01-requirements/02-interviews/capture.html) — **start here on a
-phone.** Asks the six questions and emits the `results.md` block; no name field exists on it, so
-LR7 holds by construction
-→ [`02-interviews/chat-script.md`](01-requirements/02-interviews/chat-script.md) — the DM version.
-One question per message; a chat answer *is* an interview
-→ [`02-interviews/field-kit.md`](01-requirements/02-interviews/field-kit.md) — where to stand,
-what to say, the six questions, what never to ask
-→ [`02-interviews/rehearsal-scenarios.md`](01-requirements/02-interviews/rehearsal-scenarios.md) —
-five invented practice conversations, `RS1`–`RS5`. **Rehearsal only. No `P#` may cite an `RS#`,
-and nothing there is copied into `results.md`**
-→ run `/capture-requirement` after each real one; it converts the hypothesis and re-points every
-citation so nothing goes stale
+→ [`02-interviews/results.md`](01-requirements/02-interviews/results.md) — the evidence log,
+one block per participant, plus the hypothesis tracker and the contradictions table
+→ [`01-requirements/TRACEABILITY.md`](01-requirements/TRACEABILITY.md) — the re-pointed chain
+→ [`05-log/20260908-log.md`](05-log/20260908-log.md) Addendum 3 — what was promoted, what was
+contradicted, what was not raised, and the clean audit afterwards
 
-A hypothesis becomes a pain when **two different participants raise it unprompted.** One is an
-anecdote.
+**The two requirements nobody asked for — parked.** OCR (F8, B8) traced to H6 and Workflows
+(F11, B20) to H8; **0 of 15 raised either**, and S8 contradicted H8. For the gate they are parked
+(spec §2.1): out of the requirement table, ids retained, code untouched. Spec **Q5** and **Q6**
+put three options each in front of the team for W6.
 
 ### 🔴 B17 · topic approval unconfirmed
 
@@ -137,6 +133,11 @@ UniLab is not among them. Four weeks of work sit on that ambiguity.
 
 → [`05-approvals/topic-approval-request.md`](01-requirements/05-approvals/topic-approval-request.md)
 — message drafted, **not sent**. It also plans what to do if the answer is "take one of the five".
+
+### ⏱ Still to measure, not to interview
+
+The competitor's upload-and-download round trip on campus Wi-Fi — P3's number. Three participants
+described the upload as the wait; nobody has timed it. → [`02-interviews/h3-measurement.md`](01-requirements/02-interviews/h3-measurement.md)
 
 ---
 

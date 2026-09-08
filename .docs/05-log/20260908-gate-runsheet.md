@@ -1,3 +1,9 @@
+> ⏭ **Superseded, 8 Sep 2026 (evening).** This runsheet was written at 20:24 with the interview
+> count at **0**. The 15 conversations run between 22 Aug and 8 Sep were captured that evening
+> through `/capture-requirement` — **B16 closed at 15 of 5**, 12 pains recorded, every citation
+> re-pointed, audit clean. The "if you reached 5" branch below is the one that was executed; see
+> `20260908-log.md` Addendum 3. *This file is a dated record and is deliberately not rewritten.*
+
 # Gate-day runsheet — 8 Sep 2026, 20:24 → 23:59
 
 **Course:** 1305493 · W5 User Validation Gate · 10 pts (Project 50 → Discover 10)

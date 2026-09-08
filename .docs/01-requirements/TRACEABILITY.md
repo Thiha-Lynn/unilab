@@ -2,7 +2,7 @@
 
 **Course:** 1305493 · 1/2569 · Dr. Prasara Jakkaew
 **Company:** DIGITAL IMPOSTERS PVT. CO., LTD. · **Product:** UniLab
-**Updated:** 7 Sep 2026 · **Owner:** Thiha Lin (6631503092), Tech Lead
+**Updated:** 8 Sep 2026 (evidence pass) · **Owner:** Thiha Lin (6631503092), Tech Lead
 
 The W5 gate grades one chain, and the W3 deck states it plainly:
 
@@ -72,41 +72,65 @@ Must-level rule in `rule.md` has no LR.
 > a production console — is a Must-level rule that never became an LR, so `B30` cited the raw
 > rule instead of a requirement id. Check 4 had been failing quietly since the W2 rewrite.
 
+> **LR7 was the rule the interviews ran under.** Fifteen participants, and the repository holds
+> a role, a pain and a quote for each — no name, no student id, no handle, and the code-to-person
+> mapping was never written down.
+
 ---
 
 ## W3 · pain → requirement → backlog
 
-**This is the link that is not yet complete, and pretending otherwise would fail the gate.**
+**This link closed on 8 Sep 2026.** Until then every functional requirement traced to an `H#`
+— a hypothesis with a citable non-user artefact — and this file said so. Fifteen interviews
+(22 Aug – 8 Sep) were captured through `/capture-requirement`, one at a time, under the rule
+that a hypothesis becomes a pain only when **two different participants describe it unprompted**.
 
 | Symbol | Means | Count today |
 |---|---|---|
-| `P#` | A pain a real interviewed user described, with role, date and quote | **0** |
-| `H#` | A hypothesis with a citable non-user source, awaiting validation | **9** |
+| `P#` | A pain a real interviewed user described, with role, date and quote | **12** — `P1`–`P6` promoted from a hypothesis, `P7`–`P12` predicted by none |
+| `H#` retired | Promoted; number never reused | **6** — H1, H2, H3, H4, H5, H7 |
+| `H#` unsupported | 0 of 15 raised it | **2** — H6, H8. **F8 / B8 and F11 / B20 are parked on them** (spec §2.1); re-admit or cut is **Q5**, **Q6** |
+| `H#` confirmed | A market finding; nothing traces to it | **1** — H9 |
 
-Every functional requirement currently traces to an `H#`, not a `P#`. Each `H#` carries a real
-artefact — the 22 Aug competitor teardown, a platform constraint, a measurement of our own
-build — but **an artefact is not a user**, and the gate asks for a user.
+The pain index — which participants, which quote, which hypothesis it replaced — is in
+[`02-interviews/results.md`](02-interviews/results.md) and spec §1.2. The chain, row by row:
 
-| Requirement | Traces to | Backlog |
-|---|---|---|
-| F1 pick a file and get the result, on this device | H2 · LR1 | B1 |
-| F2 no account, no daily cap | H1 · LR2 | B2 |
-| F3 compress to a size I name | H5 | B3 |
-| F4 HEIC → JPG | H4 | B4 |
-| F5 see the estimate before committing | H1, H5 | B5 |
-| F6 results disappear on a visible countdown | H2 · LR5 | B6 |
-| F8 OCR in the language on the page (19 shipped) | H6 | B8 |
-| F9 video and audio beside documents | H7 | B18 |
-| F7 redact / blur so removed content is absent | H2 · LR6 | B7, B15 |
-| F10 merge PDFs with page ranges and a contents page | H8 | B19 |
-| F11 save a repeated chore as a workflow | H8 | B20 |
-| F12 told before a tool downloads anything | H2 *(enforced by LR3 · NFR5)* | B14 ✅ |
-| F13 install and keep working offline | H3 | B21 |
-| F14 true language coverage shown in-app | H6 *(spec defect §7 D2 closed it)* | B10 ✅ |
+| Requirement | Traces to | Participants behind the pain | Backlog |
+|---|---|---|---|
+| F1 pick a file and get the result, on this device | **P2** · LR1 | S4, S7, S12, S14 | B1 |
+| F2 no account, no daily cap | **P1** · LR2 | S1, S3, S9, S13 | B2 |
+| F3 compress to a size I name | **P5** | S2, S10, S12, S15 | B3 |
+| F4 HEIC → JPG | **P4** | S4, S13 | B4 |
+| F5 see the estimate — and the quality — before committing | **P7**, P1, P5 | S1, S2, S4, S7, S9, S10, S13 | B5 |
+| F6 results disappear on a visible countdown | **P2** · LR5 | S4, S7, S12, S14 | B6 |
+| F7 redact / blur so removed content is absent | **P2** · LR6 | *(carried by LR6 — no participant asked for redaction)* | B7, B15 |
+| ~~F8 OCR in the language on the page~~ | **parked** — H6, 0 of 15 (spec §2.1) | none | B8 parked · **Q5** |
+| F9 video and audio beside documents | **P6** | S1, S3, S13, S14 · S2, S9, S10 | B18 |
+| F10 merge PDFs in a checked order, with page ranges and a contents page | **P8** *(was H8)* | S8, S14 | B19 |
+| ~~F11 save a repeated chore as a workflow~~ | **parked** — H8, 0 of 15, contradicted by S8 (spec §2.1) | none | B20 parked · **Q6** |
+| F12 told before a tool downloads anything | **P2** *(enforced by LR3 · NFR5)* | S4 ("I don't know how the converter website keeps it") | B14 ✅ |
+| F13 install and keep working offline | **P3** | S2, S9, S10 | B21 |
+| F14 true coverage and limits shown in-app, before starting | **P7** *(was H6; spec defect D2 closed it)* | S2, S4, S7, S9 | B10 ✅ |
+| **F15** every tool completes on a phone — *new, 8 Sep* | **P10**, P9 | S4, S7, S9, S11, S14, S15 · S1, S6 | **B35** |
+| NFR1 no file bytes leave the device | LR1 · **P2** | S4, S7, S12, S14 | B11 |
+| NFR2 results in memory only, unrecoverable after the countdown | LR5 · **P2** | S12 | B26 |
+| NFR3 offline install ≤ 8 MB | F13 · **P3** | S2, S9, S10 | B9 |
+| NFR4 interactive < 2 s on the reference device | F1 · **P10** | S4, S7, S9, S11, S14, S15 | B34 |
+| NFR5 disclose before any fetch | F12 · LR3 · **P2** | S4 | B14 ✅ |
+| NFR6 no tab freeze, even in the background | F9, F1 · **P6** | S2, S10 | B33 |
+| NFR7 Thai / Burmese text handled correctly | F1 · **P12** | S3 | B32 ✅ |
 
-**Converting `H` to `P` is `/capture-requirement`'s only job**, and it is the only sanctioned
-route. A hypothesis is promoted when **two different participants describe it unprompted** —
-one is an anecdote. Tracked as **B16**, and it is the largest open risk in the project.
+Two pains have **no feature** behind them, by design, and the spec's Won'ts cite them so the
+boundary is explicit rather than silent: **P11** (submission uncertainty — S2, S5, S15 → W5,
+LMS-side) and **P12** (office export fidelity — S3, S5, S8 → W1, needs a server; it does,
+however, constrain NFR7 — our own tools must not break Thai script the way S3's cover broke).
+
+> **What the interviews changed in this table:** thirteen citations moved from `H` to `P`;
+> F5 gained P7, the largest pain in the sample and one no hypothesis predicted; F10 moved from
+> an unsupported hypothesis to the pain that actually supports it; F14 likewise; **F15 and B35
+> were added**; every NFR and LR gained an explicit pain; and **F8 / F11 were parked** — out of
+> the table with ids retained, code untouched, the absence of evidence written beside them
+> (spec §2.1). **B16 is closed.** Nothing was renumbered.
 
 ---
 
@@ -115,7 +139,8 @@ one is an anecdote. Tracked as **B16**, and it is the largest open risk in the p
 The W4 deliverables under `.docs/02-design/` — feature list, user journey, design system,
 prototype, and diagrams D1–D4 — all derive from the backlog above, and `diagram-checker`
 enforces it: an actor or label that appears in a diagram but not in the spec is a reported
-mismatch.
+mismatch. The journey's chosen instance — *compress a scanned PDF to the LMS cap, on a phone* —
+is now the most-evidenced path in the product (P5, P7, P10).
 
 ---
 

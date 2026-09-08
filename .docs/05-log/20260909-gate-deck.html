@@ -1,0 +1,601 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UniLab Gate Deck</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Thai:wght@400;600&family=Noto+Sans+Myanmar:wght@400;600&display=swap">
+<style>
+:root{
+  --bg:#f6f7fb; --card:#ffffff; --ink:#171c26; --muted:#5b6472; --faint:#8a93a2; --line:#e4e7ee;
+  --accent:#5b5bd6; --accent-strong:#4747c2; --accent-soft:#eeeefc;
+  --good:#1d9e77; --good-soft:#e4f6ef; --warn:#d97706; --warn-soft:#fff7ed; --danger:#d64545; --danger-soft:#fee2e2;
+  --c-image:#d64593; --c-pdf:#d65045; --c-video:#d3891a; --c-audio:#0e9bb5; --c-text:#3d8bd6; --c-study:#1d9e77; --c-utility:#9147d6;
+  --radius:14px; --shadow:0 1px 2px rgba(23,28,38,.05),0 10px 30px rgba(23,28,38,.07);
+  color-scheme: light;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink)}
+body{font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,"Noto Sans Thai","Noto Sans Myanmar",sans-serif;font-variant-numeric:tabular-nums;line-height:1.35;-webkit-font-smoothing:antialiased}
+[lang=th]{font-family:"Noto Sans Thai",Inter,system-ui,sans-serif}
+[lang=my]{font-family:"Noto Sans Myanmar",Inter,system-ui,sans-serif;line-height:1.6}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+/* ---------- stage mode ---------- */
+#stage{position:fixed;inset:0;display:grid;place-items:center;overflow:hidden}
+body.notes #stage{right:32vw}
+.slide{display:none;position:relative;width:min(100vw,177.78vh);aspect-ratio:16/9;font-size:calc(min(100vw,177.78vh)/64);padding:2.1em 3em 2.4em;background:var(--bg);flex-direction:column;gap:1em}
+body.notes .slide{width:min(68vw,177.78vh);font-size:calc(min(68vw,177.78vh)/64)}
+.slide.on{display:flex}
+.slide .notes{display:none}
+#np{display:none;position:fixed;top:0;right:0;width:32vw;height:100vh;overflow:auto;background:var(--card);border-left:1px solid var(--line);padding:22px 24px 60px;font-size:15px;line-height:1.55}
+body.notes #np{display:block}
+#np h4{margin:0 0 6px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
+#np p{margin:0 0 10px}
+#np .cue{color:var(--accent-strong);font-weight:600}
+#np .cut{color:var(--warn);font-weight:600}
+#np .hand{color:var(--good);font-weight:600}
+#bar{position:fixed;left:0;bottom:0;height:4px;background:var(--accent);width:0;transition:width .25s}
+.tb{position:fixed;left:14px;bottom:12px;display:flex;gap:6px;align-items:center;font-size:12px;color:var(--faint);z-index:5}
+.tb button{font:inherit;font-weight:600;color:var(--muted);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:4px 9px;cursor:pointer}
+.tb button:hover{border-color:var(--accent);color:var(--accent-strong)}
+#cnt{margin-left:4px}
+
+/* ---------- slide anatomy ---------- */
+.hd{display:flex;justify-content:space-between;align-items:center;font-size:.62em;letter-spacing:.09em;text-transform:uppercase;color:var(--faint);font-weight:600}
+.who{display:inline-flex;gap:.6em;align-items:center;background:var(--accent-soft);color:var(--accent-strong);border-radius:999px;padding:.35em .9em;letter-spacing:.05em}
+.who b{color:var(--accent-strong)}
+h1{font-size:2.5em;line-height:1.04;letter-spacing:-.022em;margin:0;font-weight:800;text-wrap:balance}
+h2{font-size:1.15em;margin:0;font-weight:700;letter-spacing:-.01em}
+.lead{font-size:1.12em;line-height:1.45;color:var(--muted);max-width:36em;margin:0}
+.lead b,.lead strong{color:var(--ink)}
+.land{font-size:1.28em;font-weight:700;line-height:1.3;letter-spacing:-.01em;max-width:30em;margin:0}
+.fill{flex:1;min-height:0}
+.g2{display:grid;grid-template-columns:1.25fr .85fr;gap:2.2em;align-items:start}
+.g2.even{grid-template-columns:1fr 1fr}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1em 1.15em}
+.pill{display:inline-flex;align-items:center;gap:.45em;border-radius:999px;padding:.28em .8em;font-size:.72em;font-weight:600;line-height:1.2}
+.pill.good{background:var(--good-soft);color:var(--good)}
+.pill.warn{background:var(--warn-soft);color:var(--warn)}
+.pill.bad{background:var(--danger-soft);color:var(--danger)}
+.pill.acc{background:var(--accent-soft);color:var(--accent-strong)}
+.pill .dot{width:.55em;height:.55em;border-radius:50%;background:currentColor}
+.small{font-size:.78em;color:var(--muted)}
+.tiny{font-size:.66em;color:var(--faint)}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.9em}
+.quote{font-size:1.02em;line-height:1.45;margin:0;color:var(--ink)}
+.quote:before{content:"“";color:var(--accent);font-weight:800;margin-right:.1em}
+.quote:after{content:"”";color:var(--accent);font-weight:800;margin-left:.1em}
+.cite{font-size:.7em;color:var(--muted);margin-top:.5em}
+ul.clean{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.45em}
+.stat{display:flex;flex-direction:column;gap:.1em}
+.stat .n{font-size:2.2em;font-weight:800;letter-spacing:-.03em;line-height:1;color:var(--ink)}
+.stat .l{font-size:.72em;color:var(--muted);line-height:1.3}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1em}
+.stats .card{padding:1em 1.1em .9em}
+kbd{font:inherit;font-size:.85em;background:var(--card);border:1px solid var(--line);border-bottom-width:2px;border-radius:6px;padding:.05em .45em}
+
+/* slide 0 */
+.title h1{font-size:4.4em}
+.names{display:grid;grid-template-columns:repeat(5,1fr);gap:.8em;font-size:.72em}
+.names div b{display:block;color:var(--ink)}
+.names div{color:var(--muted);line-height:1.35;border-top:2px solid var(--line);padding-top:.6em}
+
+/* slide 1 — workflow strip */
+.flow3{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:.6em;align-items:stretch}
+.step{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1em 1.1em;display:flex;flex-direction:column;gap:.35em}
+.step .k{font-size:.62em;letter-spacing:.09em;text-transform:uppercase;color:var(--faint);font-weight:700}
+.step .t{font-size:1.15em;font-weight:700;letter-spacing:-.01em}
+.step .d{font-size:.78em;color:var(--muted);line-height:1.4}
+.step.core{background:var(--accent-soft);border-color:var(--accent)}
+.step.core .k{color:var(--accent-strong)}
+.arrow{display:grid;place-items:center;color:var(--faint);font-size:1.6em}
+.cats{display:flex;flex-wrap:wrap;gap:.5em}
+.cat{display:inline-flex;align-items:baseline;gap:.45em;padding:.35em .8em;border-radius:999px;font-size:.78em;font-weight:600;color:#fff}
+.cat span{font-weight:800;font-size:1.05em}
+
+/* slide 2 — participant grid */
+.pgrid{display:grid;grid-template-columns:7.2em repeat(3,1fr);gap:.45em;align-items:stretch}
+.pgrid .rh{font-size:.68em;color:var(--muted);font-weight:600;display:flex;align-items:center;line-height:1.25}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:.55em .7em;display:flex;flex-direction:column;gap:.2em;min-height:4.6em}
+.tile .s{font-weight:800;font-size:.85em;letter-spacing:.02em}
+.tile .r{font-size:.72em;line-height:1.25}
+.tile .m{font-size:.62em;color:var(--faint)}
+.tile.id{background:var(--accent-soft);border-color:var(--accent)}
+.tile.id .s:after{content:"identity document";float:right;font-size:.7em;color:var(--accent-strong);font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:.35em .8em;font-size:.8em;align-items:baseline}
+.kv dt{color:var(--faint);font-weight:600;font-size:.85em;letter-spacing:.04em;text-transform:uppercase}
+.kv dd{margin:0}
+
+/* slide 3 — chart */
+.chart{width:100%;height:auto;display:block}
+.chart text{font-family:inherit;fill:var(--ink)}
+.chart .lab{font-size:15px}
+.chart .val{font-size:15px;font-weight:700}
+.chart .tag{font-size:12px;fill:var(--muted)}
+.chart .tick{font-size:12px;fill:var(--faint)}
+.chart .grid{stroke:var(--line);stroke-width:1}
+.chart .bar{fill:var(--accent)}
+.chart .bar.top{fill:var(--accent-strong)}
+.chart .bar.out{fill:var(--accent-soft);stroke:var(--accent);stroke-width:1}
+.chart g:hover .bar{filter:brightness(.92)}
+.callouts{display:flex;flex-direction:column;gap:.7em}
+.callouts .card{padding:.85em 1em}
+.callouts .n{font-size:1.9em;font-weight:800;letter-spacing:-.03em;line-height:1}
+.callouts .t{font-size:.8em;color:var(--muted);margin-top:.25em;line-height:1.35}
+
+/* slide 4 — chain */
+.chain{display:grid;grid-template-columns:1.35fr auto .55fr auto .9fr auto .9fr auto 1.25fr;gap:.5em;align-items:stretch}
+.node{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:.85em .95em;display:flex;flex-direction:column;gap:.3em;font-size:.86em}
+.node .k{font-size:.66em;letter-spacing:.09em;text-transform:uppercase;color:var(--faint);font-weight:700}
+.node .t{font-weight:700;line-height:1.3}
+.node .d{font-size:.82em;color:var(--muted);line-height:1.35}
+.node.p{border-color:var(--accent);background:var(--accent-soft)}
+.node.p .k{color:var(--accent-strong)}
+.node.ok .t:before{content:"✓ ";color:var(--good)}
+.vault{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:.9em 1em;display:flex;flex-direction:column;gap:.5em;font-size:.86em}
+.vault .row{display:flex;justify-content:space-between;align-items:center;gap:.6em}
+.vault .fn{font-weight:600}
+.vault .cd{font-size:1.9em;font-weight:800;letter-spacing:-.03em;line-height:1}
+.vault .cd small{font-size:.38em;font-weight:500;color:var(--muted);letter-spacing:0;margin-left:.4em}
+.btn{font:inherit;font-weight:700;font-size:.85em;border-radius:10px;padding:.55em .9em;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:default}
+.btn.acc{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.dan{color:var(--danger);border-color:var(--danger-soft);background:var(--danger-soft)}
+.breath{font-size:.86em;color:var(--muted);line-height:1.5;margin:0}
+.breath b{color:var(--ink)}
+
+/* slide 5 — scoreboard */
+.score{display:grid;grid-template-columns:auto 1fr auto;gap:.35em .9em;align-items:center;font-size:.8em}
+.score .h{font-weight:800;letter-spacing:.02em;color:var(--faint)}
+.score .h.x{color:var(--danger)}
+.score .txt{line-height:1.3}
+.score .txt.x{color:var(--ink)}
+.res{display:inline-flex;align-items:center;gap:.45em;border-radius:999px;padding:.3em .75em;font-size:.82em;font-weight:700;white-space:nowrap}
+.res.p{background:var(--good-soft);color:var(--good)}
+.res.z{background:var(--danger-soft);color:var(--danger)}
+.res.c{background:var(--accent-soft);color:var(--accent-strong)}
+
+/* slide 6 — demo */
+ol.steps{margin:0;padding-left:1.4em;display:flex;flex-direction:column;gap:.45em;font-size:.95em}
+ol.steps li b{color:var(--ink)}
+ol.steps li{color:var(--muted);line-height:1.35}
+.warnbox{background:var(--warn-soft);border:1px solid #f3d5a3;border-radius:10px;padding:.7em .9em;font-size:.8em;color:#8a4b00;line-height:1.4}
+.work{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;font-size:.82em;display:grid;grid-template-columns:1fr 12.5em}
+.work .prev{background:var(--bg);border-right:1px solid var(--line);padding:1em;display:flex;flex-direction:column;gap:.6em;justify-content:center;align-items:center;min-height:14em}
+.page{width:6.4em;height:8.6em;background:#fff;border:1px solid var(--line);border-radius:4px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.page:before{content:"";position:absolute;inset:1em .9em auto;height:.35em;background:var(--line);box-shadow:0 .9em 0 var(--line),0 1.8em 0 var(--line),0 2.7em 0 var(--line),0 3.6em 0 var(--line),0 4.5em 0 var(--line)}
+.work .opts{padding:.9em;display:flex;flex-direction:column;gap:.55em}
+.work label{font-size:.7em;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);font-weight:700}
+.field{border:1.5px solid var(--line);border-radius:10px;padding:.5em .7em;display:flex;justify-content:space-between;font-weight:600}
+.est{background:var(--accent-soft);border-radius:10px;padding:.55em .7em;line-height:1.3}
+.est b{color:var(--accent-strong);font-size:1.15em}
+.net{font-size:.72em;color:var(--muted)}
+.net:before{content:"● ";color:var(--good)}
+
+/* slide 7 — LR list */
+.lr{display:grid;grid-template-columns:auto 1fr;gap:.4em .8em;font-size:.78em;align-items:baseline}
+.lr b{color:var(--accent-strong);font-weight:800}
+.big{font-size:1.5em;font-weight:800;letter-spacing:-.02em;line-height:1.2;margin:0;text-wrap:balance}
+.dis{display:flex;flex-direction:column;gap:.5em;font-size:.78em}
+.dis div{display:grid;grid-template-columns:1fr 1.2fr;gap:.8em;border-top:1px solid var(--line);padding-top:.5em}
+.dis div s{color:var(--muted)}
+
+/* slide 8 — open */
+.open{display:grid;grid-template-columns:1fr 1fr;gap:.9em}
+.open .card{display:flex;flex-direction:column;gap:.3em}
+.open .k{font-size:.66em;letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:var(--warn)}
+.open .t{font-weight:700;font-size:.95em}
+.open .d{font-size:.8em;color:var(--muted);line-height:1.4}
+.close{font-size:1.75em;font-weight:800;letter-spacing:-.025em;line-height:1.15;margin:0}
+.close span{color:var(--accent-strong)}
+
+/* slide 9 — questions */
+.qs{display:grid;grid-template-columns:1fr 1fr;gap:.5em .9em;font-size:.76em}
+.qs div{border-top:1px solid var(--line);padding-top:.45em;color:var(--muted);line-height:1.35}
+.qs div b{color:var(--ink)}
+.qs div i{color:var(--accent-strong);font-style:normal;font-weight:600}
+
+/* ---------- flow mode (phone, print, P key) ---------- */
+body.flow #stage{position:static;display:block;padding:16px 14px 60px;overflow:visible}
+body.flow #stage{right:auto}
+body.flow .slide,body.flow .slide.on{display:flex;width:auto;max-width:960px;aspect-ratio:auto;font-size:16px;margin:0 auto 22px;padding:22px 22px 24px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+body.flow .slide .notes{display:block;border-top:1px dashed var(--line);padding-top:12px;margin-top:6px;font-size:15px;line-height:1.55;color:var(--ink)}
+body.flow .notes h4{margin:0 0 6px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
+body.flow .notes p{margin:0 0 8px}
+body.flow .notes .cue{color:var(--accent-strong);font-weight:600}
+body.flow .notes .cut{color:var(--warn);font-weight:600}
+body.flow .notes .hand{color:var(--good);font-weight:600}
+body.flow #np,body.flow #bar{display:none}
+body.flow .title h1{font-size:2.6em}
+body.flow h1{font-size:1.8em}
+@media (max-width:760px){
+  body.flow .hd{flex-direction:column;align-items:flex-start;gap:.5em}
+  body.flow .who{white-space:nowrap}
+  body.flow .tb{background:rgba(255,255,255,.92);padding:6px 8px;border-radius:10px;border:1px solid var(--line)}
+  body.flow .g2,body.flow .g2.even,body.flow .open,body.flow .qs,body.flow .stats,body.flow .flow3,body.flow .chain{grid-template-columns:1fr}
+  body.flow .arrow{transform:rotate(90deg);justify-self:center}
+  body.flow .names{grid-template-columns:1fr 1fr}
+  body.flow .pgrid{grid-template-columns:1fr}
+  body.flow .pgrid .rh{border-top:1px solid var(--line);padding-top:.4em;margin-top:.3em}
+  body.flow .work{grid-template-columns:1fr}
+  body.flow .work .prev{border-right:0;border-bottom:1px solid var(--line)}
+  body.flow .tile.id .s:after{float:none;display:block}
+}
+@media print{
+  body{background:#fff}
+  #stage{position:static;display:block}
+  .slide,.slide.on{display:flex;width:auto;aspect-ratio:auto;font-size:13px;break-after:page;border:0;box-shadow:none;background:#fff}
+  .slide .notes{display:block;border-top:1px dashed var(--line);margin-top:8px;padding-top:8px}
+  #np,#bar,.tb{display:none}
+}
+@media (prefers-reduced-motion:reduce){#bar{transition:none}}
+</style>
+</head>
+<body>
+<div id="stage">
+
+<!-- 0 · title -->
+<section class="slide title">
+  <div class="hd"><span>1305493 · W5 User Validation Gate · 9 Sep 2026</span><span class="who"><b>Myo Zin Thant</b> · Product Owner · 15 s</span></div>
+  <div class="fill" style="display:flex;flex-direction:column;justify-content:center;gap:.9em">
+    <div><span class="pill good"><span class="dot"></span>Nothing is uploaded</span></div>
+    <h1>UniLab</h1>
+    <p class="land">Select a file → transform it on this device → download the result.</p>
+    <p class="lead">A student's file jobs — compress, convert, scan, trim — done entirely inside the browser, so the file never leaves the device and no deletion promise has to be trusted.</p>
+    <div class="stats">
+      <div class="card stat"><span class="n">15</span><span class="l">students interviewed, 22 Aug – 8 Sep, fifteen programmes</span></div>
+      <div class="card stat"><span class="n">12</span><span class="l">pains recorded — six we predicted, six we did not</span></div>
+      <div class="card stat"><span class="n">all</span><span class="l">requirements trace to a stated pain; two we built are parked, in the open</span></div>
+    </div>
+  </div>
+  <div class="names">
+    <div><b>Myo Zin Thant</b>Product Owner</div>
+    <div><b>Swan Htut Oakkar Aung</b>Designer</div>
+    <div><b>Thiha Lin</b>Tech Lead</div>
+    <div><b>Wanna San</b>AI Lead</div>
+    <div><b>Zaw Win Htut</b>QA / Test</div>
+  </div>
+  <div class="tiny">Company 18 · DIGITAL IMPOSTERS PVT. CO., LTD. · github.com/Thiha-Lynn/unilab · thiha-lynn.github.io/unilab</div>
+  <aside class="notes">
+    <h4>Myo Zin Thant · 15 s</h4>
+    <p>Good morning. Company 18, DIGITAL IMPOSTERS. Our product is <span class="cue">UniLab</span>: a student's file jobs — compress, convert, scan, trim — done entirely inside the browser, so <span class="cue">the file never leaves the device.</span> Five of us, five minutes, and the first thing we'll tell you is how many people we talked to.</p>
+    <p class="hand">→ stay on for slide 1.</p>
+  </aside>
+</section>
+
+<!-- 1 · one workflow -->
+<section class="slide">
+  <div class="hd"><span>The product · one core workflow</span><span class="who"><b>Myo Zin Thant</b> · 30 s</span></div>
+  <h1>One workflow, fifty-eight settings.</h1>
+  <div class="flow3">
+    <div class="step"><span class="k">1 · select</span><span class="t">Pick a file on this device</span><span class="d">Phone camera roll, Files, a drag onto the page. Type and size screened on every path.</span></div>
+    <div class="arrow">→</div>
+    <div class="step core"><span class="k">2 · transform on this device</span><span class="t">The whole job runs in the tab</span><span class="d">pdf.js · WebCodecs · Tesseract · RNNoise, all in the browser. <b>No upload endpoint exists in the codebase.</b></span></div>
+    <div class="arrow">→</div>
+    <div class="step"><span class="k">3 · download</span><span class="t">Take the result — and watch it expire</span><span class="d">Held in memory only, 30:00 countdown, <i>Delete now</i>, purge on tab close. Proven by test.</span></div>
+  </div>
+  <p class="land">58 tools are 58 <em>settings</em> of that one workflow — not 58 workflows. Split PDF and Remove Noise differ in what they compute, not in what the student does.</p>
+  <div class="cats">
+    <span class="cat" style="background:var(--c-pdf)">PDF <span>20</span></span>
+    <span class="cat" style="background:var(--c-image)">Image <span>13</span></span>
+    <span class="cat" style="background:var(--c-audio)">Audio <span>11</span></span>
+    <span class="cat" style="background:var(--c-video)">Video <span>7</span></span>
+    <span class="cat" style="background:var(--c-utility)">Everyday <span>3</span></span>
+    <span class="cat" style="background:var(--c-text)">Text <span>2</span></span>
+    <span class="cat" style="background:var(--c-study)">Study <span>2</span></span>
+    <span class="small" style="align-self:center">— eighteen video and audio settings: the part no free PDF site has at all.</span>
+  </div>
+  <aside class="notes">
+    <h4>Myo Zin Thant · 30 s (hard cut 20 s)</h4>
+    <p>One core workflow: <span class="cue">select a file, transform it on this device, download the result.</span> We ship fifty-eight tools, and every one of them is a <em>setting</em> of that workflow — not fifty-eight workflows. Split PDF and Remove Noise differ in what they compute, not in what the student does. That sentence is our answer to the one-month, one-workflow guardrail.</p>
+    <p><span class="cut">Hard cut: stop here.</span> Twenty of those settings are PDF, thirteen image, eighteen video and audio — the part no free PDF site has at all.</p>
+    <p class="hand">Hand-off: "Swan will tell you who we talked to."</p>
+  </aside>
+</section>
+
+<!-- 2 · the sample -->
+<section class="slide">
+  <div class="hd"><span>Evidence · who we talked to</span><span class="who"><b>Swan Htut Oakkar Aung</b> · Designer · 40 s</span></div>
+  <h1>Fifteen people, fifteen programmes.</h1>
+  <div class="g2 fill">
+    <div class="pgrid">
+      <div class="rh">Zaw Win Htut</div>
+      <div class="tile"><span class="s">S1</span><span class="r">Y2 Nursing Science</span><span class="m">EN · chat · phone → laptop</span></div>
+      <div class="tile"><span class="s">S6</span><span class="r">Y3 Cosmetic Science</span><span class="m">TH · chat · phone → laptop</span></div>
+      <div class="tile"><span class="s">S11</span><span class="r">Y1 English</span><span class="m">TH · chat · phone → library PC</span></div>
+      <div class="rh">Myo Zin Thant</div>
+      <div class="tile"><span class="s">S2</span><span class="r">Y3 Software Engineering</span><span class="m">EN · in person · laptop only</span></div>
+      <div class="tile id"><span class="s">S7</span><span class="r">Y1 Traditional Chinese Medicine</span><span class="m">EN · chat · phone only</span></div>
+      <div class="tile id"><span class="s">S12</span><span class="r">Y4 Digital Tech. for Business Innovation</span><span class="m">EN · chat · copy shop → phone</span></div>
+      <div class="rh">Wanna San</div>
+      <div class="tile"><span class="s">S3</span><span class="r">Y1 Business Administration</span><span class="m">TH · chat · phone → laptop</span></div>
+      <div class="tile"><span class="s">S8</span><span class="r">Y4 Accounting</span><span class="m">EN · in person · laptop only</span></div>
+      <div class="tile"><span class="s">S13</span><span class="r">Y2 Tourism Business &amp; Events</span><span class="m">EN · call · phone → laptop</span></div>
+      <div class="rh">Swan Htut Oakkar Aung</div>
+      <div class="tile id"><span class="s">S4</span><span class="r">Y4 Public Health</span><span class="m">MY · chat · phone only</span></div>
+      <div class="tile"><span class="s">S9</span><span class="r">Y2 Aviation Business Mgmt</span><span class="m">EN · chat · phone only</span></div>
+      <div class="tile id"><span class="s">S14</span><span class="r">Y3 Environmental Health</span><span class="m">EN · chat · phone → laptop</span></div>
+      <div class="rh">Thiha Lin</div>
+      <div class="tile"><span class="s">S5</span><span class="r">Y2 Laws</span><span class="m">EN · call · iPad → laptop</span></div>
+      <div class="tile"><span class="s">S10</span><span class="r">Y3 Multimedia Tech. &amp; Animation</span><span class="m">MY · chat · phone only</span></div>
+      <div class="tile"><span class="s">S15</span><span class="r">Y1 Applied Chemistry</span><span class="m">TH · chat · phone only</span></div>
+    </div>
+    <div class="card">
+      <dl class="kv">
+        <dt>when</dt><dd>22 Aug – 8 Sep 2026 · 10–18 min each</dd>
+        <dt>who</dt><dd>MFU undergraduates · Y1 4 · Y2 4 · Y3 4 · Y4 3 · <b>nobody from this course</b></dd>
+        <dt>channel</dt><dd>chat 10 · in person 2 · voice call 3</dd>
+        <dt>language</dt><dd>EN 9 · TH 4 · MY 2 — quotes kept in the original</dd>
+        <dt>device</dt><dd><b>phone only 5</b> · phone → laptop 7 · laptop only 2 · shop scanner → phone 1</dd>
+        <dt>identity doc</dt><dd><b>4 of 15</b> — passport, medical certificate, Thai ID, signed permission sheet</dd>
+        <dt>recorded</dt><dd>role · pain · quote. <b>No names, no student IDs</b> — anywhere (LR7)</dd>
+      </dl>
+    </div>
+  </div>
+  <aside class="notes">
+    <h4>Swan Htut Oakkar Aung · 40 s (hard cut 30 s)</h4>
+    <p><span class="cue">Fifteen people, fifteen programmes,</span> between the twenty-second of August and last night. Three each — this grid is the assignment: each row is one of us. Nursing, Law, Public Health, Accounting, Chemistry — nobody from this course. Ten by chat, two in person, three by call. Nine in English, four in Thai, two in Burmese.</p>
+    <p>Two numbers that shaped everything: <span class="cue">five never touched a laptop</span>, seven more started on the phone. And four of the fifteen were handling an identity document — a passport, a medical certificate, a Thai ID, a signed permission sheet.</p>
+    <p>We recorded role, pain and quote. No names, no student IDs, anywhere.</p>
+    <p class="hand">Hand-off: "Wanna has what they said."</p>
+  </aside>
+</section>
+
+<!-- 3 · what they said -->
+<section class="slide">
+  <div class="hd"><span>Evidence · twelve pains, by how many raised each unprompted</span><span class="who"><b>Wanna San</b> · AI Lead · 60 s</span></div>
+  <h1>What they said.</h1>
+  <div class="g2 fill">
+    <svg class="chart" viewBox="0 0 800 432" role="img" aria-label="Twelve pains ranked by the number of participants who raised each unprompted, out of fifteen. P7 and P6 lead with seven each.">
+      <line class="grid" x1="312" y1="8" x2="312" y2="404"/>
+      <line class="grid" x1="572" y1="8" x2="572" y2="404"/>
+      <text class="tick" x="312" y="424" text-anchor="middle">0</text>
+      <text class="tick" x="572" y="424" text-anchor="middle">5 of 15</text>
+      <g><title>P7 — S1, S2, S4, S7, S9, S10, S13</title><text class="lab" x="300" y="34" text-anchor="end">P7 · limit found only afterwards</text><path class="bar top" d="M312,18 H672 a4,4 0 0 1 4,4 V36 a4,4 0 0 1 -4,4 H312 Z"/><text class="val" x="686" y="34">7</text><text class="tag" x="704" y="34">unpredicted</text></g>
+      <g><title>P6 — S1, S3, S13, S14 · video S2, S10 · audio S9</title><text class="lab" x="300" y="67" text-anchor="end">P6 · 3–5 apps per submission</text><path class="bar" d="M312,51 H672 a4,4 0 0 1 4,4 V69 a4,4 0 0 1 -4,4 H312 Z"/><text class="val" x="686" y="67">7</text></g>
+      <g><title>P10 — S4, S7, S9, S11, S14, S15</title><text class="lab" x="300" y="100" text-anchor="end">P10 · phone first; every hop loses time</text><path class="bar" d="M312,84 H620 a4,4 0 0 1 4,4 V102 a4,4 0 0 1 -4,4 H312 Z"/><text class="val" x="634" y="100">6</text><text class="tag" x="652" y="100">unpredicted</text></g>
+      <g><title>P1 — S1, S3, S9, S13</title><text class="lab" x="300" y="133" text-anchor="end">P1 · the free tool rations the work</text><path class="bar" d="M312,117 H516 a4,4 0 0 1 4,4 V135 a4,4 0 0 1 -4,4 H312 Z"/><text class="val" x="530" y="133">4</text></g>
+      <g><title>P2 — S4, S7, S12, S14</title><text class="lab" x="300" y="166" text-anchor="end">P2 · ID document in someone else's custody</text><path class="bar" d="M312,150 H516 a4,4 0 0 1 4,4 V168 a4,4 0 0 1 -4,4 H312 Z"/><text class="val" x="530" y="166">4</text></g>
+      <g><title>P5 — S2, S10, S12, S15 (S6 weakly)</title><text class="lab" x="300" y="199" text-anchor="end">P5 · size cap discovered by failing</text><path class="bar" d="M312,183 H516 a4,4 0 0 1 4,4 V201 a4,4 0 0 1 -4,4 H312 Z"/><text class="val" x="530" y="199">4</text></g>
+      <g><title>P3 — S2, S9, S10</title><text class="lab" x="300" y="232" text-anchor="end">P3 · dorm Wi-Fi: the upload is the wait</text><path class="bar" d="M312,216 H464 a4,4 0 0 1 4,4 V234 a4,4 0 0 1 -4,4 H312 Z"/><text class="val" x="478" y="232">3</text></g>
+      <g><title>P11 — S2, S5, S15 — LMS-side, out of scope</title><text class="lab" x="300" y="265" text-anchor="end">P11 · the submission itself is uncertain</text><path class="bar out" d="M312,249 H464 a4,4 0 0 1 4,4 V267 a4,4 0 0 1 -4,4 H312 Z"/><text class="val" x="478" y="265">3</text><text class="tag" x="496" y="265">unpredicted · not ours</text></g>
+      <g><title>P12 — S3, S5, S8 — office rendering, out of scope</title><text class="lab" x="300" y="298" text-anchor="end">P12 · Word / Excel / Canva export breaks</text><path class="bar out" d="M312,282 H464 a4,4 0 0 1 4,4 V300 a4,4 0 0 1 -4,4 H312 Z"/><text class="val" x="478" y="298">3</text><text class="tag" x="496" y="298">unpredicted · not ours</text></g>
+      <g><title>P4 — S4, S13</title><text class="lab" x="300" y="331" text-anchor="end">P4 · HEIC refused, no explanation</text><path class="bar" d="M312,315 H412 a4,4 0 0 1 4,4 V333 a4,4 0 0 1 -4,4 H312 Z"/><text class="val" x="426" y="331">2</text></g>
+      <g><title>P8 — S8, S14</title><text class="lab" x="300" y="364" text-anchor="end">P8 · merge order wrong, seen after</text><path class="bar" d="M312,348 H412 a4,4 0 0 1 4,4 V366 a4,4 0 0 1 -4,4 H312 Z"/><text class="val" x="426" y="364">2</text><text class="tag" x="444" y="364">unpredicted</text></g>
+      <g><title>P9 — S1, S6</title><text class="lab" x="300" y="397" text-anchor="end">P9 · the chat app degrades the file</text><path class="bar" d="M312,381 H412 a4,4 0 0 1 4,4 V399 a4,4 0 0 1 -4,4 H312 Z"/><text class="val" x="426" y="397">2</text><text class="tag" x="444" y="397">unpredicted</text></g>
+    </svg>
+    <div class="callouts">
+      <div class="card"><div class="n">7 <span class="small">of 15</span></div><div class="t"><b>found out about the limit only after the work was done.</b> "Upload failed" — no reason. "File type not supported" — no fix. The pain no hypothesis predicted, and the one our estimate-before-the-run already answers.</div></div>
+      <div class="card"><div class="n">6</div><div class="t"><b>pains nobody predicted.</b> Six hypotheses became pains; six more pains arrived on their own, including the largest.</div></div>
+      <div class="card"><div class="n">2</div><div class="t"><b>recorded and not ours.</b> The LMS itself, and Word's export — written down as boundaries, not hidden.</div></div>
+      <p class="land" style="font-size:1em">The pain is rarely "I can't make a PDF." It's the workflow around it — and the limit you meet afterwards.</p>
+    </div>
+  </div>
+  <aside class="notes">
+    <h4>Wanna San · 60 s (hard cut 50 s)</h4>
+    <p>Twelve pains. Six we had predicted. <span class="cue">Six we hadn't</span> — and the biggest one is in that second group.</p>
+    <p><span class="cue">P7. Seven of fifteen found out about the limit only after the work was done.</span> "Upload failed" — no reason. "File type not supported" — no fix. A watermark after six pages were scanned. A rotation the lecturer noticed. Nobody was stopped by a PDF; they were stopped by finding out too late.</p>
+    <p>P6, also seven: one submission is a chain of three to five apps, and — their words — they want <em>one place</em>. P10, six: it starts on a phone and every hop to a laptop is where the time goes. Then the ones we predicted: the free tool running out at the deadline, four. Custody of an ID document, four. A size cap you discover by failing, four.</p>
+    <p><span class="cut">Hard cut: skip this sentence.</span> Two more we recorded and don't own — the LMS itself, and Word's export — so the boundary is written down, not hidden.</p>
+    <p><span class="cue">The pain is rarely "I can't make a PDF." It's the workflow around it, and the limit you meet afterwards.</span></p>
+    <p class="hand">Hand-off: "Thiha will take one of those all the way to the screen."</p>
+  </aside>
+</section>
+
+<!-- 4 · the chain -->
+<section class="slide">
+  <div class="hd"><span>Traceability · pain → requirement → backlog → screen</span><span class="who"><b>Thiha Lin</b> · Tech Lead · 50 s</span></div>
+  <h1>One thread, six documents.</h1>
+  <div class="chain">
+    <div class="node"><span class="k">S12 · Y4 · 2 Sep 2026</span><p class="quote" style="font-size:.95em">I asked them to delete the files afterward, but realistically I can't verify whether every temporary copy was removed.</p><span class="d">Scholarship form · transcript + Thai ID · scanned at a copy shop, compressed on a website</span></div>
+    <div class="arrow">→</div>
+    <div class="node p"><span class="k">pain</span><span class="t">P2</span><span class="d">custody of an identity document · 4 of 15</span></div>
+    <div class="arrow">→</div>
+    <div class="node"><span class="k">requirements · Must</span><span class="t">F1 no upload, ever</span><span class="t">F6 result on a visible countdown, <i>Delete now</i>, purge on close</span><span class="d">LR1 · LR5</span></div>
+    <div class="arrow">→</div>
+    <div class="node ok"><span class="k">backlog</span><span class="t">B1 done — 58 tools</span><span class="t">B6 done — vault.js</span><span class="d">test resolves the object URL after the purge: the bytes are <b>gone</b>, not unlisted</span></div>
+    <div class="arrow">→</div>
+    <div class="vault"><span class="k tiny" style="letter-spacing:.09em;text-transform:uppercase;font-weight:700">screen S3 · custody</span><div class="row"><span class="fn">transcript-scan.pdf</span><span class="small">1.9 MB</span></div><div class="cd">29:47<small>until this is gone</small></div><div class="row"><button class="btn acc" tabindex="-1" aria-disabled="true">Download</button><button class="btn dan" tabindex="-1" aria-disabled="true">Delete now</button></div><span class="pill good"><span class="dot"></span>Nothing was uploaded</span></div>
+  </div>
+  <p class="breath">Said in one breath: <b>a student cannot verify a deletion promise</b> (W1) → so no file may leave the device (W2, LR1) → so the result lives in memory with a countdown she can watch (W3, F6) → so screen S3 shows <b>29:47</b> and <b>Delete now</b> (W4). Every screen in the prototype traces backwards like this.</p>
+  <aside class="notes">
+    <h4>Thiha Lin · 50 s (hard cut 40 s)</h4>
+    <p>One thread, six documents. S12, fourth-year, scholarship application, second of September. Went to a copy shop to scan a transcript and a Thai ID. Their words: <span class="cue">"I asked them to delete the files afterward, but realistically I can't verify whether every temporary copy was removed."</span></p>
+    <p>That's pain P2 — four of fifteen said it. So requirement F1: transform with no upload. F6: the result lives in memory, on a countdown, with a delete-now button — so custody is something she can <em>watch</em>, not a promise she has to trust. Backlog B1 and B6, both done, vault.js, and a test that resolves the object URL after the purge to prove the bytes are gone — not just unlisted. And that's screen three: <span class="cue">29:47 until this is gone.</span></p>
+    <p>Pain, requirement, backlog, screen. Same thread, every document.</p>
+    <p class="hand">Hand-off: "Zaw has the part we got wrong."</p>
+  </aside>
+</section>
+
+<!-- 5 · what we got wrong -->
+<section class="slide">
+  <div class="hd"><span>Evidence · nine hypotheses, after fifteen conversations</span><span class="who"><b>Zaw Win Htut</b> · QA / Test · 50 s</span></div>
+  <h1>What we got wrong.</h1>
+  <div class="g2 fill">
+    <div class="score">
+      <span class="h">H1</span><span class="txt">Free tools ration the work; the cap lands at the deadline</span><span class="res p">→ P1 · 4 of 15</span>
+      <span class="h">H2</span><span class="txt">An ID document uploaded is in someone else's custody</span><span class="res p">→ P2 · 4 of 15</span>
+      <span class="h">H3</span><span class="txt">On campus Wi-Fi the upload is part of the wait</span><span class="res p">→ P3 · 3 — still untimed</span>
+      <span class="h">H4</span><span class="txt">iPhone HEIC photos get rejected</span><span class="res p">→ P4 · 2 of 15</span>
+      <span class="h">H5</span><span class="txt">Size caps force compression <s>against a specific number</s></span><span class="res p">→ P5 · 4 — number usually unknown</span>
+      <span class="h x">H6</span><span class="txt x"><b>Thai / Burmese scans are unsearchable, so quotes get retyped</b></span><span class="res z">0 of 15 → F8 parked</span>
+      <span class="h">H7</span><span class="txt">No one free site covers documents, video and audio</span><span class="res p">→ P6 · 7 of 15</span>
+      <span class="h x">H8</span><span class="txt x"><b>The same multi-step chore repeats every week</b></span><span class="res z">0 of 15, contradicted → F11 parked</span>
+      <span class="h">H9</span><span class="txt">"Free for students" is not a differentiator</span><span class="res c">confirmed · nobody switches for free</span>
+    </div>
+    <div class="callouts">
+      <div class="card"><div class="n">2</div><div class="t"><b>features we had already built. Nobody asked.</b> OCR in nineteen languages, saved Workflows. Not re-justified — <b>parked</b>: out of the requirement table, code untouched, decision written down for week six.</div></div>
+      <div class="card"><div class="n">0 <span class="small">of 15</span></div><div class="t"><b>named "free" as a reason to switch.</b> What they named: fewer steps in one place (S1, S13), no ads (S3), and local processing for identity documents (S4, S14).</div></div>
+      <p class="land" style="font-size:1em">Every requirement still in the spec traces to a stated pain — because we took two out.</p>
+    </div>
+  </div>
+  <aside class="notes">
+    <h4>Zaw Win Htut · 50 s (hard cut 40 s)</h4>
+    <p>We went in with nine hypotheses. <span class="cue">Six became pains. Two got zero.</span></p>
+    <p>H6: Thai and Burmese OCR. We built it — nineteen languages. Not one of fifteen mentioned searching a scan or retyping a quote. H8: the same chore every week. Zero — and one person contradicted it: <em>"something I only use around deadlines."</em></p>
+    <p>So two features we had already shipped had nobody behind them. We didn't re-justify them. We <span class="cue">parked</span> them: out of the requirement table, code untouched, decision written down for next month. Every requirement still in the spec traces to a stated pain — because we took two out.</p>
+    <p>And H9 survived: <span class="cue">nobody in fifteen named "free" as a reason to switch.</span> What they named was fewer steps, no ads, and — for identity documents — local processing.</p>
+    <p class="hand">Hand-off: "Thiha — Wi-Fi off."</p>
+  </aside>
+</section>
+
+<!-- 6 · demo -->
+<section class="slide">
+  <div class="hd"><span>Live · the core workflow, offline</span><span class="who"><b>Thiha Lin</b> · 45 s · never cut</span></div>
+  <h1>It runs with the Wi-Fi off.</h1>
+  <div class="g2 even fill">
+    <div style="display:flex;flex-direction:column;gap:.9em">
+      <ol class="steps">
+        <li><b>Show the airplane-mode icon.</b> "This laptop has no connection."</li>
+        <li><b>Compress PDF</b> is already open with a scanned 9 MB PDF — "the size S15 got refused with last week."</li>
+        <li>Type the cap: <b>5</b> MB. Read the estimate: <b>≈ 4.6 MB, before anything runs.</b> "That's F5 — and that's P7 answered."</li>
+        <li><b>Run. Download.</b> Then press <b>Delete now</b> — "same purge the countdown does."</li>
+        <li>Close: <b>"Nothing left this machine, because nothing could. There is no upload endpoint in the codebase."</b></li>
+      </ol>
+      <div class="warnbox"><b>Before the room, while online:</b> open Compress PDF and drop the file on it, <i>then</i> switch to airplane mode. The tool module is lazy-loaded; loaded once, it runs offline. Offline first = a spinner, not a demo. If anything fails on stage, show the mock-up on the right and say the live product is at thiha-lynn.github.io/unilab. Do not debug in front of the room.</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:.6em">
+      <div class="work">
+        <div class="prev"><div class="page"></div><span class="small">scan-chem-hw.pdf · 4 pages · <b>9.0 MB</b></span></div>
+        <div class="opts">
+          <label>target size</label>
+          <div class="field"><span>5</span><span class="small">MB</span></div>
+          <div class="est">Estimate <b>≈ 4.6 MB</b><br><span class="small">148 dpi · text stays sharp</span></div>
+          <span class="net">No download needed for this tool</span>
+          <button class="btn acc" tabindex="-1" aria-disabled="true">Compress PDF</button>
+        </div>
+      </div>
+      <span class="tiny">Prototype screen S2 (mock, from design-system.md tokens only) — the estimate sits above the button, before the run. R1: one primary action. R2: 16 px input on phones.</span>
+    </div>
+  </div>
+  <aside class="notes">
+    <h4>Thiha Lin · 45 s — the demo. Never cut.</h4>
+    <p>This laptop is in airplane mode. <em>(show the icon)</em> This is a scanned PDF, nine megabytes — the same size S15 got refused with last week. I type the cap, <span class="cue">five</span>. The estimate says four point six <em>before</em> I run anything — that's F5, and that's P7 answered. Run. Download. And <span class="cue">Delete now</span> — same purge the countdown does.</p>
+    <p>Nothing left this machine, because nothing could. There is no upload endpoint in the codebase.</p>
+    <p><span class="cut">If the demo fails:</span> switch to this slide's mock-up and say "the live product is at thiha-lynn dot github dot io slash unilab — the screens are the same." Do not debug on stage.</p>
+    <p class="hand">Hand-off: "Zaw — the law, in one line."</p>
+  </aside>
+</section>
+
+<!-- 7 · compliance -->
+<section class="slide">
+  <div class="hd"><span>Compliance · rule.md rewritten against this product (W2 → LR1–LR8)</span><span class="who"><b>Zaw Win Htut</b> · 25 s</span></div>
+  <h1>Compliance is architecture.</h1>
+  <div class="g2 fill">
+    <div class="lr">
+      <b>LR1</b><span>No user file content leaves the device; no upload endpoint exists — PDPA minimisation</span>
+      <b>LR2</b><span>No account, email, name or phone for any tool</span>
+      <b>LR3</b><span>Network fetches carry program code or model data only, disclosed before they start — 2 of 2 tools verified</span>
+      <b>LR4</b><span>No "files never touch a server" claim unless the architecture makes it true — it does, so the privacy page reads its numbers from the code</span>
+      <b>LR5</b><span>Results in memory only, expire unaided, erasable on demand, unreachable once dropped — <b>proven by test</b></span>
+      <b>LR6</b><span>Redaction, blurring and EXIF stripping remove content, never cover it — EXIF proven; redaction test still to write (B15)</span>
+      <b>LR7</b><span>No interview PII into an AI tool or the public repo — role, pain, quote only, kept for all 15</span>
+      <b>LR8</b><span>No filename or file content reaches the console in production</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:1em">
+      <p class="big">A duty you have discharged can fail. A duty you never incurred cannot.</p>
+      <div class="dis">
+        <div><s>CCA §26 access log, 90 days, a launch blocker</s><span>We store nothing for anyone. No server, no session, no IP — <b>there is no event to log.</b></span></div>
+        <div><s>Consent banner, ad-script gating, DPA</s><span>No ads, no analytics, no third party collects anything through the page.</span></div>
+        <div><s>ETA §9/26 consent records</s><span>Nothing is transmitted, so nothing creates the obligation.</span></div>
+      </div>
+      <p class="small">Written conditionally, not deleted: <i>if the system ever stores a file for a user, this duty returns in full.</i> The class draft that assumed a server is preserved verbatim beside the rewrite.</p>
+    </div>
+  </div>
+  <aside class="notes">
+    <h4>Zaw Win Htut · 25 s (hard cut: only the bold sentence, 10 s)</h4>
+    <p>Our W2 rule.md was rewritten against this product. Eight legal requirements, PDPA, Computer Crime Act, ETA. <span class="cue">A duty you have discharged can fail. A duty you never incurred cannot.</span> No upload, so no data controller from first byte; no server, so no section-26 log — and if a server is ever added, the rule says those duties come back in full.</p>
+    <p class="hand">Hand-off: none — Myo closes.</p>
+  </aside>
+</section>
+
+<!-- 8 · what is open -->
+<section class="slide">
+  <div class="hd"><span>Honestly open · as of 9 Sep 2026</span><span class="who"><b>Myo Zin Thant</b> · 25 s</span></div>
+  <h1>What is still open.</h1>
+  <div class="open">
+    <div class="card"><span class="k">B17 · topic</span><span class="t">UniLab is not on the 19 Aug assigned list</span><span class="d">The course overview says pick your own; the slide lists five. The confirmation request is written and goes to you today — with a mapped fallback if the answer is "take one of the five".</span></div>
+    <div class="card"><span class="k">P3 · a number</span><span class="t">Campus Wi-Fi round trip: perception, not yet a measurement</span><span class="d">Three participants said the upload is the wait. UniLab's half is measured — zero network attempts across five exit APIs. The competitor's half needs campus Wi-Fi, a 10 MB fixture and three runs.</span></div>
+    <div class="card"><span class="k">B11 · the central claim</span><span class="t">"No file bytes leave the device" — tested on one chain, not all 58</span><span class="d">Statically clean across the codebase; dynamically proven on compress → images-to-PDF. The per-tool sweep is the first BUILD-phase test.</span></div>
+    <div class="card"><span class="k">Q5 · Q6 · parked</span><span class="t">OCR and saved Workflows — re-admit or cut, in week six</span><span class="d">Zero of fifteen raised either. Three options each are written in the spec; the OCR branch gets asked directly in the next five interviews.</span></div>
+  </div>
+  <p class="close"><span>15</span> interviewed · <span>12</span> pains · every requirement traced · <span>2</span> parked, in the open.</p>
+  <aside class="notes">
+    <h4>Myo Zin Thant · 25 s (hard cut 20 s)</h4>
+    <p>Open, honestly: our topic isn't on the nineteenth-of-August list — the confirmation request is written and going to you today. The competitor's upload time on campus Wi-Fi is still a perception, not a number. The zero-upload claim is tested on one tool chain, not yet all fifty-eight. And the two parked features are a decision we owe ourselves in week six.</p>
+    <p><span class="cue">Fifteen interviewed. Twelve pains. Every requirement traced. Two parked, in the open.</span> Questions.</p>
+  </aside>
+</section>
+
+<!-- 9 · questions -->
+<section class="slide">
+  <div class="hd"><span>Company 18 · DIGITAL IMPOSTERS PVT. CO., LTD.</span><span class="who">all five</span></div>
+  <div class="fill" style="display:flex;flex-direction:column;justify-content:center;gap:1.2em">
+    <h1 style="font-size:3.4em">Questions.</h1>
+    <p class="lead">github.com/Thiha-Lynn/unilab · start at <span class="mono">.docs/01-requirements/TRACEABILITY.md</span> · every participant at <span class="mono">02-interviews/results.md</span></p>
+    <div class="qs">
+      <div><b>"Tell me about one of them."</b> — <i>whoever ran it</i>: role, date, task, the pain in their words, the quote. Zaw S1 S6 S11 · Myo S2 S7 S12 · Wanna S3 S8 S13 · Swan S4 S9 S14 · Thiha S5 S10 S15</div>
+      <div><b>"Why isn't UniLab on the topic list?"</b> — <i>Myo</i>: overview says pick your own; confirming today; fallback mapped to Internship Management System, rule.md and the tests transfer</div>
+      <div><b>"Where are the names?"</b> — <i>Zaw</i>: nowhere, by rule LR7. Public repo. The code-to-person map was never written down</div>
+      <div><b>"Fifty-eight tools in a month?"</b> — <i>Myo</i>: fifty-eight settings of one workflow; the core feature is what month two must ship end to end</div>
+      <div><b>"Where's the OCR?"</b> — <i>Zaw</i>: shipped, parked. Zero of fifteen asked. Spec §2.1, Q5</div>
+      <div><b>"Every requirement traces to a pain?"</b> — <i>Thiha</i>: every F, NFR and LR — the spec has the column. Two didn't, so they're out</div>
+      <div><b>"Biggest surprise?"</b> — <i>Wanna</i>: P7. Nobody was stopped by a PDF; seven were stopped by finding out too late</div>
+      <div><b>"Is free your pitch?"</b> — <i>Myo</i>: no. One place, fewer steps; custody for identity documents</div>
+    </div>
+  </div>
+  <aside class="notes">
+    <h4>All five</h4>
+    <p>Take the question, hand it to the owner on the slide. If you don't know: "that's in the log — I'll find it," and open <span class="mono">.docs/05-log/20260908-log.md</span>, Addendum 3.</p>
+  </aside>
+</section>
+
+</div>
+
+<div id="np"></div>
+<div id="bar"></div>
+<div class="tb"><button id="prev" type="button" aria-label="Previous slide">‹</button><button id="next" type="button" aria-label="Next slide">›</button><button id="nb" type="button">Notes <kbd>N</kbd></button><button id="fb" type="button">Scroll <kbd>P</kbd></button><span id="cnt"></span></div>
+
+<script>
+(function(){
+  var slides=[].slice.call(document.querySelectorAll('.slide')), i=0;
+  var np=document.getElementById('np'), bar=document.getElementById('bar'), cnt=document.getElementById('cnt');
+  function show(n){
+    i=Math.max(0,Math.min(slides.length-1,n));
+    slides.forEach(function(s,k){s.classList.toggle('on',k===i)});
+    bar.style.width=((i+1)/slides.length*100)+'%';
+    cnt.textContent=(i+1)+' / '+slides.length;
+    var nt=slides[i].querySelector('.notes'); np.innerHTML=nt?nt.innerHTML:'';
+    try{history.replaceState(null,'','#'+i)}catch(e){}
+    if(!document.body.classList.contains('flow')) window.scrollTo(0,0);
+  }
+  function flowMode(on){document.body.classList.toggle('flow',on); if(on){slides.forEach(function(s){s.classList.add('on')})} else {show(i)}}
+  var mq=window.matchMedia('(max-width: 899px)');
+  function sync(){flowMode(mq.matches||document.body.getAttribute('data-flow')==='1')}
+  mq.addEventListener?mq.addEventListener('change',sync):mq.addListener(sync);
+  document.addEventListener('keydown',function(e){
+    if(e.metaKey||e.ctrlKey||e.altKey) return;
+    var k=e.key;
+    if(k==='ArrowRight'||k===' '||k==='PageDown'){e.preventDefault();show(i+1)}
+    else if(k==='ArrowLeft'||k==='PageUp'){e.preventDefault();show(i-1)}
+    else if(k==='Home'){show(0)} else if(k==='End'){show(slides.length-1)}
+    else if(k==='n'||k==='N'){document.body.classList.toggle('notes')}
+    else if(k==='p'||k==='P'){document.body.setAttribute('data-flow',document.body.getAttribute('data-flow')==='1'?'0':'1');sync()}
+  });
+  document.getElementById('prev').onclick=function(){show(i-1)};
+  document.getElementById('next').onclick=function(){show(i+1)};
+  document.getElementById('nb').onclick=function(){document.body.classList.toggle('notes')};
+  document.getElementById('fb').onclick=function(){document.body.setAttribute('data-flow',document.body.getAttribute('data-flow')==='1'?'0':'1');sync()};
+  document.getElementById('stage').addEventListener('click',function(e){
+    if(document.body.classList.contains('flow')) return;
+    if(e.target.closest('a,button,svg')) return;
+    var r=this.getBoundingClientRect(); show((e.clientX-r.left)<r.width*0.22?i-1:i+1);
+  });
+  var h=parseInt((location.hash||'#0').slice(1),10); if(isNaN(h)) h=0;
+  show(h); sync();
+})();
+</script>
+</body>
+</html>

@@ -27,7 +27,7 @@ is why it is a gate blocker rather than a footnote.
 
 | # | Guardrail | UniLab |
 |---|---|---|
-| 1 | **Real users ≥ 15** (≈3 per member, no classmates, no AI personas) | Interview plan assigns 3 per member; **0 conducted so far** (B16) — stated honestly, not claimed |
+| 1 | **Real users ≥ 15** (≈3 per member, no classmates, no AI personas) | **15 conducted, 22 Aug – 8 Sep 2026**, three per member, 15 programmes, none on this course (B16 closed) — `02-interviews/results.md` |
 | 2 | **Buildable in 1 month — exactly 1 core workflow** | One workflow: *select a file → transform it on this device → download*. All 58 tools are settings of that one workflow, not 58 workflows |
 | 3 | **A measurable metric** | Files leaving the device per task (before: every file to a third-party server → after: zero), plus time-to-finished-file and submission rejections |
 | 4 | **PDPA-safe** | Compliance is architectural: no upload path exists, so no personal data is collected. `rule.md` derives LR1–LR8 from PDPA, CCA §26 and ETA §9/26/28 |

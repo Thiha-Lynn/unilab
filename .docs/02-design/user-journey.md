@@ -2,7 +2,7 @@
 
 **Course:** 1305493 · W4 · 2 Sep 2026
 **Core feature:** ⭐ Transform a file on this device ([`feature-list.md`](feature-list.md))
-**Traces to:** F1, F3, F5, F6 · H5, H2 · B1, B3, B5, B6
+**Traces to:** F1, F3, F5, F6, F15 · P5, P2, P7, P10 · B1, B3, B5, B6, B35
 
 ---
 
@@ -16,8 +16,10 @@ Why this instance: it is the shortest path that exercises the whole core feature
 Every other tool is the same five steps with different options.
 
 **Mobile-first.** The phone is the primary camera and often the primary computer for this user
-(spec §1.1), so the journey is written for a 390 px screen and the desktop layout is the
-widening of it, not the other way round.
+(spec §1.1) — 12 of the 15 interviewed started the task on one and 5 never left it (P10) — so
+the journey is written for a 390 px screen and the desktop layout is the widening of it, not the
+other way round. The instance chosen is also the most-evidenced path in the sample: a size cap
+discovered by failing (P5, 4 of 15) and a limit found only after the work (P7, 7 of 15).
 
 ---
 
