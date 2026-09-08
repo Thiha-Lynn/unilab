@@ -31,12 +31,20 @@ actor invented for a diagram is the single most common template-copy tell.
 - **D2** — an actor drawn as a box rather than a stick figure · an association carrying an
   arrowhead · `«include»` on behaviour that can be skipped · `«extend»` on behaviour that always
   runs · a generalization without a hollow triangle at the *general* case.
-- **D4** — a labelled "Start"/"End" box instead of the ● / ◉ nodes · **a diamond that is not
-  either a decision (1 edge in, 2 guarded edges out) or a merge (2 edges in, 1 out)** · a
-  decision whose outgoing edges are not both guarded in `[brackets]`.
+- **D4** — a labelled "Start"/"End" box instead of the ● / ◉ nodes · an initial and final node
+  that render identically, so a reader cannot tell the start from the end · **any diamond that
+  is not a decision** (1 edge in, 2 edges out, both guarded in `[brackets]`) · a decision whose
+  question is not legible.
 
-A 1-in / 1-out diamond is the specific defect to hunt for: it renders as a decision that was
-never answered, and it is invisible unless you count edges.
+**Every diamond in D4 must ask a question.** Merge diamonds are not used: where flows rejoin,
+the edges enter the node directly, which UML treats as an implicit merge. A bare diamond that
+asks nothing — whether it is a 1-in/1-out node or a legitimate 2-in merge — reads to a marker as
+a decision nobody answered, and that was the first thing a reader complained about.
+
+Two defects here are invisible to a parse and need the rendered image:
+- an edge label long enough that Mermaid draws the edge **through its own text** (keep guards to
+  `[yes]` / `[no]` and put the question inside the diamond);
+- a subgraph title clipped by a node that overlaps it.
 
 **C2 — Journey steps in D4.** Every numbered step in `user-journey.md` must appear in D4, **in
 the same order**. A step in one and not the other is a mismatch, whichever way round.

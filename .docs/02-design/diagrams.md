@@ -195,85 +195,61 @@ One scenario, start to end: **compress a scanned PDF to the 5 MB cap** — the f
 [`user-journey.md`](user-journey.md), in order.
 
 ```mermaid
-stateDiagram-v2
-    direction TB
+flowchart TB
+    START(( ))
+    S1["1. Open UniLab,<br/>tap Compress PDF"]
+    S2["2. Pick the scanned PDF<br/>from the device"]
+    READ["Read the file bytes in-page<br/>— no upload"]
+    S3["3. Enter the target size<br/>— 5 MB"]
+    EST["Render live preview +<br/>estimated output size"]
+    CAP{"Is the estimate<br/>under 5 MB?"}
+    S4["4. Run pdf.js on-device,<br/>yielding every ~24 ms"]
+    STORE["Store the result in the vault<br/>— 30:00 countdown starts"]
+    S5["5. Download the result"]
+    DISP{"Delete it now?"}
+    DEL["Revoke the object URL,<br/>drop it from memory"]
+    EXP["Purge on pagehide, or<br/>when the countdown ends"]
+    FINAL(("●"))
 
-    %% Two decisions and two merges. Declared before use so mermaid renders every
-    %% one as a UML diamond rather than turning a forward reference into a box.
-    state retarget  <<choice>>
-    state under_cap <<choice>>
-    state disposal  <<choice>>
-    state rejoin    <<choice>>
+    START --> S1 --> S2 --> READ --> S3 --> EST --> CAP
+    CAP -- "[no]" --> S3
+    CAP -- "[yes]" --> S4 --> STORE --> S5 --> DISP
+    DISP -- "[yes]" --> DEL --> FINAL
+    DISP -- "[no]" --> EXP --> FINAL
 
-    OpenTool  : 1. Open UniLab, tap Compress PDF
-    PickFile  : 2. Pick the scanned PDF from the device
-    ReadLocal : Read the file bytes in-page — no upload
-    SetTarget : 3. Enter the target size — 5 MB
-    Estimate  : Render live preview + estimated output size
-    Compress  : 4. Run pdf.js on-device, yielding every ~24 ms
-    Store     : Store the result in the vault — 30:00 countdown starts
-    Download  : 5. Download the result
-    DeleteNow : Revoke the object URL, drop it from memory
-    Expire    : Purge on pagehide, or when the countdown ends
-
-    [*] --> OpenTool
-    OpenTool --> PickFile
-    PickFile --> ReadLocal
-
-    ReadLocal --> retarget
-    retarget --> SetTarget
-    SetTarget --> Estimate
-
-    Estimate --> under_cap : under 5 MB?
-    under_cap --> Compress : [yes]
-    under_cap --> retarget : [no]
-
-    Compress --> Store
-    Store --> Download
-
-    Download --> disposal : delete it now?
-    disposal --> DeleteNow : [yes]
-    disposal --> Expire : [no]
-
-    DeleteNow --> rejoin
-    Expire --> rejoin
-    rejoin --> [*]
+    style START fill:#171c26,stroke:#171c26
+    style FINAL fill:#ffffff,stroke:#171c26,stroke-width:2.5px,color:#171c26,font-size:22px
 ```
 
-### Every diamond, and what it is
+### Every diamond is a decision
 
-A diamond in UML is one of exactly two things, and each has a shape rule. **A diamond with one
-line in and one line out is neither, and is a defect** — the previous version of this diagram had
-one (`merge_run`), which is why it read as a decision that had never been answered.
+| Diamond | In | Out | Reads as |
+|---|---|---|---|
+| `Is the estimate under 5 MB?` | 1 | **2** | `[yes]` runs the compression · `[no]` returns to step 3 to change the target |
+| `Delete it now?` | 1 | **2** | `[yes]` is the student pressing **Delete now** · `[no]` is the countdown ending or the tab closing |
 
-| Diamond | Kind | In | Out | Reads as |
-|---|---|---|---|---|
-| `under_cap` | **decision** | 1 | **2** | *under 5 MB?* — `[yes]` runs the compression · `[no]` returns to step 3 to change the target |
-| `disposal` | **decision** | 1 | **2** | *delete it now?* — `[yes]` is the student pressing Delete now · `[no]` is the countdown ending or the tab closing |
-| `retarget` | **merge** | **2** | 1 | where the retry loop rejoins the main flow |
-| `rejoin` | **merge** | **2** | 1 | where both disposal paths rejoin before the end |
+**There are no merge diamonds, and that is deliberate.** Where two flows rejoin — at step 3 and
+at the final node — the edges simply enter the node. UML treats **multiple incoming edges on a
+node as an implicit merge**, so an explicit merge diamond adds a shape without adding meaning.
 
-Every decision has **two labelled outputs**; every merge has **two inputs**. The question is on
-the edge entering the diamond, the answers are on the edges leaving it, and every guard is in
-`[brackets]` as the deck requires.
+An earlier draft used explicit merge nodes and claimed they were *required* for the UML to be
+legal. **That claim was wrong** and has been removed. The merge node is optional, and dropping it
+is what lets a reader apply one rule instead of two: *a diamond asks a question and has two
+guarded exits.* Bare diamonds that ask nothing were the original complaint against this diagram,
+and they are now gone entirely.
 
-**The guards are deliberately just `[yes]` and `[no]`.** Mermaid places an edge label at the
-midpoint of its edge and then draws the edge *through* it, so a long guard on the loop-back edge
-came out with the line running between its own words. What each answer means is in the table
-above, where it is readable.
-
-**Notation.** `[*]` renders as the UML initial node (●) at the top and the final node (◉) at the
-bottom — no labelled "Start"/"End" box anywhere.
+**Notation.** The question sits **inside** the diamond, so each exit needs only `[yes]` or `[no]`
+— short enough that Mermaid cannot draw the edge through its own label, which is what happened
+when the guards carried the full condition. `●` is the UML initial node and `◉` the final node;
+there is no labelled "Start"/"End" box anywhere.
 
 ### What the two decisions are there to prove
 
-**`under_cap` loops backwards, and that is the whole point of F5.** `[no]` returns to the
-`retarget` merge and back into step 3, so the student changes the target and re-reads the
-estimate. They never spend a run to discover the file is still too big. The merge is what makes
-this legal UML: without it, the `[no]` edge would re-enter a step that already has an incoming
-flow, and the diagram would not say where the two paths join.
+**The size decision loops backwards, and that is the whole point of F5.** `[no]` returns
+straight to step 3, so the student changes the target and re-reads the estimate. They never spend
+a run to discover the file is still too big.
 
-**`disposal` has no output that keeps the file.** `[yes]` revokes the object URL immediately;
+**The disposal decision has no output that keeps the file.** `[yes]` revokes the object URL immediately;
 `[no]` lets the countdown or `pagehide` purge it. Both edges lead to destruction, then to the
 final node. That is F6 and LR5 drawn as a shape rather than asserted in prose — a reader can
 check the claim by looking for an exit that keeps the result, and finding none.
@@ -289,7 +265,7 @@ check the claim by looking for an exit that keeps the result, and finding none.
 | Steps match `user-journey.md` order | — | ✅ core use case | — | ✅ 1–5 |
 | Components exist in `src/` | — | — | ✅ | ✅ pdf.js, vault |
 | Tech stack matches the spec | — | — | ✅ | ✅ |
-| **UML notation is correct** | ✅ one box, actors outside | ✅ stick figures · ovals in the boundary · associations with no arrowhead · hollow-triangle generalization · dashed open-arrow stereotypes | ✅ layers, not code | ✅ ● initial / ◉ final · every diamond is a 1→2 decision or a 2→1 merge · guards in `[brackets]` |
+| **UML notation is correct** | ✅ one box, actors outside | ✅ stick figures · ovals in the boundary · associations with no arrowhead · hollow-triangle generalization · dashed open-arrow stereotypes | ✅ layers, not code | ✅ ● initial / ◉ final · every diamond is a decision with two guarded exits · guards in `[brackets]` |
 
 ### Notation audit, 7 Sep 2026
 
@@ -300,7 +276,9 @@ Both diagrams the W4 deck grades on notation were rebuilt:
 | **D2 actors were rounded boxes.** Mermaid `flowchart` has no actor glyph, so U1–U3 rendered as stadium shapes — not UML | Stick figures, drawn in SVG |
 | **D2 associations carried arrowheads** (`---` renders a line, but the tool-to-core links used `-.->`) | Associations are plain solid lines with **no arrowhead** |
 | **D2 used `«extend»` six times** for the tools. `«extend»` means *optional, conditional* — but compressing a PDF *is* a transform, not an optional addition to one | **Generalization** (hollow triangle): each tool *is a kind of* the core use case. `«extend»` now appears once, where the behaviour really is optional |
-| **D4 had a 1-in / 1-out diamond** (`merge_run`) — neither a decision nor a merge, and it read as an unanswered question | Removed. The retry loop rejoins at `retarget`, a real 2-in merge |
+| **D4 had a 1-in / 1-out diamond** (`merge_run`) — neither a decision nor a merge, and it read as an unanswered question | Removed |
+| **D4 still drew merge diamonds** — bare diamonds that ask nothing, which is what made the original complaint right | Removed. Flows rejoin by entering the node directly, UML's implicit merge. **Every remaining diamond is a decision** |
+| **D4's guards were long enough that Mermaid drew the edge through them** | Question moved *inside* the diamond; exits are just `[yes]` / `[no]` |
 | **D1 drew the upload to the LMS as leaving the device storage** — a data store does not perform an upload | The dashed arrow now starts at **U1**, the actor who actually does it, labelled *UniLab is not involved* |
 | **D1 externals were untyped** — nothing on the diagram said which box was an actor and which a third-party system | Every external carries `«actor»` or `«external»`; the out-of-scope LMS says so on its face |
 | **D3 pointed two arrows at a subgraph** rather than at a component, so the call was ambiguous | `tool-shell → ops → pdf-utils / media-utils / audio-fx → vault`, component to component |
