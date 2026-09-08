@@ -58,7 +58,7 @@
 <tr><td>O6</td><td>Hold finished files in memory only, on a visible countdown, with delete-now and purge on tab close</td><td>30-minute TTL; nothing written to disk</td></tr>
 <tr><td>O7</td><td>Let a student save a repeated multi-step chore as a workflow and batch files through it</td><td>Workflows can be saved, exported, re-run</td></tr>
 <tr><td>O8</td><td>Keep working with no network connection once installed</td><td>Installable PWA passes an offline test</td></tr>
-<tr><td>O9</td><td>Validate the problem with at least 15 real MFU students</td><td>Every requirement traces to a stated pain</td></tr>
+<tr><td>O9</td><td>Validate the problem with at least 15 real users &mdash; anyone who has the problem and can be reached to talk, on or off campus (widened 7 Sep 2026; not MFU-only)</td><td>Every requirement traces to a stated pain</td></tr>
 </table>
 
 <h1>🧭 4. Scope</h1>
@@ -169,15 +169,15 @@
 <p>Each criterion below is measurable, and the current measured value is stated honestly &mdash; including where the product currently fails.</p>
 <table style="border-collapse:collapse;width:100%" cellpadding="7" border="1" bordercolor="#e4e7ee">
 <tr style="background-color:#f6f7fb"><td width="34%"><strong>Criterion</strong></td><td width="24%"><strong>Target</strong></td><td width="26%"><strong>Current</strong></td><td width="16%"><strong>Status</strong></td></tr>
-<tr><td>No file content leaves the device</td><td>0 bytes in any request body, across all 58 tools</td><td>Believed true; never tested</td><td style="background-color:#fff7ed;color:#d97706"><strong>Untested</strong></td></tr>
+<tr><td>No file content leaves the device</td><td>0 bytes in any request body, across all 58 tools</td><td>Partially run 8 Sep 2026: 0 of 6 <code>fetch</code> sites in <code>src/</code> carry a body (covers all 58); one live 2-step transform made 0 attempts across fetch / XHR / sendBeacon / WebSocket / WebRTC</td><td style="background-color:#e4f6ef;color:#1d9e77"><strong>Part-measured</strong></td></tr>
 <tr><td>Results are unrecoverable after the countdown</td><td>Memory only, 30-min TTL, purge on tab close</td><td>Implemented, and proven by a test that resolves the object URL</td><td style="background-color:#e4f6ef;color:#1d9e77"><strong>Met</strong></td></tr>
 <tr><td>Offline install completes on campus Wi-Fi</td><td>&le; 8 MB core precache</td><td>31 MB &mdash; 23 MB is one model file</td><td style="background-color:#fee2e2;color:#d64545"><strong>Failing</strong></td></tr>
 <tr><td>A tool becomes usable quickly</td><td>Interactive &lt; 2 s on a mid-range laptop</td><td>No reference device agreed</td><td style="background-color:#fff7ed;color:#d97706"><strong>Proposed</strong></td></tr>
-<tr><td>Network use is disclosed before it happens</td><td>100% of network-using tools</td><td>2 tools qualify; OCR already discloses</td><td style="background-color:#fff7ed;color:#d97706"><strong>Partial</strong></td></tr>
+<tr><td>Network use is disclosed before it happens</td><td>100% of network-using tools</td><td>2 of 2 disclose (7 Sep 2026, B14): OCR states engine + per-language size in-tool; Remove Background names the model size on the download button</td><td style="background-color:#e4f6ef;color:#1d9e77"><strong>Met</strong></td></tr>
 <tr><td>A long job never freezes the tab</td><td>No main-thread block &gt; 50 ms; a hidden tab still yields &ge;1&times;/second</td><td>Time-based yielding implemented and code-reviewed &mdash; not yet profiled</td><td style="background-color:#fff7ed;color:#d97706"><strong>Unprofiled</strong></td></tr>
 <tr><td>Text counts correctly in Thai and Burmese</td><td>0 miscounts over &ge;20 strings where a code-point count disagrees</td><td>23-fixture test passing</td><td style="background-color:#e4f6ef;color:#1d9e77"><strong>Proven</strong></td></tr>
 <tr><td>Redaction actually removes text</td><td>Redacted string absent from output</td><td>QA test not yet written</td><td style="background-color:#fff7ed;color:#d97706"><strong>To do</strong></td></tr>
-<tr><td>Problem validated with real users</td><td>&ge; 15 MFU students interviewed</td><td>0 interviews conducted</td><td style="background-color:#fee2e2;color:#d64545"><strong>Blocker</strong></td></tr>
+<tr><td>Problem validated with real users</td><td>&ge; 15 real users interviewed (not MFU-only)</td><td>0 interviews conducted</td><td style="background-color:#fee2e2;color:#d64545"><strong>Blocker</strong></td></tr>
 <tr><td>A student finishes the core workflow unaided</td><td>Pick &rarr; set target &rarr; run &rarr; download</td><td>To be tested in Phase 9</td><td style="background-color:#fff7ed;color:#d97706"><strong>Planned</strong></td></tr>
 </table>
 <table style="border-collapse:collapse;width:100%" cellpadding="10">
@@ -188,9 +188,9 @@
 <p>The project is structured into 10 phases across the semester, grouped into the four course stages.</p>
 <table style="border-collapse:collapse;width:100%" cellpadding="7" border="1" bordercolor="#e4e7ee">
 <tr style="background-color:#f6f7fb"><td width="12%"><strong>Stage</strong></td><td width="22%"><strong>Phase</strong></td><td width="52%"><strong>Details</strong></td><td width="14%"><strong>Timeline</strong></td></tr>
-<tr><td style="background-color:#eeeefc" rowspan="4"><strong>🔍 DISCOVER</strong></td><td>Phase 1: Problem Validation</td><td>Interview 15+ MFU students about how they handle files under deadline; convert hypotheses into pains a real user described</td><td>Weeks 1&ndash;5</td></tr>
+<tr><td style="background-color:#eeeefc" rowspan="4"><strong>🔍 DISCOVER</strong></td><td>Phase 1: Problem Validation</td><td>Interview 15+ real users, MFU and beyond &mdash; students about how they handle files under deadline; convert hypotheses into pains a real user described</td><td>Weeks 1&ndash;5</td></tr>
 <tr><td>Phase 2: Requirements</td><td>Write the spec, the backlog and the legal spec; trace every backlog row to a requirement and a pain</td><td>Weeks 3&ndash;5</td></tr>
-<tr><td>Phase 3: UX/UI Design</td><td>Feature list, user journey, design system, clickable prototype and the four required diagrams</td><td>Weeks 4&ndash;5</td></tr>
+<tr><td>Phase 3: UX/UI Design</td><td>Feature list, user journey, design system, static lo-fi prototype and the four required diagrams</td><td>Weeks 4&ndash;5</td></tr>
 <tr><td><strong>Phase 4: User Validation Gate</strong></td><td>Submit the charter, proposal, backlog and design pack (<strong>8 Sep 2026</strong>); reviewed in class 9 Sep</td><td>Week 5</td></tr>
 <tr><td style="background-color:#e4f6ef" rowspan="2"><strong>🔨 BUILD</strong></td><td>Phase 5: Core Development</td><td>Harden the core workflow end to end: uploader, live preview, on-device transform, download and the result vault</td><td>Weeks 6&ndash;8</td></tr>
 <tr><td><strong>Phase 6: Alpha Demo Day</strong></td><td>Demonstrate the one core workflow running fully on-device (<strong>7 Oct 2026</strong>)</td><td>Week 8</td></tr>
@@ -220,7 +220,7 @@
 <li><strong>Behaviour:</strong> students will accept doing the work on their own device in exchange for never uploading the file.</li>
 <li><strong>Platform:</strong> students have a reasonably current browser; Chrome, Edge and Firefox are fully supported and Safari partially.</li>
 <li><strong>Device:</strong> a phone is the primary camera and often the primary computer for the target user.</li>
-<li><strong>Access:</strong> MFU students, including the Burmese-speaking cohort, are reachable on campus for interviews and real-user testing.</li>
+<li><strong>Access:</strong> real users are reachable &mdash; MFU students including the Burmese-speaking cohort on campus, and, per the instructor's <code>M1-choosing-your-problem</code> guide, anyone with the problem reachable by call, chat, DM or video call. <em>Corrected 7 Sep 2026: the original &ldquo;on campus&rdquo; framing was a self-imposed limit, not a course rule.</em></li>
 <li><strong>Environment:</strong> submission forms will continue to enforce size caps and format restrictions, so the need for compression and conversion persists.</li>
 <li><strong>Competitors:</strong> free tiers and their fixed-window deletion promises are what students actually encounter today.</li>
 <li><strong>Compliance:</strong> because no file content leaves the device, no data-controller duties attach to file content under PDPA &mdash; the compliance position is a property of the architecture rather than of a policy document.</li>

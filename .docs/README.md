@@ -70,15 +70,17 @@ webapp/
 │   ├── 02-design/                    ← W4
 │   │   ├── feature-list.md ........... the 7 features, traced to F# and B#
 │   │   ├── user-journey.md ........... the 5 steps of the one core workflow
-│   │   ├── design-system.md .......... 23 tokens extracted from src/styles.css
+│   │   ├── design-system.md .......... 22 tokens + rules R1–R7, extracted from src/styles.css
 │   │   ├── diagrams.md ............... D1 context · D2 use case · D3 architecture · D4 activity
-│   │   └── prototype/index.html ...... clickable prototype
+│   │   └── prototype/index.html ...... static lo-fi screens (S1·S2·S3·S2-D) — not clickable
 │   │
 │   └── 05-log/                       ← the audit trail
 │       ├── 20260826-log.md ........... W3 session
 │       ├── 20260902-log.md ........... W4 session
 │       ├── 20260906-log.md ........... rule.md rewrite + conformance + W3 bridge
-│       └── 20260907-log.md ........... ★ pre-gate audit — the 4 checks, 7 findings, 0 left
+│       ├── 20260907-log.md ........... pre-gate audit — the 4 checks, 7 findings, 0 left
+│       ├── 20260908-log.md ........... ★ gate-day audit — B25, the W4 pack, the 2 blockers
+│       └── 20260908-gate-runsheet.md .. ★ the clock to 23:59 and the two honest submissions
 │
 └── test/ ......................... proves the claims rather than asserting them
     ├── vault-deletion.test.mjs ....... LR5 · bytes unreachable after purge

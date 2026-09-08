@@ -49,8 +49,9 @@ It is also the feature the other six depend on:
 
 ## Honest status
 
-The core feature and five of the seven **ship today**. The two open rows are `Offline install`
-(blocked on the 31 MB precache, B9/Q1) and the unverified half of `Network honesty` (B14).
+The core feature and six of the seven **ship today**. The one open row is `Offline install`
+(blocked on the 31 MB precache, B9/Q1). `Network honesty` closed on 7 Sep — **B14 done**, NFR5
+at 2 of 2 tools disclosing.
 
 The features are not the risk. **The evidence is** — every row above traces to an `H#`
 hypothesis, not a `P#` pain from a real interview. See B16.

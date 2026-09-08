@@ -23,6 +23,28 @@ Built by students at Mae Fah Luang University for **1305493 Software
 Engineering Case Studies** (1/2569) — and for every student who has fought an
 LMS upload cap at 11:55pm.
 
+## 📋 Coursework — start here if you are grading this
+
+Everything for the course lives in [`.docs/`](.docs/). The one-screen map is
+[`.docs/README.md`](.docs/README.md); the traceability chain is
+[`TRACEABILITY.md`](.docs/01-requirements/TRACEABILITY.md).
+
+| W5 User Validation Gate requires | Where it is |
+|---|---|
+| 1 · Updated Proposal — problem statement + target users | [`proposal.md`](.docs/01-requirements/proposal.md) |
+| 2 · Product Backlog | [`backlog.md`](.docs/01-requirements/backlog.md) |
+| 3 · Design draft — feature list, user journey, prototype, 4 diagrams | [`.docs/02-design/`](.docs/02-design/) — [feature-list](.docs/02-design/feature-list.md) · [user-journey](.docs/02-design/user-journey.md) · [design-system](.docs/02-design/design-system.md) · [prototype](.docs/02-design/prototype/index.html) · [**D1–D4**](.docs/02-design/diagrams.md) |
+| 4 · Compliance — `rule.md` + the legal spec traced from W2 | [`rule.md`](rule.md) · [spec §4 LR1–LR8](.docs/01-requirements/01-spec/20260826-01-unilab-core.md) · [W2 original, verbatim](.docs/01-requirements/04-legal/rule-as-submitted-20260819.md) |
+
+**Evidence position, stated plainly:** the gate also requires **≥ 5 real users interviewed**.
+As of the submission, **0 interviews have been conducted and 0 pains (`P#`) recorded** — every
+requirement traces to a numbered hypothesis `H1`–`H9`, each carrying the non-user artefact it
+came from. This is stated in [spec §0](.docs/01-requirements/01-spec/20260826-01-unilab-core.md),
+[`proposal.md` §5](.docs/01-requirements/proposal.md) and
+[`results.md`](.docs/01-requirements/02-interviews/results.md) rather than papered over. The
+interview instrument is complete and assigned —
+[all questions, EN/TH/MY](.docs/01-requirements/02-interviews/ALL-QUESTIONS.md).
+
 ## Why client-side?
 
 | | Upload-based sites | UniLab |
@@ -72,9 +94,10 @@ background noise comes out; a voice drowned by a passing truck does not come bac
 
 ### Video and audio, which no comparable site has
 
-Neither iLovePDF nor iLoveIMG has a single video or audio tool. UniLab has eleven, built
-on **WebCodecs** — the browser API that hands a page the same hardware decoder the video
-player uses. That is how a 500 MB lecture recording gets trimmed in seconds without being
+Neither iLovePDF nor iLoveIMG has a single video or audio tool. UniLab has **eighteen**
+— 7 video and 11 audio. The video side runs on **WebCodecs**, the browser API that hands a
+page the same hardware decoder the video player uses; the audio side runs on our own
+`audio-fx.js` (FFT, spectral gate, LUFS, WSOLA). That is how a 500 MB lecture recording gets trimmed in seconds without being
 uploaded. We deliberately did *not* use `ffmpeg.wasm`: it would mean shipping ~31 MB of
 WebAssembly and decoding on the CPU.
 

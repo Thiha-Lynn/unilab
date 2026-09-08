@@ -90,15 +90,15 @@ product table; these rows cite the course rubric instead, which is their real so
 | | Count |
 |---|---|
 | ✅ Done | 22 |
-| ⚠️ Built but unverified | 2 | (B7, B21) |
+| ⚠️ Built but unverified | 2 (B7, B21) |
 | 🔴 To do | 7 |
 | **Design pack (W4)** | **complete** — 5 deliverables, 4 diagrams, all rendered and inspected |
 | **Gate blockers open** | **2** (B16, B17) — B13 closed by the W4 push, B12 by the 6 Sep `rule.md` rewrite |
 
-*(31 product rows — 21 done, 2 built-unverified, 8 to do — plus 3 gate-deliverable rows. The 7 Sep audit closed B10 and B14, split the
+*(31 product rows — 22 done, 2 built-unverified, 7 to do — plus 3 gate-deliverable rows. The 7 Sep audit closed B14, split the
 three process rows out, added B34, and repaired B24's citation and priority.)*
 
-**The product is far ahead of its evidence.** Sixteen Must-level rows now ship, and the design
+**The product is far ahead of its evidence.** Eighteen Must-level rows now ship, and the design
 pack is complete. The compliance rewrite (B12) is done, and with it the five conformance gaps it
 exposed (B26–B30). The two remaining gate blockers are both about *proving* the work rather than
 doing it — the interviews and the topic approval. **Neither of them is code**, and no amount of

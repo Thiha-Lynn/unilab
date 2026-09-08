@@ -86,6 +86,10 @@ that language and translate the quote afterwards, marking it `[translated]`.
 
 ---
 
+> **Every question, including the H3 / H7 / H9 branches that are not in the six below, is in
+> [`ALL-QUESTIONS.md`](ALL-QUESTIONS.md) — EN, TH and MY on one page.** H9 is the one the spec
+> calls decisive, and it has no route through the six alone. Ask it of everyone.
+
 ## 3. The six questions — ask these, in this order
 
 Anchor everything to **one real, recent event**. If they generalise ("usually I…"), pull them

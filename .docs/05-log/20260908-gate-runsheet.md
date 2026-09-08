@@ -118,8 +118,14 @@ And the four things only a human eye catches:
 | `S1`–`S3` mean *prototype screens* in `.docs/02-design/` and *participants* in `results.md` | Pre-existing, disambiguated by document, and outside `diagram-checker`'s scope — but know the answer before a grader asks |
 
 ```bash
-grep -rn "\bR[1-5]\b" .docs/ --include=*.md | grep -v rehearsal-scenarios
+# rehearsal content must not appear inside the evidence log's participant section
+awk '/^## Participants/,0' .docs/01-requirements/02-interviews/results.md | grep -nE '\bRS[0-9]'
 # expect: no output
+#
+# (RS, not R — R1–R7 are design-system.md's component rules and would always match.
+#  Files that *describe* the RS convention — .docs/README.md, results.md's header,
+#  this runsheet — are references, not leakage, so the check looks only where
+#  participant blocks live.)
 ```
 
 ---

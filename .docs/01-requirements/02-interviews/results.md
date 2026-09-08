@@ -15,7 +15,7 @@ LR7 is enforced by construction rather than by remembering.
 
 > **`rehearsal-scenarios.md` is not evidence and never becomes evidence.** It holds five invented
 > practice conversations numbered `RS1`–`RS5`, so the team can rehearse the instrument. **Real
-> participants are `S1`–`S15`.** The two number spaces never touch. No `P#` may cite an `RSS#`;
+> participants are `S1`–`S15`.** The two number spaces never touch. No `P#` may cite an `RS#`;
 > nothing from that file is copied into this one — not a line, not a quote, not a role.
 
 ---

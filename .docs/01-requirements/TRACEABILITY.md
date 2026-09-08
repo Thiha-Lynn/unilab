@@ -93,16 +93,16 @@ build — but **an artefact is not a user**, and the gate asks for a user.
 | F2 no account, no daily cap | H1 · LR2 | B2 |
 | F3 compress to a size I name | H5 | B3 |
 | F4 HEIC → JPG | H4 | B4 |
-| F5 see the estimate before committing | H5 | B5 |
+| F5 see the estimate before committing | H1, H5 | B5 |
 | F6 results disappear on a visible countdown | H2 · LR5 | B6 |
 | F8 OCR in the language on the page (19 shipped) | H6 | B8 |
 | F9 video and audio beside documents | H7 | B18 |
 | F7 redact / blur so removed content is absent | H2 · LR6 | B7, B15 |
 | F10 merge PDFs with page ranges and a contents page | H8 | B19 |
 | F11 save a repeated chore as a workflow | H8 | B20 |
-| F12 told before a tool downloads anything | LR3 · NFR5 | B14 ✅ |
+| F12 told before a tool downloads anything | H2 *(enforced by LR3 · NFR5)* | B14 ✅ |
 | F13 install and keep working offline | H3 | B21 |
-| F14 true language coverage shown in-app | D2 | B10 ✅ |
+| F14 true language coverage shown in-app | H6 *(spec defect §7 D2 closed it)* | B10 ✅ |
 
 **Converting `H` to `P` is `/capture-requirement`'s only job**, and it is the only sanctioned
 route. A hypothesis is promoted when **two different participants describe it unprompted** —

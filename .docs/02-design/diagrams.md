@@ -203,7 +203,7 @@ flowchart TB
     S3["3. Enter the target size<br/>— 5 MB"]
     EST["Render live preview +<br/>estimated output size"]
     CAP{"Is the estimate<br/>under 5 MB?"}
-    S4["4. Run pdf.js on-device,<br/>yielding every ~24 ms"]
+    S4["4. Student taps <b>Compress PDF</b><br/>→ pdf.js runs on-device,<br/>yielding every ~24 ms"]
     STORE["Store the result in the vault<br/>— 30:00 countdown starts"]
     S5["5. Download the result"]
     DISP{"Delete it now?"}
@@ -297,6 +297,6 @@ Verified mechanically, all four diagrams:
 | D1 — system drawn as one box, no internals | ✅ |
 | D1 — externals typed, ≥ 2 actors | ✅ 3 actors, 2 `«external»`, 1 data store |
 | D3 — no arrow points at a subgraph | ✅ 0 |
-| D3 — every arrow labelled | ✅ 14 of 14 |
-| D4 — every diamond a valid decision or merge | ✅ 2 decisions (1→2, both guarded) · 2 merges (2→1) |
+| D3 — every arrow labelled | ✅ **12 of 12 data arrows.** The 13th edge, `VAULT -.- NOSRV`, is a note link, not a data flow, and carries no label by design |
+| D4 — every diamond asks a question | ✅ **2 decisions** (1 in, 2 guarded out each) · **0 merge diamonds** — flows rejoin by entering the node, per the note above |
 | D2 — notation counts | ✅ 3 stick figures · 8 associations · 6 generalizations · 2 `«include»` · 1 `«extend»` |
