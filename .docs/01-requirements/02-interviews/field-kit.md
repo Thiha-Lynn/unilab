@@ -130,7 +130,9 @@ end whether you may send a link next week.
 
 ## 5. Write it up before you walk away
 
-Straight into [`results.md`](results.md), or `/capture-requirement` if you have a laptop:
+**Fastest:** open [`capture.html`](capture.html) on your phone — it asks the six questions, has
+no name field to violate LR7 with, and emits the block below ready to paste.
+Otherwise straight into [`results.md`](results.md), or `/capture-requirement` on a laptop:
 
 ```
 ### S_
@@ -165,9 +167,23 @@ finishing, or you will paraphrase it into what you wanted them to say.
 > เช่น การบีบอัด แปลงไฟล์ หรือสแกน ขอเวลาประมาณ 10 นาที ถามถึงไฟล์ล่าสุดที่ต้องส่ง
 > ไม่ต้องติดตั้งอะไร ไม่เก็บข้อมูลส่วนตัว ใครสะดวกวันนี้หรือพรุ่งนี้บ้างคะ/ครับ
 
-**Burmese** — write this yourselves. Four of the five of you speak it better than any draft I
-could give you, and the Burmese-speaking cohort is the group most likely to raise **H6**
-(unsearchable Thai/Burmese scans), which is the hypothesis with the least evidence behind it.
+**Burmese** *(draft — four of you speak this better than the draft does. Fix it, then send it.
+A draft you correct in thirty seconds beats a blank space you never fill.)*
+
+> မင်္ဂလာပါ 🙏 ကျွန်တော် MFU မှာ Software Engineering တက်နေတဲ့ ကျောင်းသားပါ။ ကျောင်းသားတွေ
+> assignment ဖိုင်တွေကို ဘယ်လိုကိုင်တွယ်ကြလဲဆိုတာ သုတေသနလုပ်နေပါတယ် — ဖိုင်ချုံ့တာ၊ ဖိုင်ပုံစံ
+> ပြောင်းတာ၊ စာရွက်စာတမ်း scan ဖတ်တာမျိုးပါ။
+>
+> နောက်ဆုံးတင်လိုက်ရတဲ့ ဖိုင်တစ်ခုအကြောင်း ၁၀ မိနစ်လောက် မေးလို့ရမလားခင်ဗျ။ chat နဲ့ပဲ ဖြေလို့ရပါတယ်။
+> ဘာမှ install လုပ်စရာမလိုပါဘူး၊ ရောင်းစရာလည်း မဟုတ်ပါဘူး၊ နာမည်နဲ့ ကိုယ်ရေးအချက်အလက်တွေ
+> မှတ်ထားမှာလည်း မဟုတ်ပါဘူး။ ဒီနေ့ အားလား?
+
+**Send this one first.** The Burmese-speaking cohort is the group most likely to raise **H6**
+(unsearchable Thai/Burmese scans) — the hypothesis with the least evidence behind it — and four
+of the five of you can reach that cohort directly. Nobody else on this course can.
+
+The consent line and the six questions are written in Burmese too, in
+[`chat-script.md`](chat-script.md) §2 and §4.
 
 ---
 

@@ -54,6 +54,9 @@ webapp/
 │   │   ├── 02-interviews/            ← B16 lives here
 │   │   │   ├── interview-guide.md .... the instrument: consent, questions, never-ask list
 │   │   │   ├── field-kit.md .......... ★ the page to hold on your phone while interviewing
+│   │   │   ├── chat-script.md ........ the same interview as DMs — EN / TH / MY, one Q per message
+│   │   │   ├── capture.html .......... ★ open on a phone: asks the six, emits the results.md block
+│   │   │   ├── rehearsal-scenarios.md  RS1-RS5 practice conversations — INVENTED, never evidence
 │   │   │   └── results.md ............ the evidence log — EMPTY, 0 of 5
 │   │   ├── 03-charter/               ← W1
 │   │   │   ├── charter.html .......... source of the published Google Doc
@@ -108,9 +111,17 @@ Every one of the 14 functional requirements traces to an **`H#` (hypothesis)** �
 described)**. The gate asks for a user.
 
 **The instruments are ready; the conversations are not.**
+→ [`02-interviews/capture.html`](01-requirements/02-interviews/capture.html) — **start here on a
+phone.** Asks the six questions and emits the `results.md` block; no name field exists on it, so
+LR7 holds by construction
+→ [`02-interviews/chat-script.md`](01-requirements/02-interviews/chat-script.md) — the DM version.
+One question per message; a chat answer *is* an interview
 → [`02-interviews/field-kit.md`](01-requirements/02-interviews/field-kit.md) — where to stand,
 what to say, the six questions, what never to ask
-→ run `/capture-requirement` after each one; it converts the hypothesis and re-points every
+→ [`02-interviews/rehearsal-scenarios.md`](01-requirements/02-interviews/rehearsal-scenarios.md) —
+five invented practice conversations, `RS1`–`RS5`. **Rehearsal only. No `P#` may cite an `RS#`,
+and nothing there is copied into `results.md`**
+→ run `/capture-requirement` after each real one; it converts the hypothesis and re-points every
 citation so nothing goes stale
 
 A hypothesis becomes a pain when **two different participants raise it unprompted.** One is an
