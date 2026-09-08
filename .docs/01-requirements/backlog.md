@@ -79,9 +79,9 @@ product table; these rows cite the course rubric instead, which is their real so
 
 | ID | Item | Priority | Traces to | Status |
 |---|---|---|---|---|
-| **B22** | Design deliverables for the gate: feature list, user journey, design system, prototype, and all 4 diagrams under `.docs/02-design/` | Must | Rubric — *4 diagrams + design* | ✅ Done — W4, 2 Sep. All 4 diagrams render; `diagram-checker` C1–C7 clean |
+| **B22** | Design deliverables for the gate: feature list, user journey, design system, prototype, and all 4 diagrams under `.docs/02-design/` | Must | Rubric — *4 diagrams + design* | ✅ Done — W4, 2 Sep; diagrams rebuilt 7–8 Sep. All four rendered to image and inspected, not just parsed: D2 re-authored as UML SVG (stick figures, generalization), D4's invalid 1-in/1-out diamond removed, D1's LMS arrow re-attributed to the actor, D3 recomposed as three layer bands. `diagram-checker` C1–C7 + new C1b clean |
 | **B23** | Updated proposal: problem statement + target users | Must | Rubric — *User Discovery & Problem Fit* | ✅ Done — 7 Sep 2026. [`proposal.md`](proposal.md): problem statement (P-a/P-b/P-c + the H9 finding), the three target users, the five guardrails, and §5 stating the 0-interview position rather than glossing it |
-| **B25** | Re-run `/audit-backlog` and `diagram-checker` immediately before the gate submission and paste both reports into `.docs/05-log/` | Must | Rubric — *evidence of process* | ⚠️ Partly — the 7 Sep audit is recorded in `.docs/05-log/20260907-log.md`; re-run once more after B16/B17 move |
+| **B25** | Re-run `/audit-backlog` and `diagram-checker` immediately before the gate submission and paste both reports into `.docs/05-log/` | Must | Rubric — *evidence of process* | ✅ Done — 8 Sep 2026, gate day. Both reports in [`.docs/05-log/20260908-log.md`](../05-log/20260908-log.md); the 7 Sep passes are in `20260907-log.md`. Re-run only if B16/B17 move before submission |
 
 ---
 
@@ -92,6 +92,7 @@ product table; these rows cite the course rubric instead, which is their real so
 | ✅ Done | 22 |
 | ⚠️ Built but unverified | 2 | (B7, B21) |
 | 🔴 To do | 7 |
+| **Design pack (W4)** | **complete** — 5 deliverables, 4 diagrams, all rendered and inspected |
 | **Gate blockers open** | **2** (B16, B17) — B13 closed by the W4 push, B12 by the 6 Sep `rule.md` rewrite |
 
 *(31 product rows — 21 done, 2 built-unverified, 8 to do — plus 3 gate-deliverable rows. The 7 Sep audit closed B10 and B14, split the
