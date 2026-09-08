@@ -278,16 +278,18 @@ click could still create an obligation, and the trap of building one carelessly 
 
 ## AI accountability (ETDA guideline · course W2)
 
-UniLab ships machine-learning models — OCR for Thai, English and Burmese, and the background
+UniLab ships machine-learning models — OCR for 19 languages, and the background
 removal model — so the three failure modes from the lecture apply to us even though no model
 ever answers a user in prose.
 
 1. **Hallucination.** OCR output is a guess, not a transcription. The system must present
    recognised text as something to check, and must never imply it is verbatim.
-2. **Bias.** OCR accuracy is not equal across scripts, and Burmese is the least well served
-   by the models we use. The agent must not describe language support as equal, and must
-   state the languages actually shipped, consistently, in the code, the registry and the
-   README.
+2. **Bias.** OCR accuracy is not equal across the 19 scripts we ship, and Burmese is the
+   least well served by the models we use. The agent must not describe language support as
+   equal, and must state the languages actually shipped, consistently, in the code, the
+   registry and the README. Understating coverage is the same defect as overstating it —
+   every description in this repo claimed three languages while the tool shipped nineteen
+   (spec D2), which hid working support from the students who needed it.
 3. **No owner.** A human is always responsible: the AI Lead owns model choice and disclosure,
    and every model-backed tool must work as a plain manual tool if the model fails to load.
 4. The agent must disclose every model download before it starts, including its size, per

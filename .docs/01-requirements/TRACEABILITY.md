@@ -95,7 +95,7 @@ build — but **an artefact is not a user**, and the gate asks for a user.
 | F4 HEIC → JPG | H4 | B4 |
 | F5 see the estimate before committing | H5 | B5 |
 | F6 results disappear on a visible countdown | H2 · LR5 | B6 |
-| F8 OCR in Thai, English or Burmese | H6 | B8 |
+| F8 OCR in the language on the page (19 shipped) | H6 | B8 |
 | F9 video and audio beside documents | H7 | B18 |
 | F7 redact / blur so removed content is absent | H2 · LR6 | B7, B15 |
 | F10 merge PDFs with page ranges and a contents page | H8 | B19 |

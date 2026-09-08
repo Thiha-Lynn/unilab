@@ -11,7 +11,7 @@ user story in the spec. Nothing appears here that is not in the backlog.
 |---|---|---|
 | ⭐ **Transform a file on this device** — select → transform → download, with a live preview before committing, no upload path anywhere, and no account or task-per-day cap | **F1, F2, F3, F4, F5** | B1, B2, B3, B4, B5 |
 | **Result custody** — finished files held in memory only, on a visible countdown, with "delete now" and an automatic purge when the tab closes | F6, LR5 | B6 |
-| **Document toolkit** — PDF and image work, including true redaction and OCR in Thai / English / Burmese | F7, F8 | B7, B8 |
+| **Document toolkit** — PDF and image work, including true redaction and OCR in 19 languages | F7, F8 | B7, B8 |
 | **Media toolkit** — video and audio jobs in the same place as document jobs | F9 | B18 |
 | **Workflows** — save a repeated multi-step chore and run a batch of files through it | F10, F11 | B19, B20 |
 | **Network honesty** — any tool that must fetch from the network says what it will download, and how big, before it starts | F12, F14, LR3 | B10, B14 |

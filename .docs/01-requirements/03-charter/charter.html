@@ -54,7 +54,7 @@
 <tr><td>O2</td><td>Require no account, sign-in, email or task-per-day limit for any tool</td><td>No auth code exists in the repository</td></tr>
 <tr><td>O3</td><td>Let the student state an explicit target (&ldquo;under 5 MB&rdquo;) and see a live estimate before committing to a run</td><td>Estimate shown before every run</td></tr>
 <tr><td>O4</td><td>Cover documents, images, video and audio in one place</td><td>58 tools across 7 categories</td></tr>
-<tr><td>O5</td><td>Read scanned handouts by OCR in Thai, English and Burmese</td><td>Three languages selectable in-tool</td></tr>
+<tr><td>O5</td><td>Read scanned handouts by OCR in the language they are written in</td><td>19 languages selectable in-tool, up to 3 per run</td></tr>
 <tr><td>O6</td><td>Hold finished files in memory only, on a visible countdown, with delete-now and purge on tab close</td><td>30-minute TTL; nothing written to disk</td></tr>
 <tr><td>O7</td><td>Let a student save a repeated multi-step chore as a workflow and batch files through it</td><td>Workflows can be saved, exported, re-run</td></tr>
 <tr><td>O8</td><td>Keep working with no network connection once installed</td><td>Installable PWA passes an offline test</td></tr>
@@ -105,7 +105,7 @@
 <tr><td style="text-align:center;font-size:14pt">🎓</td><td><strong>U1 &mdash; MFU undergraduate</strong></td><td>Submitting coursework to a form with a file size cap, on a phone, the night it is due</td></tr>
 <tr><td style="text-align:center;font-size:14pt">🪪</td><td><strong>U2 &mdash; Student handling identity documents</strong></td><td>Scanning a transcript, ID card or medical certificate for a scholarship, visa or internship. Custody stops being abstract here</td></tr>
 <tr><td style="text-align:center;font-size:14pt">👥</td><td><strong>U3 &mdash; Group-work coordinator</strong></td><td>Merging everyone&rsquo;s sections into one report before a deadline &mdash; multi-file, multi-step, under time pressure</td></tr>
-<tr><td style="text-align:center;font-size:14pt">🌏</td><td><strong>Multilingual students</strong></td><td>Working in Thai, English and Burmese, including MFU&rsquo;s large Burmese-speaking cohort, whose scanned handouts most tools cannot read</td></tr>
+<tr><td style="text-align:center;font-size:14pt">🌏</td><td><strong>Multilingual students</strong></td><td>Working in Thai, English and Burmese, including MFU&rsquo;s large Burmese-speaking cohort, whose scanned handouts most tools cannot read &mdash; the OCR tool ships 19 languages so the document decides, not the tool</td></tr>
 <tr><td style="text-align:center;font-size:14pt">📶</td><td><strong>Students on campus Wi-Fi</strong></td><td>Where the upload-and-download round trip is itself a meaningful part of the wait</td></tr>
 </table>
 <h2>5.2 Stakeholders</h2>
@@ -136,7 +136,7 @@
 <tr style="background-color:#f6f7fb"><td width="26%"><strong>Feature</strong></td><td width="59%"><strong>What it does</strong></td><td width="15%"><strong>Priority</strong></td></tr>
 <tr><td>⭐ <strong>Transform a file on this device</strong></td><td>Select &rarr; transform &rarr; download, with a live preview before committing, no upload path anywhere, and no account or daily cap. <em>The core feature; everything else depends on it.</em></td><td style="background-color:#eeeefc"><strong>Must</strong></td></tr>
 <tr><td>⏳ <strong>Result custody</strong></td><td>Finished files held in memory only, on a visible 30-minute countdown, with delete-now and automatic purge when the tab closes. Never written to disk, Cache Storage or IndexedDB</td><td style="background-color:#eeeefc"><strong>Must</strong></td></tr>
-<tr><td>📄 <strong>Document toolkit</strong></td><td>PDF and image work, including <strong>true redaction</strong> (the removed text is absent from the output, not merely covered) and OCR in Thai, English and Burmese</td><td style="background-color:#eeeefc"><strong>Must</strong></td></tr>
+<tr><td>📄 <strong>Document toolkit</strong></td><td>PDF and image work, including <strong>true redaction</strong> (the removed text is absent from the output, not merely covered) and OCR in 19 languages</td><td style="background-color:#eeeefc"><strong>Must</strong></td></tr>
 <tr><td>🎬 <strong>Media toolkit</strong></td><td>Video and audio jobs in the same place as document jobs &mdash; the gap no competitor fills</td><td>Should</td></tr>
 <tr><td>🔗 <strong>Workflows</strong></td><td>Save a repeated multi-step chore as a named workflow, run a batch of files through it, export it so a group shares one chain</td><td>Should</td></tr>
 <tr><td>📡 <strong>Network honesty</strong></td><td>Any tool that must fetch a model or engine states what it will download, and roughly how large, <strong>before</strong> it starts. This is the single exception to the on-device rule, and it is always disclosed</td><td style="background-color:#eeeefc"><strong>Must</strong></td></tr>
@@ -146,7 +146,7 @@
 <ul>
 <li>Desktop two-pane work stage in the prototype, in addition to the phone layout.</li>
 <li>Bringing the offline install under the 8 MB target by loading the largest model on demand.</li>
-<li>Additional OCR languages beyond Thai, English and Burmese.</li>
+<li>OCR languages beyond the 19 the recognition engine ships.</li>
 </ul>
 
 <h1>🔑 8. User Roles</h1>

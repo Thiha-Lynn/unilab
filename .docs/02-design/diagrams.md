@@ -224,16 +224,16 @@ stateDiagram-v2
     retarget --> SetTarget
     SetTarget --> Estimate
 
-    Estimate --> under_cap : is the estimate under 5 MB?
-    under_cap --> Compress : [yes] at or under the cap
-    under_cap --> retarget : [no] over the cap, change the target
+    Estimate --> under_cap : under 5 MB?
+    under_cap --> Compress : [yes]
+    under_cap --> retarget : [no]
 
     Compress --> Store
     Store --> Download
 
     Download --> disposal : delete it now?
-    disposal --> DeleteNow : [yes] student presses Delete now
-    disposal --> Expire : [no] countdown ends, or the tab closes
+    disposal --> DeleteNow : [yes]
+    disposal --> Expire : [no]
 
     DeleteNow --> rejoin
     Expire --> rejoin
@@ -248,14 +248,19 @@ one (`merge_run`), which is why it read as a decision that had never been answer
 
 | Diamond | Kind | In | Out | Reads as |
 |---|---|---|---|---|
-| `under_cap` | **decision** | 1 | **2** | *is the estimate under 5 MB?* → `[yes]` / `[no]` |
-| `disposal` | **decision** | 1 | **2** | *delete it now?* → `[yes]` / `[no]` |
+| `under_cap` | **decision** | 1 | **2** | *under 5 MB?* — `[yes]` runs the compression · `[no]` returns to step 3 to change the target |
+| `disposal` | **decision** | 1 | **2** | *delete it now?* — `[yes]` is the student pressing Delete now · `[no]` is the countdown ending or the tab closing |
 | `retarget` | **merge** | **2** | 1 | where the retry loop rejoins the main flow |
 | `rejoin` | **merge** | **2** | 1 | where both disposal paths rejoin before the end |
 
 Every decision has **two labelled outputs**; every merge has **two inputs**. The question is on
 the edge entering the diamond, the answers are on the edges leaving it, and every guard is in
 `[brackets]` as the deck requires.
+
+**The guards are deliberately just `[yes]` and `[no]`.** Mermaid places an edge label at the
+midpoint of its edge and then draws the edge *through* it, so a long guard on the loop-back edge
+came out with the line running between its own words. What each answer means is in the table
+above, where it is readable.
 
 **Notation.** `[*]` renders as the UML initial node (●) at the top and the final node (◉) at the
 bottom — no labelled "Start"/"End" box anywhere.

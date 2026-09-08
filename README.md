@@ -44,7 +44,7 @@ the right trade for student daily life.
 | 🖼️ **Image** (13) | Compress (*"must be under X MB"* target mode) · Resize · Crop (ID-photo presets) · Convert · Images→PDF · **HEIC→JPG** · Add Text · Rotate · Watermark · **Remove Background** · **Blur Faces** · Enlarge (Lanczos-3) · Photo Editor |
 | 🎬 **Video** (7) | Compress · Trim · Convert · Resize for 9:16/1:1/16:9 · Video→GIF · Video→Photos · Screen Recorder |
 | 🎵 **Audio** (11) | **Enhance Voice** (one-press clean-up) · **Remove Noise** (spectral + optional on-device neural) · Fix Volume (LUFS) · Change Speed (pitch-preserved) · Cut Silences · Equalizer (live preview) · Join Audio · Extract Audio · Trim · Convert · Voice Recorder |
-| 📄 **PDF** (20) | Merge (page ranges + contents page) · Split (named parts) · Compress (3 levels or a size cap) · Rotate · PDF→Images · Organize · Watermark · Page Numbers · **Sign** · Crop · **Edit** · **OCR (Thai + English + Burmese)** · Fill Form · Unlock · **Redact** · Compare · PDF→Markdown · Scan to PDF · Word→PDF · Excel→PDF |
+| 📄 **PDF** (20) | Merge (page ranges + contents page) · Split (named parts) · Compress (3 levels or a size cap) · Rotate · PDF→Images · Organize · Watermark · Page Numbers · **Sign** · Crop · **Edit** · **OCR (19 languages)** · Fill Form · Unlock · **Redact** · Compare · PDF→Markdown · Scan to PDF · Word→PDF · Excel→PDF |
 | ✍️ **Text** (2) | Word Counter (Unicode-correct — see below) · Citation Generator (APA 7 / MLA 9) |
 | 🎓 **Study** (2) | GPA Calculator (Thai university scale, saved on-device) · Pomodoro Focus Timer |
 | 🧰 **Everyday** (3) | **Workflows** · QR Code Maker (link + Wi-Fi, never expires) · Unit Converter (incl. Thai land units ไร่/งาน/ตร.วา) |
