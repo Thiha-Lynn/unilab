@@ -113,42 +113,45 @@ same risk, and only U2 reaches for redaction.
 
 ## D3 · High-level Architecture
 
-Components and the direction data moves. Matches the stack named in the spec: Vite + vanilla JS,
-pdf.js, mediabunny/WebCodecs, ONNX Runtime Web, Tesseract.
+Three layers inside one browser tab, and the direction data moves between them. Matches the
+stack named in the spec: Vite + vanilla JS, pdf.js, mediabunny/WebCodecs, ONNX Runtime Web,
+Tesseract.
 
 ```mermaid
 flowchart TB
+    CDN["«external»<br/>Static host + model host"]
+    FILE[("Device file storage")]
+
     subgraph TAB["Browser tab — the entire runtime"]
         direction TB
 
+        SW["service-worker<br/>network-first for navigations"]
+
         subgraph SHELL["Presentation"]
-            MAIN["main.js<br/>router + home"]
-            REG["registry.js<br/>tool list, lazy loaders"]
-            TS["tool-shell.js<br/>uploader / work / downloader"]
-            OUI["option-ui.js<br/>sidebar components"]
+            direction LR
+            APP["main.js + registry.js<br/>router · tool list · lazy loaders"]
+            TS["tool-shell.js + option-ui.js<br/>uploader / work / downloader · option sidebar"]
         end
 
         subgraph ENGINE["Transform engines — all on-device"]
+            direction LR
+            OPS["ops.js + workflows.js<br/>13 composable operations"]
             PDF["pdf-utils.js<br/>pdf.js"]
             MEDIA["media-utils.js<br/>mediabunny / WebCodecs"]
             AUDIO["audio-fx.js<br/>FFT, LUFS, WSOLA"]
-            OPS["ops.js + workflows.js<br/>13 composable operations"]
         end
 
         subgraph CUSTODY["Custody"]
-            VAULT["vault.js<br/>in-memory, 30 min TTL, purge on pagehide"]
+            direction LR
+            VAULT["vault.js<br/>in-memory · 30 min TTL · purge on pagehide"]
+            NOSRV["No application server · no database · no session store · no access log<br/>the vault is the only place a result lives — spec §4.1"]
         end
-
-        SW["service-worker<br/>network-first for navigations"]
     end
 
-    FILE[("Device file storage")]
-    CDN["Static host + model host"]
-
+    CDN -- "code + model, disclosed" --> SW
+    SW -- "cached assets" --> APP
+    APP -- "lazy import" --> TS
     FILE -- "file handle, read in-page" --> TS
-    MAIN -- "route" --> REG
-    REG -- "lazy import" --> TS
-    TS -- "renders" --> OUI
     TS -- "options + file" --> OPS
     OPS -- "dispatch" --> PDF
     OPS -- "dispatch" --> MEDIA
@@ -157,13 +160,17 @@ flowchart TB
     MEDIA -- "result blob" --> VAULT
     AUDIO -- "result blob" --> VAULT
     VAULT -- "object URL, download" --> FILE
-    CDN -- "code + model, disclosed" --> SW
-    SW -- "cached assets" --> MAIN
+    VAULT -.- NOSRV
 
-    NOSRV["No application server, no database,<br/>no session store, no access log —<br/>see spec §4.1"]
     style NOSRV fill:#e4f6ef,stroke:#1d9e77,stroke-dasharray: 5 5,color:#171c26
     style VAULT fill:#eeeefc,stroke:#5b5bd6,stroke-width:2px,color:#171c26
+    style TAB fill:#f6f7fb,stroke:#8a93a2
 ```
+
+**Read it as three bands.** `Presentation` routes and frames · `Transform engines` do the work,
+all on-device · `Custody` holds the one copy of a result. Modules that are always used together
+are drawn as one component — `main.js + registry.js`, `tool-shell.js + option-ui.js` — because
+the deck asks for *layers and components, not code*, and a box per file was the wrong altitude.
 
 **Every arrow is labelled with what crosses it, and every arrow joins two components.** Two
 edges used to point at the `ENGINE` *subgraph* rather than at a component inside it, which
@@ -292,7 +299,10 @@ Both diagrams the W4 deck grades on notation were rebuilt:
 | **D1 drew the upload to the LMS as leaving the device storage** — a data store does not perform an upload | The dashed arrow now starts at **U1**, the actor who actually does it, labelled *UniLab is not involved* |
 | **D1 externals were untyped** — nothing on the diagram said which box was an actor and which a third-party system | Every external carries `«actor»` or `«external»`; the out-of-scope LMS says so on its face |
 | **D3 pointed two arrows at a subgraph** rather than at a component, so the call was ambiguous | `tool-shell → ops → pdf-utils / media-utils / audio-fx → vault`, component to component |
-| **D3 had four unlabelled arrows** — the deck asks arrows to show what moves | All 14 arrows carry a label |
+| **D3 had four unlabelled arrows** — the deck asks arrows to show what moves | Every arrow carries a label |
+| **D3's "no server tier" note floated unattached**, stretching the canvas and clipping off the right edge | Anchored to `vault.js` with a dashed UML note line — the component the claim is actually about |
+| **D3 was a 1418 × 1656 staircase** with a large dead region and a subgraph title clipped by a node | Recomposed as three labelled layer bands, 1250 × 1550, nothing clipped |
+| **D3 boxed one file per node** — the deck asks for components, not code | Always-together modules merged into one component; `service-worker` lifted out of `Presentation`, where it never belonged |
 | **D4 decisions had no yes/no** — guards described the condition but never answered it | Every decision asks its question on the inbound edge and answers `[yes]` / `[no]` on both outbound edges |
 
 Verified mechanically, all four diagrams:
@@ -300,6 +310,7 @@ Verified mechanically, all four diagrams:
 | Check | Result |
 |---|---|
 | Mermaid parses D1, D3, D4 | **3 of 3, 0 syntax errors** |
+| All four rendered and inspected as images | ✅ headless Chrome (D1, D3, D4) · rsvg (D2) |
 | D1 — system drawn as one box, no internals | ✅ |
 | D1 — externals typed, ≥ 2 actors | ✅ 3 actors, 2 `«external»`, 1 data store |
 | D3 — no arrow points at a subgraph | ✅ 0 |
