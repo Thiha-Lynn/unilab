@@ -72,7 +72,8 @@ webapp/
 │   │   ├── user-journey.md ........... the 5 steps of the one core workflow
 │   │   ├── design-system.md .......... 22 tokens + rules R1–R7, extracted from src/styles.css
 │   │   ├── diagrams.md ............... D1 context · D2 use case · D3 architecture · D4 activity
-│   │   └── prototype/index.html ...... static lo-fi screens (S1·S2·S3·S2-D) — not clickable
+│   │   ├── prototype/index.html ...... static lo-fi screens (S1·S2·S3·S2-D) — not clickable
+│   │   └── prototype/screenshots/ ... ★ rendered PNGs + the 5-min gate walkthrough script
 │   │
 │   └── 05-log/                       ← the audit trail
 │       ├── 20260826-log.md ........... W3 session

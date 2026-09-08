@@ -8,6 +8,11 @@ Lo-fi on purpose. This tests the **flow**, not the polish.
 
 ---
 
+> **Rendered screenshots and the 5-minute walkthrough script for the gate review live in
+> [`prototype/screenshots/`](prototype/screenshots/README.md).** Re-render them with
+> `./.docs/02-design/prototype/capture-screenshots.sh` — the prototype file is the source, the
+> PNGs are its output, so never edit a PNG by hand.
+
 ## The three screens
 
 | Screen | Journey steps | What it has to prove |
