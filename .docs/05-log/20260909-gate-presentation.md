@@ -1,9 +1,20 @@
 # Gate presentation — 9 Sep 2026 · running order, lines, and the questions
 
 **Course:** 1305493 · W5 User Validation Gate review · **Company 18 · DIGITAL IMPOSTERS PVT. CO., LTD.**
+**Print these two and you are ready:**
+- **[`UniLab-gate-speaker-notes.pdf`](UniLab-gate-speaker-notes.pdf)** — 14 pages. Run sheet, then
+  every slide with the words to say underneath it, then the question bank. **One copy each.**
+- **[`UniLab-gate-slides.pdf`](UniLab-gate-slides.pdf)** — 10 pages, 16:9, for the projector if the
+  laptop cannot run the HTML deck.
+
 **Deck:** [`20260909-gate-deck.html`](20260909-gate-deck.html) — open in any browser, arrow keys to
 move, **N** for speaker notes, **P** for the scroll/print view (also what a phone shows).
 **Time:** 5 minutes on the clock, then questions. **Hard cuts** are marked so 5:00 is a promise.
+
+> Both PDFs are generated from the deck by [`render-gate-pdf.sh`](render-gate-pdf.sh) — the slide
+> pages are screenshots of the deck itself and the scripts are read out of its `<aside class="notes">`
+> blocks, so editing the deck and re-running the script is the only way to change them. Do not edit
+> a PDF by hand; it will be overwritten.
 
 ---
 
