@@ -81,7 +81,12 @@ webapp/
 │       ├── 20260906-log.md ........... rule.md rewrite + conformance + W3 bridge
 │       ├── 20260907-log.md ........... pre-gate audit — the 4 checks, 7 findings, 0 left
 │       ├── 20260908-log.md ........... ★ gate-day audit — B25, the W4 pack, and Addendum 3: the 15-interview evidence pass
-│       └── 20260908-gate-runsheet.md .. ★ the clock to 23:59 and the two honest submissions
+│       ├── 20260908-gate-runsheet.md .. the clock to 23:59 and the two honest submissions
+│       ├── 20260909-gate-deck.html ... ★ the gate presentation — arrows, N = notes, P = phone view
+│       ├── 20260909-gate-presentation.md  running order, lines, hand-offs, question bank
+│       ├── UniLab-gate-speaker-notes.pdf  ★ PRINT THIS — 14 pp, one slide + its script per page
+│       ├── UniLab-gate-slides.pdf ..... 10 pp, 16:9, projector fallback
+│       └── render-gate-pdf.sh ......... regenerates both PDFs from the deck (needs Chrome)
 │
 └── test/ ......................... proves the claims rather than asserting them
     ├── vault-deletion.test.mjs ....... LR5 · bytes unreachable after purge
