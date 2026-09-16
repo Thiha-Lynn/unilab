@@ -818,3 +818,5 @@ audio.media-el { max-height: none; background: transparent; border: none; }
 
 .privacy-page .hero > .btn { display:inline-flex; margin-top:24px; }
 .install-card > .btn { display:inline-flex; margin:4px 0; }
+
+.install-card .note { color:var(--muted); }

@@ -111,7 +111,7 @@ function renderHome() {
 
   // Offline-mode block (see buildOfflineBlock below). Hidden entirely when
   // the browser has no Service Worker support.
-  if ('serviceWorker' in navigator) {
+  if ('serviceWorker' in navigator && location.protocol !== 'app:') {
     wrap.querySelector('.footer').appendChild(buildOfflineBlock());
   }
 
