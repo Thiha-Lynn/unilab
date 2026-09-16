@@ -4,6 +4,10 @@
 **Repo:** https://github.com/Thiha-Lynn/unilab · **Live:** https://unilab.ztvmm.live/
 **Phase:** Week 6 scope/release work. The owner explicitly authorized implementation and deployment on 16 Sep 2026. Instructor topic approval and the Week 5 gate outcome remain **pending** until today’s presentation; never infer a pass from shipped code.
 
+## Repository boundary
+
+This is the assignment/evidence repository. Product development, native packages and production deployment from v0.3.0 belong to https://github.com/Thiha-Lynn/unilab-releases (application source in `app/`). Do not overwrite the product deployment using this coursework baseline. Its GitHub Pages pipeline remains the coursework preview.
+
 ## What UniLab is
 
 A free student toolbox website — the small file jobs a student actually needs (PDF, image,

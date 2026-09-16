@@ -22,6 +22,17 @@ Built by students at Mae Fah Luang University for **1305493 Software
 Engineering Case Studies** (1/2569) — and for every student who has fought an
 LMS upload cap at 11:55pm.
 
+## Repository separation
+
+This repository is the **assignment and coursework record**, with the v0.2.0 application baseline retained for traceability. The independently maintained product source, Android APK, desktop installers and all releases from v0.3.0 live in [Thiha-Lynn/unilab-releases](https://github.com/Thiha-Lynn/unilab-releases).
+
+- **Assignment / evidence:** this repository and its `.docs/` directory.
+- **Product source / release builds:** `unilab-releases/app`, `desktop` and `mobile`; its build pipeline does not check out this assignment repository.
+- **Canonical product:** [unilab.ztvmm.live](https://unilab.ztvmm.live/).
+- **Coursework preview:** [GitHub Pages](https://thiha-lynn.github.io/unilab/), built from this repository's baseline.
+
+The product packages use their documented dependency licenses (including AGPL background removal); the MIT badge above refers to original UniLab source notices. Product releases do not establish lecturer approval or a passed Week 5 gate. Those outcomes remain pending the presentation and must be recorded from actual feedback.
+
 ## 📋 Coursework — start here if you are grading this
 
 Everything for the course lives in [`.docs/`](.docs/). The one-screen map is
