@@ -192,3 +192,16 @@ explicit, tested, atomic release; its commit is visible at `/release.json`.
 
 [Week 6 scope and evidence](.docs/03-build/20260916-week6.md) distinguishes shipped
 software from course approval and pending physical-device evidence.
+
+### UniLab 0.2.0 — installation and sharing
+
+[Install or download UniLab](https://unilab.ztvmm.live/#/install). Android and
+ iOS/iPadOS use the home-screen web app. macOS, Windows and Linux preview packages
+are maintained in [unilab-releases](https://github.com/Thiha-Lynn/unilab-releases),
+with a pinned source revision, build workflows, SHA-256 checksums and explicit
+platform testing notes. These are unsigned previews, not app-store releases.
+
+The static HTML includes Open Graph and Twitter large-image metadata and a
+1200 × 630 PNG. Regenerate it with `node scripts/social-card.mjs`. Chat services
+may cache previews of previously shared links; the site cannot force a refresh
+of an existing message. Hash routes share the same site-wide card.

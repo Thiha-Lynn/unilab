@@ -4,6 +4,7 @@ import { resolve } from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { writeManifests } from './scripts/build-manifest.js';
 
+const version = JSON.parse(readFileSync('package.json', 'utf8')).version;
 const revision = process.env.GITHUB_SHA || execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim();
 
 // Tiny build plugin: after the bundle is written (and public/ has been copied
@@ -35,7 +36,7 @@ function precacheManifest() {
 
 export default defineConfig({
   base: './',
-  define: { __RELEASE_ID__: JSON.stringify(revision.slice(0,12)) },
+  define: { __APP_VERSION__: JSON.stringify(version), __RELEASE_ID__: JSON.stringify(revision.slice(0,12)) },
   build: {
     target: 'es2022',
     chunkSizeWarningLimit: 1500,
