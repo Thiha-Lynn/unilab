@@ -4,6 +4,7 @@ import { CATEGORIES, TOOLS } from './registry.js';
 import { registerServiceWorker } from './register-sw.js';
 import { debug, debugError } from './log.js';
 import { renderPrivacy } from './privacy.js';
+import { renderInstall } from './install.js';
 
 registerServiceWorker();
 
@@ -27,7 +28,7 @@ function renderHome() {
   wrap.appendChild(el(`
     <header class="topbar">
       <div class="logo"><span class="mark">🎒</span> Uni<b>Lab</b></div>
-      <div class="privacy-pill">🔒 Files never leave your device</div>
+      <a class="btn secondary small" href="#/install">Get UniLab</a>
     </header>
   `));
 
@@ -74,7 +75,9 @@ function renderHome() {
     );
     grid.innerHTML = '';
     if (!visible.length) {
-      grid.appendChild(el(`<div class="empty-state">No tools match “${q}” — try another word.</div>`));
+      const empty = el('<div class="empty-state"></div>');
+      empty.textContent = `No tools match “${q}” — try another word.`;
+      grid.appendChild(empty);
       return;
     }
     for (const t of visible) {
@@ -101,7 +104,8 @@ function renderHome() {
       Your files are processed on your device. No file uploads, accounts or ads.</p>
       <p>UniLab · a student project from Mae Fah Luang University · Software Engineering Case Studies 1/2569</p>
       <p>Free &amp; open source — <a href="https://github.com/Thiha-Lynn/unilab" target="_blank" rel="noopener">⭐ star or contribute on GitHub</a>
-      &nbsp;·&nbsp; <a href="#/privacy">Privacy</a></p>
+      &nbsp;·&nbsp; <a href="#/privacy">Privacy</a>
+      &nbsp;·&nbsp; <a href="#/install">Install · v${__APP_VERSION__}</a></p>
     </footer>
   `));
 
@@ -235,6 +239,7 @@ function route() {
   const tool = TOOLS.find((t) => t.id === id);
   if (tool) renderTool(tool);
   // Not a tool, but a page rule.md PDPA 25 requires us to ship.
+  else if (id === 'install') { app.innerHTML = ''; renderInstall(app); }
   else if (id === 'privacy') { app.innerHTML = ''; renderPrivacy(app); }
   else renderHome();
   window.scrollTo(0, 0);
