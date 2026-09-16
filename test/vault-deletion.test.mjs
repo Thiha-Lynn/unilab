@@ -43,6 +43,7 @@ test('purge makes the bytes unreachable, not merely unlisted', () => {
 
   assert.equal(vault.state().count, 0, 'the vault should report nothing left');
   assert.equal(vault.state().bytes, 0, 'and no bytes held');
+  assert.ok(stored.every(item => item.blob === null), 'retained UI item references must release their blobs too');
   for (const url of urls) {
     assert.equal(stillReachable(url), false, 'the bytes must be gone, not flagged as deleted');
   }

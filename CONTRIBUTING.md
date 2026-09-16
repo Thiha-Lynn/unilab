@@ -177,3 +177,11 @@ Students here write in English, Thai, and Burmese — often in one document.
 Use the issue templates. For bugs, the file that triggered the problem (or an
 exact description of it) matters more than anything else — but **never upload
 private documents to an issue**; describe them instead.
+
+## Release review
+
+Use a feature branch and PR. `Tests and production build` must pass; include the
+relevant output evidence and limits. `npm test` and `npm run build` are required.
+The latter enforces the 8 MB offline core. Production publishing is documented in
+[ops/README.md](ops/README.md); GitHub Pages is only a preview. Never mark physical
+phone or privacy verification complete from a route-only smoke test.

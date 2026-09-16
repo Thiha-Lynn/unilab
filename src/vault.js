@@ -38,6 +38,7 @@ export function purge({ silent = false } = {}) {
     if (item.url) {
       try { URL.revokeObjectURL(item.url); } catch { /* already gone */ }
     }
+    item.blob = null;
   }
   items = [];
   expiresAt = 0;
@@ -97,5 +98,5 @@ export const TTL_MINUTES = DEFAULT_TTL_MINUTES;
 // Leaving the page drops everything immediately — no waiting for the timer, and
 // nothing lingering in a backgrounded tab.
 if (typeof window !== 'undefined') {
-  window.addEventListener('pagehide', () => purge({ silent: true }));
+  window.addEventListener('pagehide', () => purge());
 }
