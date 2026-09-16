@@ -79,7 +79,7 @@ export function toolShell(container, tool, spec) {
   // control, not just implied by a countdown the user only meets afterwards.
   uploader.querySelector('.ts__retention').textContent =
     `Results stay in this tab for ${ttlMinutes ?? vault.TTL_MINUTES} minutes, then are cleared. 
-     One file at a time, up to ${describeLimit(maxBytes)}.`;
+     ${multiple ? 'Multiple files supported, each' : 'One file at a time,'} up to ${describeLimit(maxBytes)}.`;
 
   const input = document.createElement('input');
   input.type = 'file';
