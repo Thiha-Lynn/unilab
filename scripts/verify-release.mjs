@@ -1,12 +1,30 @@
 import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
+import { get } from 'node:https';
+import { resolve4 } from 'node:dns';
 const base=process.argv[2], local=JSON.parse(readFileSync('dist/release.json'));
 if (!base?.startsWith('https://')) throw new Error('Pass the HTTPS deployment URL');
-const read = async path => {
-  const response=await fetch(`${base.replace(/\/$/,'')}/${path}`,{cache:'no-store',signal:AbortSignal.timeout(30000)});
-  if (!response.ok) throw new Error(`${path}: HTTP ${response.status}`);
-  return response;
-};
+// Query current DNS records directly; OS negative caches can outlive a new record.
+// HTTPS still validates the URL hostname and the full certificate chain.
+const lookup = (host, options, callback) => resolve4(host, (error, addresses) => {
+  if (error) return callback(error);
+  const records = addresses.map(address => ({address,family:4}));
+  callback(null, options.all ? records : records[0].address, 4);
+});
+const read = path => new Promise((resolve,reject) => {
+  const request = get(`${base.replace(/\/$/,'')}/${path}`, {lookup,headers:{'Cache-Control':'no-cache'}}, response => {
+    if(response.statusCode !== 200){response.resume();return reject(new Error(`${path}: HTTP ${response.statusCode}`));}
+    const chunks=[];
+    response.on('data',chunk=>chunks.push(chunk));
+    response.on('error',reject);
+    response.on('end',()=>{const bytes=Buffer.concat(chunks);resolve({
+      headers:{get:name=>response.headers[name.toLowerCase()]||null},
+      arrayBuffer:async()=>bytes, json:async()=>JSON.parse(bytes.toString()),
+    });});
+  });
+  request.setTimeout(30000,()=>request.destroy(new Error(`${path}: timeout`)));
+  request.on('error',reject);
+});
 const live=await (await read('release.json')).json();
 if (live.revision!==local.revision) throw new Error('Live revision differs from the release being deployed');
 const files=Object.entries(local.files);
