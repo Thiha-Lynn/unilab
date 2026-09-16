@@ -472,7 +472,7 @@ export function toolShell(container, tool, spec) {
     // There is no such link here, so ours hands you the *tool* instead: scan it
     // and carry on with the same tool on your phone, where the photo already is.
     const { default: QRCode } = await import('qrcode');
-    const url = `${location.origin}${location.pathname}#/${tool.id}`;
+    const url = `https://unilab.ztvmm.live/#/${encodeURIComponent(tool.id)}`;
     const canvas = document.createElement('canvas');
     await QRCode.toCanvas(canvas, url, { width: 232, margin: 1 });
     const dialog = el(`
