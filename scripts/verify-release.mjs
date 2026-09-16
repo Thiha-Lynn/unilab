@@ -11,7 +11,7 @@ const lookup = (host, options, callback) => resolve4(host, (error, addresses) =>
   const records = addresses.map(address => ({address,family:4}));
   callback(null, options.all ? records : records[0].address, 4);
 });
-const read = path => new Promise((resolve,reject) => {
+const readOnce = path => new Promise((resolve,reject) => {
   const request = get(`${base.replace(/\/$/,'')}/${path}`, {lookup,headers:{'Cache-Control':'no-cache'}}, response => {
     if(response.statusCode !== 200){response.resume();return reject(new Error(`${path}: HTTP ${response.statusCode}`));}
     const chunks=[];
@@ -25,6 +25,16 @@ const read = path => new Promise((resolve,reject) => {
   request.setTimeout(30000,()=>request.destroy(new Error(`${path}: timeout`)));
   request.on('error',reject);
 });
+const read = async path => {
+  for (let attempt=1; attempt<=3; attempt++) {
+    try { return await readOnce(path); }
+    catch (error) {
+      const transient = ['ECONNRESET','ETIMEDOUT','EAI_AGAIN'].includes(error.code) || /timeout|HTTP 50[234]/.test(error.message);
+      if (!transient || attempt===3) throw new Error(`${path}: ${error.message}`, {cause:error});
+      await new Promise(resolve=>setTimeout(resolve,attempt*500));
+    }
+  }
+};
 const live=await (await read('release.json')).json();
 if (live.revision!==local.revision) throw new Error('Live revision differs from the release being deployed');
 const files=Object.entries(local.files);
