@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# HISTORICAL bootstrap only. Current release layout/configuration: ops/README.md.
 #
 # First-time provisioning of UniLab on the AWS Lightsail box `awam-prod`
 # (3.0.126.159, ap-southeast-1), served at https://unilab.3-0-126-159.nip.io
@@ -100,7 +101,7 @@ cat > "$TMP/unilab-headers.conf" <<'CONF'
 add_header X-Content-Type-Options    "nosniff" always;
 add_header X-Frame-Options           "SAMEORIGIN" always;
 add_header Referrer-Policy           "strict-origin-when-cross-origin" always;
-add_header Permissions-Policy        "geolocation=(), microphone=(), camera=()" always;
+add_header Permissions-Policy        "geolocation=(), microphone=(self), camera=(self)" always;
 add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
 CONF
 scp -q "$TMP/unilab-headers.conf" "$HOST:/tmp/unilab-headers.conf"

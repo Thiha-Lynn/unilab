@@ -112,6 +112,9 @@ export const TOOLS = [
     desc: 'Stitch voice memos and clips into one file.',
     load: () => import('./tools/audio-merge.js') },
   // ---- pdf ----
+  { id: 'html-to-pdf', name: 'Lecture HTML → PDF', icon: '🌐', category: 'pdf',
+    desc: 'Turn HTML lectures into PDFs — every slide, ready for any PDF reader.',
+    load: () => import('./tools/html-to-pdf.js') },
   { id: 'merge-pdf', name: 'Merge PDF', icon: '➕', category: 'pdf',
     desc: 'Combine reports, cover pages and appendices into one file.',
     load: () => import('./tools/merge-pdf.js') },

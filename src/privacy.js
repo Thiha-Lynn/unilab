@@ -47,13 +47,14 @@ export function renderPrivacy(app) {
       go to the Network tab, and run any tool. No request carries your file.</p>
 
       <h2>What is held, and for how long</h2>
-      <p>Only the <b>finished result</b>, and only in this tab's memory, for
-      <b>${TTL_MINUTES} minutes</b>. It is never written to disk, and it is dropped when the
-      countdown ends, when you press <b>Delete now</b>, or the moment you close the tab —
-      whichever happens first. The file you started with is never held at all.</p>
-      <p class="check">This is proven by an automated test, not asserted: after a purge the
-      result's object URL no longer resolves, so the bytes are unreachable rather than
-      merely delisted. See <code>test/vault-deletion.test.mjs</code>.</p>
+      <p>The selected source and previews stay in this tab while you work. Finished results
+      are available for <b>${TTL_MINUTES} minutes</b>, then their download URLs and references
+      are cleared. <b>Clear files from memory</b> clears finished results sooner. Close the
+      tab to release the source and previews too. Files are not saved to app storage;
+      a copy you explicitly download stays on your device until you delete it.</p>
+      <p class="check">Automated tests check result URL revocation and released blob references.
+      Browser memory reclamation is controlled by the browser; this is not secure erasure
+      of your original file or downloaded copies.</p>
 
       <h2>What is fetched from the network, and why</h2>
       <p>The page itself, and — for two tools only — a program the tool needs in order to
@@ -67,19 +68,19 @@ export function renderPrivacy(app) {
       request</b> — the model comes to your file, not the other way round.</p>
 
       <h2>How to erase a result</h2>
-      <p>Press <b>Delete now</b> on the download screen, or close the tab. Both drop the
+      <p>Press <b>Clear files from memory</b> on the download screen, or close the tab. Both drop the
       result immediately. There is no account to delete, no data of yours on a server to
       request, and no form to fill in — the delete button <i>is</i> the erasure right,
       exercised directly.</p>
 
       <h2>Cookies, ads and analytics</h2>
       <p>None. No advertising, no analytics, no tracking pixels, no third-party scripts
-      that watch you. Nothing about what you do here is measured or sent anywhere, so
-      there is no consent banner — there is nothing to consent to.</p>
+      that watch you. The hosting server receives ordinary requests for app assets, including your IP address
+      and browser headers. It does not receive the files you process.</p>
 
       <h2>Limits worth knowing</h2>
       <ul>
-        <li>One file at a time, up to ${describeLimit(MAX_FILE_BYTES)}; files the tool
+        <li>Each tool states its file count and size limit (at most ${describeLimit(MAX_FILE_BYTES)}); files the tool
         cannot open are refused and not read.</li>
         <li>Because the work happens on your device, a large video is bounded by how fast
         that device is. We cannot promise server speed, and we do not.</li>

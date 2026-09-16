@@ -59,6 +59,7 @@ export function toolShell(container, tool, spec) {
   const files = [];
   let optionApi = null;
   let unwatch = null;
+  let disposed = false;
   const thumbUrls = new Set();
 
   const root = el(`<div class="ts" data-stage="upload"></div>`);
@@ -340,9 +341,11 @@ export function toolShell(container, tool, spec) {
     const started = performance.now();
     try {
       const result = await run(ctx, { signal: controller.signal });
+      if (disposed || controller.signal.aborted) throw new DOMException('Canceled', 'AbortError');
       if (!result?.outputs?.length) throw new Error('Nothing came back from that job. Try different settings.');
       showDone(result, performance.now() - started);
     } catch (err) {
+      if (disposed) return;
       setStage('work');
       if (err?.name === 'AbortError' || /cancel/i.test(err?.message ?? '')) toast('Canceled');
       else errorBox(container, err.message);
@@ -395,6 +398,12 @@ export function toolShell(container, tool, spec) {
     unwatch?.();
     unwatch = vault.watch((s) => {
       countEl.textContent = vault.formatCountdown(s.msLeft);
+      if (!s.count) {
+        downloadBtn.onclick = null;
+        filesBox.replaceChildren();
+        outputs.forEach(o => { o.blob = null; });
+        result.zip = null;
+      }
       if (!s.count && root.dataset.stage === 'done') {
         toast('Files cleared from memory');
         setStage('work');
@@ -500,7 +509,10 @@ export function toolShell(container, tool, spec) {
   // Leaving the tool tears everything down: object URLs, the vault, the ticker.
   window.addEventListener('hashchange', function leave() {
     window.removeEventListener('hashchange', leave);
+    disposed = true; controller?.abort();
+    vault.purge();
     unwatch?.();
+    files.length = 0;
     for (const url of thumbUrls) { try { URL.revokeObjectURL(url); } catch { /* gone */ } }
     thumbUrls.clear();
     vault.purge({ silent: true });

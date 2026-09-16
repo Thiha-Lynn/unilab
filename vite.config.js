@@ -1,6 +1,10 @@
 import { defineConfig } from 'vite';
-import { readdirSync, writeFileSync } from 'node:fs';
-import { join, resolve } from 'node:path';
+import { readFileSync, writeFileSync } from 'node:fs';
+import { resolve } from 'node:path';
+import { execFileSync } from 'node:child_process';
+import { writeManifests } from './scripts/build-manifest.js';
+
+const revision = process.env.GITHUB_SHA || execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim();
 
 // Tiny build plugin: after the bundle is written (and public/ has been copied
 // into the output directory), walk that directory and write precache.json —
@@ -13,10 +17,6 @@ import { join, resolve } from 'node:path';
 // precache.json (must always be fetched fresh, never from cache).
 function precacheManifest() {
   let outDir;
-  const walk = (dir, prefix = '') =>
-    readdirSync(dir, { withFileTypes: true }).flatMap((d) =>
-      d.isDirectory() ? walk(join(dir, d.name), `${prefix}${d.name}/`) : [`${prefix}${d.name}`]
-    );
   return {
     name: 'unilab-precache-manifest',
     apply: 'build',
@@ -25,18 +25,17 @@ function precacheManifest() {
       outDir = resolve(config.root, config.build.outDir);
     },
     closeBundle() {
-      const files = walk(outDir)
-        .filter((f) => f !== 'sw.js' && f !== 'precache.json' && !f.endsWith('.DS_Store'))
-        .sort();
-      const entries = ['./', ...files.map((f) => `./${f}`)];
-      writeFileSync(join(outDir, 'precache.json'), JSON.stringify(entries, null, 2));
-      console.log(`[precache] wrote precache.json (${entries.length} entries)`);
+      const worker = resolve(outDir, 'sw.js');
+      writeFileSync(worker, readFileSync(worker, 'utf8').replace('unilab-v4', `unilab-${revision.slice(0,12)}`));
+      const result = writeManifests(outDir, revision);
+      console.log(`[precache] ${result.count} files, ${(result.bytes / 1e6).toFixed(2)} MB core (8 MB budget)`);
     },
   };
 }
 
 export default defineConfig({
   base: './',
+  define: { __RELEASE_ID__: JSON.stringify(revision.slice(0,12)) },
   build: {
     target: 'es2022',
     chunkSizeWarningLimit: 1500,

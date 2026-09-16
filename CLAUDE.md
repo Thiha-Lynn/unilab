@@ -1,8 +1,8 @@
 # UniLab — project rules for Claude
 
 **Course:** 1305493 Software Engineering Case Studies, MFU, 1/2569 · Dr. Prasara Jakkaew
-**Repo:** https://github.com/Thiha-Lynn/unilab · **Live:** https://thiha-lynn.github.io/unilab/
-**Phase:** DISCOVER (W1–W5). **No production code until the User Validation Gate passes (Sep 8 2026).**
+**Repo:** https://github.com/Thiha-Lynn/unilab · **Live:** https://unilab.ztvmm.live/
+**Phase:** Week 6 scope/release work. The owner explicitly authorized implementation and deployment on 16 Sep 2026. Instructor topic approval and the Week 5 gate outcome remain **pending** until today’s presentation; never infer a pass from shipped code.
 
 ## What UniLab is
 
@@ -122,3 +122,11 @@ Requirement conventions:
 - If anything is unclear, **ask and offer at least 3 options. Never guess.**
 - Every change under `.claude/` or `.docs/` gets committed and pushed the same session —
   a spec that only exists on one laptop does not count at the Gate.
+
+## Owner change request, 16 Sep 2026
+
+CR1 authorizes HTML lecture to PDF conversion and deployment hardening. It is
+recorded separately in `.docs/03-build/20260916-week6.md`, not invented as an
+interview pain or silently inserted into the validated course requirements.
+Keep F8/F11 parked for course commitment until the team resolves Q5/Q6. See
+`ops/README.md` for canonical production, release checks and rollback.

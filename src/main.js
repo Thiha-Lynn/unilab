@@ -35,7 +35,7 @@ function renderHome() {
     <section class="hero">
       <h1>Every tool a student needs,<br>in one place.</h1>
       <p>Photos, PDFs, video and audio — edited right here, with no sign-up, no ads
-         and no upload limits. Everything runs inside your browser, so your files
+         and no paid quotas. Device and file-size limits apply. Everything runs inside your browser, so your files
          stay on your device.</p>
       <div class="search">
         <span class="icon">🔍</span>
@@ -98,7 +98,7 @@ function renderHome() {
   wrap.appendChild(el(`
     <footer class="footer">
       <p><b>🔒 Private by design:</b> every tool runs 100% in your browser.
-      Nothing is uploaded, tracked or stored — PDPA-friendly by architecture.</p>
+      Your files are processed on your device. No file uploads, accounts or ads.</p>
       <p>UniLab · a student project from Mae Fah Luang University · Software Engineering Case Studies 1/2569</p>
       <p>Free &amp; open source — <a href="https://github.com/Thiha-Lynn/unilab" target="_blank" rel="noopener">⭐ star or contribute on GitHub</a>
       &nbsp;·&nbsp; <a href="#/privacy">Privacy</a></p>
@@ -119,7 +119,7 @@ function renderHome() {
 // ---------------------------------------------------------------------------
 // Must match CACHE_NAME in public/sw.js — if that bumps, bump this with it so
 // the "already downloaded" flag resets for the new cache version.
-const SW_CACHE_NAME = 'unilab-v3';
+const SW_CACHE_NAME = `unilab-${__RELEASE_ID__}`;
 const OFFLINE_FLAG = `unilab.offline.${SW_CACHE_NAME}`;
 
 function buildOfflineBlock() {
@@ -127,8 +127,7 @@ function buildOfflineBlock() {
     <div style="margin-top:18px">
       <button class="btn secondary small">⬇ Make UniLab work offline</button>
       <p class="note" style="margin-bottom:0"></p>
-      <p class="note" style="margin-top:6px">Offline mode covers the app itself — the OCR language packs and the
-        background-removal model still download once on first use of those two tools.</p>
+      <p class="note" style="margin-top:6px">Download the core tools in under 8 MB. OCR and background removal need extra engines or model data on first use; prepare those while online. Large files are limited by your device.</p>
     </div>
   `);
   const btn = block.querySelector('button');
@@ -178,7 +177,7 @@ function buildOfflineBlock() {
             status.textContent = `⚠️ ${msg.total - msg.failed} of ${msg.total} files saved (${formatBytes(msg.bytes)}) — ${msg.failed} failed. Try again for full offline support.`;
           } else {
             localStorage.setItem(OFFLINE_FLAG, String(Date.now()));
-            status.textContent = `✅ All ${TOOLS.length} tools now work with no connection — even in flight mode. (${formatBytes(msg.bytes)})`;
+            status.textContent = `✅ Core tools saved for offline use (${formatBytes(msg.bytes)}). OCR and background removal require their optional downloads first.`;
           }
         } else if (msg.type === 'PRECACHE_ERROR') {
           navigator.serviceWorker.removeEventListener('message', onMessage);

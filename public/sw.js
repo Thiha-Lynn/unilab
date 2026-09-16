@@ -5,7 +5,7 @@
 // visited (exact hashed filenames aren't known at write-time, so we can't
 // precache everything up front).
 
-const CACHE_NAME = 'unilab-v3';
+const CACHE_NAME = 'unilab-v4';
 const PRECACHE_URLS = ['./', './index.html'];
 
 // ---------------------------------------------------------------------------
@@ -43,7 +43,7 @@ self.addEventListener('activate', (event) => {
         const keys = await caches.keys();
         await Promise.all(
           keys
-            .filter((key) => key !== CACHE_NAME)
+            .filter((key) => key.startsWith('unilab-') && key !== CACHE_NAME)
             .map((key) => caches.delete(key))
         );
       } catch (err) {
@@ -128,11 +128,11 @@ self.addEventListener('fetch', (event) => {
 });
 
 // ---------------------------------------------------------------------------
-// message: explicit "download everything" precache. The home page's
+// message: explicit offline core precache. The home page's
 // "Make UniLab work offline" button posts { type: 'PRECACHE_ALL' }.
 // precache.json is written at build time (see vite.config.js) and lists every
-// app file; each entry is fetched and stored in the SAME versioned cache the
-// fetch handler reads from, so every tool works offline even if never opened.
+// core app file (optional AI runtimes excluded); each entry is fetched and stored in the SAME versioned cache the
+// fetch handler reads from. OCR/model downloads must be prepared separately.
 // Replies to the requesting page:
 //   { type: 'PRECACHE_PROGRESS', done, total }      after each batch
 //   { type: 'PRECACHE_DONE', bytes, failed, total } on completion

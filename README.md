@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <a href="https://thiha-lynn.github.io/unilab/"><b>🎒 Open UniLab →</b></a>
+  <a href="https://unilab.ztvmm.live/"><b>🎒 Open UniLab →</b></a>
 </p>
 
 <p align="center">
@@ -15,9 +15,8 @@
 
 **UniLab** is a free, open-source toolbox for students — think iLovePDF /
 iLoveIMG, but with one radical difference: **everything runs 100% inside your
-browser.** No uploads, no accounts, no ads, no task limits, no file-size caps,
-and your documents never touch a server. Once loaded, it even works offline as
-an installable PWA.
+browser.** No uploads, no accounts, no ads, no paid quotas,
+and your documents never touch a server. Device and file-size limits apply. The optional offline core is under 8 MB; OCR and background removal need additional downloads.
 
 Built by students at Mae Fah Luang University for **1305493 Software
 Engineering Case Studies** (1/2569) — and for every student who has fought an
@@ -59,17 +58,28 @@ The trade-off, stated honestly: no server-grade conversions (PDF→Word needs a
 server; we don't do it), and PDF compression rasterizes text. We think that's
 the right trade for student daily life.
 
-## The tools (58)
+## The tools (59)
 
 | Category | Tools |
 | --- | --- |
 | 🖼️ **Image** (13) | Compress (*"must be under X MB"* target mode) · Resize · Crop (ID-photo presets) · Convert · Images→PDF · **HEIC→JPG** · Add Text · Rotate · Watermark · **Remove Background** · **Blur Faces** · Enlarge (Lanczos-3) · Photo Editor |
 | 🎬 **Video** (7) | Compress · Trim · Convert · Resize for 9:16/1:1/16:9 · Video→GIF · Video→Photos · Screen Recorder |
 | 🎵 **Audio** (11) | **Enhance Voice** (one-press clean-up) · **Remove Noise** (spectral + optional on-device neural) · Fix Volume (LUFS) · Change Speed (pitch-preserved) · Cut Silences · Equalizer (live preview) · Join Audio · Extract Audio · Trim · Convert · Voice Recorder |
-| 📄 **PDF** (20) | Merge (page ranges + contents page) · Split (named parts) · Compress (3 levels or a size cap) · Rotate · PDF→Images · Organize · Watermark · Page Numbers · **Sign** · Crop · **Edit** · **OCR (19 languages)** · Fill Form · Unlock · **Redact** · Compare · PDF→Markdown · Scan to PDF · Word→PDF · Excel→PDF |
+| 📄 **PDF** (21) | **Lecture HTML→PDF** · Merge (page ranges + contents page) · Split (named parts) · Compress (3 levels or a size cap) · Rotate · PDF→Images · Organize · Watermark · Page Numbers · **Sign** · Crop · **Edit** · **OCR (19 languages)** · Fill Form · Unlock · **Redact** · Compare · PDF→Markdown · Scan to PDF · Word→PDF · Excel→PDF |
 | ✍️ **Text** (2) | Word Counter (Unicode-correct — see below) · Citation Generator (APA 7 / MLA 9) |
 | 🎓 **Study** (2) | GPA Calculator (Thai university scale, saved on-device) · Pomodoro Focus Timer |
 | 🧰 **Everyday** (3) | **Workflows** · QR Code Maker (link + Wi-Fi, never expires) · Unit Converter (incl. Thai land units ไร่/งาน/ตร.วา) |
+
+### Lecture HTML → PDF
+
+Select a self-contained .html lecture, review every slide, and download a PDF on
+the same device. Original-layout mode preserves slides, embedded diagrams and CSS;
+portrait reading mode makes a one-column copy. The download uses page images for
+consistent display in PDF readers. Browser Print / Save PDF can retain selectable
+text. JavaScript is disabled; external assets and script-generated content are
+not fetched. The UI reports missing images and script limitations. Limits: 20 MB,
+150 pages. Actual W3 (34 slides) and W4 (18 slides) lectures are local QA references,
+not redistributed in this repository.
 
 ### Workflows — chained tools, free
 
@@ -173,3 +183,12 @@ the browser with real files, and owned by the team.
 ## License
 
 [MIT](LICENSE) — free to use, learn from, and fork.
+
+## Current release and Week 6
+
+Production and rollback: [ops/README.md](ops/README.md). CI runs tests and enforces
+the offline size budget before publishing the Pages preview. Production is an
+explicit, tested, atomic release; its commit is visible at `/release.json`.
+
+[Week 6 scope and evidence](.docs/03-build/20260916-week6.md) distinguishes shipped
+software from course approval and pending physical-device evidence.

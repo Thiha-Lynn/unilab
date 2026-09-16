@@ -800,3 +800,9 @@ audio.media-el { max-height: none; background: transparent; border: none; }
   font-size: 14px;
 }
 .privacy-page__body code { font-size: 13px; }
+/* Lecture preview keeps the source's layout width while fitting phone screens. */
+.html-preview { width:100%; min-width:0; }
+.html-preview .actions { display:flex; flex-wrap:wrap; align-items:center; gap:10px; }
+.html-preview [data-count] { flex:1; text-align:center; font-size:14px; }
+.html-preview__viewport { width:100%; overflow:hidden; background:#fff; border-radius:12px; box-shadow:0 2px 16px #0001; }
+.html-preview__viewport iframe { display:block; }
