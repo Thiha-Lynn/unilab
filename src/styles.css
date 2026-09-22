@@ -64,15 +64,16 @@ input, select, textarea { font: inherit; color: inherit; }
 /* ---------- header ---------- */
 .topbar {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 18px 0; margin-bottom: 8px;
+  padding: 18px 0; margin-bottom: 8px; gap: 12px;
 }
+.topbar__actions { display: flex; align-items: center; gap: 10px; }
 .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 20px; letter-spacing: -0.02em; color: var(--ink); }
 .logo .mark { font-size: 24px; }
 .logo b { color: var(--accent); }
 .privacy-pill {
   font-size: 12.5px; font-weight: 600; color: var(--good);
   background: var(--good-soft); border-radius: 999px; padding: 6px 12px;
-  white-space: nowrap;
+  white-space: nowrap; display: inline-flex; align-items: center; gap: 4px;
 }
 
 /* ---------- hero ---------- */
@@ -255,9 +256,42 @@ table.clean td { padding: 8px 10px; border-bottom: 1px solid var(--line); }
 @keyframes toast-in { from { opacity: 0; transform: translateX(-50%) translateY(10px); } }
 
 @media (max-width: 640px) {
-  .controls { gap: 10px; }
-  .panel { padding: 18px 16px; }
-  .privacy-pill { display: none; }
+  .wrap { padding: 0 14px 60px; }
+  .topbar { padding: 12px 0; gap: 8px; }
+  .topbar__actions { gap: 8px; }
+  .privacy-pill { font-size: 11px; padding: 4px 8px; }
+  .privacy-pill__text { display: none; }
+  .privacy-pill::after { content: "On-device"; font-weight: 600; }
+  .panel { padding: 18px 14px; }
+
+  /* Issue 2: Controls layout and symmetrical wrapping on mobile */
+  .controls {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 12px;
+    align-items: end;
+  }
+  .controls .field { width: 100%; min-width: 0; }
+  .controls .field input, .controls .field select { width: 100%; min-width: 0; }
+  .controls .field input[type="range"] { min-width: 0; width: 100%; }
+  .controls .field:has(input[type="range"]), .controls .field:has(textarea) {
+    grid-column: 1 / -1;
+  }
+
+  /* Issue 1: Tabular tools mobile card transformation (GPA calculator) */
+  table.clean, table.clean tbody { display: block; width: 100%; }
+  table.clean thead { display: none; }
+  table.clean tr {
+    display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+    background: var(--bg); border: 1px solid var(--line); border-radius: 10px;
+    padding: 10px; margin-bottom: 10px;
+  }
+  table.clean td { padding: 0; border: none; }
+  table.clean td:first-child { width: 100%; flex: 1 1 100%; }
+  table.clean td:nth-child(2) { flex: 1; min-width: 70px; }
+  table.clean td:nth-child(3) { flex: 1; min-width: 70px; }
+  table.clean td:nth-child(4) { flex: 0 0 auto; margin-left: auto; }
+  table.clean td input, table.clean td select { width: 100% !important; box-sizing: border-box; }
 }
 
 /* ---------- media tools (video & audio) ---------- */
@@ -756,13 +790,21 @@ audio.media-el { max-height: none; background: transparent; border: none; }
   .ts__side__scroll { padding: 18px 16px 8px; }
   .ts__side__foot { padding: 12px 16px 14px; }
 
-  /* Home grid: two smaller cards per row reads like their mobile site and
-     halves the scrolling through 50 tools. */
-  .grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
-  .tool-card { padding: 14px 12px; gap: 6px; }
-  .tool-card .icon { width: 36px; height: 36px; font-size: 19px; border-radius: 9px; }
-  .tool-card h3 { font-size: 14px; }
-  .tool-card p { font-size: 12px; }
+  /* Issue 5: Category pills horizontal swipe on mobile */
+  .pills {
+    display: flex; flex-wrap: nowrap; overflow-x: auto; justify-content: flex-start;
+    gap: 8px; margin: 16px 0 20px; padding: 4px 2px 10px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  }
+  .pills::-webkit-scrollbar { display: none; }
+  .pill { flex-shrink: 0; white-space: nowrap; font-size: 13.5px; padding: 7px 14px; }
+
+  /* Issue 3: Home grid two balanced cards per row down to 320px */
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .tool-card { padding: 12px 10px; gap: 6px; }
+  .tool-card .icon { width: 34px; height: 34px; font-size: 18px; border-radius: 8px; }
+  .tool-card h3 { font-size: 13.5px; }
+  .tool-card p { font-size: 11.5px; }
 
   .ts__done__row { gap: 10px; }
   .ts__download { padding: 15px 22px; font-size: 16px; }

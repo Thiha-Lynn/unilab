@@ -28,7 +28,10 @@ function renderHome() {
   wrap.appendChild(el(`
     <header class="topbar">
       <div class="logo"><span class="mark">🎒</span> Uni<b>Lab</b></div>
-      <a class="btn secondary small" href="#/install">Get UniLab</a>
+      <div class="topbar__actions">
+        <span class="privacy-pill" title="Every tool runs 100% in your browser">🔒 <span class="privacy-pill__text">Files stay on your device</span></span>
+        <a class="btn secondary small" href="#/install">Get UniLab</a>
+      </div>
     </header>
   `));
 
