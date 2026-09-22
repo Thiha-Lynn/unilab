@@ -37,99 +37,20 @@ Workflows — traced to hypotheses **no participant raised**, so they are **park
 (spec §2.1, Q5, Q6) rather than papered over: ids kept, code untouched, decision in W6. The interview instrument is in
 [all questions, EN/TH/MY](.docs/01-requirements/02-interviews/ALL-QUESTIONS.md).
 
-## Why client-side?
+## Application baseline
 
-| | Upload-based sites | UniLab |
-|---|---|---|
-| Your transcript / ID scan | goes to their server | never leaves your device |
-| Free tier | 2 tasks/day, size caps, ads, watermarks | everything, always |
-| Slow campus Wi-Fi | upload + download round-trip | instant |
-| Offline | ✗ | ✓ (PWA) |
-| PDPA / privacy story | a policy you must trust | an architecture you can verify |
+The retained v0.2.0 source provides 59 tools across PDF, image, video, audio, text, study and utility categories. They share one workflow: **select a file → process on this device → download**.
 
-The trade-off, stated honestly: no server-grade conversions (PDF→Word needs a
-server; we don't do it), and PDF compression rasterizes text. We think that's
-the right trade for student daily life.
+Files are processed locally. Optional OCR languages and background-removal models need an initial download. Device memory, supported codecs and file-size limits affect what can run. Compression and lecture HTML conversion may rasterize output; inspect readability before submitting a document.
 
-## The tools (59)
-
-| Category | Tools |
-| --- | --- |
-| **Image** (13) | Compress (*"must be under X MB"* target mode) · Resize · Crop (ID-photo presets) · Convert · Images→PDF · **HEIC→JPG** · Add Text · Rotate · Watermark · **Remove Background** · **Blur Faces** · Enlarge (Lanczos-3) · Photo Editor |
-| **Video** (7) | Compress · Trim · Convert · Resize for 9:16/1:1/16:9 · Video→GIF · Video→Photos · Screen Recorder |
-| **Audio** (11) | **Enhance Voice** (one-press clean-up) · **Remove Noise** (spectral + optional on-device neural) · Fix Volume (LUFS) · Change Speed (pitch-preserved) · Cut Silences · Equalizer (live preview) · Join Audio · Extract Audio · Trim · Convert · Voice Recorder |
-| **PDF** (21) | **Lecture HTML→PDF** · Merge (page ranges + contents page) · Split (named parts) · Compress (3 levels or a size cap) · Rotate · PDF→Images · Organize · Watermark · Page Numbers · **Sign** · Crop · **Edit** · **OCR (19 languages)** · Fill Form · Unlock · **Redact** · Compare · PDF→Markdown · Scan to PDF · Word→PDF · Excel→PDF |
-| **Text** (2) | Word Counter (Unicode-correct — see below) · Citation Generator (APA 7 / MLA 9) |
-| **Study** (2) | GPA Calculator (Thai university scale, saved on-device) · Pomodoro Focus Timer |
-| **Everyday** (3) | **Workflows** · QR Code Maker (link + Wi-Fi, never expires) · Unit Converter (incl. Thai land units ไร่/งาน/ตร.วา) |
-
-### Lecture HTML → PDF
-
-Select a self-contained .html lecture, review every slide, and download a PDF on
-the same device. Original-layout mode preserves slides, embedded diagrams and CSS;
-portrait reading mode makes a one-column copy. The download uses page images for
-consistent display in PDF readers. Browser Print / Save PDF can retain selectable
-text. JavaScript is disabled; external assets and script-generated content are
-not fetched. The UI reports missing images and script limitations. Limits: 20 MB,
-150 pages. Actual W3 (34 slides) and W4 (18 slides) lectures are local QA references,
-not redistributed in this repository.
-
-### Workflows — chained tools, free
-
-iLovePDF sells *Workflows* as a Premium feature, and it has to be paid for: every hop
-in a chain costs them another upload, another store and another download. In a browser
-the file is already in memory, so a chain is not only free — it is **faster** than
-running the tools one at a time.
-
-Pick your steps, save the chain, drop your files in. Ready-made ones cover the evenings
-that actually happen: *photos of notes → one small numbered PDF*, *lecture video → a
-64 kbps MP3*, *report → stamped DRAFT and numbered*.
-
-### The audio lab
-
-Adobe's Podcast Enhance does its cleaning on Adobe's servers. UniLab's audio lab does
-real signal processing in the tab: spectral noise gating that learns the room from the
-gaps between sentences, mains-hum notching, LUFS loudness normalisation, pitch-preserving
-speed change, silence cutting that tells you how many minutes it saves — and an optional
-**neural voice mode** running RNNoise as WebAssembly, bundled with the site (112 KB,
-same-origin, works offline). Honest limits, stated in the tools themselves: steady
-background noise comes out; a voice drowned by a passing truck does not come back.
-
-### Video and audio, which no comparable site has
-
-Neither iLovePDF nor iLoveIMG has a single video or audio tool. UniLab has **eighteen**
-— 7 video and 11 audio. The video side runs on **WebCodecs**, the browser API that hands a
-page the same hardware decoder the video player uses; the audio side runs on our own
-`audio-fx.js` (FFT, spectral gate, LUFS, WSOLA). That is how a 500 MB lecture recording gets trimmed in seconds without being
-uploaded. We deliberately did *not* use `ffmpeg.wasm`: it would mean shipping ~31 MB of
-WebAssembly and decoding on the CPU.
-
-### Your files are never stored — and you can watch the clock
-
-Finished files live in this tab's memory with a countdown on screen, and are dropped when
-it runs out, when you close the tab, or when you press the bin. Upload-based sites show
-you the same countdown; the difference is that theirs is a promise about a copy on their
-servers, and ours is about the only copy there has ever been.
-
-## Unicode done right 🇹🇭🇲🇲
-
-Most counters get Southeast Asian scripts wrong. UniLab counts what you
-actually see:
-
-- Burmese **ရွဲ့** = **1 character** (not 4) — grapheme-cluster counting via
-  `Intl.Segmenter`, with a separate *code points* stat for portals that count
-  the raw way, and a combo inspector that shows the decomposition (ရ + ွ + ဲ + ့).
-- Thai **สวัสดี** = 4 characters, and word counting works without spaces.
-- Zero-width spaces (the invisible separators in Myanmar text) count as
-  spaces; **။** and **។** count as sentence ends.
-- 👨‍👩‍👧‍👦 = 1 character, like your eyes say.
+The current web app and native packages are maintained independently in the [product repository](https://github.com/Thiha-Lynn/unilab-releases). Its installation guide is the source of truth for current versions, offline capabilities and platform testing limitations.
 
 ## Run it locally
 
 ```bash
 git clone https://github.com/Thiha-Lynn/unilab.git
 cd unilab
-npm install
+npm ci
 npm run dev
 ```
 
@@ -149,52 +70,22 @@ Two tools download a model on first use — OCR fetches its language data, and R
 Background fetches an ONNX model. Both are gated behind an explicit button that states
 the size, and in both cases it is the *engine* that is downloaded: your file stays here.
 
-## What we deliberately don't do
+## Development and contribution
 
-PDF→Word, PDF→PowerPoint, PDF→Excel, HTML→PDF, password *protection*, PDF/A and repair
-all need a server, so they are not here. Neither is an AI summariser or translator: those
-send your document to a model provider, which is the exact thing this project exists to
-avoid. Compress PDF rasterises pages, so its output has no selectable text — the tool
-says so on screen.
+Use this repository for course evidence and baseline corrections. Product changes belong in [unilab-releases](https://github.com/Thiha-Lynn/unilab-releases). Read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request. Main is protected and requires the test/build check.
 
-Deploys to GitHub Pages automatically on every push to `main`
-([workflow](.github/workflows/deploy.yml)).
+Current collaborators with write access: [6631503097](https://github.com/6631503097), [6631503088](https://github.com/6631503088), [zawwinhuttt](https://github.com/zawwinhuttt), and [myo-zin-thant18](https://github.com/myo-zin-thant18). Repository owner: [Thiha-Lynn](https://github.com/Thiha-Lynn).
 
-## Contributing
+Repository access and historical contribution credit are different. The owner confirmed that nine early commits used the wrong Git identity. [`.mailmap`](.mailmap) corrects their mapped attribution while retaining commit IDs and history. GitHub's contributor display may still show the original identity.
 
-New tools, translations (Thai/Burmese UI is on the roadmap), bug reports and
-first-time contributions are all welcome — a new tool is ~1 file plus a
-registry entry. Start with **[CONTRIBUTING.md](CONTRIBUTING.md)**; the one
-unbendable rule is that everything must run client-side.
+## Validation and publication
 
-## AI use disclosure
+Run `npm test` and `npm run build` before proposing source changes. [CI](.github/workflows/deploy.yml) verifies changes before publishing the coursework Pages preview. Production is deployed from the independent product repository. [Operations notes](ops/README.md) explain the separation.
 
-Prototype scaffolding and market research were AI-assisted (Claude), as
-encouraged by the course's AI-first policy. All code is reviewed, tested in
-the browser with real files, and owned by the team.
+[Week 6 scope and evidence](.docs/03-build/20260916-week6.md) distinguishes shipped software from course approval and pending physical-device evidence. A successful build is not evidence of instructor approval or universal device compatibility.
 
-## License
+## AI use and licensing
 
-[MIT](LICENSE) — free to use, learn from, and fork.
+Prototype scaffolding and development used AI assistance. Test results and documented limitations should be read alongside implementation claims; physical-device coverage remains incomplete.
 
-## Current release and Week 6
-
-Production and rollback: [ops/README.md](ops/README.md). CI runs tests and enforces
-the offline size budget before publishing the Pages preview. Production is an
-explicit, tested, atomic release; its commit is visible at `/release.json`.
-
-[Week 6 scope and evidence](.docs/03-build/20260916-week6.md) distinguishes shipped
-software from course approval and pending physical-device evidence.
-
-### UniLab 0.2.0 — installation and sharing
-
-[Install or download UniLab](https://unilab.ztvmm.live/#/install). Android and
- iOS/iPadOS use the home-screen web app. macOS, Windows and Linux preview packages
-are maintained in [unilab-releases](https://github.com/Thiha-Lynn/unilab-releases),
-with a pinned source revision, build workflows, SHA-256 checksums and explicit
-platform testing notes. These are unsigned previews, not app-store releases.
-
-The static HTML includes Open Graph and Twitter large-image metadata and a
-1200 × 630 PNG. Regenerate it with `node scripts/social-card.mjs`. Chat services
-may cache previews of previously shared links; the site cannot force a refresh
-of an existing message. Hash routes share the same site-wide card.
+Original UniLab source retains [MIT notices](LICENSE). Dependencies have their own licenses. The combined product distribution is AGPL-3.0-only; see the [product license and third-party notices](https://github.com/Thiha-Lynn/unilab-releases#license-and-source).
