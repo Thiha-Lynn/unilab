@@ -1,26 +1,8 @@
-<p align="center">
-  <img src="docs/banner.png" alt="UniLab — every tool a student needs, in one place" width="100%" />
-</p>
+# UniLab coursework
 
-<p align="center">
-  <a href="https://unilab.ztvmm.live/"><b>🎒 Open UniLab →</b></a>
-</p>
+Assignment evidence and the retained application baseline for **1305493 Software Engineering Case Studies**, Mae Fah Luang University.
 
-<p align="center">
-  <a href="https://github.com/Thiha-Lynn/unilab/actions/workflows/deploy.yml"><img src="https://github.com/Thiha-Lynn/unilab/actions/workflows/deploy.yml/badge.svg" alt="Deploy status" /></a>
-  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-5b5bd6" alt="MIT license" /></a>
-  <a href="CONTRIBUTING.md"><img src="https://img.shields.io/badge/PRs-welcome-2a9d8f" alt="PRs welcome" /></a>
-  <img src="https://img.shields.io/badge/servers-zero-e1972b" alt="Zero servers" />
-</p>
-
-**UniLab** is a free, open-source toolbox for students — think iLovePDF /
-iLoveIMG, but with one radical difference: **everything runs 100% inside your
-browser.** No uploads, no accounts, no ads, no paid quotas,
-and your documents never touch a server. Device and file-size limits apply. The optional offline core is under 8 MB; OCR and background removal need additional downloads.
-
-Built by students at Mae Fah Luang University for **1305493 Software
-Engineering Case Studies** (1/2569) — and for every student who has fought an
-LMS upload cap at 11:55pm.
+[Open UniLab](https://unilab.ztvmm.live/) · [Product source and downloads](https://github.com/Thiha-Lynn/unilab-releases) · [Coursework preview](https://thiha-lynn.github.io/unilab/)
 
 ## Repository separation
 
@@ -31,9 +13,9 @@ This repository is the **assignment and coursework record**, with the v0.2.0 app
 - **Canonical product:** [unilab.ztvmm.live](https://unilab.ztvmm.live/).
 - **Coursework preview:** [GitHub Pages](https://thiha-lynn.github.io/unilab/), built from this repository's baseline.
 
-The product packages use their documented dependency licenses (including AGPL background removal); the MIT badge above refers to original UniLab source notices. Product releases do not establish lecturer approval or a passed Week 5 gate. Those outcomes remain pending the presentation and must be recorded from actual feedback.
+The product packages use their documented dependency licenses (including AGPL background removal); original UniLab source retains its MIT notices. Product releases do not establish lecturer approval or a passed Week 5 gate. Those outcomes remain pending the presentation and must be recorded from actual feedback.
 
-## 📋 Coursework — start here if you are grading this
+## Coursework — start here if you are grading this
 
 Everything for the course lives in [`.docs/`](.docs/). The one-screen map is
 [`.docs/README.md`](.docs/README.md); the traceability chain is
@@ -73,13 +55,13 @@ the right trade for student daily life.
 
 | Category | Tools |
 | --- | --- |
-| 🖼️ **Image** (13) | Compress (*"must be under X MB"* target mode) · Resize · Crop (ID-photo presets) · Convert · Images→PDF · **HEIC→JPG** · Add Text · Rotate · Watermark · **Remove Background** · **Blur Faces** · Enlarge (Lanczos-3) · Photo Editor |
-| 🎬 **Video** (7) | Compress · Trim · Convert · Resize for 9:16/1:1/16:9 · Video→GIF · Video→Photos · Screen Recorder |
-| 🎵 **Audio** (11) | **Enhance Voice** (one-press clean-up) · **Remove Noise** (spectral + optional on-device neural) · Fix Volume (LUFS) · Change Speed (pitch-preserved) · Cut Silences · Equalizer (live preview) · Join Audio · Extract Audio · Trim · Convert · Voice Recorder |
-| 📄 **PDF** (21) | **Lecture HTML→PDF** · Merge (page ranges + contents page) · Split (named parts) · Compress (3 levels or a size cap) · Rotate · PDF→Images · Organize · Watermark · Page Numbers · **Sign** · Crop · **Edit** · **OCR (19 languages)** · Fill Form · Unlock · **Redact** · Compare · PDF→Markdown · Scan to PDF · Word→PDF · Excel→PDF |
-| ✍️ **Text** (2) | Word Counter (Unicode-correct — see below) · Citation Generator (APA 7 / MLA 9) |
-| 🎓 **Study** (2) | GPA Calculator (Thai university scale, saved on-device) · Pomodoro Focus Timer |
-| 🧰 **Everyday** (3) | **Workflows** · QR Code Maker (link + Wi-Fi, never expires) · Unit Converter (incl. Thai land units ไร่/งาน/ตร.วา) |
+| **Image** (13) | Compress (*"must be under X MB"* target mode) · Resize · Crop (ID-photo presets) · Convert · Images→PDF · **HEIC→JPG** · Add Text · Rotate · Watermark · **Remove Background** · **Blur Faces** · Enlarge (Lanczos-3) · Photo Editor |
+| **Video** (7) | Compress · Trim · Convert · Resize for 9:16/1:1/16:9 · Video→GIF · Video→Photos · Screen Recorder |
+| **Audio** (11) | **Enhance Voice** (one-press clean-up) · **Remove Noise** (spectral + optional on-device neural) · Fix Volume (LUFS) · Change Speed (pitch-preserved) · Cut Silences · Equalizer (live preview) · Join Audio · Extract Audio · Trim · Convert · Voice Recorder |
+| **PDF** (21) | **Lecture HTML→PDF** · Merge (page ranges + contents page) · Split (named parts) · Compress (3 levels or a size cap) · Rotate · PDF→Images · Organize · Watermark · Page Numbers · **Sign** · Crop · **Edit** · **OCR (19 languages)** · Fill Form · Unlock · **Redact** · Compare · PDF→Markdown · Scan to PDF · Word→PDF · Excel→PDF |
+| **Text** (2) | Word Counter (Unicode-correct — see below) · Citation Generator (APA 7 / MLA 9) |
+| **Study** (2) | GPA Calculator (Thai university scale, saved on-device) · Pomodoro Focus Timer |
+| **Everyday** (3) | **Workflows** · QR Code Maker (link + Wi-Fi, never expires) · Unit Converter (incl. Thai land units ไร่/งาน/ตร.วา) |
 
 ### Lecture HTML → PDF
 
