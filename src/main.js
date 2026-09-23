@@ -27,7 +27,7 @@ function renderHome() {
 
   wrap.appendChild(el(`
     <header class="topbar">
-      <div class="logo"><span class="mark">🎒</span> Uni<b>Lab</b></div>
+      <div class="logo"><span class="mark" aria-hidden="true">U</span><span>Uni<b>Lab</b></span></div>
       <div class="topbar__actions">
         <span class="privacy-pill" title="Every tool runs 100% in your browser">🔒 <span class="privacy-pill__text">Files stay on your device</span></span>
         <a class="btn secondary small" href="#/install">Get UniLab</a>
@@ -37,12 +37,13 @@ function renderHome() {
 
   const hero = el(`
     <section class="hero">
-      <h1>Every tool a student needs,<br>in one place.</h1>
+      <p class="hero__eyebrow">Free · Private · On your device</p>
+      <h1>Every tool a student needs,<br><em>in one place.</em></h1>
       <p>Photos, PDFs, video and audio — edited right here, with no sign-up, no ads
          and no paid quotas. Device and file-size limits apply. Everything runs inside your browser, so your files
          stay on your device.</p>
       <div class="search">
-        <span class="icon">🔍</span>
+        <span class="icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span>
         <input type="search" placeholder="Search tools… (e.g. compress video, PDF, GPA)" aria-label="Search tools" />
       </div>
     </section>
