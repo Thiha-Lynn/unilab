@@ -1,6 +1,6 @@
 # Design system — UniLab
 
-**Course:** 1305493 · W4 · 2 Sep 2026
+**Course:** 1305493 · W4 · 2 Sep 2026 · **Revised:** 23 Sep 2026 (premium visual pass)
 **Source of truth:** [`src/styles.css`](../../src/styles.css) `:root`, and the component
 vocabulary in [`src/option-ui.js`](../../src/option-ui.js).
 
@@ -16,53 +16,67 @@ drift apart.
 
 ## 1. Tokens
 
+The look is **warm ivory paper, near-black ink, champagne-gold detailing**, with serif display
+headings. Every token has a dark-mode value, applied under `@media (prefers-color-scheme: dark)`.
+
 ### 1.1 Surface & text
 
-| Token | Value | Use |
-|---|---|---|
-| `--bg` | `#f6f7fb` | Page ground. Never white — cards must lift off it. |
-| `--card` | `#ffffff` | Any raised surface: tool card, panel, sidebar, modal. |
-| `--ink` | `#171c26` | Primary text and headings. |
-| `--muted` | `#5b6472` | Secondary text, descriptions, hints. |
-| `--faint` | `#8a93a2` | Metadata, placeholders, disabled labels. |
-| `--line` | `#e4e7ee` | Every border and divider. One line colour, no exceptions. |
+| Token | Light | Dark | Use |
+|---|---|---|---|
+| `--bg` | `#f7f4ee` | `#0d0e11` | Page ground. Never white — cards must lift off it. |
+| `--bg-2` | `#efe9df` | `#121318` | Secondary ground, for a recessed band inside a page. |
+| `--card` | `#fffdf9` | `#15171c` | Any raised surface: tool card, panel, sidebar, modal. |
+| `--ink` | `#16171b` | `#eeeae2` | Primary text and headings. |
+| `--muted` | `#5d5850` | `#aaa498` | Secondary text, descriptions, hints. |
+| `--faint` | `#857f75` | `#7b766c` | Metadata, placeholders, disabled labels. |
+| `--line` | `#e6dfd3` | `#26282f` | Every border and divider. |
+| `--line-strong` | `#d6cbb8` | `#3a3a3f` | Input borders, secondary-button outlines, dashed group frames. |
 
-### 1.2 Accent & state
+### 1.2 Accent, gold & state
 
-| Token | Value | Use |
-|---|---|---|
-| `--accent` | `#5b5bd6` | The single primary action on a screen. |
-| `--accent-strong` | `#4747c2` | Hover / pressed state of that action only. |
-| `--accent-soft` | `#eeeefc` | Selected chips, active tabs, accent-tinted fills. |
-| `--good` | `#1d9e77` | Success, "done", the privacy pill. |
-| `--good-soft` | `#e4f6ef` | Success background fill. |
-| `--warn` | `#d97706` | A caution the user can proceed past — e.g. a disclosed download. |
-| `--danger` | `#d64545` | Destructive only: "Delete now", remove a file. |
+| Token | Light | Dark | Use |
+|---|---|---|---|
+| `--accent` | `#16171b` | `#e5d2a4` | The single primary action on a screen (ink-black; champagne in dark). |
+| `--accent-strong` | `#000000` | `#f2e4c2` | Hover / pressed state of that action only. |
+| `--accent-soft` | `#f1ebdf` | `#221f18` | Selected chips, active tabs, accent-tinted fills. |
+| `--on-accent` | `#fffdf9` | `#16171b` | Text on an `--accent` fill. Never hardcode `#fff` on `--accent`. |
+| `--gold` | `#a8843f` | `#d9bb7c` | Decorative detailing only: focus rings, hairlines, hover borders. Not for body text in light mode (3.2:1). |
+| `--gold-ink` | `#8a6a32` | `#d9bb7c` | Gold used **as text** — eyebrow, italic headline accent, logo, links on hover (≥ 4.5:1). |
+| `--gold-soft` | `#f3ead8` | `#26211a` | Dropzone fill, secondary-button hover, the hero glow. |
+| `--good` | `#2f7a5c` | `#62c194` | Success, "done", the privacy pill. |
+| `--good-soft` | `#e8f1eb` | `#13271e` | Success background fill. |
+| `--warn` | `#b86e12` | `#e4a24a` | A caution the user can proceed past — e.g. a disclosed download. |
+| `--danger` | `#b3413a` | `#e0706a` | Destructive only: "Delete now", remove a file. |
 
 ### 1.3 Category colours
 
-One hue per tool category, used for the tool-card icon tile and nothing else. Never as a text
-or background colour.
+One deep jewel tone per tool category. Used for the tool's icon tile, its category label, the
+card's hover accent line, and the tool page's own action buttons (`--cc`). Every value holds
+**≥ 5:1 contrast with white text**, so buttons stay readable. In dark mode the category label
+is mixed toward `--ink` for legibility.
 
 | Token | Value | Category |
 |---|---|---|
-| `--c-image` | `#d64593` | Image (13 tools) |
-| `--c-pdf` | `#d65045` | PDF (20) |
-| `--c-video` | `#d3891a` | Video (7) |
-| `--c-audio` | `#0e9bb5` | Audio (11) |
-| `--c-text` | `#3d8bd6` | Text (2) |
-| `--c-study` | `#1d9e77` | Study (2) |
-| `--c-utility` | `#9147d6` | Everyday (3) |
+| `--c-image` | `#a3456a` | Image (13 tools) |
+| `--c-pdf` | `#a8433a` | PDF (20) |
+| `--c-video` | `#93641f` | Video (7) |
+| `--c-audio` | `#24707e` | Audio (11) |
+| `--c-text` | `#36628f` | Text (2) |
+| `--c-study` | `#2d7156` | Study (2) |
+| `--c-utility` | `#684a9a` | Everyday (3) |
 
-### 1.4 Shape, depth, type, space
+### 1.4 Shape, depth, type, motion, space
 
 | Token | Value | Rule |
 |---|---|---|
-| `--radius` | `14px` | Cards and panels. Controls use `10px`; icon tiles `9px`. |
-| `--shadow` | `0 1px 2px rgba(23,28,38,.05), 0 10px 30px rgba(23,28,38,.07)` | The **only** shadow. Two layers: a contact shadow and a soft lift. |
-| Font stack | `-apple-system, BlinkMacSystemFont, "Segoe UI", Inter, system-ui, "Noto Sans Thai", sans-serif` | **`Noto Sans Thai` is not optional** — a large part of the user base reads Thai, and a missing Thai face renders as tofu. |
-| Type scale | `11 · 12 · 12.5 · 13 · 13.5 · **14** · 14.5 · 15 · 16 · 18 · 19 px`, hero `clamp(28px, 4.5vw, 44px)` | `14px` is the body default. Do not introduce a size outside this scale. |
-| Space scale | `6 · 8 · 10 · 12 · 14 · 16 · 18 · 22 · 30 px` | Multiples of 2 from a 10–14 px base. |
+| `--radius` | `16px` | Base radius. Controls `10–12px`; icon tiles `9–11px`; large surfaces (tool cards, panels, work stage, modals) `18–22px`. |
+| `--shadow` | `0 1px 1px rgba(40,32,20,.04), 0 2px 6px rgba(40,32,20,.04), 0 18px 40px -18px rgba(40,32,20,.16)` | Resting depth for every raised surface. Warm-tinted, never grey. |
+| `--shadow-lift` | `0 1px 2px rgba(40,32,20,.05), 0 10px 20px -8px rgba(40,32,20,.12), 0 30px 60px -24px rgba(40,32,20,.22)` | Hover / elevated state only: a hovered card, the work stage, modals, toasts. These two are the **only** shadows. |
+| `--font-sans` | `-apple-system, BlinkMacSystemFont, "Segoe UI Variable Text", "Segoe UI", Inter, system-ui, "Noto Sans Thai", "Noto Sans Myanmar", sans-serif` | Body and UI text. **`Noto Sans Thai` is not optional** — a large part of the user base reads Thai, and a missing Thai face renders as tofu. |
+| `--font-display` | `"Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", "URW Palladio L", Georgia, "Noto Serif", "Noto Serif Thai", serif` | Headings only: hero, tool title, sidebar title, done title, logo, stat numbers. **System fonts only — no web-font request**, so nothing is fetched from a third party (privacy + offline). |
+| `--ease` | `cubic-bezier(.2, .7, .2, 1)` | The one easing curve. Transitions 0.12–0.35 s. All motion is disabled under `prefers-reduced-motion`. |
+| Type scale | `10.5 · 11 · 11.5 · 12 · 12.5 · 13 · 13.5 · **14** · 14.5 · 15 · 16 · 18 · 19 · 20 · 21 · 22 px`, privacy h1 `40px`, hero `clamp(34px, 5.6vw, 64px)` | `14px` is the body default. Display headings use weight 500–600; small caps labels use letter-spacing `.14–.22em`. Do not introduce a size outside this scale. |
+| Space scale | `6 · 8 · 10 · 12 · 14 · 16 · 18 · 22 · 30 · 34 px`, hero top `64px` (phone `34px`) | Multiples of 2 from a 10–14 px base. |
 | Breakpoints | `640px` phone · `900px` tablet/stack · `1440px` wide | Mobile-first: write the phone rule, widen upward. |
 
 ---
@@ -103,6 +117,15 @@ loading state.
 `[hidden]` is `display:none` at the lowest specificity and any `display:flex/grid` component
 silently ignores it. Toggle visibility with `el.hidden`, never by editing `style.display`.
 
+**R8 — Gold is a detail, never a surface.** `--gold` / `--gold-ink` appear only as hairlines,
+focus rings, small-caps labels, an italic headline accent, and hover states. A gold-filled
+button or a gold background panel breaks the look. Text in gold always uses `--gold-ink`.
+
+**R9 — Style overrides live in the premium layer.** The visual polish is one block at the end of
+`styles.css`. It must not set the paddings or font sizes that the phone
+`@media (max-width: 640px)` rules control; desktop-only spacing goes in
+`@media (min-width: 641px)`. Otherwise the later block silently overrides the mobile layout.
+
 ---
 
 ## 3. What the prototype may and may not do
@@ -113,3 +136,4 @@ silently ignores it. Toggle visibility with `el.hidden`, never by editing `style
 | Use the components named in R4 | Invent a new component or CSS class |
 | Show all three stages | Add a fourth stage or a second primary action |
 | Be lo-fi and unstyled in places | Contradict the user-journey step order |
+| Use `--font-display` for headings | Load a web font from a third-party server |
