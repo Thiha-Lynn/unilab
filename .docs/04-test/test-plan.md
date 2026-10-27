@@ -27,12 +27,13 @@
 Testing evaluates the **1 Core Workflow** of UniLab across mobile and desktop browsers:
 $$\textbf{Select a file} \;\longrightarrow\; \textbf{Transform on this device} \;\longrightarrow\; \textbf{Download the result (Vault Countdown)}$$
 
-All test cases and user sessions evaluate the locked **MUST** requirements and user pain points (`P1`–`P12`):
-1. **Document Compression against Named LMS Caps (F3, F5, F6 · P1, P5, P7):** PDF compression with live size estimation before the run, targeting named caps (decimal MB), reporting honestly if the cap cannot be met. Rasterized output must be visually checked for legibility.
-2. **Format Intake & Conversion (F1, F4 · P4):** Converting iPhone photos (`.heic`) to standard `.jpg` with client-side EXIF metadata stripping (rule.md PDPA 16).
-3. **Multi-Part Assembly & Visual Organization (F2, F10 · P8):** Merging multiple document parts with visual page thumbnail reordering, rotation, and omission.
-4. **Privacy & Zero-Upload Custody (F6, F12 · P2, LR1–LR8):** Verification that 0 bytes of file payloads leave the browser, and in-memory outputs purge upon the 30-minute vault countdown or manual deletion.
-5. **Mobile Touch Ergonomics & Responsive Behavior (NFR2, P10):** Operation on smartphones (iOS Safari, Android Chrome) ensuring $\ge 38\text{ px}$ touch targets, $16\text{ px}$ input typography, and swipeable category navigation.
+The four UAT tasks selected by the owner are:
+1. **Slides cleanup and compression:** correct page 3, grayscale the document and target a decimal 5,000,000-byte limit. Inspect readability; report a cap miss honestly.
+2. **Mixed-file assembly:** combine an application PDF, JPG scorecard and PNG identity fixture into one ordered three-page PDF.
+3. **Signing and protection:** draw/place a signature and export a PDF that requires the chosen test password. Wrong or missing passwords must fail.
+4. **Extraction:** save only page 42 of a 120-page synthetic textbook.
+
+Cross-cutting engineering checks cover zero document payload uploads, bounded optional analytics, file-size screening, result-URL revocation on purge, keyboard/touch interaction, 16 px mobile inputs and >=38 px touch targets. Signing results expire after 10 minutes; the other field tools use 30 minutes. HEIC conversion and permanent redaction remain regression cases, outside the four scored UAT tasks. Physical-device memory profiling and privacy-network inspection remain required before making broader claims.
 
 ### 1.2 What We Will NOT Test (Out-of-Scope / Boundaries)
 1. **LMS-Side Confirmation (P11 / W5):** Network status or permission issues inside third-party LMS portals (Moodle, Google Classroom) after the file is downloaded.
@@ -63,7 +64,7 @@ UniLab follows the standard three-tier Testing Pyramid supplemented by real-user
 | **1. Unit Testing** | Automated tests via `node:test` (`test/**/*.test.mjs`). Evaluates pure utility logic: grapheme segmentation for Thai/Burmese script (`Intl.Segmenter`), byte conversions, filename stems, timer calculations, and SVG DOMPurify sanitization. | **100% Pass** for the recorded suite. Record the actual test count, duration and commit; do not reuse historical counts. |
 | **2. Integration Testing** | Evaluates interoperability between browser engines: `pdf-lib` + `pdf.js` page pipelines, Mediabunny WebCodecs audio/video worker dispatch, intake file-screening gates, and `vault.js` in-memory countdown purge. | Object URLs revoked and known references cleared after purge; repeat-run memory profile on target devices pending. File screening enforces stated limits. |
 | **3. End-to-End (E2E)** | Automated and semi-automated smoke tests running in Chromium/WebKit across the built distribution (`dist/`). Verifies drag-drop upload $\to$ option sidebar update $\to$ progress execution $\to$ vault download button. | Zero console errors; production build strictly respects the **8 MB offline budget**. |
-| **4. User Acceptance (UAT)** | Field testing with **$\ge 10$ real student participants** on their personal smartphones and laptops. Evaluates task completion, usability (SUS), and technology acceptance (TAM). | Task Success Rate $\ge 90\%$; Mean SUS $\ge 75$; Mean TAM PU/PEOU $\ge 4.0$. |
+| **4. User Acceptance (UAT)** | Field testing with **$\ge 10$ real student participants** on their personal smartphones and laptops. Evaluates task completion, usability (SUS), and technology acceptance (TAM). | Task Success Rate $\ge 90\%$; Mean SUS $\ge 75$; Mean TAM PU/PEOU/BI $\ge 4.0$. |
 
 ---
 
@@ -144,9 +145,9 @@ Following Slide 10:
 
 ```
 [00:00–03:00] Intro & Informed Consent (PDPA disclosure, explain think-aloud)
-[03:00–08:00] Baseline Measurement: Old Way (Perform Task 1 using current tool, e.g. iLovePDF/LINE)
+[03:00–08:00] Baseline Measurement: Old Way (observe matching task baselines; extend the session if needed)
 [08:00–20:00] UniLab Tasks 1–4 with Think-Aloud (Moderator observes; Note-taker times)
-[20:00–25:00] Questionnaires: SUS (10 items) + TAM (9 items)
+[20:00–25:00] Questionnaires: SUS (10 items) + TAM (11 items: PU4, PEOU4, BI3)
 [25:00–30:00] Debrief Interview (3 standard questions) + Wrap-up
 ```
 
@@ -244,7 +245,7 @@ Three standard post-session interview questions:
 1. **Execution:** 100% of planned 10 UAT sessions completed and logged with anonymized IDs (`U01`–`U10`).
 2. **Task Performance:** Overall task success rate reaches $\ge 90\%$.
 3. **Usability Score:** Mean System Usability Scale (SUS) score achieves $\ge 75.0$ (above average benchmark 68).
-4. **Technology Acceptance:** Mean TAM Perceived Usefulness (PU) and Ease of Use (PEOU) $\ge 4.0 / 5.0$.
+4. **Technology Acceptance:** Mean TAM PU, PEOU and BI $\ge 4.0 / 5.0$.
 5. **Defect Severity:** Zero Severity 3 (Major) or Severity 4 (Catastrophic) usability blockers remaining before the final release.
 
 ---
