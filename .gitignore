@@ -3,3 +3,5 @@ dist
 .DS_Store
 *.local
 test/fixtures/h3-10mb.pdf
+
+__pycache__/
