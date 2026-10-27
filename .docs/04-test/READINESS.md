@@ -21,7 +21,7 @@ Product changes are in the companion `Thiha-Lynn/unilab-releases` pull request, 
 
 | When | Owner | Work and evidence |
 |---|---|---|
-| Before 28 October | All five members | Review the revised plan and submit through the agreed course channel. AI assistance does not imply team approval. |
+| 28 October, 23:59 Bangkok (latest Classroom screenshot) | All five members | Review the revised plan and submit through the agreed course channel. AI assistance does not imply team approval. |
 | 29–31 October | Swan / Myo | Recruit at least 10 eligible non-classmates, aiming for 30 distinct people. Do not count invitations as users. |
 | 2–3 November | QA / Tech Lead | Run a workflow pilot; pilot/translate/back-translate questionnaire wording with 2–3 people where needed. Test real iOS Safari, Android Chrome and laptops. |
 | 4 November | Moderator + observer | Observe 5 + 5 initial sessions on recorded builds, then extend recruitment. Keep consent, permissioned evidence and coded observations privately. |
@@ -37,3 +37,7 @@ python3 .docs/04-test/calc-metrics.py /private/path/real-results.csv --json /pri
 ```
 
 Copy the CSV outside the repository before entering data. The calculator's numerical PASS is not release approval: the team must also inspect evidence, test target devices and resolve severity 3–4 defects. Public usage sessions are separate from distinct verified people. Do not pool the old GitHub Pages build and canonical product outcomes.
+
+## Consultation update (latest announcement supplied by the owner)
+
+28 October, 12:00–15:00 Bangkok is optional online project consultation, seven minutes per team, not a lecture. The supplied Classroom screenshot shows the Test Plan due at 23:59 that day; this supersedes the older handout wording for planning, subject to checking the assignment. The booking sheet had no UniLab entry when read on 27 October. Book one genuinely empty row; no slot was booked by this change. Ask the advisor to confirm the four-task scope, ten-session minimum versus the 30-person stretch target, acceptable coded evidence and the release thresholds.

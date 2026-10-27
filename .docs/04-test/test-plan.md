@@ -3,7 +3,7 @@
 **Company 18 · DIGITAL IMPOSTERS PVT. CO., LTD.**
 **Course:** 1305493 Software Engineering Case Studies · Semester 1/2569 · Dr. Prasara Jakkaew, ADT MFU
 **Deliverable:** Post-Midterm Deliverable — Test Plan
-**Submission Deadline:** before 28 October 2026 (prepare and submit 27 October)
+**Submission Deadline:** 28 October 2026, 23:59 Bangkok (latest Classroom screenshot supplied 27 October; verify the assignment before submission). The older PDF says before 28 October.
 **Testing Date:** 4 November 2026 (Field Testing Day)
 **Final Presentation Date:** 18 November 2026 (Teams 11–20)
 
@@ -221,7 +221,7 @@ Three standard post-session interview questions:
 
 | Date | Activity | Responsible | Deliverable / Output |
 | :--- | :--- | :--- | :--- |
-| **Before 28 Oct 2026** | **Submit Test Plan** | All Team | Final `test-plan.md` submitted to Google Classroom |
+| **28 Oct, 23:59 Bangkok** | **Submit Test Plan** | All Team | Final `test-plan.md` submitted to Google Classroom |
 | **29–31 Oct** | Participant Pre-Recruitment | Swan Htut, Myo Zin | 10 MFU students booked for 4 Nov testing slots |
 | **31 Oct (Sat)** | Cybersecurity Lecture | All Team | Attendance in Room E4614; laptop lab |
 | **2–3 Nov** | Pilot Test & Data Sheets | Zaw Win Htut, Thiha | 1 pilot session run; Excel data collection sheets prepped |
