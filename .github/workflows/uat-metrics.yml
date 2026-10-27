@@ -1,0 +1,19 @@
+name: Validate field evidence kit
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  metrics:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python3 -m unittest discover -s .docs/04-test -p 'test_*.py' -v
+      - run: python3 .docs/04-test/calc-metrics.py --json /tmp/blank-report.json
+      - name: Verify unfilled slots never become participant evidence
+        run: python3 -c "import json; d=json.load(open('/tmp/blank-report.json')); assert d['completedSessions']==0 and d['eligibleParticipants']==0 and d['numericExitCriteria']=='PENDING'"

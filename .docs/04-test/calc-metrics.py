@@ -1,161 +1,129 @@
 #!/usr/bin/env python3
+"""UAT-2026-10-27: validate real observations and report denominators explicitly.
+Usage: python3 calc-metrics.py PRIVATE.csv [--json report.json]
+Reserved participant slots are not evidence. No third-party packages required.
 """
-calc-metrics.py - UniLab UAT & Usability Metrics Calculator
-Company 18 (Digital Imposters Pvt. Co., Ltd.) - Software Engineering Case Studies (1305493)
-
-Usage:
-    python3 calc-metrics.py [uat-scorecard-template.csv]
-
-Calculates:
-    - Before vs. After Task Durations and % Reduction
-    - Task Success Rates (%)
-    - System Usability Scale (SUS) Score according to Brooke (1996) standard
-    - Technology Acceptance Model (TAM) Constructs: PU, PEOU, BI according to Davis (1989)
-    - Formats output for immediate inclusion into Final Presentation slides (18 Nov).
-"""
-
-import sys
-import os
+import argparse
 import csv
+import json
+import math
+from pathlib import Path
+import re
 import statistics
 
-def compute_sus(q_responses):
-    """
-    Computes SUS according to Brooke (1996):
-    Odd items (1, 3, 5, 7, 9): score - 1
-    Even items (2, 4, 6, 8, 10): 5 - score
-    Sum * 2.5
-    """
-    if len(q_responses) != 10:
-        return 0.0
-    total = 0
-    for i, r in enumerate(q_responses):
-        if r is None:
-            continue
-        if i % 2 == 0:  # Odd items: Q1, Q3, Q5, Q7, Q9 (0-indexed: 0, 2, 4, 6, 8)
-            total += (r - 1)
-        else:          # Even items: Q2, Q4, Q6, Q8, Q10 (0-indexed: 1, 3, 5, 7, 9)
-            total += (5 - r)
-    return total * 2.5
+TASKS = ['Slides cleanup', 'Mixed-file assembly', 'Sign and protect', 'Page extraction']
+SCALES = {'SUS': [f'SUS_Q{i}' for i in range(1, 11)],
+          **{c: [f'TAM_{c}{i}' for i in range(1, n+1)] for c, n in [('PU', 4), ('PEOU', 4), ('BI', 3)]}}
+META = ['Participant_ID', 'Cohort_Wave', 'Session_Date', 'Build_Revision', 'Consent', 'Distinct_Person_Verified', 'Eligible_Non_Classmate', 'Session_Complete']
+TASK_FIELDS = [f'T{i}_{s}' for i in range(1, 5) for s in ['Baseline_Method', 'Before_sec', 'After_sec', 'Status', 'Output_Verified', 'Errors', 'Hesitations', 'Notes']]
+REQUIRED = META + TASK_FIELDS + sum(SCALES.values(), [])
 
-def get_sus_grade(score):
-    if score >= 84.1:
-        return "A+ (Best Imaginable)"
-    elif score >= 80.8:
-        return "A (Excellent)"
-    elif score >= 71.1:
-        return "B (Good)"
-    elif score >= 68.0:
-        return "C (Average / Benchmark)"
-    elif score >= 51.0:
-        return "D (Poor)"
-    else:
-        return "F (Unacceptable)"
+def number(value, name, *, likert=False, integer=False):
+    if not value: return None
+    try: n = float(value)
+    except (ValueError, TypeError): raise ValueError(f'{name}: expected a number')
+    if not math.isfinite(n) or n < 0: raise ValueError(f'{name}: expected a finite non-negative number')
+    if likert and (not n.is_integer() or not 1 <= n <= 5): raise ValueError(f'{name}: use an integer from 1 to 5')
+    if integer and not n.is_integer(): raise ValueError(f'{name}: use a whole number')
+    if name.endswith('_sec') and n <= 0: raise ValueError(f'{name}: measured duration must be positive')
+    return n
 
-def safe_float(val):
-    try:
-        return float(val)
-    except (ValueError, TypeError):
-        return None
+def compute_sus(values):
+    if len(values) != 10 or any(v is None for v in values): return None
+    for v in values: number(str(v), 'SUS', likert=True)
+    return 2.5 * sum(v-1 if i % 2 == 0 else 5-v for i, v in enumerate(values))
+
+def summary(values):
+    return {'n': len(values), 'mean': statistics.mean(values) if values else None,
+            'sd': statistics.stdev(values) if len(values) > 1 else None}
+
+def read_rows(path):
+    with open(path, newline='', encoding='utf-8-sig') as stream:
+        reader = csv.DictReader(stream)
+        if not reader.fieldnames or len(set(reader.fieldnames)) != len(reader.fieldnames): raise ValueError('Missing or duplicate CSV columns')
+        missing = set(REQUIRED) - set(reader.fieldnames)
+        if missing: raise ValueError('Missing columns: ' + ', '.join(sorted(missing)))
+        rows = []; seen = set()
+        for line, raw in enumerate(reader, 2):
+            if None in raw or any(v is None for v in raw.values()): raise ValueError(f'Line {line}: wrong number of CSV cells')
+            row = {k: v.strip() for k, v in raw.items()}
+            if not any(row.values()): continue
+            pid = row['Participant_ID']
+            if not re.fullmatch(r'U\d{2,3}', pid): raise ValueError(f'Line {line}: invalid participant code')
+            if pid in seen: raise ValueError(f'Duplicate participant: {pid}')
+            seen.add(pid)
+            if not any(v for k, v in row.items() if k not in ('Participant_ID', 'Cohort_Wave')): continue
+            for key in ['Consent', 'Distinct_Person_Verified', 'Eligible_Non_Classmate', 'Session_Complete'] + [f'T{i}_Output_Verified' for i in range(1,5)]:
+                if row[key] not in ('', 'Yes', 'No'): raise ValueError(f'{pid} {key}: use Yes/No or blank')
+            for i in range(1,5):
+                key = f'T{i}'
+                status = row[key+'_Status']
+                if status not in ('', 'Success', 'Assisted', 'Failed', 'Not attempted'): raise ValueError(f'{pid} {key}: invalid status')
+                method = row[key+'_Baseline_Method']
+                if method not in ('', 'observed', 'recalled'): raise ValueError(f'{pid} {key}: baseline method must be observed or recalled')
+                for suffix in ['Before_sec', 'After_sec', 'Errors', 'Hesitations']:
+                    row[key+'_'+suffix] = number(row[key+'_'+suffix], key+'_'+suffix, integer=suffix in ('Errors','Hesitations'))
+                if row[key+'_Before_sec'] is not None and not method: raise ValueError(f'{pid} {key}: baseline method required')
+                if status == 'Success' and (row[key+'_Output_Verified'] != 'Yes' or row[key+'_After_sec'] is None):
+                    raise ValueError(f'{pid} {key}: Success requires measured time and verified saved output')
+            for columns in SCALES.values():
+                for key in columns: row[key] = number(row[key], key, likert=True)
+            if row['Session_Complete'] == 'Yes':
+                if not all(row[k] == 'Yes' for k in ['Consent','Distinct_Person_Verified','Eligible_Non_Classmate']): raise ValueError(f'{pid}: completed session requires consent and eligibility verification')
+                if not row['Build_Revision'] or not row['Cohort_Wave']: raise ValueError(f'{pid}: build and wave required')
+                from datetime import date
+                try: date.fromisoformat(row['Session_Date'])
+                except ValueError: raise ValueError(f'{pid}: valid session date required')
+                for i in range(1,5):
+                    if row[f'T{i}_Status'] not in ('Success','Assisted','Failed') or any(row[f'T{i}_{s}'] is None for s in ['After_sec','Errors','Hesitations']):
+                        raise ValueError(f'{pid}: completed session needs four attempted/timed tasks and error/hesitation counts')
+            rows.append(row)
+        return rows
+
+def analyze(rows):
+    eligible = [r for r in rows if all(r[k] == 'Yes' for k in ['Consent','Distinct_Person_Verified','Eligible_Non_Classmate'])]
+    completed = [r for r in eligible if r['Session_Complete'] == 'Yes']
+    tasks = []
+    for i, name in enumerate(TASKS, 1):
+        attempted = [r for r in eligible if r[f'T{i}_Status'] in ('Success','Assisted','Failed')]
+        success = sum(r[f'T{i}_Status'] == 'Success' for r in attempted)
+        paired = [r for r in attempted if r[f'T{i}_Baseline_Method'] == 'observed' and r[f'T{i}_Before_sec'] is not None and r[f'T{i}_After_sec'] is not None and r[f'T{i}_Status'] == 'Success']
+        before = summary([r[f'T{i}_Before_sec'] for r in paired]); after = summary([r[f'T{i}_After_sec'] for r in paired])
+        tasks.append({'task': name, 'attempted': len(attempted), 'pending': len(eligible)-len(attempted), 'successful': success,
+                      'successRate': 100*success/len(attempted) if attempted else None,
+                      'pairedObservedBefore': before, 'pairedObservedAfter': after,
+                      'timeReductionPercent': 100*(before['mean']-after['mean'])/before['mean'] if paired else None,
+                      'errors': summary([r[f'T{i}_Errors'] for r in attempted if r[f'T{i}_Errors'] is not None]),
+                      'hesitations': summary([r[f'T{i}_Hesitations'] for r in attempted if r[f'T{i}_Hesitations'] is not None])})
+    scales = {}
+    for scale, columns in SCALES.items():
+        scores = []
+        for row in completed:
+            values = [row[c] for c in columns]
+            if any(v is None for v in values): continue
+            scores.append(compute_sus(values) if scale == 'SUS' else statistics.mean(values))
+        scales[scale] = summary(scores)
+    full_attempts = len(completed)*4
+    rate = 100*sum(r[f'T{i}_Status'] == 'Success' for r in completed for i in range(1,5))/full_attempts if completed else None
+    metrics_ready = len(completed) >= 10 and all(s['n'] == len(completed) for s in scales.values())
+    passed = metrics_ready and rate >= 90 and scales['SUS']['mean'] >= 75 and all(scales[c]['mean'] >= 4 for c in ('PU','PEOU','BI'))
+    return {'instrument': 'UAT-2026-10-27', 'recordedRows': len(rows), 'eligibleParticipants': len(eligible), 'completedSessions': len(completed),
+            'excludedUnverifiedRows': len(rows)-len(eligible), 'tasks': tasks, 'scales': scales,
+            'completedCohortTaskSuccessRate': rate, 'numericExitCriteria': 'PASS' if passed else ('NEEDS ATTENTION' if metrics_ready else 'PENDING'),
+            'releaseDecision': 'Human review required: physical devices, consent/evidence and zero open severity 3–4 defects.',
+            'definitions': ['Reserved rows are not people.', 'Timing pairs include successful tasks with observed baselines only; n is explicit.', 'SD is sample SD; absent for n < 2.', 'SUS 75 exit threshold; 80.8 stretch target.']}
 
 def main():
-    csv_path = sys.argv[1] if len(sys.argv) > 1 else os.path.join(os.path.dirname(__file__), "uat-scorecard-template.csv")
-    if not os.path.exists(csv_path):
-        print(f"Error: File not found at {csv_path}")
-        sys.exit(1)
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('csv', nargs='?', default=str(Path(__file__).with_name('uat-scorecard-template.csv')))
+    parser.add_argument('--json', type=Path)
+    args = parser.parse_args()
+    try:
+        rows = read_rows(args.csv); report = analyze(rows)
+        report['waves'] = {wave: analyze([r for r in rows if r['Cohort_Wave'] == wave]) for wave in sorted({r['Cohort_Wave'] for r in rows if r['Cohort_Wave']})}
+    except (ValueError, OSError) as error: parser.exit(2, f'Invalid evidence: {error}\n')
+    output = json.dumps(report, indent=2, allow_nan=False)
+    if args.json: args.json.write_text(output+'\n')
+    print(output)
 
-    participants = []
-    with open(csv_path, mode="r", encoding="utf-8-sig") as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            pid = row.get("Participant_ID", "").strip()
-            if not pid or pid.startswith("BENCHMARK") or pid.startswith("FORMULA"):
-                continue
-            participants.append(row)
-
-    print(f"\n==================================================================")
-    print(f"  UniLab Field Testing UAT Metrics Analysis (1305493 Case Studies)  ")
-    print(f"==================================================================")
-    print(f"Total Participants Analyzed: {len(participants)}")
-
-    if not participants:
-        print("No participant rows found in CSV.")
-        sys.exit(0)
-
-    # 1. Task Results
-    tasks = [
-        ("Task 1: Slides (Compress+Rotate+B&W)", "T1_Before_sec", "T1_After_sec", "T1_Status"),
-        ("Task 2: Merge (Portfolio Multi-file)", "T2_Before_sec", "T2_After_sec", "T2_Status"),
-        ("Task 3: Sign (Petition Sign+Encrypt)", "T3_Before_sec", "T3_After_sec", "T3_Status"),
-        ("Task 4: Split (Chapter Extract)", "T4_Before_sec", "T4_After_sec", "T4_Status"),
-    ]
-
-    print("\n--- 1. TASK PERFORMANCE: BEFORE vs. AFTER ---")
-    for name, b_col, a_col, s_col in tasks:
-        b_times = [safe_float(p.get(b_col)) for p in participants if safe_float(p.get(b_col)) is not None]
-        a_times = [safe_float(p.get(a_col)) for p in participants if safe_float(p.get(a_col)) is not None]
-        successes = [1 for p in participants if p.get(s_col, "").strip().lower() == "success"]
-
-        avg_b = statistics.mean(b_times) if b_times else 0.0
-        avg_a = statistics.mean(a_times) if a_times else 0.0
-        pct_imp = ((avg_b - avg_a) / avg_b * 100) if avg_b > 0 and avg_a > 0 else 0.0
-        succ_rate = (len(successes) / len(participants) * 100) if participants else 0.0
-
-        print(f"\n* {name}:")
-        print(f"  - Success Rate: {succ_rate:.1f}% ({len(successes)}/{len(participants)})")
-        print(f"  - Baseline Mean Time (Before): {avg_b:.1f}s")
-        print(f"  - UniLab Mean Time (After):    {avg_a:.1f}s" if avg_a > 0 else "  - UniLab Mean Time (After):    Pending field test data")
-        if pct_imp > 0:
-            print(f"  - Time Reduction:              {pct_imp:.1f}% faster")
-
-    # 2. SUS Scores
-    sus_scores = []
-    for p in participants:
-        q_vals = []
-        for i in range(1, 11):
-            val = safe_float(p.get(f"SUS_Q{i}"))
-            if val is not None:
-                q_vals.append(val)
-        if len(q_vals) == 10:
-            sus_scores.append(compute_sus(q_vals))
-
-    print("\n--- 2. SYSTEM USABILITY SCALE (SUS) ---")
-    if sus_scores:
-        avg_sus = statistics.mean(sus_scores)
-        sd_sus = statistics.stdev(sus_scores) if len(sus_scores) > 1 else 0.0
-        print(f"  - Mean SUS Score: {avg_sus:.1f} ± {sd_sus:.1f}")
-        print(f"  - Usability Grade: {get_sus_grade(avg_sus)}")
-        print(f"  - Target Status: {'PASS (>= 80.8 Grade A)' if avg_sus >= 80.8 else 'NEEDS ATTENTION (< 80.8)'}")
-    else:
-        print("  - SUS Responses pending collection on 4 November testing day.")
-        print("  - Target Benchmark: >= 80.8 (Grade A, Industry Avg = 68.0)")
-
-    # 3. TAM Constructs
-    pu_scores = []
-    peou_scores = []
-    bi_scores = []
-
-    for p in participants:
-        pu_vals = [safe_float(p.get(f"TAM_PU{i}")) for i in range(1, 5) if safe_float(p.get(f"TAM_PU{i}")) is not None]
-        peou_vals = [safe_float(p.get(f"TAM_PEOU{i}")) for i in range(1, 5) if safe_float(p.get(f"TAM_PEOU{i}")) is not None]
-        bi_vals = [safe_float(p.get(f"TAM_BI{i}")) for i in range(1, 3) if safe_float(p.get(f"TAM_BI{i}")) is not None]
-
-        if len(pu_vals) == 4:
-            pu_scores.append(statistics.mean(pu_vals))
-        if len(peou_vals) == 4:
-            peou_scores.append(statistics.mean(peou_vals))
-        if len(bi_vals) == 2:
-            bi_scores.append(statistics.mean(bi_vals))
-
-    print("\n--- 3. TECHNOLOGY ACCEPTANCE MODEL (TAM) ---")
-    if pu_scores and peou_scores and bi_scores:
-        print(f"  - Perceived Usefulness (PU):         {statistics.mean(pu_scores):.2f} / 5.0 (Target: >= 4.0)")
-        print(f"  - Perceived Ease of Use (PEOU):      {statistics.mean(peou_scores):.2f} / 5.0 (Target: >= 4.0)")
-        print(f"  - Behavioral Intention to Use (BI):  {statistics.mean(bi_scores):.2f} / 5.0 (Target: >= 4.0)")
-    else:
-        print("  - TAM Responses pending collection on 4 November testing day.")
-        print("  - Target Benchmark: >= 4.0 / 5.0 across PU, PEOU, and BI constructs.")
-    print("==================================================================\n")
-
-if __name__ == "__main__":
-    main()
+if __name__ == '__main__': main()
