@@ -1,230 +1,92 @@
-# UniLab Comprehensive Project Report
+# UniLab project report — verified status, 16 November 2026
 
-**Project Name:** UniLab — 100% Client-Side Academic Document Suite  
-**Company:** Digital Imposters Pvt. Co., Ltd. (Company 18)  
-**Course:** 1305493 Software Engineering Case Studies (Semester 1/2569)  
-**Instructor:** Dr. Prasara Jakkaew (School of Information Technology, Mae Fah Luang University)  
-**Live Production URL:** [https://unilab.ztvmm.live/](https://unilab.ztvmm.live/)  
-**Coursework Preview URL:** [https://thiha-lynn.github.io/unilab/](https://thiha-lynn.github.io/unilab/)  
-**Coursework Repository:** [https://github.com/Thiha-Lynn/unilab](https://github.com/Thiha-Lynn/unilab)  
-**Date of Report:** 27 October 2026  
+UniLab provides student document tools through one workflow: **select a file → transform it on this device → download the result**. The four current study tasks are slide cleanup/compression, mixed-file assembly, signing with password protection, and single-page extraction. The working product is demonstrated; formal user outcomes are not yet established.
 
----
+**Course:** 1305493 Software Engineering Case Studies, 1/2569 · Dr. Prasara Jakkaew. **Company:** Digital Imposters, Company 18. **Final presentation:** Team 2 in the updated timetable, 18 November 2026, 09:25–09:40 Bangkok, SE Lab. The current final rubric is Test 10 + Portfolio 10. See the [P1–P5 completion checklist](06-deliver/README.md).
 
-## Executive Summary
+## Sources and repository boundaries
 
-UniLab is a zero-telemetry, zero-upload, 100% client-side academic document processing suite engineered specifically for university students. Confronted with stringent Learning Management System (LMS) file size constraints, aggressive paywalls/watermarks on commercial web converters (e.g., iLovePDF, Smallpdf), and severe privacy risks when uploading identity documents (e.g., transcripts, ID cards, visas, petitions), students routinely face friction during high-stress deadline periods.
+- [Coursework repository](https://github.com/Thiha-Lynn/unilab): requirements, design, historical baseline, study plan and portfolio evidence. Audited main revision: `1194049dce475191a54ecfea628a4b4f6db819d2`.
+- [Product repository](https://github.com/Thiha-Lynn/unilab-releases): production application in `app/`, native packages and first-party usage collector. Reviewed main revision: `45e98702201d`; the full hash is in the verification record.
+- [Live product](https://unilab.ztvmm.live/), [release manifest](https://unilab.ztvmm.live/release.json), [aggregate usage dashboard](https://unilab.ztvmm.live/usage/).
+- [Classroom](https://classroom.google.com/c/ODU1NTkyOTA0MjY1): 3 November final instructions supersede the older split 11/18 November schedule. The registered repository sheet points to coursework `unilab/tree/main`; bring the separate product link as instructed for code in another repository.
 
-UniLab eliminates this entire class of problems through an uncompromising architectural invariant: **zero bytes of user files ever leave the local machine.** All file parsing, transformation, compression, redaction, encryption, and rendering execute entirely inside the client’s browser memory via WebAssembly and modern web APIs.
+The live manifest reports revision `9851fbb3a6d5e66b1287b3a065d01602d06dca1d`, built 28 October. Git comparison found its tree identical to reviewed product main. Browser checks below used a clean local build of main, not a newly deployed release.
 
-The project demonstrates end-to-end software engineering rigor:
-- **Empirical Grounding:** Backed by 15 pre-midterm contextual inquiry interviews across 15 distinct MFU undergraduate degree programmes (`S1`–`S15`), uncovering 12 validated user pains (`P1`–`P12`).
-- **Complete Traceability:** An unbroken chain connecting User Pains $\rightarrow$ Functional/Non-Functional/Legal Requirements (`F1`–`F15`, `NFR1`–`NFR7`, `LR1`–`LR8`) $\rightarrow$ Product Backlog Items (`B1`–`B35`) $\rightarrow$ Automated Test Suites.
-- **Strict Course Alignment:** Full adherence to the five course guardrails, the Alpha Demo refresh/hands-off criteria, and the Post-Midterm Test Plan with a planned 10-user field testing protocol on 4 November 2026 utilizing the System Usability Scale (SUS) and Technology Acceptance Model (TAM).
+## Team roles
 
----
+Roles and IDs follow the charter source and submitted test plan. They describe responsibilities, not proof of who performed every implementation task; use reviewed PRs and personal statements for actual contribution.
 
-## 1. Company Organization & Roles
-
-UniLab was founded and built by Company 18 (**Digital Imposters Pvt. Co., Ltd.**):
-
-| Name | Student ID | GitHub Handle | Primary Role | Core Responsibilities |
-|---|---|---|---|---|
-| **Myo Zin Thant** | `6631503079` | [`myo-zin-thant18`](https://github.com/myo-zin-thant18) | Product Owner | Requirements capture, backlog prioritization, stakeholder liaison, proposal ownership |
-| **Thiha Lin** | `6631503092` | [`Thiha-Lynn`](https://github.com/Thiha-Lynn) | Tech Lead / Architect | Core architecture, pipeline engineering, CI/CD, security invariants |
-| **Swan Htut Oakkar Aung** | `6631503088` | [`6631503088`](https://github.com/6631503088) | Designer / UX | Design system tokens, UI layout, mobile ergonomics, UAT test plan & instruments |
-| **Zaw Win Htut** | `6631503084` | [`zawwinhuttt`](https://github.com/zawwinhuttt) | QA Lead / Tester | Test suite, automated regression verification, UAT data collection |
-| **Team Member** | `6631503097` | [`6631503097`](https://github.com/6631503097) | Full-Stack Developer | Tool engine integration, media encoding, client-side workers |
-
----
-
-## 2. Problem Statement & Empirical Evidence
-
-### 2.1 The Core Student Dilemma
-University students submit assignments, project portfolios, and administrative petitions late at night under strict deadlines, primarily using smartphones or budget laptops. When attempting to prepare these files, four systemic problems compound:
-
-```
-[Deadline Pressure (11 PM)]
-           │
-           ├──► Problem A: Commercial Free Tiers Ration at the Critical Moment (P1)
-           │    (Watermarks, daily batch caps, paywalls encountered after work is completed)
-           │
-           ├──► Problem B: Inadvertent Surrender of Confidential Documents (P2)
-           │    (ID cards, medical forms, transcripts uploaded to unknown remote servers)
-           │
-           ├──► Problem C: Fragmented Multi-App Workflow Chains (P6)
-           │    (Hopping between 3 to 5 disparate apps and hopping between devices)
-           │
-           └──► Problem D: Blind Submissions & Hidden Failure Points (P7)
-                (Uninformative "Upload failed" errors, wrong orientation, bloated file size)
-```
-
-### 2.2 Empirical Research: The 15-Interview Study
-Rather than relying on synthetic assumptions or AI personas, the team conducted 15 semi-structured interviews between 22 August and 8 September 2026 across 15 distinct undergraduate majors at Mae Fah Luang University:
-
-- **Participants:** 15 students (`S1` to `S15`).
-- **Demographics:** Information Technology, Software Engineering, Multimedia, Business, English, Health Science, Applied Chemistry, Law, etc.
-- **Language Breakdown:** English (9), Thai (4), Burmese (2).
-- **Device Context:** 5 phone-only users, 7 started on phone and transferred to laptop.
-
-### 2.3 The 12 Validated User Pains (`P1`–`P12`)
-A hypothesis was only promoted to a verified pain if **at least two independent participants raised it unprompted**:
-
-| Pain ID | Description | Participant Citations | Architectural Impact |
-|---|---|---|---|
-| **P1** | Free tier runs out / watermarks appear right before deadline | S1, S3, S9, S13 | `F2` (No accounts, no limits, no paywalls) |
-| **P2** | Obligated to upload sensitive identity documents to untrusted cloud converters | S4, S7, S12, S14 | `F1`, `LR1`, `NFR1` (Zero server uploads; local execution) |
-| **P3** | Long upload/download wait times on congested campus Wi-Fi | S2, S9, S10 | `F13`, `NFR3` (Offline PWA $\le 8$ MB precache) |
-| **P4** | HEIC smartphone photos rejected by Moodle / web portals | S4, S13 | `F4` (Fast local HEIC $\rightarrow$ JPG conversion) |
-| **P5** | Strict LMS / Moodle file upload ceilings (e.g., 5 MB or 10 MB) | S2, S10, S12, S15 | `F3` (Target-size compressor with quality slider) |
-| **P6** | Multi-app fragmentation (competitors lack video/audio alongside docs) | S1, S3, S13, S14, S2, S9, S10 | `F9` (Integrated document, image, video, and audio tools) |
-| **P7** | Limits discovered only after processing or upload fails | S1, S2, S4, S7, S9, S10, S13 | `F5`, `F14` (Real-time pre-run size and quality estimation) |
-| **P8** | Merged sections in wrong order or broken page ranges | S8, S14 | `F10` (Visual reordering and preview before merge) |
-| **P9** | Complex desktop software unsuited for quick mobile operations | S1, S6 | `F15` (Mobile touch-first responsive UI) |
-| **P10** | Mobile browser crashes or freezes on large documents | S4, S7, S9, S11, S14, S15 | `F15`, `NFR4`, `NFR6` (Yielding web worker loops) |
-| **P11** | Uncertainty over whether submitted files meet lecturer expectations | S2, S5, S15 | Explicit *Won't* boundary (LMS-side constraint) |
-| **P12** | Office document conversion formatting fidelity issues | S3, S5, S8 | Explicit *Won't* boundary (Requires server LibreOffice) |
-
----
-
-## 3. Product Scope & The "1 Core Workflow"
-
-### 3.1 Course Guardrail 2 Compliance
-Course Guardrail 2 stipulates: *"Buildable in 1 month — exactly 1 core workflow."*  
-While UniLab offers 59 distinct utility settings, **UniLab has exactly 1 core workflow**:
-
-```mermaid
-flowchart LR
-    A["Step 1: Select File<br>(Dropzone / File Picker)"] --> B["Step 2: Local Processing<br>(In-Memory Web Worker / WASM)"]
-    B --> C["Step 3: Download & Auto-Purge<br>(Instant Memory Revocation)"]
-```
-
-All 59 specialized tools (Compress PDF, Merge PDF, Sign PDF, Crop Image, Trim Audio, Transcode Video, etc.) are **configuration settings of this single pipeline**, sharing identical UI primitives, dropzone screening, progress feedback, and retention logic.
-
-### 3.2 In-Scope vs. Parked vs. Out-of-Scope (Won't) Boundaries
-
-| Classification | Feature / Component | Justification |
+| Member | Student ID | Charter role |
 |---|---|---|
-| **In-Scope (Must)** | PDF Compress, Merge, Rotate, Split, Encrypt, Sign, Watermark | Directly solves validated student pains `P1`, `P2`, `P5`, `P8`. |
-| **In-Scope (Must)** | HEIC Converter, Image Resizer/Cropper, Format Converter | Solves smartphone camera incompatibility (`P4`). |
-| **In-Scope (Must)** | Audio Trim, Voice Recorder, Video Resize, WebCodecs Transcoder | Solves multi-app fragmentation for student presentations (`P6`). |
-| **In-Scope (Must)** | 30-Minute Memory Vault with "Delete Now" Button | Enforces PDPA retention and data minimization (`LR5`, `NFR2`). |
-| **Parked (Q5/Q6)** | Thai/Burmese OCR (`F8`) & Chained Workflows (`F11`) | 0 of 15 interviewees requested them unprompted; parked to maintain scope discipline. |
-| **Out-of-Scope (Won't)** | User Accounts, Cloud Storage, Server Database | Violates zero-upload privacy guarantee (`LR1`, `LR2`). |
-| **Out-of-Scope (Won't)** | Flawless PDF-to-Word Re-flow (`P12`) | Requires heavy server-side engines; violates client-only constraint. |
+| Myo Zin Thant | 6631503076 | Product Owner |
+| Swan Htut Oakkar Aung | 6631503088 | Designer |
+| Thiha Lin | 6631503092 | Tech Lead |
+| Wanna San | 6631503097 | AI Lead |
+| Zaw Win Htut | 6631503101 | QA / Test |
 
----
+The previous report had conflicting IDs for Myo and Zaw and an unnamed fifth member. These entries now agree with [the charter](01-requirements/03-charter/charter.html). Each member must still verify and author their personal role statement.
 
-## 4. Legal Compliance & Privacy Architecture
+## Problem, scope and research evidence
 
-UniLab's legal compliance is **architectural, not contractual**:
+The repository records 15 discovery interviews dated 22 August–8 September and 12 pains. This audit checks the recorded traceability; it does not independently authenticate those historical conversations. Discovery interviews are separate from the post-build UAT study.
 
-```mermaid
-graph TD
-    subgraph Client Browser
-        F[User Document / Photo] --> M[Client-Side RAM]
-        M --> W[WebAssembly / WebCodecs Engine]
-        W --> O[Transformed Output in Memory]
-        O --> D[User Downloads File]
-        O -.->|After 30 Mins or Tab Close| X[Blob URL Revoked & Memory Purged]
-    end
-    subgraph External Cloud
-        S[(Remote Servers)]
-    end
-    F -.->|0 Bytes Transferred| S
-```
+The [canonical specification](01-requirements/01-spec/20260826-01-unilab-core.md) and [traceability map](01-requirements/TRACEABILITY.md) preserve the detailed pain citations. In particular, P9 concerns degradation/expiry during file transfer and P10 concerns completing work on the device available; neither should be rewritten as an unsupported performance/crash finding. F7 covers permanent redaction/blur, not signing. F8 OCR and F11 saved workflows remain parked for course commitment pending team decisions.
 
-1. **Personal Data Protection Act (PDPA):**
-   - Because no files or personal identifiers are collected, transmitted, or stored on external servers, UniLab requires no intrusive cookie banners or consent check-boxes (`LR1`, `LR2`).
-   - Results exist exclusively as temporary in-memory Object URLs that expire automatically after 30 minutes or immediately upon clicking *"Delete Now"* or closing the tab (`LR5`).
-2. **Computer Crimes Act (CCA) Section 26:**
-   - UniLab operates as client software rather than a service provider storing third-party subscriber data. Thus, mandatory server log retention burdens do not apply.
-3. **Electronic Transactions Act (ETA) Sections 9, 26, 28:**
-   - Handwritten digital signatures (`F7`) generate clean client-side SVG vectors stamped directly onto the PDF DOM coordinate space, satisfying electronic signature enforceability standards.
+The [four-task plan](04-test/test-plan.md) is the current evaluation scope. It does not require adding authentication or retaining document history. Scope includes local processing, meaningful output verification, size screening and temporary result custody. It excludes LMS-side submission guarantees and broad native-package certification. More shipped tools do not themselves earn evidence of these outcomes.
 
----
+## Implementation and measured engineering checks
 
-## 5. Technical Architecture & Implementation
+Product main has the four task capabilities: decimal size targeting, grayscale and page-specific orientation correction; PDF/JPG/PNG assembly; drawing a signature with optional QPDF-based password protection; and extraction of page 42 from a 120-page PDF. `pdf-lib` handles PDF assembly/manipulation; QPDF supplies password protection. Do not attribute encryption to `pdf-lib` alone.
 
-### 5.1 Tech Stack
-- **Build System & Runtime:** Vanilla JavaScript (ES2022+), Vite 8.2.1 (Fast, zero-framework overhead).
-- **PDF Manipulation:** `pdf-lib` (Document generation, page manipulation, encryption, vector stamping), `pdf.js` (High-fidelity browser rendering).
-- **Media Processing:** `mediabunny` (Modern WebCodecs API for high-performance in-browser video/audio demuxing and decoding).
-- **Image Processing:** `cropperjs`, `browser-image-compression`, `heic2any` (Client-side libheif WebAssembly wrapper).
-- **Document Conversion:** `mammoth.js` (.docx to HTML/PDF conversion), `jszip` (Batch packaging).
-- **Progressive Web App (PWA):** Custom Service Worker precaching core assets within an **$\le 8\text{ MB}$ strict offline budget** (Current build: 7.41 MB).
+Fresh checks on 16 November 2026:
 
-### 5.2 Performance & Memory Guardrails
-- **Loop Non-Blocking:** CPU-heavy loops yield execution via `setTimeout(0)` rather than `requestAnimationFrame`, preventing UI freezes even during heavy 100-page document tasks (`NFR6`).
-- **Grapheme Cluster Awareness:** Uses `Intl.Segmenter` for accurate character and page counting, avoiding broken Thai diacritics and combining vowels (`NFR7`).
-- **Zero-Byte File Leaks:** FileReader objects and ArrayBuffers are dereferenced immediately after canvas or PDF-lib operations to ensure prompt garbage collection on mobile devices with limited RAM.
-
----
-
-## 6. Verification & Testing Pyramid
-
-UniLab employs a multi-tiered testing strategy ensuring both code stability and usability validation:
-
-```mermaid
-flowchart TD
-    UAT["Level 4: User Acceptance Testing (UAT)<br>10+ Real Students, 4 Tasks, SUS & TAM Metrics"]
-    E2E["Level 3: End-to-End Hands-Off Verification<br>Fresh Browser Profiles, Offline Mode, Refresh Test"]
-    INT["Level 2: Integration Tests<br>Dropzone Screening, Memory Vault Purge Lifecycle"]
-    UNIT["Level 1: Automated Unit Tests (25 Passing)<br>Offline Precache Budget, Thai Graphemes, Redaction Scrubbing"]
-
-    UNIT --> INT --> E2E --> UAT
-```
-
-### 6.1 Automated Test Suite (`npm test`)
-UniLab maintains 25 automated unit and regression tests running in Node.js:
-- `offline budget`: Enforces release bundles strictly stay within the 8 MB precache limit.
-- `graphemes()`: Tests adversarial Thai combining character sequences.
-- `lecture sanitization`: Validates that external scripts and CSS network references are stripped.
-- `dropzone screening`: Ensures unsupported filetypes or oversized drops fail with clear error messages.
-- `redaction byte scrub`: Validates that redacted regions are destroyed at the byte level rather than visually overlaid.
-- `memory vault countdown`: Validates that timer expiration purges files from memory without user interaction.
-
-### 6.2 Post-Midterm UAT & Field Testing Plan (4 November 2026)
-Following course requirements (`Post-Midterm-Plan-2569-EN.pdf`):
-- **Participants:** $\ge 10$ MFU students (`U01` to `U10`) across two iterative waves (Nielsen 5+5 model: 5 morning, triage sprint, 5 afternoon).
-- **Evaluation Tasks:**
-  1. *Task 1 (Slides):* Compress 15 MB slide deck under 5 MB, rotate upside-down pages, convert to B&W.
-  2. *Task 2 (Merge):* Combine application form PDF, IELTS JPG, and Thai ID PNG into one ordered PDF.
-  3. *Task 3 (Sign):* Draw signature on academic petition and encrypt with password `UniLabSecure2026`.
-  4. *Task 4 (Split):* Extract single page 42 from a 120-page textbook.
-- **Quantitative Target Metrics:**
-  - **Task Success Rate:** $100\%$ hands-off completion without facilitator intervention.
-  - **System Usability Scale (SUS):** Benchmark $\ge 80.8$ (Grade A / Excellent; industry average is 68.0).
-  - **Technology Acceptance Model (TAM):** Benchmark $\ge 4.0 / 5.0$ across Perceived Usefulness (PU), Perceived Ease of Use (PEOU), and Behavioral Intention (BI).
-
----
-
-## 7. Project History & Key Milestones
-
-| Timeline | Phase / Gate | Milestone Deliverables |
+| Check | Result | Scope |
 |---|---|---|
-| **Week 1 (Aug 2026)** | Foundation | Company Charter established (Company 18); 1 Core Workflow defined. |
-| **Week 2 (Aug 2026)** | Legal Architecture | `rule.md` drafted; derived 8 Legal Requirements (`LR1`–`LR8`) from Thai PDPA, CCA §26, and ETA. |
-| **Week 3 (Sep 2026)** | Specification | Formal Software Requirements Specification (`01-spec`) and Product Backlog (`backlog.md`). |
-| **Week 4 (Sep 2026)** | Design Pack | Design system, clickable prototype, and 4 formal UML/C4 diagrams (D1–D4). |
-| **Week 5 (Sep 2026)** | Validation Gate | Completed 15 real-user interviews across 15 majors; validated 12 user pains (`P1`–`P12`); parked OCR and Workflows. |
-| **Week 6–10 (Oct 2026)**| Midterm & Alpha | Core tools implemented; 25 automated tests; Alpha Demo verified live refresh and hands-off tests. |
-| **Week 11 (27 Oct 2026)**| Test Plan Due | Authored formal Test Plan deliverable; created UAT Kit, Scorecards, and Metric Calculator ([PR #20](https://github.com/Thiha-Lynn/unilab/pull/20), [PR #21](https://github.com/Thiha-Lynn/unilab/pull/21)). |
-| **Week 12 (4 Nov 2026)** | Field Testing Day | Execute 10+ real-student UAT sessions on MFU campus using Nielsen 5+5 iterative method. |
-| **Week 14 (18 Nov 2026)**| Final Presentation | Final 100-point course presentation and defense for Team 18. |
+| Product app `npm test` | 41 passed, 0 failed | Automated tests on reviewed product main |
+| Analytics Python suite | 10 passed | Collector/dashboard rules, not verified users |
+| Desktop policy suite | 2 passed | Policy tests, not physical-device certification |
+| Coursework Python metrics/merger suite | 16 passed | Missing data, scoring, duplicates, denominators and safe merging |
+| Coursework Node suite with recorder | 31 passed | Existing checks plus recorder evidence safeguards |
+| Production build | Passed; core below 8,000,000 bytes | Optional engines remain outside the small core budget |
+| Four browser workflows | 4/4 passed in Chrome 157 on this Mac | Synthetic fixture checks; see [raw evidence](04-test/evidence/20261116-browser-workflows.json) |
 
----
+T1 produced a six-page 671,783-byte PDF with grayscale/orientation checks. T2 decoded three pages in the expected order. T3 rejected absent/wrong passwords and opened with the correct test password. T4 retained exactly page 42. The harness is a limited synthetic check; the displayed signature and real-device readability still need human inspection. Its fetch-body check is not an exhaustive browser-network audit. Synthetic padded slide compression is not a real-world speed/ratio claim.
 
-## 8. Summary Table of Key Links & References
+The public live manifest reports a 7,943,852-byte offline core. Record the manifest and test build when citing a size, rather than mixing historical 7.31/7.41 MB values. See [the verification record](04-test/evidence/20261116-verification.json) for exact revisions. Offline first use of optional engines/models and physical mobile performance remain separate qualifications.
 
-| Resource | Path / URL |
-|---|---|
-| **Live Web App** | [unilab.ztvmm.live](https://unilab.ztvmm.live/) |
-| **Coursework Repository** | [github.com/Thiha-Lynn/unilab](https://github.com/Thiha-Lynn/unilab) |
-| **Full Traceability Matrix** | [`.docs/01-requirements/TRACEABILITY.md`](.docs/01-requirements/TRACEABILITY.md) |
-| **Core Requirements Spec** | [`.docs/01-requirements/01-spec/20260826-01-unilab-core.md`](.docs/01-requirements/01-spec/20260826-01-unilab-core.md) |
-| **15-Interview Results** | [`.docs/01-requirements/02-interviews/results.md`](.docs/01-requirements/02-interviews/results.md) |
-| **Post-Midterm Test Plan** | [`.docs/04-test/test-plan.md`](.docs/04-test/test-plan.md) |
-| **UAT Field Protocol & Kit**| [`.docs/04-test/uat-protocol-and-questionnaire.md`](.docs/04-test/uat-protocol-and-questionnaire.md) |
-| **UAT Scorecard CSV** | [`.docs/04-test/uat-scorecard-template.csv`](.docs/04-test/uat-scorecard-template.csv) |
-| **Metrics Calculator** | [`.docs/04-test/calc-metrics.py`](.docs/04-test/calc-metrics.py) |
+An npm audit of product main reports five high-severity affected package entries (markdown-it, Vite, undici, zod and the affected background-removal dependency chain). These are dependency findings, not five demonstrated application exploits. Triage runtime reachability and patch in a tested product branch; do not infer a clean security audit from functional tests.
+
+## Privacy boundary
+
+Document transformations run on-device. Generated results use in-memory custody with explicit local download, expiry and clear controls. The signing workflow uses a 10-minute result window; other field tools use 30 minutes. A downloaded file remains under the user's control after the app releases its in-memory copy. Clearing object URLs is not a guarantee about browser internals or instantaneous operating-system memory erasure.
+
+The whole ecosystem is **not zero-telemetry or serverless**: the product includes optional first-party activity counts and a separately consented pilot. The public dashboard reports aggregates; its sessions/visitor instances are not distinct people or completed UAT sessions. Source documents, filenames and passwords are excluded from its documented event payloads. Read the current [product privacy page](https://unilab.ztvmm.live/#/privacy) and [collector documentation](https://github.com/Thiha-Lynn/unilab-releases/blob/main/analytics/README.md).
+
+Research observations are a separate, consented dataset. Keep coded rows, raw questionnaire responses and permissioned evidence privately, with the study retention/withdrawal process. Publish only reviewed aggregates and appropriately redacted supporting evidence. This does not require uploading participants' documents to UniLab or adding MFU accounts.
+
+Historical legal coursework is preserved as coursework. This report does not certify statutory exemptions or legal enforceability of a drawn signature. The rule-to-LR audit has unresolved mappings and older architecture wording; see [the audit](05-log/20261116-log.md).
+
+## User evidence and remaining completion work
+
+On 16 November the owner confirmed formal results have not yet been collected, although family and student friends have tried the product. The blank repository CSV calculates zero recorded sessions and PENDING; it must never be presented as 30 observations. The current proposal is five members recruiting three distinct eligible MFU students each, for **15 planned participants**. This exceeds the plan's minimum ten, once real completed observations exist.
+
+Use [Run the study](04-test/RUN-STUDY.md) and [the recorder](04-test/session-recorder.html). A repeat participant, invitation, login, download click or automated test is not another completed participant. Retain failed/assisted tasks, missing responses and negative changes. Report sample sizes and the source of every before/after number.
+
+The submitted team's thresholds are >=90% overall unassisted task success, mean SUS >=75 (80.8 stretch), mean TAM PU/PEOU/BI >=4, and no open severity 3–4 defects. These are targets, not observed scores or a lecturer-awarded grade. The handout's general optional-questionnaire language does not automatically remove the team's selected SUS/TAM protocol.
+
+Remaining: actual sessions/consent, observed comparable baselines, physical device records, results and defect retests; P1 case-study outcomes; P2 <=3-minute video plus live demo; P3 evidence log; P4 before/after and measured AI/SDLC impact; five P5 statements. Topic/gate decision and the original scope exceptions remain unconfirmed in the repository. An appearance on the final timetable does not supply that historical receipt.
+
+## History without implied completion
+
+| Period | Recorded work | Evidence limit |
+|---|---|---|
+| Aug–Sep | Charter, original W2 submission, requirements, backlog and design pack | Current summaries must not rewrite the archived W2 attachment |
+| 8 Sep | Repository records 15 discovery interviews and 12 pains | Distinct from UAT and not independently authenticated by this audit |
+| 16 Sep onward | Release hardening and separate product repository | Shipped code does not imply course approval |
+| 7 Oct | Lecturer's Alpha Demo date | Historical group outcome not verified here; generic refresh/persistence check conflicts with intentional transient file custody and needs an agreed interpretation |
+| 27–28 Oct | Test plan/kit and four-task product release | Preparation and synthetic checks, not completed participant sessions |
+| 16 Nov | Current audit and fresh 4/4 browser check | Formal study still to be recorded |
+| 18 Nov | Scheduled final presentation | Future event; outcome unknown |
+
+Proceed with the [portfolio checklist](06-deliver/README.md). Optional MFU login/recent-tool features are recorded there as a future proposal, not an accepted change to this evaluation scope.

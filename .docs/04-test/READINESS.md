@@ -1,4 +1,6 @@
-# Field-test readiness — 27 October 2026
+# Field-test readiness — 27 October preparation record
+
+**Current status, 16 November:** formal UAT results have not yet been collected (owner confirmation). The proposed recruitment target is now 15 distinct MFU students, three per member. Use [Run the study](RUN-STUDY.md), the [session recorder](session-recorder.html), and the [final portfolio checklist](../06-deliver/README.md). The dated preparation record below is historical, not a claim that its scheduled work happened.
 
 The owner selected Swan Htut's newer four-task field kit on 27 October. This is preparation evidence, not completed UAT. No sample score or placeholder participant is a real observation.
 
