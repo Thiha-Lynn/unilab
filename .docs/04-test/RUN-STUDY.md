@@ -2,6 +2,8 @@
 
 Updated 16 November 2026. The owner confirmed that formal results have not yet been collected; family and student friends have tried the app informally. Those experiences may inform recruitment and feedback, but are not retrospectively timed UAT sessions.
 
+Start with [the complete facilitator script](start-session.html) and [the fictional practice example](practice-example.html). `make-study-pack.py NEW_DIRECTORY PRODUCT/app/qa/fixtures/uat` creates a portable blank packet outside Git with the synthetic fixtures, 15 coded recorders, blank consent records, tracker and calculators. Share only its original blank ZIP, never a filled working folder. Reuse the protocol/forms, not another participant's observations.
+
 ## The minimum to finish
 
 The current recruitment target is **15 distinct eligible students: five members recruit three each**. Complete at least **10 eligible student sessions**, using the four tasks in the submitted [test plan](test-plan.md). The 30-person product pilot is a stretch target, not the course minimum. The submitted plan commits to observed task results, SUS and TAM, so collect all three. The lecturer's PDF calls the questionnaires optional in general; that does not silently remove our team's selected method or override the later Classroom instructions.
