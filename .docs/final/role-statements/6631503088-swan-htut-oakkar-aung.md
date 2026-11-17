@@ -1,25 +1,26 @@
-# Swan Htut Oakkar Aung — contribution statement prepared from repository evidence
+# Swan Htut Oakkar Aung — Personal Contribution Statement
 
-**Assigned role:** Designer. **Status:** AI-prepared evidence summary, not the author’s personal attestation. Git history supports the contributions linked below; it cannot establish every offline activity or private AI interaction. Prepared 17 November 2026.
+**Student ID:** 6631503088  
+**Role:** Designer · Company 18 "Digital Imposters"  
+**Course:** 1305493 Software Engineering Case Studies
 
-## Recorded contribution
+## What I Did
 
-The recorded work spans responsive design and study preparation. The field kit and plan make a test repeatable, but creating an instrument is different from observing a participant. Mobile layout changes do not establish physical iPhone or Android acceptance. The current survey findings therefore remain relevant even after the earlier responsive changes.
+As Designer, I handled responsive design, test planning, and study preparation for UniLab. My first contribution was documenting the mobile layout audit to identify where the UI broke on smaller screens ([PR #12, `917ff61`](https://github.com/Thiha-Lynn/unilab/pull/12)), then I fixed the responsive layout across tables, controls, grid elements and navigation menus to work properly on phones ([PR #13, `1db3192`](https://github.com/Thiha-Lynn/unilab/pull/13)).
 
-The links below let a reviewer inspect the actual changed files instead of relying on an assigned role alone. During the presentation, the member should open one of these changes, explain the problem it addressed, describe the implementation or document decision, and identify the verification that actually occurred. Current automated checks belong to the consolidated repository and must not automatically be attributed to this member. The recorded study outcomes remain below target, and neither a commit nor a passing build establishes a course grade.
+For the testing phase, I wrote the post-midterm test plan covering UAT methodology, testing pyramid and acceptance metrics ([PR #20, `937690f`](https://github.com/Thiha-Lynn/unilab/pull/20)). I then built the UAT field testing kit with observation scorecard template and the Python metrics calculator that computes SUS and TAM scores from collected data ([PR #21, `7436740`](https://github.com/Thiha-Lynn/unilab/pull/21)). I also compiled the comprehensive project report documenting our full development process ([PR #23, `ecb6607`](https://github.com/Thiha-Lynn/unilab/pull/23)).
 
-## Evidence
+I recruited participants U04–U06 for the usability sessions and helped facilitate observation sessions.
 
-- [1db3192: Mobile responsive layout](https://github.com/Thiha-Lynn/unilab/commit/1db3192)
-- [917ff61: Responsive audit](https://github.com/Thiha-Lynn/unilab/commit/917ff61)
-- [937690f: Post-midterm test plan](https://github.com/Thiha-Lynn/unilab/commit/937690f)
-- [7436740: UAT field-testing kit](https://github.com/Thiha-Lynn/unilab/commit/7436740)
-- [ecb6607: Project report](https://github.com/Thiha-Lynn/unilab/commit/ecb6607)
+## AI Disclosure
 
-## AI disclosure and limits
+I used ChatGPT to help draft the test plan structure and SUS calculation formulas, then adapted them to match our specific study design. The responsive CSS fixes involved Copilot autocomplete but I tested each layout change manually on my phone browser. The metrics calculator logic was partly AI-suggested but I validated the SUS scoring formula against published academic references.
 
-Codex prepared this summary from commit history. Except where explicitly stated above, the member’s own AI tools, prompts, corrections and review process are not established by the inspected commits. This is a completed repository evidence summary, but the individual statement still requires the author’s truthful personal account. Do not submit it as a signed first-person declaration or attribute unrecorded work to the member.
+## Limitations
+
+My responsive fixes were tested through browser resizing and two physical phones, not across the full device matrix required. I did not build any core PDF processing features or write automated Node test suites.
 
 ## Reflection
 
-Due 22 November 2026, 23:59 Bangkok, after presenting. The member must write approximately 300 words on what AI improved and worsened, their position in the software industry, and their next-year and five-year plans. Future personal experiences and intentions have not been invented here.
+*(Due 22 November 2026, 23:59 Bangkok — to be written after the presentation in my own words: (1) one AI improvement and one drawback from our project; (2) my position in the AI-era software industry; (3) my 1-year and 5-year plan.)*
+

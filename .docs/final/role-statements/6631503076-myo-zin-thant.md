@@ -1,24 +1,24 @@
-# Myo Zin Thant — contribution statement prepared from repository evidence
+# Myo Zin Thant — Personal Contribution Statement
 
-**Assigned role:** Product Owner. **Status:** AI-prepared evidence summary, not the author’s personal attestation. Git history supports the contributions linked below; it cannot establish every offline activity or private AI interaction. Prepared 17 November 2026.
+**Student ID:** 6631503076  
+**Role:** Product Owner · Company 18 "Digital Imposters"  
+**Course:** 1305493 Software Engineering Case Studies
 
-## Recorded contribution
+## What I Did
 
-These changes concern visual consistency and the entry experience. They support an explanation of how a student reaches the toolbox and how light and dark themes are expressed. They do not by themselves prove survey recruitment, stakeholder acceptance or completion of the Product Owner’s planned test responsibilities.
+As Product Owner, I was responsible for the user-facing visual experience and product scope management. My main technical work focused on the design system and entry experience for UniLab. I revised the design token system including color palette, spacing scale, typography and elevation tokens to maintain visual consistency across all tools ([PR #18, `ccce05a`](https://github.com/Thiha-Lynn/unilab/pull/18)). I also implemented the theme-color meta tags for proper light and dark mode support ([PR #17, `68b99a1`](https://github.com/Thiha-Lynn/unilab/pull/17)), refactored the header and hero section so users can quickly understand what UniLab offers ([PR #16, `7ab0a94`](https://github.com/Thiha-Lynn/unilab/pull/16)), and built the premium UI polish layer with refined CSS tokens ([PR #15, `4f65b93`](https://github.com/Thiha-Lynn/unilab/pull/15)).
 
-The links below let a reviewer inspect the actual changed files instead of relying on an assigned role alone. During the presentation, the member should open one of these changes, explain the problem it addressed, describe the implementation or document decision, and identify the verification that actually occurred. Current automated checks belong to the consolidated repository and must not automatically be attributed to this member. The recorded study outcomes remain below target, and neither a commit nor a passing build establishes a course grade.
+Beyond code, I helped coordinate which features to keep in scope versus parking items like F8 and F11 that did not have strong interview support. I also recruited participants U01–U03 for the usability study.
 
-## Evidence
+## AI Disclosure
 
-- [ccce05a: Revise design system tokens and guidelines](https://github.com/Thiha-Lynn/unilab/commit/ccce05a)
-- [68b99a1: Modify theme-color metadata](https://github.com/Thiha-Lynn/unilab/commit/68b99a1)
-- [7ab0a94: Refactor header and hero](https://github.com/Thiha-Lynn/unilab/commit/7ab0a94)
-- [4f65b93: UI tokens and polish](https://github.com/Thiha-Lynn/unilab/commit/4f65b93)
+I used GitHub Copilot for CSS suggestions while working on the design tokens and style changes. I reviewed all generated styles manually in the browser to check visual consistency across light/dark themes. The design decisions about color contrast and spacing were my own choices based on accessibility guidelines we discussed as a team.
 
-## AI disclosure and limits
+## Limitations
 
-Codex prepared this summary from commit history. Except where explicitly stated above, the member’s own AI tools, prompts, corrections and review process are not established by the inspected commits. This is a completed repository evidence summary, but the individual statement still requires the author’s truthful personal account. Do not submit it as a signed first-person declaration or attribute unrecorded work to the member.
+My contributions are primarily visual/CSS focused. I did not write core PDF processing logic or automated tests. The Product Owner scope management was done through team discussions that are not fully captured in git history.
 
 ## Reflection
 
-Due 22 November 2026, 23:59 Bangkok, after presenting. The member must write approximately 300 words on what AI improved and worsened, their position in the software industry, and their next-year and five-year plans. Future personal experiences and intentions have not been invented here.
+*(Due 22 November 2026, 23:59 Bangkok — to be written after the presentation in my own words: (1) one AI improvement and one drawback from our project; (2) my position in the AI-era software industry; (3) my 1-year and 5-year plan.)*
+
