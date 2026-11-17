@@ -1,3 +1,5 @@
+> **Superseded missing-record status:** The owner has now supplied 15 task scorecards. See [review](../.docs/final/task-session-review.md). This alternative-evidence report is retained as the earlier audit trail; the current record is 15 owner-confirmed task sessions, with 88.33% unassisted success and unresolved chronology, not zero supplied task records.
+
 # Alternative task evidence — observed UAT incomplete
 
 Updated 17 November 2026 for the lecturer's alternative-evidence route. The project now has [55 survey records and scored results](../.docs/final/survey-results.md). This file concerns missing observed task logs, not absence of survey answers or historical discovery interviews.

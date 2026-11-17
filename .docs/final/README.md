@@ -1,3 +1,5 @@
+> **Latest owner clarification, 17 November:** 15 task scorecards and private consent records have now been supplied and described by the owner as actual observations. The reviewed dataset reports 53/60 unassisted successes (88.33%), below target. All 315 questionnaire ratings match the overlapping U01–U15 survey rows. Source chronology/first-use statements remain unresolved; see [task-session review](task-session-review.md). Earlier missing-record findings below describe the pre-handoff audit.
+
 # UniLab Final Portfolio Index (`.docs/final/`)
 
 **Course:** 1305493 Software Engineering Case Studies · Semester 1/2569 · Dr. Prasara Jakkaew  
@@ -5,11 +7,12 @@
 **Product:** **UniLab** — 100% Client-Side Student Document & Media Toolbox  
 **Live Product:** [https://unilab.ztvmm.live/](https://unilab.ztvmm.live/) · **Coursework Preview:** [https://thiha-lynn.github.io/unilab/](https://thiha-lynn.github.io/unilab/) · **Product Releases Repo:** [https://github.com/Thiha-Lynn/unilab-releases](https://github.com/Thiha-Lynn/unilab-releases)
 
-> **Current readiness, 17 November:** 55 survey responses are available and [scored reproducibly](survey-results.md); SUS and all TAM constructs are below the team's targets. Observed four-task sessions/baselines remain unverified. Survey responses, historical discovery interviews and synthetic QA are separate evidence. This index is on branch `audit/final-readiness-20261116` (PR #24); inherited main links resolve to the consolidated branch when viewing this file. **Not a claim of full release readiness.**
+> **Current readiness, 17 November:** 55 survey responses are available and [scored reproducibly](survey-results.md); SUS and all TAM constructs are below the team's targets. Owner-confirmed task records are now reviewed with explicit provenance limits. Survey responses, historical discovery interviews and synthetic QA are separate evidence. This index is on branch `audit/final-readiness-20261116` (PR #24); inherited main links resolve to the consolidated branch when viewing this file. **Not a claim of full release readiness.**
 
 Latest Classroom: repository inspection **18 November 08:00 Bangkok**, all branches. Presentation **09:25–09:40**. Four personal statements still need their authors' completion/review. Reflection (~300 words) due **22 November 23:59**. Product code is in the second repository linked above; the team must reply to today's Classroom post with that link tonight.
 
 - [Core sequence and class-style data model](core-diagrams.md)
+- [15-session review and corrections](task-session-review.md)
 - [Survey results and limitations](survey-results.md)
 - [Tonight's readiness/action report](readiness-20261117.md)
 - [Fresh benchmark output](evidence/benchmark-20261117.json) — synthetic core operations, not human task timings
@@ -49,7 +52,7 @@ Latest Classroom: repository inspection **18 November 08:00 Bangkok**, all branc
 | **Test Plan** | [`.docs/04-test/test-plan.md`](../04-test/test-plan.md) | `main` | Submitted (pinned `1194049`) |
 | **UAT Protocol, Questionnaires (SUS + TAM) & Study Guide** | [`.docs/04-test/uat-protocol-and-questionnaire.md`](../04-test/uat-protocol-and-questionnaire.md) · [`READINESS.md`](../04-test/READINESS.md) | `main` | Ready to execute |
 | **Automated Metrics Calculator & Python Tests** | [`.docs/04-test/calc-metrics.py`](../04-test/calc-metrics.py) · [`test_metrics.py`](../04-test/test_metrics.py) | `main` | 16 Python tests passed on consolidated branch |
-| **No-Real-User Test Report & Alternative Evidence** | [`test/no-real-user-test.md`](../../test/no-real-user-test.md) | `main` | Alternative task evidence; survey now available |
+| **No-Real-User Test Report & Alternative Evidence** | [`test/no-real-user-test.md`](../../test/no-real-user-test.md) | `main` | Historical alternative report; see current 15-session review |
 | **Before / After Benchmark Script** | [`scripts/qa-benchmark.mjs`](../../scripts/qa-benchmark.mjs) | `main` | Reproducible synthetic local benchmark |
 | **Issue / Defect Log (Severity, Fix Commit, Retest)** | [`.docs/04-test/defect-log.csv`](../04-test/defect-log.csv) | `main` | 8 tracked issues (`ISS-001`–`ISS-008`) |
 | **Session Recorder, Study Pack & 4-Workflow Browser Check** | [PR #24 (`audit/final-readiness-20261116`)](https://github.com/Thiha-Lynn/unilab/pull/24) · [`20261116-browser-workflows.json`](https://github.com/Thiha-Lynn/unilab/blob/audit/final-readiness-20261116/.docs/04-test/evidence/20261116-browser-workflows.json) | Branch `audit/final-readiness-20261116` (PR #24) | 4/4 synthetic browser workflows pass |

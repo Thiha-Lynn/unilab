@@ -1,3 +1,5 @@
+> **Latest owner clarification, 17 November:** 15 task scorecards and private consent records have now been supplied and described by the owner as actual observations. The reviewed dataset reports 53/60 unassisted successes (88.33%), below target. All 315 questionnaire ratings match the overlapping U01–U15 survey rows. Source chronology/first-use statements remain unresolved; see [task-session review](task-session-review.md). Earlier missing-record findings below describe the pre-handoff audit.
+
 > **17 November update:** 55 survey responses are now available; see [survey results](survey-results.md). Mean SUS 58.64 and TAM constructs below 4. Observed task timings/completion and original collection/consent records remain unverified. Earlier statements about no survey data are historical.
 
 # UniLab — Case Study

@@ -1,3 +1,5 @@
+> **Latest owner clarification, 17 November:** 15 task scorecards and private consent records have now been supplied and described by the owner as actual observations. The reviewed dataset reports 53/60 unassisted successes (88.33%), below target. All 315 questionnaire ratings match the overlapping U01–U15 survey rows. Source chronology/first-use statements remain unresolved; see [task-session review](task-session-review.md). Earlier missing-record findings below describe the pre-handoff audit.
+
 # Survey results — 17 November 2026
 
 Google Forms showed 55 responses in Thiha's account on 17 November. The owner supplied 55 source records, described as collected student answers. All 55 have complete 10-item SUS and 11-item TAM ratings and unique participant codes. This validates data structure, not independent authentication of 55 observed task sessions.
@@ -21,7 +23,7 @@ The source contains names and student IDs, contrary to the original coded-only c
 
 The reported sample is Myanmar student volunteers, heavily concentrated in Management (39/55); it is a convenience sample, not representative of all MFU students. Report prior familiarity and language/translation method when known.
 
-The survey contains no observed baseline/task durations, inspected-output checks, device/build records or consent evidence. It cannot establish the 90% unassisted-success criterion, completion of all four tasks, improvement after fixes or zero severe defects. Do not populate the UAT task CSV from these ratings alone.
+The survey itself contains no observed baseline/task durations, inspected-output checks, device/build records or consent evidence; these are now supplied separately for 15 overlapping codes in the task-session review. It cannot establish the 90% unassisted-success criterion, completion of all four tasks, improvement after fixes or zero severe defects. Do not populate the UAT task CSV from these ratings alone.
 
 ## Implications
 

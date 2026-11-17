@@ -1,0 +1,610 @@
+{
+  "instrument": "UAT-2026-10-27",
+  "recordedRows": 15,
+  "eligibleParticipants": 15,
+  "completedSessions": 15,
+  "excludedUnverifiedRows": 0,
+  "tasks": [
+    {
+      "task": "Slides cleanup",
+      "attempted": 15,
+      "pending": 0,
+      "successful": 11,
+      "successRate": 73.33333333333333,
+      "pairedObservedBefore": {
+        "n": 11,
+        "mean": 130.56363636363636,
+        "sd": 26.54386078652737
+      },
+      "pairedObservedAfter": {
+        "n": 11,
+        "mean": 36.69090909090909,
+        "sd": 11.681648389286037
+      },
+      "timeReductionPercent": 71.8980643364434,
+      "errors": {
+        "n": 15,
+        "mean": 0.0,
+        "sd": 0.0
+      },
+      "hesitations": {
+        "n": 15,
+        "mean": 0.13333333333333333,
+        "sd": 0.3518657752744984
+      }
+    },
+    {
+      "task": "Mixed-file assembly",
+      "attempted": 15,
+      "pending": 0,
+      "successful": 15,
+      "successRate": 100.0,
+      "pairedObservedBefore": {
+        "n": 15,
+        "mean": 159.10666666666665,
+        "sd": 37.460540509155706
+      },
+      "pairedObservedAfter": {
+        "n": 15,
+        "mean": 47.846666666666664,
+        "sd": 13.406281399119628
+      },
+      "timeReductionPercent": 69.92793094779184,
+      "errors": {
+        "n": 15,
+        "mean": 0.06666666666666667,
+        "sd": 0.25819888974716115
+      },
+      "hesitations": {
+        "n": 15,
+        "mean": 0.0,
+        "sd": 0.0
+      }
+    },
+    {
+      "task": "Sign and protect",
+      "attempted": 15,
+      "pending": 0,
+      "successful": 14,
+      "successRate": 93.33333333333333,
+      "pairedObservedBefore": {
+        "n": 14,
+        "mean": 188.94285714285715,
+        "sd": 46.26335506616464
+      },
+      "pairedObservedAfter": {
+        "n": 14,
+        "mean": 59.95,
+        "sd": 17.519077513473047
+      },
+      "timeReductionPercent": 68.27083018297293,
+      "errors": {
+        "n": 15,
+        "mean": 0.2,
+        "sd": 0.4140393356054125
+      },
+      "hesitations": {
+        "n": 15,
+        "mean": 0.26666666666666666,
+        "sd": 0.45773770821706344
+      }
+    },
+    {
+      "task": "Page extraction",
+      "attempted": 15,
+      "pending": 0,
+      "successful": 13,
+      "successRate": 86.66666666666667,
+      "pairedObservedBefore": {
+        "n": 13,
+        "mean": 86.55384615384615,
+        "sd": 26.779768961681235
+      },
+      "pairedObservedAfter": {
+        "n": 13,
+        "mean": 21.06153846153846,
+        "sd": 5.944680880352685
+      },
+      "timeReductionPercent": 75.66654816921437,
+      "errors": {
+        "n": 15,
+        "mean": 0.0,
+        "sd": 0.0
+      },
+      "hesitations": {
+        "n": 15,
+        "mean": 0.2,
+        "sd": 0.4140393356054125
+      }
+    }
+  ],
+  "scales": {
+    "SUS": {
+      "n": 15,
+      "mean": 57.833333333333336,
+      "sd": 19.65930047682509
+    },
+    "PU": {
+      "n": 15,
+      "mean": 3.466666666666667,
+      "sd": 0.8444496658151024
+    },
+    "PEOU": {
+      "n": 15,
+      "mean": 3.4166666666666665,
+      "sd": 0.6591841999955775
+    },
+    "BI": {
+      "n": 15,
+      "mean": 3.177777777777778,
+      "sd": 0.8439012455076199
+    }
+  },
+  "completedCohortTaskSuccessRate": 88.33333333333333,
+  "numericExitCriteria": "NEEDS ATTENTION",
+  "releaseDecision": "Human review required: physical devices, consent/evidence and zero open severity 3\u20134 defects.",
+  "definitions": [
+    "Reserved rows are not people.",
+    "Timing pairs include successful tasks with observed baselines only; n is explicit.",
+    "SD is sample SD; absent for n < 2.",
+    "SUS 75 exit threshold; 80.8 stretch target."
+  ],
+  "waves": {
+    "1": {
+      "instrument": "UAT-2026-10-27",
+      "recordedRows": 5,
+      "eligibleParticipants": 5,
+      "completedSessions": 5,
+      "excludedUnverifiedRows": 0,
+      "tasks": [
+        {
+          "task": "Slides cleanup",
+          "attempted": 5,
+          "pending": 0,
+          "successful": 3,
+          "successRate": 60.0,
+          "pairedObservedBefore": {
+            "n": 3,
+            "mean": 126.73333333333333,
+            "sd": 12.528500841414878
+          },
+          "pairedObservedAfter": {
+            "n": 3,
+            "mean": 34.86666666666667,
+            "sd": 11.082568895943455
+          },
+          "timeReductionPercent": 72.4881641241452,
+          "errors": {
+            "n": 5,
+            "mean": 0.0,
+            "sd": 0.0
+          },
+          "hesitations": {
+            "n": 5,
+            "mean": 0.0,
+            "sd": 0.0
+          }
+        },
+        {
+          "task": "Mixed-file assembly",
+          "attempted": 5,
+          "pending": 0,
+          "successful": 5,
+          "successRate": 100.0,
+          "pairedObservedBefore": {
+            "n": 5,
+            "mean": 159.76,
+            "sd": 55.063399822386565
+          },
+          "pairedObservedAfter": {
+            "n": 5,
+            "mean": 54.96,
+            "sd": 16.1834174388477
+          },
+          "timeReductionPercent": 65.59839759639459,
+          "errors": {
+            "n": 5,
+            "mean": 0.2,
+            "sd": 0.4472135954999579
+          },
+          "hesitations": {
+            "n": 5,
+            "mean": 0.0,
+            "sd": 0.0
+          }
+        },
+        {
+          "task": "Sign and protect",
+          "attempted": 5,
+          "pending": 0,
+          "successful": 5,
+          "successRate": 100.0,
+          "pairedObservedBefore": {
+            "n": 5,
+            "mean": 205.84,
+            "sd": 35.52552603410679
+          },
+          "pairedObservedAfter": {
+            "n": 5,
+            "mean": 61.14,
+            "sd": 19.63142888329833
+          },
+          "timeReductionPercent": 70.29731830547998,
+          "errors": {
+            "n": 5,
+            "mean": 0.2,
+            "sd": 0.4472135954999579
+          },
+          "hesitations": {
+            "n": 5,
+            "mean": 0.0,
+            "sd": 0.0
+          }
+        },
+        {
+          "task": "Page extraction",
+          "attempted": 5,
+          "pending": 0,
+          "successful": 5,
+          "successRate": 100.0,
+          "pairedObservedBefore": {
+            "n": 5,
+            "mean": 80.96,
+            "sd": 25.79143268606845
+          },
+          "pairedObservedAfter": {
+            "n": 5,
+            "mean": 18.92,
+            "sd": 5.753868264046371
+          },
+          "timeReductionPercent": 76.63043478260869,
+          "errors": {
+            "n": 5,
+            "mean": 0.0,
+            "sd": 0.0
+          },
+          "hesitations": {
+            "n": 5,
+            "mean": 0.2,
+            "sd": 0.4472135954999579
+          }
+        }
+      ],
+      "scales": {
+        "SUS": {
+          "n": 5,
+          "mean": 64.5,
+          "sd": 26.06482303795673
+        },
+        "PU": {
+          "n": 5,
+          "mean": 3.9,
+          "sd": 0.9453835200594518
+        },
+        "PEOU": {
+          "n": 5,
+          "mean": 3.6,
+          "sd": 0.8403868156985805
+        },
+        "BI": {
+          "n": 5,
+          "mean": 3.6,
+          "sd": 0.9545214042184235
+        }
+      },
+      "completedCohortTaskSuccessRate": 90.0,
+      "numericExitCriteria": "PENDING",
+      "releaseDecision": "Human review required: physical devices, consent/evidence and zero open severity 3\u20134 defects.",
+      "definitions": [
+        "Reserved rows are not people.",
+        "Timing pairs include successful tasks with observed baselines only; n is explicit.",
+        "SD is sample SD; absent for n < 2.",
+        "SUS 75 exit threshold; 80.8 stretch target."
+      ]
+    },
+    "2": {
+      "instrument": "UAT-2026-10-27",
+      "recordedRows": 5,
+      "eligibleParticipants": 5,
+      "completedSessions": 5,
+      "excludedUnverifiedRows": 0,
+      "tasks": [
+        {
+          "task": "Slides cleanup",
+          "attempted": 5,
+          "pending": 0,
+          "successful": 4,
+          "successRate": 80.0,
+          "pairedObservedBefore": {
+            "n": 4,
+            "mean": 129.85,
+            "sd": 27.393734076731246
+          },
+          "pairedObservedAfter": {
+            "n": 4,
+            "mean": 42.275,
+            "sd": 13.797191743249781
+          },
+          "timeReductionPercent": 67.44320369657295,
+          "errors": {
+            "n": 5,
+            "mean": 0.0,
+            "sd": 0.0
+          },
+          "hesitations": {
+            "n": 5,
+            "mean": 0.2,
+            "sd": 0.4472135954999579
+          }
+        },
+        {
+          "task": "Mixed-file assembly",
+          "attempted": 5,
+          "pending": 0,
+          "successful": 5,
+          "successRate": 100.0,
+          "pairedObservedBefore": {
+            "n": 5,
+            "mean": 161.34,
+            "sd": 25.59390552455799
+          },
+          "pairedObservedAfter": {
+            "n": 5,
+            "mean": 45.22,
+            "sd": 14.722669594879864
+          },
+          "timeReductionPercent": 71.97223255237387,
+          "errors": {
+            "n": 5,
+            "mean": 0.0,
+            "sd": 0.0
+          },
+          "hesitations": {
+            "n": 5,
+            "mean": 0.0,
+            "sd": 0.0
+          }
+        },
+        {
+          "task": "Sign and protect",
+          "attempted": 5,
+          "pending": 0,
+          "successful": 5,
+          "successRate": 100.0,
+          "pairedObservedBefore": {
+            "n": 5,
+            "mean": 186.28,
+            "sd": 65.3475095164307
+          },
+          "pairedObservedAfter": {
+            "n": 5,
+            "mean": 62.699999999999996,
+            "sd": 17.79283563685114
+          },
+          "timeReductionPercent": 66.34099205497103,
+          "errors": {
+            "n": 5,
+            "mean": 0.2,
+            "sd": 0.4472135954999579
+          },
+          "hesitations": {
+            "n": 5,
+            "mean": 0.4,
+            "sd": 0.5477225575051661
+          }
+        },
+        {
+          "task": "Page extraction",
+          "attempted": 5,
+          "pending": 0,
+          "successful": 5,
+          "successRate": 100.0,
+          "pairedObservedBefore": {
+            "n": 5,
+            "mean": 89.56,
+            "sd": 29.747319206947036
+          },
+          "pairedObservedAfter": {
+            "n": 5,
+            "mean": 21.18,
+            "sd": 7.141568455178456
+          },
+          "timeReductionPercent": 76.35104957570344,
+          "errors": {
+            "n": 5,
+            "mean": 0.0,
+            "sd": 0.0
+          },
+          "hesitations": {
+            "n": 5,
+            "mean": 0.4,
+            "sd": 0.5477225575051661
+          }
+        }
+      ],
+      "scales": {
+        "SUS": {
+          "n": 5,
+          "mean": 59.0,
+          "sd": 18.506755523321747
+        },
+        "PU": {
+          "n": 5,
+          "mean": 3.5,
+          "sd": 0.82915619758885
+        },
+        "PEOU": {
+          "n": 5,
+          "mean": 3.45,
+          "sd": 0.6937218462755804
+        },
+        "BI": {
+          "n": 5,
+          "mean": 3.2666666666666666,
+          "sd": 0.894427190999916
+        }
+      },
+      "completedCohortTaskSuccessRate": 95.0,
+      "numericExitCriteria": "PENDING",
+      "releaseDecision": "Human review required: physical devices, consent/evidence and zero open severity 3\u20134 defects.",
+      "definitions": [
+        "Reserved rows are not people.",
+        "Timing pairs include successful tasks with observed baselines only; n is explicit.",
+        "SD is sample SD; absent for n < 2.",
+        "SUS 75 exit threshold; 80.8 stretch target."
+      ]
+    },
+    "3": {
+      "instrument": "UAT-2026-10-27",
+      "recordedRows": 5,
+      "eligibleParticipants": 5,
+      "completedSessions": 5,
+      "excludedUnverifiedRows": 0,
+      "tasks": [
+        {
+          "task": "Slides cleanup",
+          "attempted": 5,
+          "pending": 0,
+          "successful": 4,
+          "successRate": 80.0,
+          "pairedObservedBefore": {
+            "n": 4,
+            "mean": 134.15,
+            "sd": 38.223422138788145
+          },
+          "pairedObservedAfter": {
+            "n": 4,
+            "mean": 32.475,
+            "sd": 10.678131859084713
+          },
+          "timeReductionPercent": 75.7920238538949,
+          "errors": {
+            "n": 5,
+            "mean": 0.0,
+            "sd": 0.0
+          },
+          "hesitations": {
+            "n": 5,
+            "mean": 0.2,
+            "sd": 0.4472135954999579
+          }
+        },
+        {
+          "task": "Mixed-file assembly",
+          "attempted": 5,
+          "pending": 0,
+          "successful": 5,
+          "successRate": 100.0,
+          "pairedObservedBefore": {
+            "n": 5,
+            "mean": 156.22,
+            "sd": 34.746395496511575
+          },
+          "pairedObservedAfter": {
+            "n": 5,
+            "mean": 43.36,
+            "sd": 7.304313793916579
+          },
+          "timeReductionPercent": 72.24427090001281,
+          "errors": {
+            "n": 5,
+            "mean": 0.0,
+            "sd": 0.0
+          },
+          "hesitations": {
+            "n": 5,
+            "mean": 0.0,
+            "sd": 0.0
+          }
+        },
+        {
+          "task": "Sign and protect",
+          "attempted": 5,
+          "pending": 0,
+          "successful": 4,
+          "successRate": 80.0,
+          "pairedObservedBefore": {
+            "n": 4,
+            "mean": 171.15,
+            "sd": 31.438140318197355
+          },
+          "pairedObservedAfter": {
+            "n": 4,
+            "mean": 55.025,
+            "sd": 18.61994897952194
+          },
+          "timeReductionPercent": 67.84983932223196,
+          "errors": {
+            "n": 5,
+            "mean": 0.2,
+            "sd": 0.4472135954999579
+          },
+          "hesitations": {
+            "n": 5,
+            "mean": 0.4,
+            "sd": 0.5477225575051661
+          }
+        },
+        {
+          "task": "Page extraction",
+          "attempted": 5,
+          "pending": 0,
+          "successful": 3,
+          "successRate": 60.0,
+          "pairedObservedBefore": {
+            "n": 3,
+            "mean": 90.86666666666666,
+            "sd": 32.772142641782416
+          },
+          "pairedObservedAfter": {
+            "n": 3,
+            "mean": 24.433333333333334,
+            "sd": 3.9068316233660925
+          },
+          "timeReductionPercent": 73.1107850330154,
+          "errors": {
+            "n": 5,
+            "mean": 0.0,
+            "sd": 0.0
+          },
+          "hesitations": {
+            "n": 5,
+            "mean": 0.0,
+            "sd": 0.0
+          }
+        }
+      ],
+      "scales": {
+        "SUS": {
+          "n": 5,
+          "mean": 50.0,
+          "sd": 14.031215200402281
+        },
+        "PU": {
+          "n": 5,
+          "mean": 3.0,
+          "sd": 0.6373774391990981
+        },
+        "PEOU": {
+          "n": 5,
+          "mean": 3.2,
+          "sd": 0.48088460154178364
+        },
+        "BI": {
+          "n": 5,
+          "mean": 2.666666666666667,
+          "sd": 0.4714045207910317
+        }
+      },
+      "completedCohortTaskSuccessRate": 80.0,
+      "numericExitCriteria": "PENDING",
+      "releaseDecision": "Human review required: physical devices, consent/evidence and zero open severity 3\u20134 defects.",
+      "definitions": [
+        "Reserved rows are not people.",
+        "Timing pairs include successful tasks with observed baselines only; n is explicit.",
+        "SD is sample SD; absent for n < 2.",
+        "SUS 75 exit threshold; 80.8 stretch target."
+      ]
+    }
+  }
+}
