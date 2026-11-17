@@ -1,3 +1,5 @@
+> **17 November update:** 55 survey responses are now available; see [survey results](final/survey-results.md). Mean SUS 58.64 and TAM constructs below 4. Observed task timings/completion and original collection/consent records remain unverified. Earlier statements about no survey data are historical.
+
 # UniLab project report — verified status, 16 November 2026
 
 UniLab provides student document tools through one workflow: **select a file → transform it on this device → download the result**. The four current study tasks are slide cleanup/compression, mixed-file assembly, signing with password protection, and single-page extraction. The working product is demonstrated; formal user outcomes are not yet established.

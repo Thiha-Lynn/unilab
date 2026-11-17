@@ -1,0 +1,32 @@
+{
+  "measuredAt": "2026-11-17T15:32:57.642Z",
+  "environment": "Node v24.22.1 (darwin/arm64)",
+  "results": [
+    {
+      "task": "Local 3-file PDF assembly (T2 core logic)",
+      "ms": 24,
+      "outputBytes": 607,
+      "networkMeasurement": "not instrumented by this benchmark"
+    },
+    {
+      "task": "Local Page-42 extraction from 120-page PDF (T4 core logic)",
+      "ms": 19.3,
+      "inputBytes": 25588,
+      "outputBytes": 864,
+      "networkMeasurement": "not instrumented by this benchmark"
+    },
+    {
+      "task": "Permanent PDF redaction (F7 / LR6)",
+      "ms": 508.7,
+      "outputBytes": 5835,
+      "networkMeasurement": "not instrumented by this benchmark"
+    },
+    {
+      "task": "Vault store + immediate purge (F6 / LR5)",
+      "ms": 9.81,
+      "reachableBefore": true,
+      "countAfter": 0,
+      "networkMeasurement": "not instrumented by this benchmark"
+    }
+  ]
+}

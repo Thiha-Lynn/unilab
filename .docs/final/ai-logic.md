@@ -1,3 +1,5 @@
+> **17 November verification limit:** Test-count growth is an engineering output, not measured causal AI impact. No matched manual-versus-AI baseline has been supplied. Model accuracy/bias evaluation is also incomplete. Present these gaps explicitly; do not label the AI impact requirement fully passed. Current tests/logs are linked from the final readiness report.
+
 # AI Logic & AI-Assisted SDLC Evidence
 
 **Project:** UniLab (Company 18 · Digital Imposters Pvt. Co., Ltd.)  
@@ -43,5 +45,5 @@ Rather than inventing "hours saved" from commit timestamps, we report directly m
 - **Traceability & diagram audits (`.docs/05-log/20260908-log.md`, `20261116-log.md`):**
   - Before automated checks: `D1`–`D7` defects existed (e.g., `D2` OCR language mismatch across 3 files, `D3` `rule.md` describing a nonexistent server, `D4` invalid merge diamonds in Activity diagram).
   - After human-reviewed skill/audit runs: `0` diagram ID mismatches across `D1`–`D4`, `3/4` backlog audit checks passing (with `1` legal-coverage gap transparently left open for human decision rather than hidden).
-- **Automated regression coverage:** Expanded from `17` unit tests (8 Sep gate) → `25` tests (`main`) → **`37` Node tests + `12` Python tests** (`17 Nov 2026`), all passing in CI.
+- **Automated regression coverage:** Expanded from `17` unit tests (8 Sep gate) → `25` tests (`main`) → **`43` Node tests + `16` Python tests** (`17 Nov 2026`), all passing in CI.
 - **What this does NOT prove:** Automated test count is a quality-gate improvement, **not** a controlled time-savings experiment comparing manual vs. AI-assisted coding speed (`READINESS.md`).

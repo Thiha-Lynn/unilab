@@ -1,0 +1,16 @@
+# Swan Htut Oakkar Aung — role statement draft
+
+**AUTHOR REVIEW REQUIRED — not a completed personal statement.** Charter role: Designer. Planned test responsibility: task scenarios, SUS and moderation. These assignments do not prove actual contribution.
+
+Write about 200 words in your own voice covering:
+1. What you actually owned and implemented/tested.
+2. Exact PR, commit, test/session or design evidence links for that work.
+3. One concrete difficulty, your decision and its outcome.
+4. Which AI tools you used, what they produced, and how you checked/corrected them.
+5. A lesson you can explain in tomorrow's Q&A.
+
+Evidence starting points: [final index](../README.md), [survey results](../survey-results.md), [AI disclosure](../ai-logic.md). Do not claim another member's work or invent time saved. Replace these prompts after author review; do not present this draft as submitted evidence of contribution.
+
+## Reflection
+
+Due 22 November 2026, 23:59 Bangkok. After presenting, write ~300 words answering: what AI improved and worsened in your engineering/teamwork; where you stand in today's software industry; your next-year and five-year plan. This section is pending the author's own reflection.
