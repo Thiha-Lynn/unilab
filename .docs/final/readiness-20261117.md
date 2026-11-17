@@ -15,9 +15,9 @@
 | Consent | Private filled records supplied, not independently witnessed/authenticated | [Evidence qualification](task-session-review.md) |
 | Defect retests | Historical engineering fixes recorded; new reported usability concerns need reproduction and actual retests | [Defect log](../04-test/defect-log.csv) |
 | Diagrams | Existing pack plus new source-based sequence and class-style record model | [Core diagrams](core-diagrams.md) |
-| Personal statements | Zaw's authored statement present; four drafts need authors' completion/review | [Role folder](role-statements/) |
+| Personal statements | Zaw's authored statement present; four commit-linked summaries prepared; personal attestations pending | [Role folder](role-statements/) |
 | Demo video | Supplied trim is only 1.066667 seconds, 320×240 | Inspected with ffprobe; not final demo |
-| Slides | Six-slide PDF is September material with 25-test count, not current final evidence | Existing `.docs/05-log/` deck; replace/update |
+| Slides | Six-slide PDF is September material with 25-test count, not current final evidence | Eight final slides created and visually checked; [previews](presentation/README.md) and [script](presentation-script.md) |
 | AI impact | Verification activity documented; controlled baseline/product model accuracy remains missing | [AI logic](ai-logic.md) |
 
 ## Tonight's remaining human work
@@ -36,3 +36,7 @@ Physical handset/media profiling, full-tool processing/network coverage, depende
 Problem/discovery 1 min → live MUST highlights 3 min → survey results and limitations 2 min → task results with assistance correction 1 min → AI evidence/limits 1 min → roles and lessons 2 min. Keep n=55 questionnaire respondents and n=15 overlapping task participants separate. Do not claim 95% success, improved SUS, universal zero uploads or causal AI time savings.
 
 Only the instructor awards course grades. Passing builds/CI and having 55 responses do not mean all project criteria passed.
+
+## Repository completion pass
+
+Added a [criterion-by-criterion grading map](grading-checklist.md), [ten-minute presentation manuscript](presentation-script.md), [demo/retest procedure](retest-and-demo.md), and four contribution summaries based on actual commit history. Added `scripts/verify-final-evidence.py` to CI: it recomputes both published datasets, checks 315 shared questionnaire values and resolves final Markdown links. This closes preparation and consistency gaps; it does not create new empirical results or individual attestations. Eight final slides have since been created and visually reviewed, with public previews committed. A meaningful video, real-device checks, new defect retests and personal reflections remain uncompleted.

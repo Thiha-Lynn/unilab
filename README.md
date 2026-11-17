@@ -15,6 +15,10 @@ This repository is the **assignment and coursework record**, with the v0.2.0 app
 
 The product packages use their documented dependency licenses (including AGPL background removal); original UniLab source retains its MIT notices. Product releases do not establish lecturer approval or a passed Week 5 gate. Those outcomes remain pending the presentation and must be recorded from actual feedback.
 
+## Final presentation — 18 November 2026
+
+Start with the [final portfolio](.docs/final/README.md), [criterion-by-criterion evidence map](.docs/final/grading-checklist.md), and [presentation script](.docs/final/presentation-script.md). The final evidence is consolidated on `audit/final-readiness-20261116` in [PR #24](https://github.com/Thiha-Lynn/unilab/pull/24). Results are reproducible with `python3 scripts/verify-final-evidence.py`. Passing this check establishes data consistency, not that usability targets or lecturer grading criteria are all satisfied.
+
 ## Coursework — start here if you are grading this
 
 Everything for the course lives in [`.docs/`](.docs/). The one-screen map is

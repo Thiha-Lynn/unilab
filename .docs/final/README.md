@@ -9,8 +9,11 @@
 
 > **Current readiness, 17 November:** 55 survey responses are available and [scored reproducibly](survey-results.md); SUS and all TAM constructs are below the team's targets. Owner-confirmed task records are now reviewed with explicit provenance limits. Survey responses, historical discovery interviews and synthetic QA are separate evidence. This index is on branch `audit/final-readiness-20261116` (PR #24); inherited main links resolve to the consolidated branch when viewing this file. **Not a claim of full release readiness.**
 
-Latest Classroom: repository inspection **18 November 08:00 Bangkok**, all branches. Presentation **09:25–09:40**. Four personal statements still need their authors' completion/review. Reflection (~300 words) due **22 November 23:59**. Product code is in the second repository linked above; the team must reply to today's Classroom post with that link tonight.
+Latest Classroom: repository inspection **18 November 08:00 Bangkok**, all branches. Presentation **09:25–09:40**. Four commit-linked contribution summaries now exist; their authors still need to supply personal attestations. Reflection (~300 words) due **22 November 23:59**. Product code is in the second repository linked above; the team must reply to today's Classroom post with that link tonight.
 
+- [Lecturer grading checklist](grading-checklist.md)
+- [Final slide previews](presentation/README.md) and [timed presentation script](presentation-script.md) — eight slides created and visually checked; live rehearsal remains pending
+- [Retest and demo procedure](retest-and-demo.md)
 - [Core sequence and class-style data model](core-diagrams.md)
 - [15-session review and corrections](task-session-review.md)
 - [Survey results and limitations](survey-results.md)
@@ -54,7 +57,7 @@ Latest Classroom: repository inspection **18 November 08:00 Bangkok**, all branc
 | **Automated Metrics Calculator & Python Tests** | [`.docs/04-test/calc-metrics.py`](../04-test/calc-metrics.py) · [`test_metrics.py`](../04-test/test_metrics.py) | `main` | 16 Python tests passed on consolidated branch |
 | **No-Real-User Test Report & Alternative Evidence** | [`test/no-real-user-test.md`](../../test/no-real-user-test.md) | `main` | Historical alternative report; see current 15-session review |
 | **Before / After Benchmark Script** | [`scripts/qa-benchmark.mjs`](../../scripts/qa-benchmark.mjs) | `main` | Reproducible synthetic local benchmark |
-| **Issue / Defect Log (Severity, Fix Commit, Retest)** | [`.docs/04-test/defect-log.csv`](../04-test/defect-log.csv) | `main` | 8 tracked issues (`ISS-001`–`ISS-008`) |
+| **Issue / Defect Log (Severity, Fix Commit, Retest)** | [`.docs/04-test/defect-log.csv`](../04-test/defect-log.csv) | `main` | 12 tracked issues (`ISS-001`–`ISS-012`); four survey concerns await reproduction |
 | **Session Recorder, Study Pack & 4-Workflow Browser Check** | [PR #24 (`audit/final-readiness-20261116`)](https://github.com/Thiha-Lynn/unilab/pull/24) · [`20261116-browser-workflows.json`](https://github.com/Thiha-Lynn/unilab/blob/audit/final-readiness-20261116/.docs/04-test/evidence/20261116-browser-workflows.json) | Branch `audit/final-readiness-20261116` (PR #24) | 4/4 synthetic browser workflows pass |
 
 ## 4) DELIVER (`.docs/final/`)
