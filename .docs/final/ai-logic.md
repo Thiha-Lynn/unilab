@@ -47,3 +47,7 @@ Rather than inventing "hours saved" from commit timestamps, we report directly m
   - After human-reviewed skill/audit runs: `0` diagram ID mismatches across `D1`–`D4`, `3/4` backlog audit checks passing (with `1` legal-coverage gap transparently left open for human decision rather than hidden).
 - **Automated regression coverage:** Expanded from `17` unit tests (8 Sep gate) → `25` tests (`main`) → **`43` Node tests + `16` Python tests** (`17 Nov 2026`), all passing in CI.
 - **What this does NOT prove:** Automated test count is a quality-gate improvement, **not** a controlled time-savings experiment comparing manual vs. AI-assisted coding speed (`READINESS.md`).
+
+## New measured AI-assisted engineering correction — 17 November
+
+Product [PR9](https://github.com/Thiha-Lynn/unilab-releases/pull/9) adds persistent save guidance and handles rejected ZIP exports with retry feedback and duplicate-click protection. A new regression test fails against baseline45e9870 and passes with the correction;42product app tests and the production build pass. [Before/after logs, procedure and limits](https://github.com/Thiha-Lynn/unilab-releases/blob/fix/final-download-feedback/docs/qa/download-feedback-2026-11-17.md). This is an AI-assisted implementation with observed verification results. It does not isolate AI's causal contribution, measure developer time savings, improve the historical survey scores, or establish model accuracy. Not deployed or real-user retested at this point.

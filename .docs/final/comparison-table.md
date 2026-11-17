@@ -13,6 +13,14 @@ No numeric change is claimed where comparable before/after measurements are abse
 | TAM PU / PEOU / BI | No earlier comparable survey supplied | 3.34 / 3.43 / 3.30, n=55 each; target 4 | All below target | Complete per-person construct means | [survey results](survey-results.md) |
 | AI-assisted SDLC | Matched manual baseline absent | 43 Node + 16 Python checks passed on consolidated branch | Verification output only; causal AI gain not established | Test logs; human-reviewed diffs | [AI disclosure](ai-logic.md), [verification](readiness-20261117.md) |
 
+## Newly measured export regression (product review branch)
+
+| Item | Before | After | Change | Measured with | Evidence |
+|---|---|---|---|---|---|
+| AI-assisted export-feedback correction | New regression fails on45e9870: save guidance absent | Same regression passes after correction;42product app tests pass | One new acceptance test goes from fail to pass; no causal AI productivity claim | Node/JSDOM fixture, ZIP rejection/retry and duplicate-click checks; baseline source substituted for matched check | [PR9 and raw logs](https://github.com/Thiha-Lynn/unilab-releases/blob/fix/final-download-feedback/docs/qa/download-feedback-2026-11-17.md) |
+
+This product change is not yet deployed or tested with real participants. Coursework test counts remain43Node+16Python; do not combine the two suites into one claimed product result.
+
 ## Team-measured synthetic operations (not user before/after)
 
 [Raw benchmark](evidence/benchmark-20261117.json) records a single Node run on this Mac: three blank-PDF assembly 24.0 ms, page-42 extraction 19.3 ms, redaction 508.7 ms, vault store+purge 9.81 ms. These timings include only the script's operation boundaries, not UI interaction or participant effort. Three blank PDFs are not the mixed-image T2 study fixture. Network traffic is not instrumented by this benchmark. Do not claim 100% upload elimination, universal zero payloads, human time savings or a successful baseline from it.

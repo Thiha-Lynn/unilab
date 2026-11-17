@@ -1,3 +1,5 @@
+> **Presentation launch page: [SHOW THIS TOMORROW](SHOW-THIS-TOMORROW.md)** — direct links for all five lecturer requirements and exact team actions.
+
 > **Latest owner clarification, 17 November:** 15 task scorecards and private consent records have now been supplied and described by the owner as actual observations. The reviewed dataset reports 53/60 unassisted successes (88.33%), below target. All 315 questionnaire ratings match the overlapping U01–U15 survey rows. Source chronology/first-use statements remain unresolved; see [task-session review](task-session-review.md). Earlier missing-record findings below describe the pre-handoff audit.
 
 # UniLab Final Portfolio Index (`.docs/final/`)
