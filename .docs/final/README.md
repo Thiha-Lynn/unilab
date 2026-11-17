@@ -11,6 +11,8 @@
 
 Latest Classroom: repository inspection **18 November 08:00 Bangkok**, all branches. Presentation **09:25–09:40**. Four commit-linked contribution summaries now exist; their authors still need to supply personal attestations. Reflection (~300 words) due **22 November 23:59**. Product code is in the second repository linked above; the team must reply to today's Classroom post with that link tonight.
 
+- [Role-specific Q&A rehearsal](member-qa-rehearsal.md)
+- [Morning handoff checklist](morning-handoff.md)
 - [Lecturer grading checklist](grading-checklist.md)
 - [Final slide previews](presentation/README.md) and [timed presentation script](presentation-script.md) — eight slides created and visually checked; live rehearsal remains pending
 - [Retest and demo procedure](retest-and-demo.md)

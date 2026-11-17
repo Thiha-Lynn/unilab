@@ -9,6 +9,7 @@ Source: [Classroom announcements](https://classroom.google.com/c/ODU1NTkyOTA0MjY
 | Rules and AI working instructions | [rule.md](../../rule.md), [CLAUDE.md](../../CLAUDE.md) | Rule-level legal mapping remains incomplete; no legal certification |
 | Use case, activity, architecture, sequence, class/data model | [D1–D4](../02-design/diagrams.md), [sequence and records](core-diagrams.md) | Source-based diagrams; not evidence of production runtime coverage |
 | Code, setup, tests | [Root README](../../README.md), [verification log](evidence/course-tests-20261117.txt), [build](evidence/course-build-20261117.txt) | Coursework and production builds differ; no credentials required for baseline; no .env required for local baseline |
+| No secrets | [Git-history scan](evidence/secret-history-scan-20261117.json) | No matches in available local history; default detector rules are not exhaustive |
 | Real test plan and observed sessions | [Plan](../04-test/test-plan.md), [15-session review](task-session-review.md) | Owner-confirmed; dates and first-use statements still conflict; private consent is not public |
 | Before/after for Must tasks | [Comparison](comparison-table.md) | Four study scenarios have successful-only pairs; not coverage of every Must requirement |
 | Questionnaire and results | [55-response analysis](survey-results.md) | SUS 58.64 <75; TAM 3.34/3.43/3.30 <4; no prior comparable survey |

@@ -25,7 +25,7 @@
 1. Explain original collection method/dates and survey-before-session/first-use contradictions using original notes. Do not alter dates to force agreement. Confirm that the four save reminders were assistance; the derived dataset conservatively counts them as such.
 2. Reproduce navigation/export/mobile/performance concerns; record severity, actual fix and retest. Do not assert zero severe defects simply because the issue log has blank severity.
 3. Finish/review four personal statements (~200 words each), linking actual work and AI disclosure. Each member speaks to actual contribution. Reflections ~300 words are due Nov22 23:59.
-4. Update final slides using the comparison and survey tables; record a meaningful ≤3-minute product video and rehearse the actual live MUST demo on the presentation laptop. The short October trim does not satisfy this.
+4. Use the eight updated slides and rehearse the live MUST demo on the presentation laptop. A meaningful backup video is optional under the supplied announcements; it cannot replace the required live demo. The short October trim is unsuitable even as backup.
 5. Supply measured AI/SDLC evaluation/baseline if available; otherwise disclose that part as incomplete, not an invented saving.
 6. Reply to today's Classroom post with the second repo link: https://github.com/Thiha-Lynn/unilab-releases. No message was sent by the agent.
 
@@ -40,3 +40,7 @@ Only the instructor awards course grades. Passing builds/CI and having 55 respon
 ## Repository completion pass
 
 Added a [criterion-by-criterion grading map](grading-checklist.md), [ten-minute presentation manuscript](presentation-script.md), [demo/retest procedure](retest-and-demo.md), and four contribution summaries based on actual commit history. Added `scripts/verify-final-evidence.py` to CI: it recomputes both published datasets, checks 315 shared questionnaire values and resolves final Markdown links. This closes preparation and consistency gaps; it does not create new empirical results or individual attestations. Eight final slides have since been created and visually reviewed, with public previews committed. A meaningful video, real-device checks, new defect retests and personal reflections remain uncompleted.
+
+## Exact-announcement clarification
+
+The supplied 17 November post requires repository artifacts and a live demonstration; it does not require a separate demo video. Lean Canvas is optional. Reflection is due after the presentation on22November, not before the08:00 repository check. `.env.example` and test credentials are applicable only when setup needs them; the retained baseline has neither a server secret nor a required login. All-branch inspection means PR24 need not be merged to be inspectable, provided the final index clearly names its branch. New real observations and personal declarations remain human work. See [member rehearsal](member-qa-rehearsal.md).
