@@ -39,7 +39,7 @@ const results = [];
     task: 'Local 3-file PDF assembly (T2 core logic)',
     ms: Number(ms.toFixed(1)),
     outputBytes: outBytes.length,
-    networkBytesUploaded: 0,
+    networkMeasurement: "not instrumented by this benchmark",
   });
 }
 
@@ -64,7 +64,7 @@ const results = [];
     ms: Number(ms.toFixed(1)),
     inputBytes: bookBytes.length,
     outputBytes: outBytes.length,
-    networkBytesUploaded: 0,
+    networkMeasurement: "not instrumented by this benchmark",
   });
 }
 
@@ -93,7 +93,7 @@ const results = [];
     task: 'Permanent PDF redaction (F7 / LR6)',
     ms: Number(ms.toFixed(1)),
     outputBytes: blob.size,
-    networkBytesUploaded: 0,
+    networkMeasurement: "not instrumented by this benchmark",
   });
 }
 
@@ -110,7 +110,7 @@ const results = [];
     ms: Number(ms.toFixed(2)),
     reachableBefore,
     countAfter,
-    networkBytesUploaded: 0,
+    networkMeasurement: "not instrumented by this benchmark",
   });
 }
 

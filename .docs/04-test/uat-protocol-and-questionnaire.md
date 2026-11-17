@@ -2,9 +2,9 @@
 
 **Project:** UniLab — 100% Client-Side Academic Document Suite (Company 18 / Digital Imposters Pvt. Co., Ltd.)
 **Course:** 1305493 Software Engineering Case Studies (Semester 1/2569)
-**Deliverable Date:** Testing on Wednesday 4 November 2026 (Field Testing Day)
-**Target:** at least 10 completed eligible sessions for the course; recruit 30 distinct people (`U01`–`U30`) for the wider product pilot. Exclude team members and classmates from course 1305493.
-**Instrument version:** UAT-2026-10-27. This working kit aligns the newer four tasks with the course handout. Team review and questionnaire translation/pilot remain required; this is not a legal compliance certification.
+**Deliverable Date:** 4 November was the scheduled field day. Record actual session dates; see [the current study procedure](RUN-STUDY.md).
+**Target:** at least 10 completed eligible sessions in the submitted plan; the current recruitment target is 15 (`U01`–`U15`), three per member. Thirty distinct people remains the wider product-pilot stretch target. Exclude team members and classmates from course 1305493.
+**Instrument version:** UAT-2026-10-27 (16 November pre-collection clarification: SUS wording matches the submitted test plan; no responses have been collected under this clarification). This working kit aligns the newer four tasks with the course handout. Team review and questionnaire translation/pilot remain required; this is not a legal compliance certification.
 
 ---
 
@@ -35,7 +35,7 @@ Each 25–30 minute testing session is managed by two team members:
 ## 2. Participant Consent & Demographic Profile
 
 ```
-PARTICIPANT ID: [ U____ ]     DATE: 2026-11-04     SESSION TIME: [ ____:____ ]
+PARTICIPANT ID: [ U____ ]     DATE: [ actual YYYY-MM-DD ]     SESSION TIME: [ ____:____ ]
 FACILITATOR: [ __________________ ]    OBSERVER: [ __________________ ]
 ```
 
@@ -148,14 +148,14 @@ PARTICIPANT ID: [ U____ ]
 
 | # | Item Statement | 1<br>(Strongly Disagree) | 2<br>(Disagree) | 3<br>(Neutral) | 4<br>(Agree) | 5<br>(Strongly Agree) |
 |---|---|:---:|:---:|:---:|:---:|:---:|
-| **Q1** | I think that I would like to use UniLab frequently for my coursework. *(Odd)* | [ ] | [ ] | [ ] | [ ] | [ ] |
+| **Q1** | I think that I would like to use UniLab frequently. *(Odd)* | [ ] | [ ] | [ ] | [ ] | [ ] |
 | **Q2** | I found UniLab unnecessarily complex. *(Even)* | [ ] | [ ] | [ ] | [ ] | [ ] |
 | **Q3** | I thought UniLab was easy to use. *(Odd)* | [ ] | [ ] | [ ] | [ ] | [ ] |
 | **Q4** | I think that I would need the support of a technical person to be able to use UniLab. *(Even)* | [ ] | [ ] | [ ] | [ ] | [ ] |
 | **Q5** | I found the various functions in UniLab were well integrated. *(Odd)* | [ ] | [ ] | [ ] | [ ] | [ ] |
 | **Q6** | I thought there was too much inconsistency in UniLab. *(Even)* | [ ] | [ ] | [ ] | [ ] | [ ] |
-| **Q7** | I would imagine that most students would learn to use UniLab very quickly. *(Odd)* | [ ] | [ ] | [ ] | [ ] | [ ] |
-| **Q8** | I found UniLab very cumbersome / awkward to use. *(Even)* | [ ] | [ ] | [ ] | [ ] | [ ] |
+| **Q7** | I would imagine that most people would learn to use UniLab very quickly. *(Odd)* | [ ] | [ ] | [ ] | [ ] | [ ] |
+| **Q8** | I found UniLab very cumbersome to use. *(Even)* | [ ] | [ ] | [ ] | [ ] | [ ] |
 | **Q9** | I felt very confident using UniLab. *(Odd)* | [ ] | [ ] | [ ] | [ ] | [ ] |
 | **Q10** | I needed to learn a lot of things before I could get going with UniLab. *(Even)* | [ ] | [ ] | [ ] | [ ] | [ ] |
 

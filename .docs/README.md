@@ -3,6 +3,10 @@
 **Company 18 · DIGITAL IMPOSTERS PVT. CO., LTD. · UniLab**
 1305493 Software Engineering Case Studies · 1/2569 · Dr. Prasara Jakkaew
 
+**Current final delivery:** [P1–P5 checklist](06-deliver/README.md) · [Run the 15-person study](04-test/RUN-STUDY.md) · [Local recorder](04-test/session-recorder.html) · [Verified project report](PROJECT_REPORT.md).
+
+Historical discovery/gate navigation below remains for provenance.
+
 Start here: **[`01-requirements/TRACEABILITY.md`](01-requirements/TRACEABILITY.md)** — the whole
 chain on one screen. Everything below hangs off it.
 

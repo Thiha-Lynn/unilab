@@ -1,0 +1,56 @@
+
+> unilab@0.2.0 test
+> node --test "test/**/*.test.mjs"
+
+✔ offline budget excludes optional AI runtime and release hashes include service worker (145.401333ms)
+✔ the fixture is adversarial — a code-point count is wrong for every string (4.867084ms)
+✔ graphemes() counts combining marks as part of their base character (1.955125ms)
+✔ String.length would fail this fixture — the requirement is not vacuous (0.427125ms)
+✔ lecture conversion retains every slide, text, styling and SVG diagram (102.518834ms)
+✔ lecture scripts, forms and external resources are removed (157.219459ms)
+✔ CSS network references are removed while local SVG paint references remain (1.404125ms)
+✔ pagination covers all content without gaps and prefers a block boundary (2.110083ms)
+✔ W4-Class-2569.html: all 18 lecture slides survive conversion (2025.85025ms)
+✔ W3-Class-2569.html: all 34 lecture slides survive conversion (602.855916ms)
+✔ CSS theme variables and their fallback values survive sanitization (0.536042ms)
+✔ accept matching handles the three shapes the tools actually use (4.627291ms)
+✔ an extension is matched whatever case the phone wrote it in (1.445167ms)
+✔ a file the tool cannot open is refused and not passed on (0.49975ms)
+✔ a file above the stated size is refused (0.267708ms)
+✔ a mixed drop keeps what it can and refuses the rest (1.873709ms)
+✔ the refusal names the file and the reason, so nothing fails silently (0.106167ms)
+✔ screening returns only plain arrays, holding no reference to a refused file (0.161292ms)
+✔ the stated limit reads the way it is written in the UI (0.1235ms)
+✔ NFR1 / LR1: src/ contains no upload sinks (XHR, sendBeacon, WebSocket, FormData, or POST fetch) (42.000875ms)
+✔ LR8: production logging helpers stay silent outside Vite DEV mode (0.160292ms)
+✔ LR4 / PDPA 25: privacy page dynamically reflects vault TTL and intake size limits (431.234208ms)
+✔ LR3 / NFR5 / F14: OCR ships 19 languages and Remove Background gates model download behind dynamic import (1.464541ms)
+✔ redaction removes marked-page text and annotations, preserves untouched text, and paints the output (974.289541ms)
+Warning: Please use the `legacy` build in Node.js environments.
+✔ tool registry exposes 59 valid, unique tools across known categories (6.54775ms)
+✔ ops catalogue validates compatible chains and rejects mismatched step types (0.661166ms)
+✔ parsePageRanges parses single pages, ranges, deduplicates, and rejects invalid ranges (5.5255ms)
+✔ UAT Task 2 & Task 4 core PDF operations (ordered merge and page-42 extract) execute locally with 0 fetch calls (423.637709ms)
+✔ recorder starts without assumed consent, outcomes, timings or questionnaire answers (682.719833ms)
+✔ success without inspected output cannot be exported (438.128917ms)
+✔ completed session without consent and eligibility cannot be exported (1268.059084ms)
+✔ partial observations export blanks and safely quoted notes without claiming completion (93.434125ms)
+✔ social crawlers receive a public image and matching dimensions without JavaScript (453.894875ms)
+✔ formatBytes and stem handle edge cases consistently (0.71825ms)
+✔ fileListView supports reordering and removal for multi-file workflows (537.03325ms)
+✔ unit-converter converts data sizes, temperature, and Thai land area accurately in DOM (133.2005ms)
+✔ word-counter updates grapheme, code-point, and stacked-combo counts in DOM (1493.670208ms)
+✔ a stored result is reachable while it is in the vault (2.720791ms)
+✔ purge makes the bytes unreachable, not merely unlisted (0.275042ms)
+✔ pressing "delete now" is the same purge the countdown performs (0.118291ms)
+✔ the countdown expiring purges without anyone pressing anything (1243.64425ms)
+✔ starting a new job releases the previous job's files (49.767541ms)
+✔ the retention window the UI states is the one the vault enforces (0.144125ms)
+ℹ tests 43
+ℹ suites 0
+ℹ pass 43
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 7940.257292

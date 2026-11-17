@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'none'; img-src data:; form-action 'none'; base-uri 'none'">
+<title>UniLab · Observe a testing session</title>
+<style>
+:root{font:17px/1.5 system-ui;color:#183e37;background:#f4f7f5}body{max-width:980px;margin:30px auto;padding:0 22px 80px}h1{line-height:1.15}h2{margin-top:0}fieldset,.notice{border:1px solid #b9cec4;border-radius:12px;padding:22px;margin:22px 0;background:white}legend{font-size:1.3rem;font-weight:700;padding:0 8px}label{display:block;margin:14px 0}input,select,textarea,button{font:inherit;padding:9px;border:1px solid #8ca79b;border-radius:6px;box-sizing:border-box}input:not([type=checkbox]),textarea,select{display:block;width:100%;margin-top:5px}input[type=checkbox]{width:20px;height:20px;vertical-align:middle}textarea{min-height:85px}button{cursor:pointer;background:#174f40;color:white}button.secondary{background:white;color:#174f40}.grid{display:grid;grid-template-columns:1fr 1fr;gap:0 22px}.question{display:grid;grid-template-columns:1fr 150px;gap:20px;align-items:center;border-bottom:1px solid #e0e8e3;padding:12px 0}.question label{margin:0}.question select{margin:0}.note{color:#49685b}.actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center}#status{white-space:pre-wrap}a{color:#174f40}small{display:block}.timer{padding:14px;background:#edf4f0;border-radius:8px}output{font-variant-numeric:tabular-nums;font-weight:700}@media(max-width:640px){.grid,.question{grid-template-columns:1fr}.question{gap:7px}body{padding:0 12px 50px}fieldset{padding:15px}}
+</style>
+<h1>Observe one real testing session</h1>
+<p>UniLab · Four tasks, observed timings, SUS and TAM. Observer records facts; the participant chooses their own answers.</p>
+<div class="notice"><strong>Private, local worksheet.</strong> Nothing is sent or saved in browser storage. Export the CSV before closing or refreshing. Store it outside the repository. No names, emails, student IDs, real documents or personal signatures. This form is for the main eligible student study; keep family/pilot feedback and repeat-participant retests separately. <a href="RUN-STUDY.md">Read the study instructions</a>.</div>
+<form id="session">
+<fieldset><legend>1 · Consent and session</legend>
+<p>Read the study notice and withdrawal/retention explanation first. Recording photos or video needs separate permission. These checks record the participant's actual agreement and the observer's verification; they do not obtain consent automatically.</p>
+<div class="grid">
+<label>Participant code <input name="Participant_ID" pattern="U[0-9]{2,3}" placeholder="U01" required autocomplete="off"></label>
+<label>Actual session date <input name="Session_Date" type="date" required></label>
+<label>Wave <input name="Cohort_Wave" placeholder="Wave 1" required></label>
+<label>Product commit / revision <input name="Build_Revision" placeholder="Copy the frozen release revision" required></label>
+<label>Physical device, OS and browser <input name="Device_Browser" required placeholder="Model, OS version, browser version"></label>
+<label>Product URL <input name="Product_URL" type="url" value="https://unilab.ztvmm.live/" required></label>
+</div>
+<label>Prior UniLab experience, baseline tools and study context <textarea name="Session_Context" placeholder="Use role/context only; no identifying details. Include facilitator/observer codes, notice version and actual consent time/method. Record relevant prior familiarity."></textarea></label>
+<label><input name="Consent" type="checkbox"> Participant voluntarily agreed to coded study observations.</label>
+<label><input name="Distinct_Person_Verified" type="checkbox"> One distinct person; this is not a repeat session being counted again.</label>
+<label><input name="Eligible_Non_Classmate" type="checkbox"> Target student, not a team member or course 1305493 classmate; applicable age/consent requirements checked.</label>
+</fieldset>
+<section id="tasks"></section>
+<fieldset><legend>3 · Participant questionnaires</legend>
+<p>Ask the participant after the tasks. 1 = Strongly disagree, 2 = Disagree, 3 = Neutral, 4 = Agree, 5 = Strongly agree. Leave unanswered questions blank. These are the existing plan's instruments, not automatically validated translations.</p>
+<h2>System Usability Scale</h2><div id="sus"></div>
+<h2 style="margin-top:28px">Technology Acceptance Model</h2><div id="tam"></div>
+</fieldset>
+<fieldset><legend>4 · Debrief and export</legend>
+<label>What worked, where they struggled, and whether they would use it again <textarea name="Debrief" placeholder="Record their actual words without identifying details."></textarea></label>
+<label>Consent record, defects and private evidence references <textarea name="Evidence_References" placeholder="Coded references to consent and observations; a Yes flag alone is not the consent record. Do not paste private sharing links or personal data."></textarea></label>
+<label><input name="Session_Complete" type="checkbox"> All four tasks were attempted and timed, errors/hesitations recorded, and consent/eligibility verified.</label>
+<p class="note">A completed session can include failures or assistance. Missing questionnaire responses remain missing. Exporting is not a claim of study completion, passing metrics or lecturer approval.</p>
+<div class="actions"><button type="submit">Export this session CSV</button><button type="button" class="secondary" id="clear">Clear worksheet</button></div>
+<p id="status" role="status" aria-live="polite">No observations exported.</p>
+</fieldset></form>
+<script>
+const form=document.querySelector('#session');
+const meta=['Participant_ID','Cohort_Wave','Session_Date','Build_Revision','Consent','Distinct_Person_Verified','Eligible_Non_Classmate','Session_Complete'];
+const suffixes=['Baseline_Method','Before_sec','After_sec','Status','Output_Verified','Errors','Hesitations','Notes'];
+const sus=[
+'I think that I would like to use UniLab frequently.',
+'I found UniLab unnecessarily complex.',
+'I thought UniLab was easy to use.',
+'I think that I would need the support of a technical person to be able to use UniLab.',
+'I found the various functions in UniLab were well integrated.',
+'I thought there was too much inconsistency in UniLab.',
+'I would imagine that most people would learn to use UniLab very quickly.',
+'I found UniLab very cumbersome to use.',
+'I felt very confident using UniLab.',
+'I needed to learn a lot of things before I could get going with UniLab.'];
+const tam={PU:[
+'Using UniLab enables me to complete document submission tasks more quickly.',
+'Using UniLab improves the quality and security of my academic submissions.',
+'Using UniLab makes it easier to handle PDF assignments without size limit penalties.',
+'I find UniLab useful in my daily academic activities as a student.'],PEOU:[
+'Learning to operate UniLab is easy for me.',
+'I find it easy to get UniLab to do what I want it to do.',
+'My interaction with UniLab is clear and understandable.',
+'I find UniLab flexible to interact with across my devices.'],BI:[
+'Assuming I have internet or offline access, I predict that I would use UniLab during exam & submission weeks.',
+'I plan to keep using UniLab next month.',
+'If UniLab were available, I would use it regularly.']};
+const taskNames=['Slides cleanup','Mixed-file assembly','Sign and protect','Page extraction'];
+const taskGoals=[
+'Prepare the synthetic slides for a 5,000,000-byte cap: correct upside-down page 3, convert to grayscale, save and inspect readability.',
+'Save one three-page PDF: application PDF first, JPG scorecard second, PNG identity fixture third.',
+'Place an invented signature mark on the synthetic petition, protect with the public test password UniLabSecure2026, then check saved output with missing, wrong and correct passwords.',
+'Save exactly page 42 from the synthetic 120-page textbook; reopen the saved page to verify it.'];
+const scaleNames=[...sus.map((_,i)=>'SUS_Q'+(i+1)),...Object.entries(tam).flatMap(([c,items])=>items.map((_,i)=>'TAM_'+c+(i+1)))];
+const headers=[...meta,...taskNames.flatMap((_,i)=>suffixes.map(s=>'T'+(i+1)+'_'+s)),...scaleNames,'Device_Browser','Product_URL','Session_Context','Debrief','Evidence_References'];
+const choice=(name,label,options)=>`<label>${label}<select name="${name}"><option value="">Not recorded</option>${options.map(x=>`<option>${x}</option>`).join('')}</select></label>`;
+document.querySelector('#tasks').innerHTML=taskNames.map((title,i)=>{let p='T'+(i+1);return `<fieldset><legend>2.${i+1} · ${title}</legend><p>${taskGoals[i]}</p><p class="note">Observer notes. Give the scenario without showing control instructions. Stop timings after inspecting the saved output. If a baseline fails or is not comparable, explain in notes and leave paired Before seconds empty.</p><div class="timer actions"><button type="button" data-start="${p}">Start stopwatch</button><button type="button" class="secondary" data-stop="${p}" disabled>Stop stopwatch</button><output id="clock-${p}">0.0 seconds</output><small>Copy the elapsed time into the correct field below. Starting again resets only the stopwatch.</small></div><div class="grid">${choice(p+'_Baseline_Method','Baseline source',['observed','recalled'])}<label>Before: successful comparable baseline (seconds)<input name="${p}_Before_sec" type="number" min="0.001" step="any"></label><label>UniLab elapsed time (seconds, including failed attempts)<input name="${p}_After_sec" type="number" min="0.001" step="any"></label>${choice(p+'_Status','UniLab outcome',['Success','Assisted','Failed','Not attempted'])}${choice(p+'_Output_Verified','Saved output inspected and correct?',['Yes','No'])}<label>Observed errors (count)<input name="${p}_Errors" type="number" min="0" step="1"></label><label>Observed hesitations (count)<input name="${p}_Hesitations" type="number" min="0" step="1"></label></div><label>Baseline outcome/tool, assistance, errors and observations<textarea name="${p}_Notes"></textarea></label></fieldset>`}).join('');
+function question(container,name,text){const row=document.createElement('div');row.className='question';const label=document.createElement('label');label.htmlFor=name;label.textContent=text;const select=document.createElement('select');select.name=name;select.id=name;for(const [value,title] of [['','Unanswered'],...Array.from({length:5},(_,i)=>[String(i+1),String(i+1)])]){const o=document.createElement('option');o.value=value;o.textContent=title;select.append(o)}row.append(label,select);document.querySelector(container).append(row)}
+sus.forEach((s,i)=>question('#sus','SUS_Q'+(i+1),`${i+1}. ${s}`));Object.entries(tam).forEach(([c,items])=>items.forEach((s,i)=>question('#tam','TAM_'+c+(i+1),`${c}${i+1}. ${s}`)));
+const timers=new Map();let dirty=false;form.addEventListener('input',()=>dirty=true);form.addEventListener('change',()=>dirty=true);
+form.addEventListener('click',e=>{const start=e.target.closest('[data-start]'),stop=e.target.closest('[data-stop]');if(start){const p=start.dataset.start;timers.set(p,performance.now());document.querySelector(`[data-stop="${p}"]`).disabled=false;start.disabled=true}if(stop){const p=stop.dataset.stop;document.querySelector('#clock-'+p).textContent=((performance.now()-timers.get(p))/1000).toFixed(1)+' seconds';timers.delete(p);stop.disabled=true;document.querySelector(`[data-start="${p}"]`).disabled=false}});
+setInterval(()=>{for(const[p,t]of timers)document.querySelector('#clock-'+p).textContent=((performance.now()-t)/1000).toFixed(1)+' seconds'},100);
+const cell=v=>'"'+(/^[=+@-]/.test(String(v).trimStart())?"'":'')+String(v).replaceAll('"','""')+'"';
+form.addEventListener('submit',e=>{e.preventDefault();if(!form.reportValidity())return;const row={};for(const h of headers){const el=form.elements.namedItem(h);row[h]=el.type==='checkbox'?(el.checked?'Yes':'No'):el.value.trim()}const issues=[];for(let i=1;i<=4;i++){const p='T'+i;if(row[p+'_Before_sec']&&!row[p+'_Baseline_Method'])issues.push(p+': choose observed or recalled for the baseline.');if(row[p+'_Status']==='Success'&&(!row[p+'_After_sec']||row[p+'_Output_Verified']!=='Yes'))issues.push(p+': success needs elapsed time and a verified saved output.');if(row.Session_Complete==='Yes'&&(!['Success','Assisted','Failed'].includes(row[p+'_Status'])||['After_sec','Errors','Hesitations'].some(s=>row[p+'_'+s]==='')))issues.push(p+': completed session needs an attempted outcome, elapsed time, errors and hesitations.')}if(row.Session_Complete==='Yes'&&['Consent','Distinct_Person_Verified','Eligible_Non_Classmate'].some(k=>row[k]!=='Yes'))issues.push('Completed sessions require all three consent/eligibility checks.');if(timers.size)issues.push('Stop the running stopwatch before exporting.');const status=document.querySelector('#status');if(issues.length){status.textContent='Export blocked:\n'+issues.join('\n');return}const blob=new Blob([headers.map(cell).join(',')+'\r\n'+headers.map(h=>cell(row[h])).join(',')+'\r\n'],{type:'text/csv;charset=utf-8'});const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='session-'+row.Participant_ID+'.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),30000);dirty=false;status.textContent='Download requested. Verify session-'+row.Participant_ID+'.csv is saved in private storage. Missing answers remain blank. Use the calculator for scoring; this is not a passing result.'});
+document.querySelector('#clear').onclick=()=>{if(!confirm('Clear this worksheet? Export first if you need to keep these observations.'))return;form.reset();timers.clear();document.querySelectorAll('[data-start]').forEach(b=>b.disabled=false);document.querySelectorAll('[data-stop]').forEach(b=>b.disabled=true);document.querySelectorAll('output').forEach(o=>o.textContent='0.0 seconds');dirty=false;document.querySelector('#status').textContent='Worksheet cleared. No observations exported.'};
+window.addEventListener('beforeunload',e=>{if(dirty){e.preventDefault();e.returnValue=''}});
+</script></html>

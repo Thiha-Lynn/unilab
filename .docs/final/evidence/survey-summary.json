@@ -1,0 +1,39 @@
+{
+  "kind": "survey ratings; not observed task completion",
+  "responses": 55,
+  "metrics": {
+    "SUS": {
+      "n": 55,
+      "mean": 58.63636363636363,
+      "sampleSD": 18.376326998053607,
+      "target": 75,
+      "targetMet": false
+    },
+    "PU": {
+      "n": 55,
+      "mean": 3.3363636363636364,
+      "sampleSD": 0.7472452213801175,
+      "target": 4,
+      "targetMet": false
+    },
+    "PEOU": {
+      "n": 55,
+      "mean": 3.4272727272727272,
+      "sampleSD": 0.7767941110159698,
+      "target": 4,
+      "targetMet": false
+    },
+    "BI": {
+      "n": 55,
+      "mean": 3.303030303030303,
+      "sampleSD": 0.8296777282834445,
+      "target": 4,
+      "targetMet": false
+    }
+  },
+  "limits": [
+    "Collection authenticity/consent and task exposure require original records.",
+    "Form entry timestamps and reported collection times are distinct.",
+    "No task timing, success-rate or causal improvement is established by ratings."
+  ]
+}

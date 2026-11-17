@@ -1,3 +1,7 @@
+> **Latest owner clarification, 17 November:** 15 task scorecards and private consent records have now been supplied and described by the owner as actual observations. The reviewed dataset reports 53/60 unassisted successes (88.33%), below target. All 315 questionnaire ratings match the overlapping U01–U15 survey rows. Source chronology/first-use statements remain unresolved; see [task-session review](task-session-review.md). Earlier missing-record findings below describe the pre-handoff audit.
+
+> **17 November update:** 55 survey responses are now available; see [survey results](survey-results.md). Mean SUS 58.64 and TAM constructs below 4. Observed task timings/completion and original collection/consent records remain unverified. Earlier statements about no survey data are historical.
+
 # UniLab — Case Study
 
 **Live Product:** [https://unilab.ztvmm.live/](https://unilab.ztvmm.live/)  
@@ -18,13 +22,13 @@ Mae Fah Luang University (MFU) undergraduates routinely submit academic PDFs, sc
 
 ## 2. Process
 
-1. **Discover & Compliance First:** Defined a single core workflow (**Select a file → Transform on this device → Download the result**), rewrote `rule.md` around **architectural compliance** (dissolving server-upload duties under PDPA & CCA §26 because no file is ever transmitted), and traced every requirement `Pain → Requirement → Backlog` in [`TRACEABILITY.md`](../01-requirements/TRACEABILITY.md).
+1. **Discover & Compliance First:** Defined a single core workflow (**Select a file → Transform on this device → Download the result**), rewrote `rule.md` around **architectural compliance** (documenting the intended local-processing boundary; historical legal conclusions remain coursework, not certification), and traced every requirement `Pain → Requirement → Backlog` in [`TRACEABILITY.md`](../01-requirements/TRACEABILITY.md).
 2. **Design & Scope Discipline:** Created D1–D4 diagrams ([`diagrams.md`](../02-design/diagrams.md)), design tokens ([`design-system.md`](../02-design/design-system.md)), mobile/desktop prototypes, and **parked** two unvalidated features (`F8` OCR and `F11` saved Workflows) when 0 of 15 discovery participants requested them.
 3. **Build & Optimize:** Shipped 59 browser-local tools (`pdf-lib`, `pdf.js`, `mediabunny` WebCodecs, `browser-image-compression`, `heic2any`, `dompurify`) with an in-memory vault (`src/vault.js`, automatic countdown + "Clear files from memory" + `pagehide` purge), drag-and-drop file screening (`src/intake.js`), and reduced the offline precache from **31 MB** to **7.41 MB** (<= 8 MB target, `B9`) by lazy-loading the 23 MB ONNX runtime on demand.
-4. **Verify & Test:** Built automated unit/integration tests (`npm test`: **37/37 passing**) proving vault URL revocation, intake screening, permanent PDF redaction, Thai/Burmese grapheme counting, zero-upload static/runtime isolation, and 59-tool registry integrity, alongside Python UAT scoring checks (`12/12` passing) and 4/4 synthetic browser workflow checks on `unilab-releases`.
+4. **Verify & Test:** Built automated unit/integration tests (`npm test`: **43/43 passing**) proving vault URL revocation, intake screening, permanent PDF redaction, Thai/Burmese grapheme counting, zero-upload static/runtime isolation, and 59-tool registry integrity, alongside Python UAT scoring checks (`16/16` passing) and 4/4 synthetic browser workflow checks on `unilab-releases`.
 
 ## 3. Outcome & Honest Status
 
 - **Working, deployed product:** Live at [https://unilab.ztvmm.live/](https://unilab.ztvmm.live/) with all four focus UAT workflows operational (slide cleanup/compression, mixed PDF/JPG/PNG assembly, signing with QPDF password protection, single-page textbook extraction) and verified on synthetic fixtures.
-- **Measured engineering outcomes:** `0 bytes` of user file payload uploaded (`test/privacy-network-isolation.test.mjs`, `test/registry-and-ops.test.mjs`); offline core reduced from `31 MB` to `7.41 MB` (`npm run build`); `37/37` JS tests and `12/12` Python UAT metric tests passing.
-- **Remaining validation gap (explicitly disclosed):** Formal post-build real-user UAT (`U01`–`U15` SUS/TAM and real student timing comparisons) has not yet been collected as of 17 November 2026 (`test/no-real-user-test.md`). Physical handset 60-second media profiling (`ISS-007`) and full 59-tool live browser sweeps (`ISS-006`) remain open in [`.docs/04-test/defect-log.csv`](../04-test/defect-log.csv).
+- **Measured engineering outcomes:** limited static/runtime network checks pass (not an exhaustive production network certification); offline core reduced from `31 MB` to `7.41 MB` (`npm run build`); `43/43` JS tests and `16/16` Python UAT metric tests passing.
+- **Remaining validation gap (explicitly disclosed):** 55 survey responses are scored separately, while observed four-task completion and matching baseline times remain unverified (`test/no-real-user-test.md`). Physical handset 60-second media profiling (`ISS-007`) and full 59-tool live browser sweeps (`ISS-006`) remain open in [`.docs/04-test/defect-log.csv`](../04-test/defect-log.csv).

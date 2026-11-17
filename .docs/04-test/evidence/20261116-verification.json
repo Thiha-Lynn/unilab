@@ -1,0 +1,41 @@
+{
+  "date": "2026-11-16",
+  "kind": "engineering checks, not participant evidence",
+  "course_base_revision": "1194049dce475191a54ecfea628a4b4f6db819d2",
+  "product_review_revision": "45e98702201dbecce6fc7e01a14cfb2289ec4ac0",
+  "live_revision": "9851fbb3a6d5e66b1287b3a065d01602d06dca1d",
+  "live_tree_matches_reviewed_product": true,
+  "checks": {
+    "product_app_tests": {
+      "passed": 41,
+      "failed": 0
+    },
+    "analytics_tests": {
+      "passed": 10
+    },
+    "desktop_policy_tests": {
+      "passed": 2
+    },
+    "course_node_tests_including_recorder": {
+      "passed": 31
+    },
+    "course_python_metrics_and_merger_tests": {
+      "passed": 16
+    },
+    "product_build": "passed",
+    "course_build": "passed",
+    "browser_workflows": {
+      "passed": 4,
+      "total": 4,
+      "evidence": "20261116-browser-workflows.json"
+    }
+  },
+  "live_offline_core_bytes": 7943852,
+  "limits": [
+    "Synthetic fixtures; no human participant outcomes.",
+    "Chrome on this Mac, not physical mobile coverage.",
+    "Harness window.fetch check is not an exhaustive network audit.",
+    "Visual signature/readability inspection still required during human tasks.",
+    "Formal results not collected as confirmed by owner; blank CSV reports zero and PENDING."
+  ]
+}

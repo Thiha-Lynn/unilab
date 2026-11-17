@@ -3,9 +3,9 @@
 **Company 18 · DIGITAL IMPOSTERS PVT. CO., LTD.**
 **Course:** 1305493 Software Engineering Case Studies · Semester 1/2569 · Dr. Prasara Jakkaew, ADT MFU
 **Deliverable:** Post-Midterm Deliverable — Test Plan
-**Submission Deadline:** 28 October 2026, 23:59 Bangkok (latest Classroom screenshot supplied 27 October; verify the assignment before submission). The older PDF says before 28 October.
-**Testing Date:** 4 November 2026 (Field Testing Day)
-**Final Presentation Date:** 18 November 2026 (Teams 11–20)
+**Submission Deadline:** 28 October 2026, 23:59 Bangkok (confirmed in Classroom on 16 November). The submitted attachment is pinned to commit `1194049dce475191a54ecfea628a4b4f6db819d2`; working-plan corrections do not change that submission.
+**Testing Date:** 4 November 2026 was the scheduled field day. Formal results remain uncollected as confirmed on 16 November; record actual dates when running the study.
+**Final Presentation Date:** 18 November 2026, 09:25–09:40 Bangkok, SE Lab — UniLab is presentation Team 2 (3 November Classroom timetable supersedes the older Teams 11–20 wording).
 
 ---
 
@@ -55,7 +55,7 @@ UniLab follows the standard three-tier Testing Pyramid supplemented by real-user
       /-----------\
      / Integration \      Subsystems: pdf.js, Mediabunny, Intake, Vault
     /---------------\
-   /   Unit Tests    \    Pure Logic: Graphemes, Bytes, Sanitization (25 automated)
+   /   Unit Tests    \    Pure Logic: Graphemes, Bytes, Sanitization (record current count)
   /-------------------\
 ```
 
