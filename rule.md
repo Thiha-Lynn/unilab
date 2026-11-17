@@ -342,3 +342,12 @@ the network at run time · shipping a self-hosted version · issuing certificate
 *Written by: Thiha Lin (6631503092), Tech Lead — submitted on behalf of the company*
 *Draft submitted in class 19 Aug 2026; rewritten against the Charter's product 6 Sep 2026 (B12).*
 *The submitted text is preserved verbatim at `.docs/01-requirements/04-legal/rule-as-submitted-20260819.md`.*
+
+---
+
+> **Electronic signature limitation:** UniLab's PDF signing tool places a user-drawn
+> visual mark and optionally password-protects the file. This is a convenience feature
+> for coursework submission, NOT a certified electronic signature under Thailand's
+> Electronic Transactions Act B.E. 2544 (2001) or its amendments. For legally binding
+> electronic signatures, use a certified service provider. The team does not claim
+> legal enforceability of drawn signatures.

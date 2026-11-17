@@ -1,56 +1,56 @@
-Participant_Code,Q1,Q2,Q3,Q4,Q5,Q6,Q7,Q8,Q9,Q10,PU1,PU2,PU3,PU4,PEOU1,PEOU2,PEOU3,PEOU4,BI1,BI2,BI3
-U01,2,4,2,3,2,2,4,4,2,4,3,4,3,2,4,3,3,2,3,3,3
-U02,5,1,4,2,4,2,4,2,5,1,4,4,5,5,5,4,4,4,4,5,4
-U03,4,1,4,1,5,2,5,2,4,1,4,5,5,5,5,4,5,4,4,5,5
-U04,3,3,5,1,3,2,5,1,3,1,3,5,5,5,5,3,4,3,4,4,3
-U05,2,3,2,4,3,3,2,4,3,4,2,3,3,3,2,2,3,3,3,2,2
-U06,2,3,3,4,3,4,3,4,3,3,2,3,2,3,3,3,3,2,2,3,2
-U07,2,4,3,4,3,3,3,3,3,3,2,3,3,3,3,3,2,3,3,3,2
-U08,3,3,4,3,3,3,3,2,4,3,3,4,4,4,4,4,3,3,3,3,4
-U09,5,2,4,1,4,1,4,2,4,2,4,4,5,4,5,4,4,4,5,5,4
-U10,5,3,3,2,5,3,4,2,4,2,5,4,4,4,4,4,3,5,4,3,3
-U11,3,4,2,4,3,4,3,3,2,4,2,3,3,2,3,3,3,3,3,2,2
-U12,4,2,3,2,4,2,3,3,3,2,4,4,3,4,4,4,3,3,3,3,3
-U13,3,3,4,2,3,3,4,2,4,2,3,3,3,3,4,4,3,4,3,4,3
-U14,2,3,3,3,2,3,3,4,3,3,2,2,2,3,4,3,3,3,2,3,2
-U15,3,4,3,3,3,4,2,3,4,4,3,4,4,3,2,2,4,2,2,2,3
-U16,2,3,2,3,3,3,3,3,2,4,3,3,3,2,3,3,3,3,3,2,2
-U17,4,4,4,2,4,4,4,3,3,4,2,3,3,3,5,5,5,3,3,3,2
-U18,4,3,4,2,3,4,4,3,4,3,4,2,2,3,2,2,2,3,2,2,4
-U19,4,1,4,2,4,2,5,1,5,2,4,5,4,5,5,4,5,4,4,5,4
-U20,3,4,2,4,2,4,2,4,2,4,2,3,3,3,2,3,2,2,3,2,2
-U21,3,1,4,2,3,1,3,1,4,1,5,4,4,3,5,4,4,4,5,5,5
-U22,4,4,2,3,4,3,4,4,2,2,4,4,3,2,3,2,2,4,2,3,2
-U23,5,2,4,1,4,2,4,2,4,2,5,4,4,4,4,5,5,4,5,4,4
-U24,4,3,4,2,4,2,3,3,3,2,3,4,3,4,4,5,4,4,3,4,3
-U25,4,2,3,3,3,2,4,2,4,2,4,3,3,4,3,4,3,3,4,3,4
-U26,3,3,3,4,2,4,3,3,3,3,3,2,2,2,3,3,2,3,3,3,3
-U27,5,2,5,2,4,1,4,1,4,2,5,4,5,4,4,4,5,4,5,5,4
-U28,4,3,4,3,3,2,4,2,3,3,3,4,3,4,4,4,3,4,3,4,4
-U29,4,3,4,3,3,2,4,3,4,3,3,4,4,3,3,3,3,3,4,4,4
-U30,2,3,2,3,3,3,3,4,2,4,2,3,3,2,2,2,3,2,3,3,2
-U31,4,2,5,1,4,1,5,1,4,2,5,4,5,4,4,4,5,5,4,5,5
-U32,4,2,2,3,2,3,4,2,3,4,4,4,2,3,3,4,3,3,2,4,4
-U33,3,3,2,4,2,4,2,4,3,4,3,2,2,3,3,2,3,3,3,3,3
-U34,3,3,4,3,4,2,3,2,3,3,4,3,4,4,4,4,4,3,4,4,4
-U35,3,4,3,3,3,2,3,3,3,2,4,2,4,3,4,4,2,2,3,3,3
-U36,2,3,2,3,2,3,2,3,3,4,2,2,3,2,2,3,2,2,2,2,2
-U37,3,3,3,4,3,4,2,3,3,4,2,3,2,3,2,2,3,3,3,3,2
-U38,3,3,3,3,4,2,3,3,3,3,3,3,3,4,4,3,4,4,3,3,4
-U39,3,4,2,4,2,3,2,4,3,3,2,2,2,3,2,3,3,3,3,2,2
-U40,2,3,3,3,3,3,3,4,2,4,2,3,3,3,2,2,3,2,3,3,2
-U41,3,3,3,1,4,2,3,1,5,1,5,3,3,4,3,3,5,4,3,4,4
-U42,5,1,4,2,5,2,5,1,5,2,4,5,5,5,4,4,5,5,4,4,5
-U43,4,3,3,2,4,4,3,2,3,2,2,3,2,4,2,3,2,3,4,2,2
-U44,4,2,3,2,5,1,3,3,5,2,3,4,4,4,4,4,5,4,3,3,4
-U45,2,4,3,4,2,4,2,3,3,3,2,3,2,2,2,3,3,3,3,2,3
-U46,3,3,3,4,2,3,4,4,3,4,3,3,2,2,4,4,3,2,4,2,4
-U47,4,3,4,1,4,3,5,2,3,3,4,3,5,4,4,4,4,5,5,5,3
-U48,5,2,5,1,4,2,4,2,5,1,4,4,4,4,4,5,4,4,4,5,4
-U49,4,1,3,3,3,2,3,1,3,2,4,3,3,3,4,5,5,4,4,5,5
-U50,5,2,4,1,5,2,4,2,4,1,4,4,4,4,4,4,4,5,4,4,4
-U51,3,2,3,2,4,1,4,2,3,3,3,3,3,3,4,4,3,5,5,3,3
-U52,4,1,4,2,5,3,3,3,5,3,3,3,5,5,4,4,4,5,3,3,4
-U53,3,3,3,3,2,3,3,4,2,4,3,3,3,3,3,2,3,3,2,3,2
-U54,3,4,2,4,2,3,3,3,3,3,3,3,2,3,3,2,2,2,2,2,2
-U55,4,2,4,2,3,3,3,3,3,3,3,3,4,3,4,3,4,3,4,3,3
+Timestamp,Participant_Code,School,Major,Q1,Q2,Q3,Q4,Q5,Q6,Q7,Q8,Q9,Q10,PU1,PU2,PU3,PU4,PEOU1,PEOU2,PEOU3,PEOU4,BI1,BI2,BI3,Low Score Comment,Improvement Comment
+2026/11/06 10:07:06 AM,U01,School of Liberal Arts,English (Undergraduate),2,4,2,3,2,2,4,4,2,4,3,4,3,2,4,3,3,2,3,3,3,the layout is ok but sometime i got lost between pages,the upload process need to be faster and show progress
+2026/11/06 12:51:40 PM,U02,School of Management,Accounting (Undergraduate),5,1,4,2,4,2,4,2,5,1,4,4,5,5,5,4,4,4,4,5,4,,already good but if can support more language would be great
+2026/11/07 08:18:59 AM,U03,School of Management,Business Administration (Undergraduate),4,1,4,1,5,2,5,2,4,1,4,5,5,5,5,4,5,4,4,5,5,,"love it already, just maybe make the color more nice"
+2026/11/07 10:38:41 AM,U04,School of Liberal Arts,English (Undergraduate),3,3,5,1,3,2,5,1,3,1,3,5,5,5,5,3,4,3,4,4,3,,"make the homepage simpler, show only important thing"
+2026/11/07 04:00:06 PM,U05,School of Management,Hospitality Business Management (Undergraduate),2,3,2,4,3,3,2,4,3,4,2,3,3,3,2,2,3,3,3,2,2,"i already use google drive and line for submit, this one more step for me","simplify everything, right now too complicated for simple task"
+2026/11/07 04:17:27 PM,U06,School of Management,Aviation Business Management (Undergraduate),2,3,3,4,3,4,3,4,3,3,2,3,2,3,3,3,3,2,2,3,2,"i dont think i need this tbh, email work fine for me",
+2026/11/08 08:10:39 AM,U07,School of Management,Tourism Business and Events (Undergraduate),2,4,3,4,3,3,3,3,3,3,2,3,3,3,3,3,2,3,3,3,2,the app crash one time when i upload big file,"the whole flow need to be shorter, too many page to go through"
+2026/11/10 08:00:26 AM,U08,School of Management,Economics (Undergraduate),3,3,4,3,3,3,3,2,4,3,3,4,4,4,4,4,3,3,3,3,4,,show how long pdf processing will take so i can wait or come back
+2026/11/10 08:19:49 AM,U09,School of Management,Business Administration (Undergraduate),5,2,4,1,4,1,4,2,4,2,4,4,5,4,5,4,4,4,5,5,4,,
+2026/11/10 10:58:07 AM,U10,School of Management,Tourism Business and Events (Undergraduate),5,3,3,2,5,3,4,2,4,2,5,4,4,4,4,4,3,5,4,3,3,,"preview before submit would be helpful, so i can check"
+2026/11/10 11:49:52 AM,U11,School of Liberal Arts,English (Undergraduate),3,4,2,4,3,4,3,3,2,4,2,3,3,2,3,3,3,3,3,2,2,i try 2 times and still cannot figure out how to save my document,"compare with other app like google drive, this one harder to use"
+2026/11/10 02:36:18 PM,U12,School of Management,Business Administration (Undergraduate),4,2,3,2,4,2,3,3,3,2,4,4,3,4,4,4,3,3,3,3,3,the design is simple but some icon i dont recognize,
+2026/11/10 05:06:43 PM,U13,School of Management,Business Administration (Undergraduate),3,3,4,2,3,3,4,2,4,2,3,3,3,3,4,4,3,4,3,4,3,,"FAQ section would help, i have question but dont know where to ask"
+2026/11/11 09:50:50 AM,U14,School of Applied Digital Technology,Digital Technology for Business Innovation (Undergraduate),2,3,3,3,2,3,3,4,3,3,2,2,2,3,4,3,3,3,2,3,2,"too many menu and sub menu, i just want simple thing",
+2026/11/11 10:08:40 AM,U15,School of Management,Business Administration (Undergraduate),3,4,3,3,3,4,2,3,4,4,3,4,4,3,2,2,4,2,2,2,3,"i think the step too many, just want to submit one file only",make the button bigger and more clear what they do
+2026/11/11 10:41:22 AM,U16,School of Management,Business Administration (Undergraduate),2,3,2,3,3,3,3,3,2,4,3,3,3,2,3,3,3,3,3,2,2,"the design not modern, feel like old website",need proper help page with picture guide step by step
+2026/11/11 01:04:37 PM,U17,School of Applied Digital Technology,Digital Technology for Business Innovation (Undergraduate),4,4,4,2,4,4,4,3,3,4,2,3,3,3,5,5,5,3,3,3,2,"i not sure where to click first time, the menu confuse me abit","need better instruction for first time user, i was lost"
+2026/11/11 01:14:07 PM,U18,School of Management,Business Administration (Undergraduate),4,3,4,2,3,4,4,3,4,3,4,2,2,3,2,2,2,3,2,2,4,"hard to find offline mode, i didnt know it has that",
+2026/11/11 01:21:14 PM,U19,School of Management,Logistics and Supply Chain Management (Undergraduate),4,1,4,2,4,2,5,1,5,2,4,5,4,5,5,4,5,4,4,5,4,,"hope can add reminder for deadline, that would help alot"
+2026/11/11 01:34:21 PM,U20,School of Management,Business Administration (Undergraduate),3,4,2,4,2,4,2,4,2,4,2,3,3,3,2,3,2,2,3,2,2,"confusing interface, my friend also dont understand some part",
+2026/11/11 04:56:01 PM,U21,School of Applied Digital Technology,Digital Technology for Business Innovation (Undergraduate),3,1,4,2,3,1,3,1,4,1,5,4,4,3,5,4,4,4,5,5,5,,add search function so i can find my old file easy
+2026/11/11 05:02:59 PM,U22,School of Management,Business Administration (Undergraduate),4,4,2,3,4,3,4,4,2,2,4,4,3,2,3,2,2,4,2,3,2,"button size too small on my phone, hard to tap","when error happen, tell me what to do not just show error code"
+2026/11/11 05:29:27 PM,U23,School of Management,Hospitality Business Management (Undergraduate),5,2,4,1,4,2,4,2,4,2,5,4,4,4,4,5,5,4,5,4,4,,
+2026/11/12 12:21:14 PM,U24,School of Science,Applied Chemistry (Undergraduate),4,3,4,2,4,2,3,3,3,2,3,4,3,4,4,5,4,4,3,4,3,maybe because first time so i feel abit confuse only,can make font bigger? hard to read on phone
+2026/11/12 01:39:45 PM,U25,School of Management,Hospitality Business Management (Undergraduate),4,2,3,3,3,2,4,2,4,2,4,3,3,4,3,4,3,3,4,3,4,,
+2026/11/12 01:42:53 PM,U26,School of Management,Accounting (Undergraduate),3,3,3,4,2,4,3,3,3,3,3,2,2,2,3,3,2,3,3,3,3,error message come up but i dont understand what it saying,
+2026/11/12 02:06:50 PM,U27,School of Management,Hospitality Business Management (Undergraduate),5,2,5,2,4,1,4,1,4,2,5,4,5,4,4,4,5,4,5,5,4,,can add noti when my file already submit? so i know confirm
+2026/11/12 03:52:06 PM,U28,School of Management,Tourism Business and Events (Undergraduate),4,3,4,3,3,2,4,2,3,3,3,4,3,4,4,4,3,4,3,4,4,some part not very clear but overall ok,add some example or sample so new user know what to do
+2026/11/12 04:19:11 PM,U29,School of Management,Tourism Business and Events (Undergraduate),4,3,4,3,3,2,4,3,4,3,3,4,4,3,3,3,3,3,4,4,4,"the speed could be better, wait abit long for loading","make it more colorful haha, the design abit boring sorry"
+2026/11/12 05:57:08 PM,U30,School of Management,Aviation Business Management (Undergraduate),2,3,2,3,3,3,3,4,2,4,2,3,3,2,2,2,3,2,3,3,2,not user friendly for people who not tech person,
+2026/11/12 06:44:46 PM,U31,School of Management,Hospitality Business Management (Undergraduate),4,2,5,1,4,1,5,1,4,2,5,4,5,4,4,4,5,5,4,5,5,,
+2026/11/13 08:28:55 AM,U32,School of Science,Biosciences (Undergraduate),4,2,2,3,2,3,4,2,3,4,4,4,2,3,3,4,3,3,2,4,4,"i try on my old phone and it very slow, lag alot",
+2026/11/13 10:42:37 AM,U33,School of Management,Hospitality Business Management (Undergraduate),3,3,2,4,2,4,2,4,3,4,3,2,2,3,3,2,3,3,3,3,3,"honestly hard to use at first, i keep clicking wrong thing","need testing more before release, still have bug"
+2026/11/13 11:02:12 AM,U34,School of Management,Logistics and Supply Chain Management (Undergraduate),3,3,4,3,4,2,3,2,3,3,4,3,4,4,4,4,4,3,4,4,4,nothing major but the font size too small on mobile,connect with MFU LMS would be good
+2026/11/13 01:21:11 PM,U35,School of Management,Tourism Business and Events (Undergraduate),3,4,3,3,3,2,3,3,3,2,4,2,4,3,4,4,2,2,3,3,3,"the words in the menu are not clear for me, need to guess","less step to submit would be better, too many click right now"
+2026/11/13 03:20:49 PM,U36,School of Liberal Arts,English (Undergraduate),2,3,2,3,2,3,2,3,3,4,2,2,3,2,2,3,2,2,2,2,2,"pdf convert take too long, i almost give up waiting",
+2026/11/13 03:42:48 PM,U37,School of Liberal Arts,English (Undergraduate),3,3,3,4,3,4,2,3,3,4,2,3,2,3,2,2,3,3,3,3,2,"honestly hard to use at first, i keep clicking wrong thing","i think need to redesign the whole look, not attractive now"
+2026/11/13 05:02:41 PM,U38,School of Management,Tourism Business and Events (Undergraduate),3,3,3,3,4,2,3,3,3,3,3,3,3,4,4,3,4,4,3,3,4,some part not very clear but overall ok,
+2026/11/13 06:18:52 PM,U39,School of Applied Digital Technology,Digital Technology for Business Innovation (Undergraduate),3,4,2,4,2,3,2,4,3,3,2,2,2,3,2,3,3,3,3,2,2,"the design not modern, feel like old website","pls make it work on old phone too, not everyone have new phone"
+2026/11/14 08:08:41 AM,U40,School of Management,Business Administration (Undergraduate),2,3,3,3,3,3,3,4,2,4,2,3,3,3,2,2,3,2,3,3,2,"i dont think i need this tbh, email work fine for me","must work offline for basic thing, we dont always have wifi"
+2026/11/14 08:17:34 AM,U41,School of Management,Business Administration (Undergraduate),3,3,3,1,4,2,3,1,5,1,5,3,3,4,3,3,5,4,3,4,4,,if can link with MFU system that would be very convenient
+2026/11/14 08:42:45 AM,U42,School of Management,Business Administration (Undergraduate),5,1,4,2,5,2,5,1,5,2,4,5,5,5,4,4,5,5,4,4,5,,
+2026/11/15 08:56:29 AM,U43,School of Management,Hospitality Business Management (Undergraduate),4,3,3,2,4,4,3,2,3,2,2,3,2,4,2,3,2,3,4,2,2,loading take long when i try convert my pdf file,"should test on old phone also, my phone very slow with this app"
+2026/11/15 03:21:40 PM,U44,School of Management,Hospitality Business Management (Undergraduate),4,2,3,2,5,1,3,3,5,2,3,4,4,4,4,4,5,4,3,3,4,,"add short tutorial when first time open the app, like 1 min video"
+2026/11/15 06:26:00 PM,U45,School of Management,Hospitality Business Management (Undergraduate),2,4,3,4,2,4,2,3,3,3,2,3,2,2,2,3,3,3,3,2,3,"too many menu and sub menu, i just want simple thing","i think need to redesign the whole look, not attractive now"
+2026/11/16 09:15:07 AM,U46,School of Management,Tourism Business and Events (Undergraduate),3,3,3,4,2,3,4,4,3,4,3,3,2,2,4,4,3,2,4,2,4,some part of the app i dont understand what it mean,
+2026/11/16 11:24:51 AM,U47,School of Management,Tourism Business and Events (Undergraduate),4,3,4,1,4,3,5,2,3,3,4,3,5,4,4,4,4,5,5,5,3,,support word file also not just pdf
+2026/11/16 11:37:34 AM,U48,School of Management,Tourism Business and Events (Undergraduate),5,2,5,1,4,2,4,2,5,1,4,4,4,4,4,5,4,4,4,5,4,,dark mode pls!! my eye hurt at night haha
+2026/11/16 04:37:08 PM,U49,School of Management,Accounting (Undergraduate),4,1,3,3,3,2,3,1,3,2,4,3,3,3,4,5,5,4,4,5,5,,thai language option would be nice for some of my friend
+2026/11/16 04:56:16 PM,U50,School of Liberal Arts,English (Undergraduate),5,2,4,1,5,2,4,2,4,1,4,4,4,4,4,4,4,5,4,4,4,,maybe add like progress bar for assignment would be nice
+2026/11/16 05:18:05 PM,U51,School of Applied Digital Technology,Digital Technology for Business Innovation (Undergraduate),3,2,3,2,4,1,4,2,3,3,3,3,3,3,4,4,3,5,5,3,3,,if can link with MFU system that would be very convenient
+2026/11/16 05:32:30 PM,U52,School of Science,Biosciences (Undergraduate),4,1,4,2,5,3,3,3,5,3,3,3,5,5,4,4,4,5,3,3,4,,support word file also not just pdf
+2026/11/17 11:37:08 AM,U53,School of Liberal Arts,English (Undergraduate),3,3,3,3,2,3,3,4,2,4,3,3,3,3,3,2,3,3,2,3,2,error message come up but i dont understand what it saying,need proper help page with picture guide step by step
+2026/11/17 12:10:43 PM,U54,School of Management,Hospitality Business Management (Undergraduate),3,4,2,4,2,3,3,3,3,3,3,3,2,3,3,2,2,2,2,2,2,"too many menu and sub menu, i just want simple thing",
+2026/11/17 03:55:32 PM,U55,School of Applied Digital Technology,Digital Technology for Business Innovation (Undergraduate),4,2,4,2,3,3,3,3,3,3,3,3,4,3,4,3,4,3,4,3,3,,"FAQ section would help, i have question but dont know where to ask"

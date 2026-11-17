@@ -1,0 +1,16 @@
+Reserved_Code,Recruiter,Actual_Status,Scheduled_Time,Duplicate_Checked,Session_File,Questionnaire_Complete,Nonidentifying_Notes
+U01,Myo,Completed,2026-11-10 10:15,Yes,sessions/U01/scorecard.csv,Yes,English student
+U02,Myo,Completed,2026-11-10 14:30,Yes,sessions/U02/scorecard.csv,Yes,Accounting student
+U03,Myo,Completed,2026-11-10 16:00,Yes,sessions/U03/scorecard.csv,Yes,Business Administration student
+U04,Swan,Completed,2026-11-11 09:00,Yes,sessions/U04/scorecard.csv,Yes,English student
+U05,Swan,Completed,2026-11-11 11:20,Yes,sessions/U05/scorecard.csv,Yes,Hospitality Business Management student
+U06,Swan,Completed,2026-11-12 10:00,Yes,sessions/U06/scorecard.csv,Yes,Aviation Business Management student
+U07,Thiha,Completed,2026-11-12 13:45,Yes,sessions/U07/scorecard.csv,Yes,Tourism Business and Events student
+U08,Thiha,Completed,2026-11-12 15:30,Yes,sessions/U08/scorecard.csv,Yes,Economics student
+U09,Thiha,Completed,2026-11-13 09:30,Yes,sessions/U09/scorecard.csv,Yes,Business Administration student
+U10,Wanna,Completed,2026-11-13 14:00,Yes,sessions/U10/scorecard.csv,Yes,Tourism Business and Events student
+U11,Wanna,Completed,2026-11-14 10:15,Yes,sessions/U11/scorecard.csv,Yes,English student
+U12,Wanna,Completed,2026-11-14 13:00,Yes,sessions/U12/scorecard.csv,Yes,Business Administration student
+U13,Zaw,Completed,2026-11-14 16:30,Yes,sessions/U13/scorecard.csv,Yes,Business Administration student
+U14,Zaw,Completed,2026-11-16 10:00,Yes,sessions/U14/scorecard.csv,Yes,Digital Technology for Business Innovation student
+U15,Zaw,Completed,2026-11-16 14:45,Yes,sessions/U15/scorecard.csv,Yes,Business Administration student
