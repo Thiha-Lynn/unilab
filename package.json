@@ -18,7 +18,7 @@
     "browser-image-compression": "^2.0.2",
     "cropperjs": "^1.6.2",
     "css-tree": "^3.2.1",
-    "dompurify": "^3.4.15",
+    "dompurify": "^3.4.17",
     "gifenc": "^1.0.3",
     "heic2any": "^0.0.4",
     "html-to-image": "^1.11.13",
