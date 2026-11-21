@@ -54,7 +54,9 @@
 | **AI Logic (Where, How, Prove, Measure)** | [`.docs/final/ai-logic.md`](ai-logic.md) | `main` | Complete |
 | **Before / After Comparison Table** | [`.docs/final/comparison-table.md`](comparison-table.md) | `main` | Complete (every number sourced) |
 | **Role Statement — Zaw Win Htut (`6631503101`)** | [`.docs/final/role-statements/6631503101-zaw-win-htut.md`](role-statements/6631503101-zaw-win-htut.md) | `main` | Complete (~200 words + AI disclosure; `## Reflection` due Sun 22 Nov) |
-| **Role Statements — Other Members** | `.docs/final/role-statements/` | `main` | Pending individual member submissions (`6631503076`, `6631503088`, `6631503092`, `6631503097`) |
+| **Role Statement — Myo Zin Thant (`6631503076`)** | [`.docs/final/role-statements/6631503076-myo-zin-thant.md`](role-statements/6631503076-myo-zin-thant.md) | `main` | Complete (Statement + Reflection complete) |
+| **Role Statement — Swan Htut Oakkar Aung (`6631503088`)** | [`.docs/final/role-statements/6631503088-swan-htut-oakkar-aung.md`](role-statements/6631503088-swan-htut-oakkar-aung.md) | `main` | Complete (Statement + Reflection complete) |
+| **Role Statements — Other Members** | `.docs/final/role-statements/` | `main` | Pending individual member submissions (`6631503092`, `6631503097`) |
 
 ## 5) SUPPORTING PROJECT DOCUMENTS
 
